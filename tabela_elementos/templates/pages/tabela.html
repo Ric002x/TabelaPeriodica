@@ -1,0 +1,14 @@
+{% extends "global/base.html" %}
+
+{% block title %}Tabela{% endblock title %}
+
+{% block content %}
+
+    <h1 class='chart-title'>Tabela Periódica</h1>
+
+    <div class="main-content-grid">
+        <div class="grid-tabela">
+            {% include "partials/tabela/elementos_grid.html" %}
+        </div>
+    </div>
+{% endblock content %}

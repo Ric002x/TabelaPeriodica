@@ -1,0 +1,30 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+    <section class="main-content home">
+        <div class="title-content">
+            <h1 class='title'>
+                Conheça os <span>Elementos Químicos</span> de Forma Intuitiva e Rápida.
+            </h1>
+
+            <p class='title-description'>Obtenha informações detalhadas sobre cada elemento com apenas 
+                um clique. Descubra suas propriedades físicas e químicas, 
+                curiosidades históricas e muito mais, tudo de forma rápida e intuitiva</p>
+
+            <button class='dft-button'>
+                <a href="{% url "tabela_elementos:tabela" %}">
+                    Experimente agora
+                </a>
+            </button>
+        </div>
+
+        <div class="img-tabela">
+            <img src="{% static "global/src/my_table.png" %}" alt="Periodic_table">
+        </div>
+    </section>
+
+{% endblock content %}

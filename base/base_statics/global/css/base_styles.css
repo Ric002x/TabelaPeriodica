@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&display=swap');
+
+:root {
+    --color-primary-dark: rgb(26, 28, 42);
+    --color-primary-white: rgba(255, 255, 255, 0.932);
+    --color-second-dark: rgb(14, 16, 33);
+    --color-second-dark-transition: rgb(24, 26, 51);
+    --color-yellow-dark: rgba(230, 255, 8, 0.893);
+
+    --font-poppins-logo: 'Poppins', sans-serif;
+    --font-arvo--paragraph: 'Arvo', serif;
+    --font-noto-sans: "Noto Sans HK", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: var(--font-noto-sans);
+}
+
+body {
+    background-color: var(--color-primary-dark);
+}
+
+.main-content-container {
+    min-height: 458px;
+    padding: 3rem;
+}
