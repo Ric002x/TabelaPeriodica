@@ -1,6 +1,7 @@
 {% block grid_item %}
     <!-- Primeira linha -->
-    <div class="grid-item ametal"><div class="num-atom atom-mass"><span>1</span><span>1.008</span></div><h2 class="element">H</h2><p class="element-name">Hidrogênio</p></div>
+
+    <a href="{% url "tabela_elementos:single_element" slug='hidrogenio' %}" class='link-elemento'><div class="grid-item ametal"><div class="num-atom atom-mass"><span>1</span><span>1.008</span></div><h2 class="element">H</h2><p class="element-name">Hidrogênio</p></div></a> 
     <div class="grid-item"></div>
     <div class="grid-item"></div>
     <div class="grid-item"></div>

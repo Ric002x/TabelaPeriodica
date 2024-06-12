@@ -6,5 +6,6 @@ app_name = 'tabela_elementos'
 urlpatterns = [
     path('', views.home),
     path('tabela/', views.tabela_view, name='tabela'),
-    # path('elementos/<slug:slug>', name='single_element'),
+    path('elementos/<slug:slug>', views.single_element_view,
+         name='single_element'),
 ]

@@ -5,9 +5,15 @@ from django.urls import reverse
 
 
 class Elements(models.Model):
-    name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
+    slug = models.SlugField(max_length=30, unique=True)
     simbol = models.CharField(max_length=5)
+    element_cover = models.ImageField(
+        upload_to='tabaela_elementos/elements_cover/',
+        blank=True,
+        default='')
+    atomic_number = models.IntegerField()
+    atomic_mass = models.FloatField()
 
     def __str__(self) -> str:
         return self.name
