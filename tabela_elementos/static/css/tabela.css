@@ -17,6 +17,10 @@
     gap: 5px;
 }
 
+.link-elemento {
+    text-decoration: none;
+}
+
 @media screen and (max-width: 1430px) {
     .main-content-grid {
         display: flex;

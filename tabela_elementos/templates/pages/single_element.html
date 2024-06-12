@@ -1,2 +1,11 @@
 {% extends "global/base.html" %}
 
+
+
+{% if element.slug == hidrogenio %}
+    {% block title %}Hidrogenio{% endblock title %}
+    
+    {% block content %}
+            {% include "partials/elements/hidrogenio.html" %}
+    {% endblock content %}
+{% endif %}
