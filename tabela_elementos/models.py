@@ -9,7 +9,7 @@ class Elements(models.Model):
     slug = models.SlugField(max_length=30, unique=True)
     simbol = models.CharField(max_length=5)
     element_cover = models.ImageField(
-        upload_to='tabaela_elementos/elements_cover/',
+        upload_to='tabela_elementos/elements_cover/',
         blank=True,
         default='')
     atomic_number = models.IntegerField()
