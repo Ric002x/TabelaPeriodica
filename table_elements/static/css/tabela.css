@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+.chart-title {
+    text-align: center;
+    color: white;
+    margin-bottom: 5rem;
+    font-family: "Oswald", sans-serif;
+    font-size: 3rem;
+    text-shadow: 0 5px 5px 0 black;
+}
+
+.grid-tabela {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(4.5rem, 5rem));
+    align-items: center;
+    gap: 5px;
+}
+
+.link-no-decoration {
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width: 1430px) {
+    .main-content-grid {
+        display: flex;
+        overflow-x: auto;
+    }
+}
+
+.grid-item {
+    width: 100%;
+    height: 4.6rem;
+    background: none;
+    font-size: 1rem;
+    flex-direction: column;
+    color: black;
+}
+
+.ametal {
+    background-color: rgb(229, 229, 14);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.nobel-gas {
+    background-color: rgba(199, 87, 247, 0.533);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.metal-alcaline {
+    background-color: rgb(249, 76, 76);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.metal-alcaline-2 {
+    background-color: rgb(22, 195, 252);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.semimetal {
+    background-color: rgb(255, 42, 42);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.halogen {
+    background-color: rgb(0, 185, 22);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.semiconductor {
+    background-color: rgb(13, 93, 253);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.trans-metal {
+    background-color: rgb(255, 183, 39);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.line-break {
+    grid-column-start: 1;
+    grid-column-end: 19;
+}
+
+.lantanide {
+    background-color: rgb(255, 114, 14);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.actinide {
+    background-color: rgb(14, 255, 82);
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 black;
+}
+
+.actinide-se,
+.lantanide-se {
+    position: relative;
+}
+
+.lantanide-se span,
+.actinide-se span{
+    color: white;
+    border-bottom: solid 1.5px white;
+    position: absolute;
+    bottom: 15px;
+}
+
+.grid-item .elements {
+    margin-left: 0.2rem;
+    font-size: 0.8rem;
+}
+
+.grid-item .num-atom {
+    margin: 0 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+.grid-item .element {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.grid-item .element-name {
+    font-size: 0.6rem;
+    justify-content: center;
+    color: black;
+}
+
+.space-17 {
+    grid-column-start: 2;
+    grid-column-end: 18;
+}
+
+.space-10 {
+    grid-column-start: 3;
+    grid-column-end: 13;
+}
+
+.space-3 {
+    grid-column: span 2;
+}
+
+.space-row {
+    grid-column-start: 1;
+    grid-column-end: 19;
+    grid-row-start: 8;
+    grid-row-end: 9;
+}

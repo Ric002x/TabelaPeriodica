@@ -1,0 +1,32 @@
+.main-content-list {
+    width: 50%;
+}
+
+.element-box {
+    display: grid;
+    grid-template-columns: 3rem 6rem;
+    grid-template-rows: 3rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.element-item {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.element-simbol {
+    font-family: var(--font-roboto);
+}
+
+.element-name {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    font-family: var(--font-noto-sans);
+    color: whitesmoke;
+}

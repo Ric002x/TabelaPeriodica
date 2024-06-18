@@ -1,8 +1,0 @@
-<div enctype='multipart/'>
-    {% for element in elements %}
-        {{ element.name }}
-        {% if element_cover.url %}
-            <img src="{{ element.element_cover.url }}" alt="">
-        {% endif %}
-    {% endfor %}
-</div>
