@@ -42,7 +42,7 @@ class Elements(models.Model):
 
     def get_absolute_url(self):
         return reverse("table_elements:single_element",
-                       kwargs={"slug": self.name})
+                       kwargs={"slug": self.slug})
 
     def get_css_class(self):
         if self.simbol in ametal:
