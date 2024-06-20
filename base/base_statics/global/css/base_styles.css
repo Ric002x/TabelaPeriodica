@@ -3,6 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&family=Roboto+Slab:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+ES:wght@100..400&family=Recursive:wght@300..1000&family=Roboto+Slab:wght@100..900&display=swap');
+@import url(footer.css);
+@import url(header.css);
+
 
 :root {
     --color-primary-dark: rgb(26, 28, 42);

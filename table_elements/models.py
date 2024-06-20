@@ -1,5 +1,4 @@
 from django.db import models
-from django.urls import reverse
 
 # Create your models here.
 ametal = ['H', 'C', 'N', 'O', 'P', 'S', 'Se']
@@ -39,10 +38,6 @@ class Elements(models.Model):
 
     def __str__(self) -> str:
         return self.name
-
-    def get_absolute_url(self):
-        return reverse("table_elements:single_element",
-                       kwargs={"slug": self.slug})
 
     def get_css_class(self):
         if self.simbol in ametal:

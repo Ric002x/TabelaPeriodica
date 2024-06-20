@@ -1,10 +1,7 @@
 {% extends "global/base.html" %}
 
-
 {% block content %}
-<div class="element-detail">
-    {% if element.name %}
-        {% include "partials/elements/hidrogenio.html" %}
-    {% endif %}
-</div>
+    <div class="element-content-info">
+        {% block element_detail %}{% endblock element_detail %}
+    </div>
 {% endblock content %}

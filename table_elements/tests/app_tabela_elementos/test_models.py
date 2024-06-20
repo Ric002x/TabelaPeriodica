@@ -24,8 +24,3 @@ class TestTabelaElementPage(TestCase):
         self.element.full_clean()
         self.element.save()
         self.assertEqual(str(self.element), 'Hidrogênio')
-
-    def test_return_get_absolute_url(self):
-        self.element
-        response = self.client.get(Elements.get_absolute_url(self.element))
-        self.assertIn('element-detail', response.content.decode('utf-8'))

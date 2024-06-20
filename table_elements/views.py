@@ -30,4 +30,7 @@ class ElementsListView(ListView):
 class ElementsDetailView(DetailView):
     model = Elements
     context_object_name = 'element'
-    template_name = 'pages/single_element.html'
+
+    def get_template_names(self):
+        slug = self.kwargs.get("slug")
+        return [f'partials/element_detail/{slug}.html']
