@@ -1,16 +1,13 @@
-from django.shortcuts import render
 from .models import Elements
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.core.paginator import Paginator
+from django.shortcuts import render
 # Create your views here.
 
 
-class HomePageView(ListView):
-    model = Elements
-    context_object_name = 'elements'
-    template_name = 'pages/main_page.html'
-    ordering = 'id',
+def homepageview(request):
+    return render(request, 'pages/main_page.html')
 
 
 class TabelaElementsView(ListView):

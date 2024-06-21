@@ -4,7 +4,7 @@ from . import views
 app_name = 'table_elements'
 
 urlpatterns = [
-    path('', views.HomePageView.as_view(), name='home'),
+    path('', views.homepageview, name='home'),
     path('tabela/', views.TabelaElementsView.as_view(),
          name='table'),
     path('elementos/lista/', views.ElementsListView.as_view(),
