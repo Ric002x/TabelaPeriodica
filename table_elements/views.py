@@ -6,8 +6,11 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 
-def home(request):
-    return render(request, 'pages/main_page.html')
+class HomePageView(ListView):
+    model = Elements
+    context_object_name = 'elements'
+    template_name = 'pages/main_page.html'
+    ordering = 'id',
 
 
 class TabelaElementsView(ListView):

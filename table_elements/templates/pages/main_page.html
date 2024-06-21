@@ -1,11 +1,13 @@
 {% extends "global/base.html" %}
 {% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Atomic Discoveries{% endblock title %}
 
 {% block content %}
 
+
     <section class="main-content home">
+        <div class="shape"></div>
         <div class="title-content">
             <h1 class='title'>
                 Conheça os <span>Elementos Químicos</span> de Forma Prática e Intuitiva.
@@ -22,8 +24,31 @@
             </button>
         </div>
 
-        <div class="img-tabela">
-            <img src="{% static "global/src/my_table.png" %}" alt="Periodic_table">
+        <div href="" class="img-tabela">
+            <img src="{% static "src/main_page/chemistry lab-rafiki.png" %}" alt="">
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2>Principais Destaques</h2>
+        <div class="features-container">
+            <div class="feature">
+                <h3>Acesso Rápido</h3>
+                <p>Encontre informações sobre os Elementos Químicos de modo rápido e prático</p>
+                <img class='img-feature-1'src="{% static "src/main_page/Science-cuate.png" %}" alt="">
+                <img src="{% static "src/main_page/shape.png" %}" alt="" class='backgroud-shape-1'>
+            </div>
+            <div class="feature">
+                <h3>Informações Detalhadas</h3>
+                <p>Cada elemento possui uma página dedicada com dados detalhados e curiosidades</p>
+                <img src="{% static "src/main_page/potassium.png" %}" alt="" class="img-feature-2">
+            </div>
+            <div class="feature">
+                <h3>Acesso a Conteúdo da Comunidade</h3>
+                <p>Usuários do site poderão publicar contribuições para o site como: atividades, jogos, informações extras sobre elementos e mais!</p>
+                <img src="{% static "src/main_page/Group discussion-amico.png" %}" alt="" class="img-feature-3">
+                <img src="{% static "src/main_page/shape.png" %}" alt="" class='backgroud-shape-1'>
+            </div>
         </div>
     </section>
 

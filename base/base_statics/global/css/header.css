@@ -1,19 +1,31 @@
 .header-container {
     width: 100%;
-    background-color: var(--color-second-dark);
+    position: relative;
 }
 
 .nav-bar {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center;;
+    border-radius: 2rem;
+    margin: 1rem 5rem;
+    position: relative;
 }
 
-.main-logo,
+.main-logo {
+    position: relative;
+    z-index: 10;
+    padding: 0.5rem;
+}
+
+
 .link-home {
-    padding: 1.3rem;
+    width: 30%;
     font-weight: 200;
     font-size: 24px;
+}
+
+.link-home i:hover {
+    text-decoration: underline;
 }
 
 .main-logo i span {
@@ -21,26 +33,32 @@
     color: white;
 }
 
-.link-home i:hover {
-    border-bottom: solid white 3px;
-}
-
-.user-perfil {
+.principal-pages {
+    position: absolute;
     display: flex;
-    align-items: center;
+    width: 100%;
+    z-index: 5;
 }
 
-.user-perfil a {
-    font-size: 24px;
-    text-decoration: none;
+.pages {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    list-style-type: None;
+    justify-content: center;
+}
+
+.link-page {
+    text-decoration: None;
+    margin: 0 0.5rem;
     color: var(--color-primary-white);
-    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border: solid 2px color(None);
+    border-radius: 0.8rem;
+    transition: all 0.2s;
 }
 
-.user-img {
-    background-color: white;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: 1.3rem
+.link-page:hover {
+    background-color: #7c746e;
+    box-shadow: 0 0 5px 0 black;
 }

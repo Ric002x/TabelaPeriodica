@@ -2,12 +2,15 @@
     <nav class='nav-bar'>
         <div class="main-logo">
             <a href="/" class='link-home'>
-                <i class="fa-solid fa-atom" style="color: #ffffff;"><span>Tabela Periódica</span></i>
+                <i class="fa-solid fa-atom" style="color: #ffffff;"><span>Atomic Discoveries</span></i>
             </a>
         </div>
-        <div class="user-perfil">
-            <a href="">Usuário</a>
-            <div class="user-img"></div>
+
+        <div class="principal-pages">
+            <ul class="pages">
+                <a href="{% url "table_elements:table" %}" class="link-page"><li>Tabela</li></a>
+                <a href="{% url "table_elements:elements_list" %}" class="link-page"><li>Lista de Elementos</li></a>
+            </ul>
         </div>
     </nav>
 </header>

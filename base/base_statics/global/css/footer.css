@@ -1,7 +1,7 @@
 .main-footer {
     width: 100%;
     padding: 2rem;
-    background-color: var(--color-second-dark);
+    background-color: var(--color-secondary-dark);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }

@@ -8,11 +8,12 @@
 
 
 :root {
-    --color-primary-dark: rgb(26, 28, 42);
-    --color-primary-white: rgba(255, 255, 255, 0.932);
-    --color-second-dark: rgb(14, 16, 33);
-    --color-second-dark-transition: rgb(24, 26, 51);
-    --color-yellow-dark: rgba(230, 255, 8, 0.893);
+    --color-primary-dark: #373331;
+    --color-secondary-dark: #605A56;
+    --color-primary-white: #F8FAE5;
+    --color-primary-red-wine: #541212;
+    --color-primary-green-olive: #BED754;
+    --color-primary-orange: #E3651D;
 
     --font-poppins-logo: 'Poppins', sans-serif;
     --font-arvo-paragraph: 'Arvo', serif;
@@ -30,9 +31,4 @@
 
 body {
     background: rgb(26, 25, 25);
-}
-
-.main-content-container {
-    min-height: 458px;
-    padding: 3rem;
 }
