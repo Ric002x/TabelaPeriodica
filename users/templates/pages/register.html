@@ -2,9 +2,8 @@
 
 {% block title %}Cadastro{% endblock title %}
 
-{% block content %}
 
-    <section class="register-container">
+    <section class="register-content-container">
         <div class="register-description">
             <h2>Bem Vindo!</h2>
             <p>Aqui você poderá se registrar, e fazer parte da comunidade de cientistas e professores que buscam manter a educação de
@@ -12,9 +11,37 @@
             </p>
         </div>
 
-        <div class="register-user">
-            
+        <div class="register-content">
+            <div class="register-user">
+                <h2>Cadastro</h2>
+                <form action="{{form_action}}" class="register-form" method='POST'>
+                    <div class="field first-name-field">
+                        <div class='field-label'>{{form.first_name.label}}</div>
+                        <div class='field-input'>{{form.first_name}}</div>
+                    </div>
+                    <div class="field last-name-field">
+                        <div class='field-label'>{{form.last_name.label}}</div>
+                        <div class='field-input'>{{form.last_name}}</div>
+                    </div>
+                    <div class="field username-field">
+                        <div class='field-label'>{{form.username.label}}</div>
+                        <div class='field-input'>{{form.username}}</div>
+                    </div>
+                    <div class="field email-field">
+                        <div class='field-label'>{{form.email.label}}</div>
+                        <div class='field-input'>{{form.email}}</div>
+                    </div>
+                    <div class="field password-field">
+                        <div class='field-label'>{{form.password.label}}</div>
+                        <div class='field-input'>{{form.password}}</div>
+                    </div>
+                    <div class="field password-field">
+                        <div class='field-label'>{{form.password2.label}}</div>
+                        <div class='field-input'>{{form.password2}}</div>
+                    </div>
+                </form>
         </div>
+    </div>
     </section>
 
 {% endblock content %}

@@ -1,4 +1,4 @@
-.register-container {
+.register-content-container {
     padding: 3%;
     display: flex;
     flex-direction: row;
@@ -19,4 +19,51 @@
     color: var(--color-primary-white);
     font-size: 18px;
     margin: 0 10% 0 0;
+}
+
+.register-content {
+    width: 50%;
+    background: None;
+    backdrop-filter: blur(55px);
+}
+
+.register-user {
+    width: 70%;
+    margin: 0 auto;
+    padding: 2%;
+    padding-bottom: 8%;
+    border-radius: 10%;
+    border: solid 2px white;
+}
+
+.register-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 60px;
+    column-gap: 1%;
+}
+
+.register-user h2 {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.field {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.field-label {
+    font-family: var(--font-roboto);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.field-input input {
+    width: 100%;
+    height: 2rem;
+    background: None;
+    border: none;
+    border-bottom: 1px solid black;
 }
