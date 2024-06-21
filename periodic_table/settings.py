@@ -126,6 +126,7 @@ STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'base/base_statics'),
     os.path.join(BASE_DIR, 'table_elements/static'),
+    os.path.join(BASE_DIR, 'users/static'),
 ]
 
 MEDIA_URL = '/media/'
