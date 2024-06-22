@@ -32,3 +32,22 @@
 body {
     background: rgb(26, 25, 25);
 }
+
+.main-content-container {
+    margin: 8vh 0;
+}
+
+.message-center {
+    text-align: center;
+    padding: 0.8rem;
+    width: 100%;
+    margin-top: 8vh;
+}
+
+.success {
+    background-color: rgba(119, 255, 119, 0.681);
+}
+
+.error {
+    background-color: rgba(234, 33, 33, 0.681);
+}

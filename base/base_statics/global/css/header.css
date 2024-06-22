@@ -1,14 +1,18 @@
 .header-container {
     width: 100%;
-    position: relative;
+    position: absolute;
+    z-index: 10;
+    background: none;
+    top: 0;
 }
 
 .nav-bar {
     display: flex;
     align-items: center;;
     border-radius: 2rem;
-    margin: 1rem 5rem;
+    margin: 0.4rem 5rem;
     position: relative;
+    background: none;
 }
 
 .main-logo {
@@ -21,11 +25,11 @@
 .link-home {
     width: 30%;
     font-weight: 200;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .link-home i:hover {
-    text-decoration: underline;
+    border-bottom: solid 2px white;
 }
 
 .main-logo i span {
@@ -50,6 +54,7 @@
 
 .link-page {
     text-decoration: None;
+    font-size: 16px;
     margin: 0 0.5rem;
     color: var(--color-primary-white);
     padding: 0.2rem 0.5rem;
