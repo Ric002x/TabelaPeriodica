@@ -7,12 +7,16 @@
 </head>
 
 <body>
-    {% include "global/partials/header.html" %}
+    {% if not register_page %}
+        {% include "global/partials/header.html" %}
+    {% endif %}
 
     <div class="main-content-container">
         {% block content %}{% endblock content %}
     </div>
     
-    {% include "global/partials/footer.html" %}
+    {% if not register_page or login_page %}
+        {% include "global/partials/footer.html" %}
+    {% endif %}
 </body>
 </html>

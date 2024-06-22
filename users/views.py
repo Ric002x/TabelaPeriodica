@@ -2,16 +2,18 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.urls import reverse
+from django.contrib import messages
 # Create your views here.
 
 
 def register_view(request):
-    register_form_data = request.session.get('register_form_data, None')
+    register_form_data = request.session.get('register_form_data', None)
     form = RegisterForm(register_form_data)
 
     return render(request, 'pages/register.html', context={
-        'form': form, 
+        'form': form,
         'form_action': reverse('users:register_create'),
+        'register_page': True,
     })
 
 
@@ -30,8 +32,8 @@ def register_create(request):
 
         del (request.session['register_form_data'])
 
-        return redirect('users:login')
+        messages.success(request, 'Usuário Criado')
+        return redirect('users:register')
     else:
-        form = RegisterForm()
-
-    return redirect('users:register')
+        messages.error(request, 'Erro no cadastro')
+        return redirect('users:register')

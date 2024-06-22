@@ -1,3 +1,17 @@
+.background-img {
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.background-img img {
+    width: 100%;
+    image-rendering: crisp-edges;
+    height: 100%;
+}
+
 .register-content-container {
     padding: 3%;
     display: flex;
@@ -24,29 +38,30 @@
 .register-content {
     width: 50%;
     background: None;
-    backdrop-filter: blur(55px);
 }
 
 .register-user {
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     padding: 2%;
     padding-bottom: 8%;
     border-radius: 10%;
     border: solid 2px white;
+    backdrop-filter: blur(35px);
 }
 
 .register-form {
     width: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
-    row-gap: 60px;
+    row-gap: 30px;
     column-gap: 1%;
 }
 
 .register-user h2 {
     text-align: center;
-    margin-bottom: 3%;
+    margin-bottom: 10%;
+    color: var(--color-primary-white)
 }
 
 .field {
@@ -57,13 +72,59 @@
 .field-label {
     font-family: var(--font-roboto);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
+    color: var(--color-primary-white);
+    text-shadow: 50px 10px 10px 15px black;
 }
 
 .field-input input {
     width: 100%;
     height: 2rem;
-    background: None;
+    background: transparent;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--color-primary-white);
+    color: var(--color-primary-white);
+}
+
+.button-content {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 0 auto;
+}
+
+.submit-button {
+    background: rgb(31, 29, 29);
+    border-radius: 3rem;
+    padding: 0.6rem 2.1rem;
+    color: white;
+    box-shadow: 0 0 3px 0 black;
+}
+
+.submit-button:hover {
+    background: rgb(55, 51, 51);
+    cursor: pointer;
+}
+
+.field-errors {
+    color: red;
+    font-weight: 700;
+    margin-top: 2%;
+}
+
+.errorlist li {
+    list-style-type: none;
+}
+
+.message-center {
+    text-align: center;
+    padding: 0.8rem;
+    width: 100%;
+}
+
+.success {
+    background-color: rgba(119, 255, 119, 0.681);
+}
+
+.error {
+    background-color: rgba(234, 33, 33, 0.681);
 }
