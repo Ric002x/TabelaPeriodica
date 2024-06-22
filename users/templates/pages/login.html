@@ -1,0 +1,41 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content %}
+    <header class='header-container'>
+        <nav class='nav-bar'>
+            <div class="main-logo">
+                <a href="/" class='link-home'>
+                    <i class="fa-solid fa-atom" style="color: #ffffff;"><span>Atomic Discoveries</span></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+    {% for message in messages %}
+        <div class="message-center {{message.tags}}">{{message}}</div>
+    {% endfor %}
+    <section class='form-login-content'>
+        <form action="{{form_action}}" method='POST' class='form-login' autocomplete="off">
+            {% csrf_token %}
+            <h2>Login</h2>
+            {% for field in form %}
+            <div class="form-item-login">
+                <div class="input-login">{{field}}</div>
+                <div class="errors-login">{{field.errors}}</div>
+            </div>
+            {% endfor %}
+            <div class="show-password">
+                <input type="checkbox" onclick='passwordShow()' name="show-password"><span>Mostrar Senha</span>
+            </div>
+
+            <div class="button-login">
+                <button type="submit">Entrar</button>
+            </div>
+
+            <div class="no-acount">
+                <p>Não tem conta? <a href="{% url "users:register" %}">Registre-se</a></p>
+            </div>
+        </form>
+    </section>
+{% endblock content %}
+

@@ -8,9 +8,6 @@
     {% for message in messages %}
         <div class="message-center {{message.tags}}">{{message}}</div>
     {% endfor %}
-    <div class="background-img">
-        <img src="{% static "src/background_register.jpg" %}" alt="">
-    </div>
     <section class="register-content-container">
         <div class="register-description">
             <h2>Bem Vindo!</h2>
@@ -24,36 +21,13 @@
                 <h2>Cadastre-se</h2>
                 <form action="{% url "users:register_create" %}" class="register-form" method='POST'>
                     {% csrf_token %}
-                    <div class="field first-name-field">
-                        <div class='field-label'>{{form.first_name.label}}</div>
-                        <div class='field-input'>{{form.first_name}}</div>
-                        <div class="field-errors">{{form.first_name.errors}}</div>
-                    </div>
-                    <div class="field last-name-field">
-                        <div class='field-label'>{{form.last_name.label}}</div>
-                        <div class='field-input'>{{form.last_name}}</div>
-                        <div class="field-errors">{{form.last_name.errors}}</div>
-                    </div>
-                    <div class="field username-field">
-                        <div class='field-label'>{{form.username.label}}</div>
-                        <div class='field-input'>{{form.username}}</div>
-                        <div class="field-errors">{{form.username.errors}}</div>
-                    </div>
-                    <div class="field email-field">
-                        <div class='field-label'>{{form.email.label}}</div>
-                        <div class='field-input'>{{form.email}}</div>
-                        <div class="field-errors">{{form.email.errors}}</div>
-                    </div>
-                    <div class="field password-field">
-                        <div class='field-label'>{{form.password.label}}</div>
-                        <div class='field-input'>{{form.password}}</div>
-                        <div class="field-errors">{{form.password.errors}}</div>
-                    </div>
-                    <div class="field password-field">
-                        <div class='field-label'>{{form.password2.label}}</div>
-                        <div class='field-input'>{{form.password2}}</div>
-                        <div class="field-errors">{{form.password2.errors}}</div>
-                    </div>
+                    {% for field in form %}
+                        <div class="field">
+                            <label for="field.id-for-label" class='field-label'>{{field.label}}</label>
+                            <div class="field-input">{{field}}</div>
+                            <div class="field-errors">{{field.errors}}</div>
+                        </div>
+                    {% endfor %}
                     <div class="button-content">
                         <button type="submit" class='submit-button'>Cadastrar</button>
                     </div>
