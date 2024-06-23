@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'table_elements',
     'users',
+    'learn_lab',
 ]
 
 MIDDLEWARE = [

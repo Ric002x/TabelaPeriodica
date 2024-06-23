@@ -12,9 +12,17 @@
     {% else %}    
         {% include "global/partials/header.html" %}
     {% endif %}
-    
+
+    {% if not register_page and not login_page %}
+        <div class="main-content-container">
+    {% endif %}
+
     {% block content %}{% endblock content %}
-    
+
+    {% if not register_page and not login_page %}
+        </div>
+    {% endif %}
+
     {% if register_page %}
     {% elif login_page %}
     {% else %}    

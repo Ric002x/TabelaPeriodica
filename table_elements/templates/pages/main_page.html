@@ -5,7 +5,6 @@
 
 {% block content %}
 
-<div class='main-content-container'>
     {% for message in messages %}
     <div class="message-center {{message.tags}}">{{message}}</div>
     {% endfor %}
@@ -54,5 +53,4 @@
             </div>
         </div>
     </section>
-</div>
 {% endblock content %}
