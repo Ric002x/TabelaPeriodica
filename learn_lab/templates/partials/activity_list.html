@@ -1,11 +1,12 @@
 <div class="activity-content">
-        <div class="activity-group">
+        <div class="activity-group-list">
             <a href="{{activity.get_absolute_url}}"><h2 class='activity-title-list'>{{activity.title}}</h2></a>
-            {% if activity.file %}
+            {% comment %} {% if activity.file %}
                 <div class="acitivity-file-list">{{activity.file}}</div>
             {% else %}
                 <div class="no-file-list"></div>
-            {% endif %}
+            {% endif %} {% endcomment %}
+            <div class="no-file-list"></div>
             <span class="activity-subject-list">Conteúdo: {{activity.subject}}</span><br>
             <span class="activity-level-list">Turma: {{activity.level}}</span>
         </div>

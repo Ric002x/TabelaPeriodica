@@ -8,6 +8,7 @@
 
 
 :root {
+    --color-background-dark: rgb(26, 25, 25);
     --color-primary-dark: #373331;
     --color-secondary-dark: #605A56;
     --color-primary-white: #F8FAE5;
@@ -30,7 +31,7 @@
 }
 
 body {
-    background: rgb(26, 25, 25);
+    background: var(--color-background-dark);
 }
 
 .main-content-container {

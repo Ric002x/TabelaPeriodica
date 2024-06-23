@@ -24,4 +24,4 @@ class LearnLabActivityView(DetailView):
     context_object_name = 'activity'
     slug_field = "slug"
     slug_url_kwarg = "slug"
-    template_name = 'pages/learn_lab_activity.html'
+    template_name = 'pages/learn_lab_activitydetail.html'

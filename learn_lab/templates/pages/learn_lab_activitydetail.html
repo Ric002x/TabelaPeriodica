@@ -1,0 +1,13 @@
+{% extends "global/base.html" %}
+
+{% block title %}{{acitivity.title}}{% endblock title %}
+
+{% block content %}
+
+<section class='activities-detail-container'>
+    <div class='activities-content-detail'>
+        {% include "partials/activity_detail.html" %}
+    </div>
+</section>
+
+{% endblock content %}

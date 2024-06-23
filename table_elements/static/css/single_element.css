@@ -1,3 +1,36 @@
-.main-description p {
-    color: white;
+/* Hidrogênio */
+
+.element-content-info {
+    margin: 5% 5% 0 5%;
+}
+
+.element-content-info p,
+.element-content-info h2 {
+    color: var(--color-primary-white);
+}
+
+.title-element {
+    font-size: 30px;
+    margin-bottom: 3%;
+}
+
+.element-description {
+    font-size: 16px;
+    text-align: justify;
+    color: var(--color-primary-white);
+}
+
+.subtitle-description {
+    font-size: 20px;
+}
+
+.element-img {
+    float: right;
+    border: 1.3rem solid var(--color-background-dark);
+    width: 34%;
+    padding: 1.5rem 1.5rem 4rem 1.5rem;
+    margin: 0 auto;
+    max-height: 28rem;
+    background-color: var(--color-primary-white);
+    object-fit: cover;
 }
