@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils.text import slugify
 
 # Create your models here.
@@ -47,3 +48,7 @@ class Activity(models.Model):
             self.slug = slug
 
         return super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("learn_lab:learn_lab_activity",
+                       kwargs={"slug": self.slug})

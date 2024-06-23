@@ -1,0 +1,8 @@
+.activities-list-container {
+    margin: 3% 5%;
+}
+
+.activities-container-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(16%, 18%));
+}

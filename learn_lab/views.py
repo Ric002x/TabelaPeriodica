@@ -1,6 +1,5 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .models import Activity
 
 # Create your views here.
@@ -18,3 +17,11 @@ class LearnLabHomeView(ListView):
             is_published=True,
         )
         return query_set
+
+
+class LearnLabActivityView(DetailView):
+    model = Activity
+    context_object_name = 'activity'
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    template_name = 'pages/learn_lab_activity.html'

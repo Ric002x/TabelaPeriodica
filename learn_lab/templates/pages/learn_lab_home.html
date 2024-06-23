@@ -1,3 +1,15 @@
 {% extends "global/base.html" %}
 
 {% block title %}Learn Lab{% endblock title%}
+
+{% block content %}
+
+<section class='activities-list-container'>
+    <div class='activities-container-grid'>
+        {% for activity in activities %}
+            {% include "partials/activity_listview.html" %}
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}
