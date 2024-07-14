@@ -61,6 +61,12 @@ class RegisterForm(forms.ModelForm):
             'email', 'password', 'password2',
         ]
 
+        labels = {
+            'first_name': 'Nome',
+            'last_name': 'Sobrenome',
+            'email': 'E-mail',
+        }
+
         error_messages = {
             'first_name': {
                 'required': 'Esse campo é obrigatório',
@@ -72,6 +78,7 @@ class RegisterForm(forms.ModelForm):
 
             'email': {
                 'required': 'Esse campo é obrigatório',
+                'invalid': 'Insira um endereço de e-mail válido',
                 },
 
             'username': {

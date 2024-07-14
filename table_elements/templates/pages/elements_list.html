@@ -3,37 +3,10 @@
 
 {% block content %}
     <div class="main-content-list">
-        <div class="list-content">
-            {% for element in elements %}
-            <div class="element-box">
-                <a href="{% url "table_elements:single_element" element.slug %}" class='link-no-decoration'>
-                    <div class="element-item {{element.get_css_class}}">
-                        <h2 class='element-simbol'>{{element.simbol}}</h2>
-                    </div>
-                </a>
-                <p class="element-name">
-                    {{element.name}}
-                </p>
-            </div>
-            {% endfor %}
-        </div>
+        {% include "global/partials/search.html" %}
+
+        {% include "partials/element.html" %}
     </div>
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-    
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-    
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+    {% include "global/partials/pagination.html" %}
 {% endblock content %}

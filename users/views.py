@@ -38,17 +38,21 @@ class RegisterView(FormView):
         return super().form_invalid(form)
 
     def post(self, request, *args, **kwargs):
-        if request.method != 'POST':
+        if request.path == reverse_lazy('users:register_create'):
+            POST = request.POST
+            request.session['register_form_data'] = POST
+            form = self.get_form(self.form_class)
+            if form.is_valid():
+                return self.form_valid(form)
+            else:
+                return self.form_invalid(form)
+        else:
             raise Http404
 
-        POST = request.POST
-        request.session['register_form_data'] = POST
-        form = self.get_form(self.form_class)
-
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+    def get(self, request, *args, **kwargs):
+        if request.path == reverse_lazy('users:register_create'):
+            raise Http404
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         # Adiciona contexto adicional à renderização do template
@@ -96,3 +100,8 @@ class LoginView(FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+    def get(self, request, *args, **kwargs):
+        if request.path == reverse_lazy("users:login_create"):
+            raise Http404
+        return super().get(request, *args, **kwargs)

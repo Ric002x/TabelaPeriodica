@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% include "global/partials/search.html" %}
+
 <section class='activities-list-container'>
     <div class='activities-container-grid'>
         {% for activity in activities %}
@@ -11,5 +13,7 @@
         {% endfor %}
     </div>
 </section>
+
+{% include "global/partials/pagination.html" %}
 
 {% endblock content %}

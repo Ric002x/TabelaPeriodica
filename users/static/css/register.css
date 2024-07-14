@@ -1,104 +1,96 @@
-.register-content-container {
-    padding: 3%;
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    background: url(imgs/background_register.jpg) no-repeat center/100%;
+.register {
+    width: 100%;
+    background-color: var(--primary-blue);
+    padding: var(--spacing-m) 0;
 }
 
-.register-description {
-    width: 50%;
-    padding: 3%;
-}
-
-.register-description h2 {
-    color: var(--color-primary-white);
-    font-size: 32px;
-    margin: 0 10% 5% 0;
-}
-
-.register-description p {
-    color: var(--color-primary-white);
-    font-size: 18px;
-    margin: 0 10% 0 0;
-}
-
-.register-content {
-    width: 50%;
-    background: None;
-}
-
-.register-user {
-    width: 80%;
+.form-frame {
+    width: 60rem;
     margin: 0 auto;
-    padding: 2%;
-    padding-bottom: 8%;
-    border-radius: 10%;
-    border: solid 2px white;
-    backdrop-filter: blur(35px);
+    border-radius: 2rem;
+    background-color: var(--background-secondary);
+    box-shadow: 4px 6px 5px 2px rgba(0, 0, 0, 0.701);
+}
+
+.form-frame h2 {
+    text-align: center;
+    color: var(--primary-blue);
+    font-family: var(--font-outfit);
+    font-weight: 800;
+    padding: var(--spacing-s);
 }
 
 .register-form {
-    width: 100%;
+    width: 85%;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: 50% 50%;
-    row-gap: 30px;
-    column-gap: 1%;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-ss);
 }
 
-.register-user h2 {
-    text-align: center;
-    margin-bottom: 10%;
-    color: var(--color-primary-white)
+.form-label {
+    color: var(--primary-blue);
+    font-weight: 500;
 }
 
-.field {
-    width: 95%;
-    margin: 0 auto;
-}
-
-.field-label {
-    font-family: var(--font-roboto);
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--color-primary-white);
-    text-shadow: 50px 10px 10px 15px black;
-}
-
-.field-input input {
+.form-input input {
     width: 100%;
-    height: 2rem;
-    background: transparent;
+    background-color: transparent;
+    color: black;
+    font-weight: 500;
+    height: 3rem;
     border: none;
-    border-bottom: 1px solid var(--color-primary-white);
-    color: var(--color-primary-white);
+    border-bottom: solid 2px var(--primary-blue);
+    outline: none;
 }
 
-.button-content {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    margin: 0 auto;
+.form-input input::placeholder {
+    color: black;
 }
 
-.submit-button {
-    background: rgb(31, 29, 29);
-    border-radius: 3rem;
-    padding: 0.6rem 2.1rem;
+.form-help {
+    font-size: var(--font-size-sss);
+    color: black;
+    padding: var(--spacing-ss) 0;
+    font-weight: 500;
+}
+
+.has-account {
+    grid-column: span 2;
+    color: black;
+}
+
+.has-account a {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+.register-form button {
+    width: 20rem;
+    height: 3rem;
+    grid-column: span 2;
+    margin: var(--spacing-s) auto;
+    background-color: var(--primary-green);
+    border-radius: 1.1rem;
+    border: none;
+    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.634);
     color: white;
-    box-shadow: 0 0 3px 0 black;
+    font-size: var(--font-size-s);
+    transition: all 0.2s;
 }
 
-.submit-button:hover {
-    background: rgb(55, 51, 51);
+.register-form button:hover {
     cursor: pointer;
+    background-color: var(--secondary-green);
 }
 
-.field-errors {
+.form-errors {
     color: red;
-    font-weight: 700;
-    margin-top: 2%;
+    font-size: var(--font-size-sss);
+    text-decoration: none;
 }
 
-.errorlist li {
+.form-errors li {
     list-style-type: none;
+    padding: 0.3rem 0;
 }

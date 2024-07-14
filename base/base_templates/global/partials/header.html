@@ -1,16 +1,20 @@
+{% load static %}
+
+{% if not login_page and not register_page %}
 <header class='header-container'>
     <nav class='nav-bar'>
-        <div class="main-logo">
-            <a href="/" class='link-home'>
-                <i class="fa-solid fa-atom" style="color: #ffffff;"><span>Atomic Discoveries</span></i>
-            </a>
-        </div>
-
-        <div class="principal-pages">
-            <ul class="pages">
-                <a href="{% url "table_elements:table" %}" class="link-page"><li>Tabela</li></a>
-                <a href="{% url "table_elements:elements_list" %}" class="link-page"><li>Lista de Elementos</li></a>
-            </ul>
-        </div>
+        <a href="/" class='link-home'>
+            <img src="{% static "global/assets/logo.png" %}" alt=""><span>ATOMIC DISCOVERIES</span>
+        </a>
     </nav>
 </header>
+
+{% else %}
+<header id='register_login' class='header-container'>
+    <nav class='nav-bar'>
+        <a href='/' class='link-home logo'>
+            <img src="{% static "global/assets/green-logo.png" %}" alt=""><span>ATOMIC DISCOVERIES</span>
+        </a>
+    </nav>
+</header>
+{% endif %}

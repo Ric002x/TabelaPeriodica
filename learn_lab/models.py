@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.text import slugify
+from pdf2image import convert_from_path
+import os
+from django.conf import settings
 
 # Create your models here.
 
@@ -41,14 +44,14 @@ class Activity(models.Model):
     def __str__(self):
         return str(self.title)
 
+    def get_absolute_url(self):
+        return reverse("learn_lab:learn_lab_activity",
+                       kwargs={"slug": self.slug})
+
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = slugify(self.title)
             str(slug)
             self.slug = slug
 
-        return super().save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse("learn_lab:learn_lab_activity",
-                       kwargs={"slug": self.slug})
+        super().save(*args, **kwargs)

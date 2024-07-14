@@ -1,34 +1,57 @@
-.main-footer {
-    width: 100%;
-    padding: 2rem;
-    background-color: var(--color-secondary-dark);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+/* Base Footer */
+
+footer {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: var(--spacing-s) 0;
+    font-size: var(--font-size-ss);
 }
 
-.infos {
-    color: var(--color-primary-white);
+#register-login {
+    border-top: solid 3px white;
+}
+
+.footer-container {
     width: 80%;
-    text-align: justify;
-}
-
-.infos h4 {
-    margin-bottom: 0.4rem;
-    font-size: 24px;
-    text-decoration: underline solid var(--color-primary-white) 2px;
-}
-
-.creator {
-    width: 80%;
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    padding-left: 2rem;
-}
-
-.creator i {
+    margin: 0 auto;
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.creator span {
-    margin-left: 5px;
+.footer-section {
+    flex: 1;
+    margin: var(--spacing-ss);
+}
+
+
+.footer-logo {
+    width: 10rem;
+    margin-bottom: var(--spacing-ss);
+    border-radius: 2rem;
+}
+
+.footer-section h4 {
+    margin-bottom: var(--spacing-s);
+    font-size: var(--font-size-m);
+    font-family: var(--font-outfit);
+}
+
+.footer-section p, .footer-section a, .footer-section ul, .footer-section li {
+    margin-bottom: var(--spacing-ss);
+}
+
+.footer-section a {
+    color: var(--primary-green);
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: var(--spacing-ss) 0;
+    border-top: 1px solid var(--background-secondary);
 }

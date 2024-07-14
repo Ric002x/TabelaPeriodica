@@ -1,13 +1,79 @@
-<footer class='main-content main-footer'>
-    <div class="infos">
-        <h4>Tabela Periódica</h4>
-        <p>Esse site trás o aprendizado/pesquisa sobre os elementos da tabela periódica.
-            Nele contém as principais informações dos elementos, assim como um bônus de curiosidades!
-        </p>
+{% load static %}
+{% if not login_page and not register_page %}
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="{% static 'global/assets/main-logo.png' %}" alt="Logo do Projeto" class="footer-logo">
+            <p>Conheça o Mundo da Ciências de forma rápida e intuitiva.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Contato</h4>
+            <p>Email: <a href="mailto:seuemail@exemplo.com">ricvenicius@gmail.com</a></p>
+            <p>Telefone: (00) 1234-5678</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com" target="_blank">Facebook</a>
+                <a href="https://www.twitter.com" target="_blank">Twitter</a>
+                <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Tabela Periódica</a></li>
+                <li><a href="#">Learn-Lab</a></li>
+                <li><a href="#">Junte-se a nós</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Políticas</h4>
+            <ul>
+                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="#">Termos de Uso</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Newsletter</h4>
+            <p>Inscreva-se para receber as últimas novidades.</p>
+            <form action="#">
+                <input type="email" placeholder="Seu email">
+                <button type="submit">Inscrever-se</button>
+            </form>
+        </div>
     </div>
-
-    <div class="creator">
-        <i class="fa-brands fa-instagram" style="color: #ffffff;"><span>Ric02x</span></i>
-        <i class="fa-regular fa-envelope" style="color: #ffffff;"><span>ricvenicius@gmail.com</span></i>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Mundo da Ciências. Todos os direitos reservados.</p>
     </div>
 </footer>
+{% else %}
+<footer id='register-login'>
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="{% static 'global/assets/main-logo.png' %}" alt="Logo do Projeto" class="footer-logo">
+            <p>Conheça o Mundo da Ciências de forma rápida e intuitiva.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Contato</h4>
+            <p>Email: <a href="mailto:seuemail@exemplo.com">ricvenicius@gmail.com</a></p>
+            <p>Telefone: (00) 1234-5678</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com" target="_blank">Facebook</a>
+                <a href="https://www.twitter.com" target="_blank">Twitter</a>
+                <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Políticas</h4>
+            <ul>
+                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="#">Termos de Uso</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+            </ul>
+        </div>  
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Mundo da Ciências. Todos os direitos reservados.</p>
+    </div>
+</footer>
+{% endif %}

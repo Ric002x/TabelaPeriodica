@@ -1,0 +1,24 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1% 0;
+}
+
+.step-links a {
+    text-decoration: none;
+    color: var(--color-primary-white);
+    background-color: var(--color-primary-dark);
+    border-radius: 0.8rem;
+    padding: 0.1rem 0.4rem;
+    box-shadow: 3px 3px 10px 0 black;
+    transition: transform 0.3s;
+}
+
+.step-links a:hover {
+    transform: translateY(-7px);
+}
+
+.current {
+    color: var(--color-primary-white);
+}

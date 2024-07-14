@@ -1,0 +1,13 @@
+{% extends "global/base.html" %}
+
+{% block title %}Elementos{% endblock title %}
+
+{% block content %}
+<div class="main-content-list">
+    {% include "global/partials/search.html" %}
+
+    {% include "partials/element.html" %}
+</div>
+
+{% include "global/partials/pagination.html" %}
+{% endblock content %}

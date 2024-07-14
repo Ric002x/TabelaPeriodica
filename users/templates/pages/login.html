@@ -2,40 +2,27 @@
 {% load static %}
 
 {% block content %}
-    <header class='header-container'>
-        <nav class='nav-bar'>
-            <div class="main-logo">
-                <a href="/" class='link-home'>
-                    <i class="fa-solid fa-atom" style="color: #ffffff;"><span>Atomic Discoveries</span></i>
-                </a>
-            </div>
-        </nav>
-    </header>
+    {% include "global/partials/header.html" %}
     {% for message in messages %}
         <div class="message-center {{message.tags}}">{{message}}</div>
     {% endfor %}
-    <section class='form-login-content'>
-        <form action="{{form_action}}" method='POST' class='form-login' autocomplete="off">
-            {% csrf_token %}
+
+    <section class='login'>
+        <div class="form-container">
             <h2>Login</h2>
-            {% for field in form %}
-            <div class="form-item-login">
-                <div class="input-login">{{field}}</div>
-                <div class="errors-login">{{field.errors}}</div>
-            </div>
-            {% endfor %}
-            <div class="show-password">
-                <input type="checkbox" onclick='passwordShow()' name="show-password"><span>Mostrar Senha</span>
-            </div>
-
-            <div class="button-login">
+            <form action="{{form_action}}" method='POST' class='form-login'>
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="login-item">
+                    <label for="field.id_for_label" class='form-label'>{{field.label}}</label>
+                    <div class="form-input">{{field}}</div>
+                    <span class="form-errors">{{field.errors}}</span>
+                </div>
+                {% endfor %}
+                <a href='' class="forget">Esqueceu sua senha?</a>
                 <button type="submit">Entrar</button>
-            </div>
-
-            <div class="no-acount">
-                <p>Não tem conta? <a href="{% url "users:register" %}">Registre-se</a></p>
-            </div>
-        </form>
+            </form>
+        </div>
     </section>
 {% endblock content %}
 

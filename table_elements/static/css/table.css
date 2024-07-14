@@ -1,12 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
-
 .chart-title {
     text-align: center;
-    color: white;
-    margin: 7rem 0 5rem 0;
-    font-family: "Oswald", sans-serif;
-    font-size: 3rem;
-    text-shadow: 0 5px 5px 0 black;
+    color: var(--color-primary-white);
+    margin: 3rem 0 ;
 }
 
 .main-content-grid {
@@ -18,11 +13,12 @@
     grid-template-columns: repeat(18, 5.2%);
     align-items: center;
     gap: 5px;
+    padding: 5rem 0;
 }
 
 .link-no-decoration {
     text-decoration: none;
-    color: black;
+    color: var(--color-background-black);
 }
 
 @media screen and (max-width: 1430px) {
@@ -32,80 +28,109 @@
     }
 }
 
-.grid-item {
+.grid-item-container {
     width: 100%;
-    height: 4.6rem;
-    background: none;
-    font-size: 1rem;
-    flex-direction: column;
-    color: black;
 }
 
+.grid-item {
+    display: flex;
+    min-height: 7.38rem;
+    flex-direction: column;
+    background: none;
+    color: var(--color-background-black);
+    text-decoration: none;
+}
+
+.grid-item span,
+.grid-item h2,
+.grid-item p {
+    display: inline;
+    color: var(--color-background-black);
+    font-weight: 600;
+}
+
+.grid-item .num-atom-num-mass {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.grid-item h2 {
+    font-size: var(--font-size-large);
+    text-align: center;
+}
+
+.grid-item p {
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+/* Classes para tipos de elementos */
 .ametal {
-    background-color: rgb(229, 229, 14);
+    width: 100%;
+    background-color: #E5E50E; /* Amarelo */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .nobel-gas {
-    background-color: rgba(199, 87, 247, 0.533);
+    background-color: #C757F7; /* Roxo Claro */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .metal-alcaline {
-    background-color: rgb(249, 76, 76);
+    background-color: #fb4141; /* Vermelho Claro */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .metal-alcaline-2 {
-    background-color: rgb(22, 195, 252);
+    background-color: #40cfff; /* Azul Claro */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .semimetal {
-    background-color: rgb(255, 42, 42);
+    background-color: #f43b3b; /* Vermelho */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .halogen {
-    background-color: rgb(0, 185, 22);
+    background-color: #00B916; /* Verde Claro */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .semiconductor {
-    background-color: rgb(13, 93, 253);
+    background-color: #3e7eff; /* Azul */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .trans-metal {
-    background-color: rgb(255, 183, 39);
+    background-color: #FFB727; /* Laranja Claro */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
-.line-break {
-    grid-column-start: 1;
-    grid-column-end: 19;
-}
-
 .lantanide {
-    background-color: rgb(255, 114, 14);
+    background-color: #FF720E; /* Laranja */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
 .actinide {
-    background-color: rgb(14, 255, 82);
+    background-color: #0EFF52; /* Verde Neon */
     border-radius: 5px;
     box-shadow: 0 2px 2px 0 black;
 }
 
+/* Classe de quebra de linha para elementos */
 .actinide-se,
 .lantanide-se {
     position: relative;
@@ -113,33 +138,11 @@
 
 .lantanide-se span,
 .actinide-se span{
-    color: white;
+    color: var(--color-primary-white);
     border-bottom: solid 1.5px white;
     position: absolute;
     bottom: 15px;
-}
-
-.grid-item .elements {
-    margin-left: 0.2rem;
-    font-size: 0.8rem;
-}
-
-.grid-item .num-atom {
-    margin: 0 5px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-}
-
-.grid-item .element {
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-.grid-item .element-name {
-    font-size: 0.6rem;
-    justify-content: center;
-    color: black;
+    font-size: var(--font-size-small);
 }
 
 .space-17 {
@@ -160,5 +163,5 @@
     grid-column-start: 1;
     grid-column-end: 19;
     grid-row-start: 8;
-    grid-row-end: 9;
+    grid-row-end: 10;
 }

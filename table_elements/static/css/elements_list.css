@@ -1,18 +1,22 @@
-.main-content-list {
-    width: 50%;
+.list-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 60vh;
+    margin: 2% 5% 0 5%;
 }
 
 .element-box {
     display: grid;
-    grid-template-columns: 3rem 6rem;
-    grid-template-rows: 3rem;
-    margin-bottom: 1rem;
-    gap: 1rem;
+    grid-template-columns: 5rem 15rem;
+    grid-template-rows: 5rem;
+    margin-bottom: 2rem;
+    gap: 2rem;
 }
 
 .element-item {
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,6 +24,8 @@
 
 .element-simbol {
     font-family: var(--font-roboto);
+    color: var(--color-primary-white);
+    text-shadow: 2px 2px black;
 }
 
 .element-name {
@@ -28,5 +34,57 @@
     font-size: 1.4rem;
     font-weight: 600;
     font-family: var(--font-noto-sans);
-    color: whitesmoke;
+    color: var(--color-primary-white);
+}
+
+/* Search Page */
+
+.search-camp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 0;
+}
+
+.search-form {
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-form input {
+    width: 35rem;
+    height: 3rem;
+    padding-left: 10px;
+    padding-right: 25px;
+    background-color: rgb(216, 216, 216);
+    border: none;
+    backdrop-filter: blur(32);
+    color: black;
+    border-radius: 1rem;
+    font-size: 14px;
+    transition: all 0.3s;
+    margin-bottom: 1rem;
+}
+
+.search-form input:focus {
+    background: rgb(195, 195, 195);
+}
+
+.search-form button {
+    position: absolute;
+    right: 0.4rem;
+    background: none;
+    border: none;
+    z-index: 10;
+    min-height: 1.8rem;
+    min-width: 1.8rem;
+    justify-content: center;
+    top: 0.6rem;
+    transition: all 0.3s;
+}
+
+.search-form button:hover {
+    cursor: pointer;
+    transform: translateY(-0.2rem);
 }

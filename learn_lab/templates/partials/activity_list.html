@@ -2,7 +2,7 @@
         <div class="activity-group-list">
             <a href="{{activity.get_absolute_url}}"><h2 class='activity-title-list'>{{activity.title}}</h2></a>
             {% comment %} {% if activity.file %}
-                <div class="acitivity-file-list">{{activity.file}}</div>
+                <div class="acitivity-file-list"><img src="{{activity.thumbnail.url}}" alt="pdf_thumbnail"></div>
             {% else %}
                 <div class="no-file-list"></div>
             {% endif %} {% endcomment %}

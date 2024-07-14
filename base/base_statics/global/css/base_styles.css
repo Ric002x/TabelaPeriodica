@@ -1,41 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&family=Roboto+Slab:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+ES:wght@100..400&family=Recursive:wght@300..1000&family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100..900&display=swap');
 @import url(footer.css);
 @import url(header.css);
+@import url(pagination.css);
 
 
 :root {
-    --color-background-dark: rgb(26, 25, 25);
-    --color-primary-dark: #373331;
-    --color-secondary-dark: #605A56;
-    --color-primary-white: #F8FAE5;
-    --color-primary-red-wine: #541212;
-    --color-primary-green-olive: #BED754;
-    --color-primary-orange: #E3651D;
+    /* Background Colors */
+    --background-primary: #EFF0F0;  /* Preto */
+    --background-secondary: #D4D7D6;    /* Cinza Escuro */
 
-    --font-poppins-logo: 'Poppins', sans-serif;
-    --font-arvo-paragraph: 'Arvo', serif;
-    --font-noto-sans: "Noto Sans HK", sans-serif;
-    --font-cursive: "Playwrite ES", cursive;
-    --font-roboto: "Roboto Slab", serif;
+    /* Primary Colors */
+    --primary-blue: #000A3B;  /* Cinza Muito Escuro */
+    --primary-green: #008646; /* Verde Oliva */
+    --secondary-green: #006434;
+    --primary-orange: #E3651D;  /* Laranja */
+    --white: #FFFFFF;
+    --primary-yellow: #f2d80f;
+    --link-blue: #0044ff;
+
+    /* Fonts */
+    --font-outfit: "Outfit", sans-serif;
+    --font-fira: "Fira Sans", sans-serif;
+
+    /* Fonts Sizes */
+    --font-size-sss: 1.2rem;  /* 16px */
+    --font-size-ss: 1.6rem;  /* 16px */
+    --font-size-s: 2.0rem; /* 20px */
+    --font-size-m: 2.4rem;  /* 24px */
+    --font-size-l: 3.2rem;  /* 32px */
+    --font-size-xl: 4.2rem; /* 36px */
+
+    /* Spacings */
+    --spacing-ss: 1.0rem;
+    --spacing-s: 2.0rem;
+    --spacing-m: 6.4rem;
+    --spacing-l: 12.8rem;
+    --spacing-xl: 19.2rem;
+}
+
+html {
+    font-size: 62.5%;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: var(--font-noto-sans);
+    font-family: var(--font-fira);
 }
 
 body {
-    background: var(--color-background-dark);
+    background: var(--background-primary);
+    font-size: var(--font-size-m);
 }
 
-.main-content-container {
-    padding: 8vh 0;
+h1 {
+    font-size: var(--font-size-xl);
+    font-family: var(--font-outfit);
+    letter-spacing: 0.2rem;
+}
+
+h2 {
+    font-size: var(--font-size-l);
+    font-family: var(--font-outfit);
+    letter-spacing: 0.2rem;
+}
+
+h3 {
+    font-size: var(--font-size-m);
+    font-family: var(--font-outfit);
+    letter-spacing: 0.2rem;
+}
+
+h4 {
+    font-size: var(--font-size-m);
+    font-family: var(--font-outfit);
+    letter-spacing: 0.2rem;
+}
+
+p, a {
+    font-size: var(--font-size-s);
+}
+
+h1, h2, h3, h4, p, a {
+    color: var(--white);
+    text-decoration: none;
 }
 
 .message-center {

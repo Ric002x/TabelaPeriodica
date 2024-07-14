@@ -1,68 +1,43 @@
 .header-container {
     width: 100%;
-    position: absolute;
-    z-index: 10;
-    background: none;
-    top: 0;
+    background-color: var(--background-secondary);
 }
 
 .nav-bar {
-    display: flex;
-    align-items: center;;
-    border-radius: 2rem;
-    margin: 0.4rem 5rem;
-    position: relative;
-}
-
-.main-logo {
-    position: relative;
-    z-index: 10;
-    padding: 0.5rem;
-}
-
-
-.link-home {
-    width: 30%;
-    font-weight: 200;
-    font-size: 20px;
-}
-
-.link-home i:hover {
-    border-bottom: solid 2px white;
-}
-
-.main-logo i span {
-    padding-left: 0.5rem;
-    color: white;
-}
-
-.principal-pages {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    z-index: 5;
-}
-
-.pages {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
+    height: var(--spacing-m);
     display: flex;
     flex-direction: row;
-    list-style-type: None;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.link-page {
-    text-decoration: None;
-    font-size: 16px;
-    margin: 0 0.5rem;
-    color: var(--color-primary-white);
-    padding: 0.2rem 0.5rem;
-    border: solid 2px color(None);
-    border-radius: 0.8rem;
-    transition: all 0.2s;
+.link-home {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: 800;
+    font-size: var(--font-size-m);
 }
 
-.link-page:hover {
-    background-color: #7c746e;
-    box-shadow: 0 0 5px 0 black;
+.link-home img {
+    height: 6vh;
+    margin-right: var(--spacing-ss);
 }
+
+/* Header for login/register */
+
+#register_login {
+    background-color: transparent;
+}
+
+#register_login .link-home {
+}
+
+#register_login .link-home img {
+    border-radius: 50%;
+}
+

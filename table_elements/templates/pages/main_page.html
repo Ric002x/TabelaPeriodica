@@ -8,48 +8,87 @@
     {% for message in messages %}
     <div class="message-center {{message.tags}}">{{message}}</div>
     {% endfor %}
-    <section class="main-content home">
-        <div class="shape"></div>
-        <div class="title-content">
-            <h1 class='title'>
-                Conheça os <span>Elementos Químicos</span> de Forma Prática e Intuitiva.
-            </h1>
 
-            <p class='title-description'>Obtenha informações detalhadas sobre cada elemento com apenas 
-                um clique. Descubra suas propriedades físicas e químicas, 
-                curiosidades históricas e muito mais, tudo de forma rápida e intuitiva</p>
-
-            <button class='dft-button'>
-                <a href="{% url "table_elements:table" %}">
-                    Experimente agora
-                </a>
-            </button>
+    <section class="hero">
+        <div class='hero-title'>
+            <h1>Conheça o <span>Mundo da Ciências</span> de forma rápida e intuitiva.</h1>
+            <img src="{% static "assets/scientist-cuate.png" %}" alt="">
         </div>
 
-        <div href="" class="img-tabela">
-            <img src="{% static "src/main_page/chemistry lab-rafiki.png" %}" alt="">
+        <div class='introduction'>
+            <div class="frame"><p>Explore o Elementos Químicos com apenas um click</p></div>
+            <div class="frame"><p>Contribua com publicações de atividades, jogos e notícias do mundo da ciências</p></div>
+            <div class="frame"><p>Interaja com uma Comunidade de Estudantes e Educadores</p></div>
         </div>
     </section>
 
-    <section class="features-section">
-        <h2>Principais Destaques</h2>
-        <div class="features-container">
-            <div class="feature">
-                <h3>Acesso Rápido</h3>
-                <p>Encontre informações sobre os Elementos Químicos de modo rápido e prático</p>
-                <img class='img-feature-1'src="{% static "src/main_page/Science-cuate.png" %}" alt="">
-                <img src="{% static "src/main_page/shape.png" %}" alt="" class='backgroud-shape-1'>
+    <section class="about">
+        <h2>SOBRE O SITE</h2>
+
+        <div class="objectives">
+            <div class="frame">
+                <div class="background-img">
+                    <img src="{% static "assets/laboratory.jpeg" %}" alt="" class="objective-img">
+                </div>
+                <p class='objectives-text'>Buscamos <strong>Facilitar o Acesso ao Conhecimento Científico</strong>, disponibilizando informações claras e acessíveis sobre elementos químicos e conceitos científicos.</p>
+                <a href="#" class="objective-button">Tabela periódica</a>
             </div>
-            <div class="feature">
-                <h3>Informações Detalhadas</h3>
-                <p>Cada elemento possui uma página dedicada com dados detalhados e curiosidades</p>
-                <img src="{% static "src/main_page/potassium.png" %}" alt="" class="img-feature-2">
+            <div class="frame">
+                <div class="background-img">
+                    <img src="{% static "assets/kids.jpeg" %}" alt="" class="objective-img">
+                </div>
+                <p class='objectives-text'>Estimulamos a <strong>Criatividade e o Interesse pela Ciência</strong>, oferecerendo recursos e jogos didáticos que tornam o aprendizado divertido e envolvente.</p>
+                <a href="#" class="objective-button">learn-lab</a>
             </div>
-            <div class="feature">
-                <h3>Acesso a Conteúdo da Comunidade</h3>
-                <p>Usuários do site poderão publicar contribuições para o site como: atividades, jogos, informações extras sobre elementos e mais!</p>
-                <img src="{% static "src/main_page/Group discussion-amico.png" %}" alt="" class="img-feature-3">
-                <img src="{% static "src/main_page/shape.png" %}" alt="" class='backgroud-shape-1'>
+            <div class="frame">
+                <div class="background-img">
+                    <img src="{% static "assets/scientists.jpg" %}" alt="" class="objective-img">
+                </div>
+                <p class='objectives-text'>Fomentamos a <strong>Colaboração e a Contribuição da Comunidade</strong>, permitindo que usuários compartilhem atividades, experiências e descobertas no campo da ciência.</p>
+                <a href="#" class="objective-button">Junte-se a nós</a>
+            </div>
+        </div>
+    </section>
+
+    <section class='site-content'>
+        <h3>ÁREAS ABORDADAS</h3>
+
+        <div class="subject-section">
+            <h4>Química</h4>
+            <div class='subject-content-container'>
+                <div class="subject-icon">
+                    <img src="{% static "assets/moleculas.png" %}" alt="">
+                </div>
+                <div class="subject-content">
+                    <p>A Química explora a composição, estrutura, propriedades e mudanças da matéria. É essencial para diversas aplicações na indústria, medicina e tecnologia.</p>
+                    <a href="">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="subject-section">
+            <h4>Biologia</h4>
+            <div class='subject-content-container'>
+                <div class="subject-icon">
+                    <img src="{% static "assets/dna.png" %}" alt="">
+                </div>
+                <div class="subject-content">
+                    <p>A Biologia é a ciência que estuda os seres vivos, suas interações e processos vitais. É fundamental para a compreensão da vida em todas as suas formas e níveis.</p>
+                    <a href="">Sabia mais</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="subject-section">
+            <h4>Física</h4>
+            <div class='subject-content-container'>
+                <div class="subject-icon">
+                    <img src="{% static "assets/berco-newton.png" %}" alt="">
+                </div>
+                <div class="subject-content">
+                    <p>A Física investiga os princípios fundamentais que governam o universo, desde partículas subatômicas até galáxias. Contribui significativamente para o avanço tecnológico.</p>
+                    <a href="">Sabia mais</a>
+                </div>
             </div>
         </div>
     </section>

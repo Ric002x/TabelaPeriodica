@@ -4,37 +4,30 @@
 {% block title %}Cadastro{% endblock title %}
 
 {% block content %}
+{% include "global/partials/header.html" %}
 
     {% for message in messages %}
         <div class="message-center {{message.tags}}">{{message}}</div>
     {% endfor %}
 
-<section class="register-content-container">
-        <div class="register-description">
-            <h2>Bem Vindo!</h2>
-            <p>Aqui você poderá se registrar, e fazer parte da comunidade de cientistas e professores que buscam manter a educação de
-                ciências dinâmica e interativa
-            </p>
-        </div>
+<section class="register">
+    <div class="form-frame">
+        <h2>Crie sua conta</h2>
 
-        <div class="register-content">
-            <div class="register-user">
-                <h2>Cadastre-se</h2>
-                <form action="{% url "users:register_create" %}" class="register-form" method='POST'>
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div class="field">
-                            <label for="field.id-for-label" class='field-label'>{{field.label}}</label>
-                            <div class="field-input">{{field}}</div>
-                            <div class="field-errors">{{field.errors}}</div>
-                        </div>
-                    {% endfor %}
-                    <div class="button-content">
-                        <button type="submit" class='submit-button'>Cadastrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <form action="" method="post" class='register-form'>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="register-item">
+                    <label for="field.id_for_label" class='form-label'>{{field.label}}</label>
+                    <div class="form-input">{{field}}</div>
+                    <p class="form-help">{{field.help_text}}</p>
+                    <span class="form-errors">{{field.errors}}</span>
+                </div>
+            {% endfor %}
+            <p class="has-account">Já possui conta? <a href="{% url "users:login" %}">clique aqui</a> para entrar</p>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
 </section>
 
 {% endblock content %}
