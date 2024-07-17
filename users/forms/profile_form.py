@@ -4,6 +4,18 @@ from ..models import Profile
 
 
 class UpdateUserForm(forms.ModelForm):
+    first_name = forms.CharField(
+        max_length=20,
+        min_length=3,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+        )
+    last_name = forms.CharField(
+        max_length=20,
+        min_length=3,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+        )
     username = forms.CharField(
         max_length=20,
         min_length=3,
@@ -18,12 +30,7 @@ class UpdateUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email']
-
-        labels = {
-            'username': 'Nome de usuário',
-            'email': 'Email',
-        }
+        fields = ['first_name', 'last_name', 'username', 'email']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

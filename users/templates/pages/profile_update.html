@@ -9,8 +9,16 @@
     <section class='update-profile'>
         <div class="form-profile-container">
             <h2>Atualizar dados</h2>
-            <form action="{{form_action}}" method="post" enctype='multipart/form-data'>
+            <form action="{{form_action}}" method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
+                <div class='form-group'>
+                    <label class='label-profile'>Nome</label><br>
+                    <div class='form-input'>{{user_form.first_name}}</div>
+                </div>
+                <div class='form-group'>
+                    <label class='label-profile'>Sobrenome</label><br>
+                    <div class='form-input'>{{user_form.last_name}}</div>
+                </div>
                 <div class='form-group'>
                     <label class='label-profile'>Usuário</label><br>
                     <div class='form-input'>{{user_form.username}}</div>

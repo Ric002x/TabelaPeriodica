@@ -151,6 +151,11 @@
     background-color: var(--primary-orange);
     text-decoration: none;
     margin-bottom: var(--spacing-s);
+    transition: all 0.3s;
+}
+
+.objective-button:hover {
+    background-color: var(--secondary-orange);
 }
 
 /* Content Section */
@@ -228,6 +233,11 @@
     background: var(--primary-orange);
     border-radius: 1rem;
     box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.745);
+    transition: all 0.3s;
+}
+
+.subject-content a:hover {
+    background-color: var(--secondary-orange);
 }
 
 .subject-icon {

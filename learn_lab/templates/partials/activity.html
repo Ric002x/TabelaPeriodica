@@ -13,20 +13,19 @@
 {% endif %}
 
 {% if activiy_detail_page %}
-    <div class="activity-content-detail">
-        <div class="activity-group-detail">
-            <h2 class="acitivity-title-detail">{{activity.title}}</h2>
-            <div class="description-content">
-                <p class="activity-description-detail">{{activity.description}}</p>
-                <span class="activity-subject-detail">Matéria: {{activity.subject}}</span><br>
-                <span class="activity-level-detail">Turma: {{activity.level}}</span>
+    <div class="activity-detail-content">
+        <h2>{{activity.title}}</h2>
+
+        <div class="detail-description-and-file">
+            <div class="detail-description">
+                <p>{{activity.description}}</p>
+                <ul>
+                    <li><strong>Matéria: </strong>{{activity.subject}}</li>
+                    <li><strong>Turma: </strong>{{activity.level}}</li>
+                </ul>
             </div>
-            {% comment %} {% if activity.file %}
-            {% else %}
-                <div class="no-file-detail"></div>
-            {% endif %} {% endcomment %}
-            <div class="no-file-container">
-                <div class="no-file-detail"></div>
+            <div class="detail-file">
+                
             </div>
         </div>
     </div>

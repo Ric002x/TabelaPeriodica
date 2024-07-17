@@ -118,14 +118,14 @@ def perfil_update(request):
                            ' preencheu corretamente os campos')
 
     else:
-        user_form = UpdateUserForm()
-        profile_form = UpdateProfileForm()
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'pages/profile_update.html', context={
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'form_action': reverse('users:profile')
-    })
+        return render(request, 'pages/profile_update.html', context={
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'form_action': reverse('users:profile_update')
+        })
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
