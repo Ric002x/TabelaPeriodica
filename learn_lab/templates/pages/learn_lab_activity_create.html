@@ -1,0 +1,40 @@
+{% extends "global/base.html" %}
+
+{% block title %}Criar atividade{% endblock title %}
+
+{% block content %}
+<section class='activity-create'>
+    <div class="activity-form-details">
+        <h2>Formulário de Atividade</h2>
+        <p>Preencha o formulário abaixo para criar e compartilhar uma atividade educacional. Contribua para o nosso site com conteúdo de qualidade que outros usuários podem utilizar em suas salas de aula. Sua colaboração é essencial para enriquecer a experiência de aprendizado de todos.</p>
+        <hr>
+        <h3>📋 Instruções para Preenchimento:</h3>
+        <ul class="instructions-activity">
+            <li><h4>📌 Título:</h4><p>No título deve conter a temática principal da atividade.</p></li>
+            <li><h4>📝 Descrição:</h4><p>Na descrição, resuma da melhor maneira a atividade proposta.</p></li>
+            <li><h4>📚 Matéria e Turma:</h4><p>Certifique-se de selecionar as opções corretas de matéria e turma.</p></li>
+            <li><h4>📁 Arquivo:</h4><p>Priorize adicionar arquivos do tipo PDF, pois corre menos risco de haver falhas com envio e download.</p></li>
+            <li>
+                <h4>💡 Dicas:</h4>
+                <ul class="hints-form">
+                    <li><p><strong>Enriqueça sua Atividade:</strong> Além da atividade em si, inclua recomendações sobre como utilizá-la em sala de aula.</p></li>
+                    <li><p><strong>Adicione um Plano de Aula:</strong> Um plano de aula detalhado pode tornar sua atividade ainda mais útil para outros educadores.</p></li>
+                    <li><p><strong>Inove:</strong> Considere adicionar materiais adicionais, como recursos visuais ou links para leituras complementares, para tornar a experiência mais enriquecedora.</p></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-container-activity">
+        <form action="{{form_action}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{field.id_for_label}}" class='activity-label'>{{field.label}}</label>
+                <div class='activity-input'>{{field}}</div>
+            {% endfor %}
+            <button type="submit">Criar Atividade</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}
+

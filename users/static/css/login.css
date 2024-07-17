@@ -33,21 +33,3 @@
     display: block;
     width: 20rem;
 }
-
-.form-login button {
-    width: 30%;
-    height: 4rem;
-    margin: var(--spacing-ss) auto;
-    background-color: var(--primary-green);
-    border-radius: 3rem;
-    border: none;
-    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.634);
-    color: white;
-    font-size: var(--font-size-s);
-    transition: all 0.2s;
-}
-
-.form-login button:hover {
-    cursor: pointer;
-    background-color: var(--secondary-green);
-}

@@ -24,7 +24,7 @@
     --font-fira: "Fira Sans", sans-serif;
 
     /* Fonts Sizes */
-    --font-size-sss: 1.2rem;  /* 16px */
+    --font-size-sss: 1.2rem;  /* 12px */
     --font-size-ss: 1.6rem;  /* 16px */
     --font-size-s: 2.0rem; /* 20px */
     --font-size-m: 2.4rem;  /* 24px */
@@ -32,6 +32,7 @@
     --font-size-xl: 4.2rem; /* 36px */
 
     /* Spacings */
+    --spacing-sss: 0.4rem;
     --spacing-ss: 1.0rem;
     --spacing-s: 2.0rem;
     --spacing-m: 6.4rem;
@@ -100,4 +101,94 @@ h1, h2, h3, h4, p, a {
 
 .error {
     background-color: rgba(234, 33, 33, 0.681);
+}
+
+.default-button {
+    width: fit-content;
+    padding: 0.5rem 3rem;
+    display: block;
+    margin: var(--spacing-ss) auto;
+    background-color: var(--primary-green);
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0px 4px 2px 0px rgba(125, 135, 145, 0.79);
+    color: white;
+    font-size: var(--font-size-ss);
+    transition: all 0.2s;
+}
+
+.default-button:hover {
+    cursor: pointer;
+    background-color: var(--secondary-green);
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(80vh);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes littleSlideInLeft {
+    from {
+        transform: translateX(5vh);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-80vw);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(5rem);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+
+.animate-on-scroll.slide-left.animate-enter {
+    opacity: 1;
+    animation: slideInLeft 1s forwards;
+}
+
+.animate-on-scroll.little-slide-left.animate-enter {
+    opacity: 1;
+    animation: littleSlideInLeft 1s forwards;
+}
+
+.animate-on-scroll.slide-right.animate-enter {
+    opacity: 1;
+    animation: slideInRight 1s forwards;
+}
+
+.animate-on-scroll.slide-up.animate-enter {
+    opacity: 1;
+    animation: slideInUp 1s forwards;
+}
+
+.button-animate {
+    transition: all 0.3s;
+}
+
+.button-animate:hover {
+    transform: translateY(-0.3rem);
 }

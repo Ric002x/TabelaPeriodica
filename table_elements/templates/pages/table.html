@@ -3,11 +3,24 @@
 {% block title %}Tabela{% endblock title %}
 
 {% block content %}
-    <h1 class='chart-title'>Tabela Periódica</h1>
 
-    <div class="main-content-grid">
+<section class="periodic-table">
+    <h1>Tabela Periódica</h1>
+
+    <div class="table-content">
         <div class="grid-tabela">
             {% include "partials/table/elements_grid.html" %}
         </div>
+        <div class="separation-line"></div>
+        <div class="table-labels">
+            <div class='label-element-group'><div class="metal-alcaline"></div><span class='element-group-name'>Metais Alcalinos</span></div>
+            <div class='label-element-group'><div class="metal-alcaline-2"></div><span class='element-group-name'>Metais Alcalinos Terrosos</span></div>
+            <div class='label-element-group'><div class="trans-metal"></div><span class='element-group-name'>Metais de Transição</span></div>
+            <div class='label-element-group'><div class="ametal"></div><span class='element-group-name'>Ametais</span></div>
+            <div class='label-element-group'><div class="semimetal"></div><span class='element-group-name'>Semimetais</span></div>
+            <div class='label-element-group'><div class="semiconductor"></div><span class='element-group-name'>Semicondutores</span></div>
+            <div class='label-element-group'><div class="nobel-gas"></div><span class='element-group-name'>Gases Nobres</span></div>
+        </div>
     </div>
+</section>
 {% endblock content %}

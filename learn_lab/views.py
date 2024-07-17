@@ -3,9 +3,13 @@ from django.http import Http404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Activity
+from .forms import ActivityForm
 from django.core.paginator import Paginator
 from django.db.models import Q
-
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.contrib import messages
 # Create your views here.
 
 
@@ -30,6 +34,7 @@ class LearnLabHomeView(ListView):
         context_data.update({
             'learn_lab_page': True,
             'placeholder_input': 'Buscar por uma atividade...',
+            'activity_list_page': True
         })
 
         return context_data
@@ -62,7 +67,8 @@ class LearnLabActivitySearch(LearnLabHomeView):
             'search_term': search_term,
             'additional_url_query': f'&q={search_term}',
             'learn_lab_page': True,
-            'placeholder_input': 'Buscar por atividade...'
+            'placeholder_input': 'Buscar por atividade...',
+            'activity_list_page': True
         })
 
         return context
@@ -74,3 +80,30 @@ class LearnLabActivityView(DetailView):
     slug_field = "slug"
     slug_url_kwarg = "slug"
     template_name = 'pages/learn_lab_activitydetail.html'
+
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["activiy_detail_page"] = True
+        return context
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def activity_create(request):
+    if request.method == 'POST':
+        form = ActivityForm(
+            data=request.POST,
+            files=request.FILES)
+        if form.is_valid():
+            activity = form.save(commit=False)
+            activity.user = request.user
+            activity.save()
+            form.save()
+            messages.success(request, 'Atividade criada!')
+            return redirect('users:profile')
+
+    else:
+        form = ActivityForm()
+        return render(request, 'pages/learn_lab_activity_create.html', {
+            'form': form,
+            'form_action': reverse('learn_lab:activity_create')
+        })

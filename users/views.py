@@ -1,107 +1,143 @@
 from django.http import Http404
-from django.shortcuts import redirect
-from .forms import RegisterForm, LoginForm
-from django.urls import reverse_lazy
+from django.shortcuts import redirect, render
+from .forms import RegisterForm, LoginForm, UpdateProfileForm, UpdateUserForm
+from django.urls import reverse
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.views.generic.edit import FormView
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from learn_lab.models import Activity
 
 # Create your views here.
 
 
-class RegisterView(FormView):
-    template_name = 'pages/register.html'
-    form_class = RegisterForm
-    success_url = reverse_lazy('users:login')
+def register_view(request):
+    if request.user.is_authenticated:
+        messages.warning(request, '✅ usuário já logado')
+        return redirect('users:profile')
 
-    def get_initial(self):
-        initial = super().get_initial()
-        register_form_data = self.request.session.get(
-            'register_form_data', None)
-        if register_form_data:
-            initial.update(register_form_data)
-        return initial
+    register_form_data = request.session.get('register_form_data', None)
+    form = RegisterForm(register_form_data)
 
-    def form_valid(self, form):
+    return render(request, 'pages/register.html', context={
+        'form': form,
+        'form_action': reverse('users:register_create'),
+        'register_page': True,
+    })
+
+
+def register_create(request):
+    if not request.POST:
+        raise Http404
+
+    POST = request.POST
+    request.session['register_form_data'] = POST
+    form = RegisterForm(POST)
+
+    if form.is_valid():
         user = form.save(commit=False)
         user.set_password(form.cleaned_data['password'])
         user.save()
-        if 'register_form_data' in self.request.session:
-            del self.request.session['register_form_data']
-        messages.success(self.request, 'Usuário criado com sucesso!')
-        return super().form_valid(form)
+        messages.success(request, 'usuário cadastrado!')
 
-    def form_invalid(self, form):
-        # Salva os dados do formulário na sessão e mostra uma mensagem de erro
-        self.request.session['register_form_data'] = self.request.POST
-        messages.error(self.request, 'Erro no cadastro')
-        return super().form_invalid(form)
+        del (request.session['register_form_data'])
 
-    def post(self, request, *args, **kwargs):
-        if request.path == reverse_lazy('users:register_create'):
-            POST = request.POST
-            request.session['register_form_data'] = POST
-            form = self.get_form(self.form_class)
-            if form.is_valid():
-                return self.form_valid(form)
-            else:
-                return self.form_invalid(form)
-        else:
-            raise Http404
-
-    def get(self, request, *args, **kwargs):
-        if request.path == reverse_lazy('users:register_create'):
-            raise Http404
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        # Adiciona contexto adicional à renderização do template
-        context = super().get_context_data(**kwargs)
-        context['form_action'] = reverse_lazy('users:register_create')
-        context['register_page'] = True
-        return context
-
-
-class LoginView(FormView):
-    template_name = 'pages/login.html'
-    form_class = LoginForm
-    success_url = reverse_lazy('table_elements:home')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form_action'] = reverse_lazy('users:login_create')
-        context['login_page'] = True
-        return context
-
-    def form_valid(self, form):
-        username = form.cleaned_data.get('username', '')
-        password = form.cleaned_data.get('password', '')
-        authenticated_user = authenticate(username=username, password=password)
-
-        if authenticated_user is not None:
-            login(self.request, authenticated_user)
-            messages.success(self.request, "Logado com sucesso")
-            return super().form_valid(form)
-        else:
-            messages.error(self.request,
-                           'Nome de usuário ou senha podem estar incorretos')
-            return redirect('users:login')
-
-    def form_invalid(self, form):
-        messages.error(self.request, 'Erro no formulário de login')
         return redirect('users:login')
 
-    def post(self, request, *args, **kwargs):
-        if request.method != 'POST':
-            raise Http404
+    else:
+        form = RegisterForm()
 
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
+        messages.error(request, 'erro no cadastro')
+
+        return redirect('users:register')
+
+
+def login_view(request):
+    if request.user.is_authenticated:
+        messages.warning(request, '✅ usuário já logado')
+        return redirect('users:profile')
+
+    form = LoginForm()
+    return render(request, 'pages/login.html', context={
+        'form': form,
+        'form_action': reverse('users:login_create'),
+        'login_page': True,
+    })
+
+
+def login_create(request):
+    if not request.POST:
+        raise Http404
+
+    form = LoginForm(request.POST)
+    if form.is_valid():
+        authenticated_user = authenticate(
+            username=form.cleaned_data.get('username', ''),
+            password=form.cleaned_data.get('password', ''),
+        )
+
+        if authenticated_user is not None:
+            messages.success(request, "usuário logado!")
+            login(request, authenticated_user)
+            return redirect('learn_lab:learn_lab_home')
         else:
-            return self.form_invalid(form)
+            messages.error(request, 'erro no login. confira '
+                           'se o usuário ou senha estão corretos')
+            return redirect('users:login')
 
-    def get(self, request, *args, **kwargs):
-        if request.path == reverse_lazy("users:login_create"):
-            raise Http404
-        return super().get(request, *args, **kwargs)
+    else:
+        messages.error(request, 'erro na validação')
+
+    return redirect('learn_lab:learn_lab_home')
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def user_manager(request):
+    activities = Activity.objects.filter(
+        user=request.user,
+    )
+
+    return render(request, 'pages/profile.html', context={
+        'activities': activities,
+        'profile_page': True,
+    })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def perfil_update(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'perfil atualizado com sucesso!')
+            return redirect('users:profile')
+        else:
+            messages.error(request, 'opa! verifique se você'
+                           ' preencheu corretamente os campos')
+
+    else:
+        user_form = UpdateUserForm()
+        profile_form = UpdateProfileForm()
+
+    return render(request, 'pages/profile_update.html', context={
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'form_action': reverse('users:profile')
+    })
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def logout_update(request):
+    if not request.POST:
+        messages.error(request, 'entre em uma conta para deslogar')
+        return redirect(reverse('table_elements:home'))
+
+    if request.POST.get('username') != request.user.username:
+        messages.error(request, 'Logout de usuário inválido')
+        return redirect(reverse('table_elements:home'))
+
+    logout(request)
+    messages.success(request, 'usuário saiu')
+    return redirect(reverse('table_elements:home'))

@@ -10,6 +10,7 @@
     border-radius: 2rem;
     background-color: var(--background-secondary);
     box-shadow: 4px 6px 5px 2px rgba(0, 0, 0, 0.701);
+    padding: var(--spacing-ss) 0;
 }
 
 .form-frame h2 {
@@ -23,6 +24,9 @@
 .register-form {
     width: 85%;
     margin: 0 auto;
+}
+
+.grid-content-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-ss);
@@ -56,32 +60,17 @@
 }
 
 .has-account {
-    grid-column: span 2;
     color: black;
+    display: block;
+    margin: var(--spacing-s) 0;
+    font-size: var(--font-size-ss);
+    text-align: center;
 }
 
 .has-account a {
     color: var(--primary-blue);
     text-decoration: underline;
-}
-
-.register-form button {
-    width: 20rem;
-    height: 3rem;
-    grid-column: span 2;
-    margin: var(--spacing-s) auto;
-    background-color: var(--primary-green);
-    border-radius: 1.1rem;
-    border: none;
-    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.634);
-    color: white;
-    font-size: var(--font-size-s);
-    transition: all 0.2s;
-}
-
-.register-form button:hover {
-    cursor: pointer;
-    background-color: var(--secondary-green);
+    font-size: var(--font-size-ss);
 }
 
 .form-errors {

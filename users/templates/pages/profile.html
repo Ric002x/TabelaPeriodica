@@ -1,0 +1,51 @@
+{% extends "global/base.html" %}
+
+{% block title %}Perfil de Usuário{% endblock title %}
+
+{% block content %}
+{% for message in messages %}
+        <div class="message-center {{message.tags}}">{{message}}</div>
+{% endfor %}
+    <section class='user-manager'>
+        <div class="container">
+            <div class="sidebar">
+                <img src="{{user.profile.avatar.url}}" alt="" class='user-img'>
+                <ul>
+                    <li><a href="#" data-section="user-data" class='active'><i class="fa-solid fa-user section-icon" style="color: #ffffff;"></i>Dados do Usuário</a></li>
+                    <li><a href="#" data-section="user-items"><i class="fa-solid fa-pen-nib section-icon" style="color: #ffffff;"></i>Publicações</a></li>
+                    <li><a href="#" data-section="saved-items"><i class="fa-solid fa-bookmark section-icon" style="color: #ffffff;"></i>Itens Salvos</a></li>
+                </ul>
+            </div>
+            <div class="content">
+
+                <div id="user-data" class="section active">
+                    <h2 class='user-section-data'>Dados do Usuário</h2>
+                    <p>Nome completo: <span>{{user.first_name}} {{user.last_name}}</span></p>
+                    <p>Email: <span>{{user.email}}</span></p>
+                    <a class='link-change' href="{% url "users:profile_update" %}">Alterar dados</a>
+                </div>
+
+                <div id="user-items" class="section hidden">
+                    <h2 class='user-section-data'>Suas Publicações</h2>
+                    <!-- Conteúdo dos itens salvos -->
+
+                     <div class="publications">
+                        {% for activity in activities %} 
+                            {% include "partials/activity.html" %}
+                        {% endfor %}
+                    </div>
+
+                    <div class='new-activity'>Para criar uma nova atividade, clique aqui:
+                        <a href="{% url "learn_lab:activity_create" %}" class='btn-activity-create'>Nova atividade</a>
+                    </div>
+                </div>
+
+                <div id="saved-items" class="section hidden">
+                    <h2 class='user-section-data'>Itens Salvos</h2>
+                    <!-- Conteúdo dos itens salvos -->
+                </div>
+            </div>
+        </div>
+        
+    </section>
+{% endblock content %}

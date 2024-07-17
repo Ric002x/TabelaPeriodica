@@ -6,6 +6,23 @@
         <a href="/" class='link-home'>
             <img src="{% static "global/assets/logo.png" %}" alt=""><span>ATOMIC DISCOVERIES</span>
         </a>
+        {% if user.is_authenticated %}
+            <div class="user-menu">
+                <a href="{% url "users:profile" %}" id="user-icon"><span>{{user.username}}</span><img src="{{user.profile.avatar.url}}"></a>
+                <ul class="menu-options animate-on-scroll little-slide-left" id="menu-options">
+                    <li class='button-animate'><a href="{% url "users:profile" %}">Perfil</a></li>
+                    <li class='button-animate'><form action="{% url "users:logout" %}" method="POST" id="form-logout">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value={{request.user.username}}>
+                        <button type="submit" id="logout">Sair</button>
+                    </form></li>
+                </ul>
+            </div>
+        {% else %}
+        <div class="link-login">
+            <a href="{% url "users:login" %}">Logar</a>
+        </div>
+        {% endif %}
     </nav>
 </header>
 
