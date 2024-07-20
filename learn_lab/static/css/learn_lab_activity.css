@@ -28,7 +28,7 @@
 .activity-content h2 a {
     text-align: center;
     color: black;
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-s);
 }
 
 .no-file-list {
@@ -41,10 +41,28 @@
     box-shadow: 0 2px 0 0 rgba(65, 65, 65, 0.274);
 }
 
+.acitivity-file-list {
+    margin: var(--spacing-ss) auto;
+    width: 170px;
+    height: 239px;
+    border-radius: 3rem;
+    box-shadow: 0 2px 0 0 rgba(65, 65, 65, 0.274);
+}
+
+.acitivity-file-list img {
+    width: 100%;
+    border-radius: 3rem;
+}
+
 .activity-subject-list,
 .activity-level-list {
     font-size: var(--font-size-ss);
     font-weight: 500;
+}
+
+.activity-delete {
+    display: block;
+    margin-top: var(--spacing-ss);
 }
 
 
@@ -66,11 +84,11 @@
 
 .detail-description-and-file {
     display: flex;
-    gap: var(--spacing-s);
+    gap: var(--spacing-l);
 }
 
 .detail-description {
-    width: 50%;
+    width: max-content;
 }
 
 .detail-description p {
@@ -85,6 +103,7 @@
 
 .detail-description ul li {
     font-size: var(--font-size-s);
+    color: black;
 }
 
 .detail-file {
@@ -103,5 +122,14 @@
     margin: 0 auto;
     height: 55rem;
     background: white;
+    border-radius: 3rem;
+}
+
+.acitivity-file-detail {
+    max-width: 40%;
+    margin: 0 auto;
+    border: solid 3px black;
+    background-color: var(--background-primary);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.167);
     border-radius: 3rem;
 }

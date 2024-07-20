@@ -6,7 +6,7 @@ from .models import Activity
 from .forms import ActivityForm
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
@@ -88,7 +88,7 @@ class LearnLabActivityView(DetailView):
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
-def activity_create(request):
+def activity_create(request, id=None):
     if request.method == 'POST':
         form = ActivityForm(
             data=request.POST,
@@ -102,8 +102,29 @@ def activity_create(request):
             return redirect('users:profile')
 
     else:
-        form = ActivityForm()
+        activity = Activity.objects.filter(
+            pk=id,
+            user=request.user
+        ).first()
+
+        form = ActivityForm(
+            instance=activity
+        )
         return render(request, 'pages/learn_lab_activity_create.html', {
             'form': form,
             'form_action': reverse('learn_lab:activity_create')
         })
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def activity_delete(request, slug):
+
+    if request.method == 'POST':
+        activity = get_object_or_404(
+            Activity, slug=slug, user=request.user)
+        activity.delete()
+        messages.success(request, '✅ Atividade deletada com sucesso')
+        return redirect('users:profile')
+    else:
+        messages.error(request, 'Método de requisição inválido.')
+        raise redirect('users:profile')

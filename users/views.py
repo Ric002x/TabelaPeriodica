@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from learn_lab.models import Activity
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -95,10 +96,15 @@ def user_manager(request):
     activities = Activity.objects.filter(
         user=request.user,
     )
+    paginator = Paginator(activities, 9)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     return render(request, 'pages/profile.html', context={
         'activities': activities,
         'profile_page': True,
+        'page_obj': page_obj,
     })
 
 

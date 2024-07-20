@@ -11,5 +11,8 @@ urlpatterns = [
          name='learn_lab_activity_search'),
     path('atividade/<slug:slug>',
          views.LearnLabActivityView.as_view(), name='learn_lab_activity'),
-    path('atividade/criar/', views.activity_create, name='activity_create')
+    path('atividade/criar/',
+         views.activity_create, name='activity_create'),
+    path('atividade/deletar/<slug:slug>',
+         views.activity_delete, name='activity_delete'),
 ]

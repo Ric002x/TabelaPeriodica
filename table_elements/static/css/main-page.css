@@ -140,25 +140,8 @@
     color: black;
     font-size: var(--font-size-ss);
 }
-
-.objective-button {
-    display: block;
-    text-align: center;
-    width: 60%;
-    margin: 0 auto;
-    padding: 1.1rem;
-    border-radius: 3rem;
-    background-color: var(--primary-orange);
-    text-decoration: none;
-    margin-bottom: var(--spacing-s);
-    transition: all 0.3s;
-}
-
-.objective-button:hover {
-    background-color: var(--secondary-orange);
-}
-
 /* Content Section */
+
 
 .site-content {
     width: 100%;

@@ -59,7 +59,7 @@ class ActivityForm(forms.ModelForm):
         },
         widget=forms.ClearableFileInput(attrs={
             'class': 'form-activity-input',
-            'accept': '.doc, .docx, .pdf'
+            'accept': '.pdf'
         })
     )
 

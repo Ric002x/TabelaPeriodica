@@ -22,7 +22,7 @@
                     <h2 class='user-section-data'>Dados do Usuário</h2>
                     <p>Nome completo: <span>{{user.first_name}} {{user.last_name}}</span></p>
                     <p>Email: <span>{{user.email}}</span></p>
-                    <a class='link-change' href="{% url "users:profile_update" %}">Alterar dados</a>
+                    <a class='default-button green-square' href="{% url "users:profile_update" %}">Alterar dados</a>
                 </div>
 
                 <div id="user-items" class="section hidden">
@@ -34,9 +34,10 @@
                             {% include "partials/activity.html" %}
                         {% endfor %}
                     </div>
-
+                    <br>
+                    {% include "global/partials/pagination.html" %}
                     <div class='new-activity'>Para criar uma nova atividade, clique aqui:
-                        <a href="{% url "learn_lab:activity_create" %}" class='btn-activity-create'>Nova atividade</a>
+                        <a href="{% url "learn_lab:activity_create" %}" class='default-button green-square'>Nova atividade</a>
                     </div>
                 </div>
 

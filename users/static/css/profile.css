@@ -100,7 +100,8 @@
 
 .publications {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-s);
 }
 
 .new-activity {
@@ -123,9 +124,35 @@
 
 
 /* Profire update form */
+
 .update-profile {
     width: 100%;
-    margin: var(--spacing-m) 0;
+    padding: var(--spacing-m);
+}
+
+.instructions-form-containter {
+    display: flex;
+}
+
+.instruction-container {
+    width: 50%;
+    background-color: var(--primary-green);
+    padding: var(--spacing-m);
+    border-radius: 3rem;
+    box-shadow: -4px 4px 5px 0 rgba(0, 0, 0, 0.304);
+}
+
+.suport {
+    padding-left: var(--spacing-s);
+}
+
+.suport li {
+    list-style-type: disc;
+    margin-bottom: var(--spacing-ss);
+}
+
+.suport-activity.suport li {
+    font-size: var(--font-size-ss);
 }
 
 .form-profile-container {
@@ -133,7 +160,7 @@
     margin: 0 auto;
     border: solid 2px black;
     border-radius: 3rem;
-    box-shadow: 4px 4px 5px 2px rgba(0, 0, 0, 0.236);
+    box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.304);
 }
 
 .form-profile-container h2 {
@@ -172,36 +199,3 @@
     border-bottom: solid 1px var(--primary-blue);
     margin-bottom: var(--spacing-ss);
 }
-
-.btn-profile-change {
-    display: block;
-    background-color: var(--primary-green);
-    margin: 0 auto;
-    padding: var(--spacing-ss);
-    border: none;
-    border-radius: 2rem;
-    color: white;
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.488);
-    font-size: var(--font-size-ss);
-    margin-bottom: var(--spacing-ss);
-    transition: all 0.3s;
-}
-
-.btn:hover {
-    cursor: pointer;
-}
-
-.btn-reset-profile {
-    display: block;
-    color: var(--primary-blue);
-    background-color: transparent;
-    border: none;
-    width: fit-content;
-    margin: 0 auto;
-}
-
-.btn-profile-change:hover {
-    background-color: var(--secondary-green);
-}
-
-

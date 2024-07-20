@@ -3,6 +3,7 @@
 @import url(footer.css);
 @import url(header.css);
 @import url(pagination.css);
+@import url(search.css);
 
 
 :root {
@@ -86,8 +87,14 @@ p, a {
 }
 
 h1, h2, h3, h4, p, a {
-    color: var(--white);
+    color: white;
     text-decoration: none;
+}
+
+ul, li {
+    color: white;
+    list-style-type: none;
+    font-size: var(--font-size-s);
 }
 
 .message-center {
@@ -104,23 +111,85 @@ h1, h2, h3, h4, p, a {
     background-color: rgba(234, 33, 33, 0.681);
 }
 
-.default-button {
+.default-button.green-round {
     width: fit-content;
-    padding: 0.5rem 3rem;
+    padding: 0.6rem 2.1rem;
     display: block;
-    margin: var(--spacing-ss) auto;
     background-color: var(--primary-green);
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     border: none;
-    box-shadow: 0px 4px 2px 0px rgba(125, 135, 145, 0.79);
+    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
     color: white;
     font-size: var(--font-size-ss);
     transition: all 0.2s;
 }
 
-.default-button:hover {
+.default-button.green-round:hover {
     cursor: pointer;
     background-color: var(--secondary-green);
+    transform: translateY(-0.3rem);
+}
+
+.default-button.green-square {
+    width: fit-content;
+    padding: 0.6rem 2.1rem;
+    display: block;
+    background-color: var(--primary-green);
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
+    color: white;
+    font-size: var(--font-size-s);
+    transition: all 0.2s;
+}
+
+.default-button.green-square:hover {
+    cursor: pointer;
+    background-color: var(--secondary-green);
+    transform: translateY(-0.3rem);
+}
+
+.default-button.orange-square {
+    width: fit-content;
+    padding: 0.6rem 2.1rem;
+    display: block;
+    background-color: var(--primary-orange);
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
+    color: white;
+    font-size: var(--font-size-s);
+    transition: all 0.2s;
+}
+
+.default-button.orange-square:hover {
+    cursor: pointer;
+    background-color: var(--secondary-orange);
+    transform: translateY(-0.3rem);
+}
+
+.default-button.orange-round {
+    width: fit-content;
+    padding: 0.6rem 2.1rem;
+    display: block;
+    margin: 0 auto var(--spacing-s) auto;
+    background-color: var(--primary-orange);
+    border-radius: 2rem;
+    border: none;
+    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
+    color: white;
+    font-size: var(--font-size-s);
+    transition: all 0.2s;
+}
+
+.default-button.orange-round:hover {
+    cursor: pointer;
+    background-color: var(--secondary-orange);
+    transform: translateY(-0.3rem);
+}
+
+.center {
+    margin: 0 auto;
 }
 
 @keyframes slideInLeft {
@@ -184,12 +253,4 @@ h1, h2, h3, h4, p, a {
 .animate-on-scroll.slide-up.animate-enter {
     opacity: 1;
     animation: slideInUp 1s forwards;
-}
-
-.button-animate {
-    transition: all 0.3s;
-}
-
-.button-animate:hover {
-    transform: translateY(-0.3rem);
 }

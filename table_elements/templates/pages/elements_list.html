@@ -1,12 +1,14 @@
 {% extends "global/base.html" %}
-{% load static %}
+
+{% block title %}Elementos{% endblock title %}
 
 {% block content %}
-    <div class="main-content-list">
-        {% include "global/partials/search.html" %}
+<section class="elements-list">
+    {% include "global/partials/search.html" %} <br>
 
-        {% include "partials/element.html" %}
-    </div>
+    {% include "partials/element.html" %}
 
     {% include "global/partials/pagination.html" %}
+</section>
+
 {% endblock content %}

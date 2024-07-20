@@ -7,36 +7,49 @@
         <div class="message-center {{message.tags}}">{{message}}</div>
 {% endfor %}
     <section class='update-profile'>
-        <div class="form-profile-container">
-            <h2>Atualizar dados</h2>
-            <form action="{{form_action}}" method="POST" enctype='multipart/form-data'>
-                {% csrf_token %}
-                <div class='form-group'>
-                    <label class='label-profile'>Nome</label><br>
-                    <div class='form-input'>{{user_form.first_name}}</div>
-                </div>
-                <div class='form-group'>
-                    <label class='label-profile'>Sobrenome</label><br>
-                    <div class='form-input'>{{user_form.last_name}}</div>
-                </div>
-                <div class='form-group'>
-                    <label class='label-profile'>Usuário</label><br>
-                    <div class='form-input'>{{user_form.username}}</div>
-                </div>
-                <div class='form-group'>
-                    <label class='label-profile'>Email</label><br>
-                    <div class='form-input'>{{user_form.email}}</div>
-                </div>
-                <div class='form-group'>
-                    <a href="">Trocar Senha</a>
-                    <label class='label-profile'>Atualizar imagem</label><br>
-                    <div class='select-img'>{{profile_form.avatar}}</div>
-                </div>
-            
+        <div class="instructions-form-containter">
+            <div class="instruction-container">
+                <h2>📋 Intruções para atualização:</h2><br>
+                <p>Os campos já iniciam preenchidos com seus dados. Certifique-se de alterar somente os campos desejados.</p>
+                <br><hr><br>
+                <p>🔧 Em caso de suporte, contate:</p>
+                <ul class='suport'>
+                    <br>
+                    <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i>    ricvenicius@gmail.com</li>
+                    <li><i class="fa-solid fa-phone" style="color: #ffffff;"></i>    (00) 00000-0000</li>
+                </ul>
+            </div>
+            <div class="form-profile-container">
+                <h2>Atualizar dados</h2>
+                <form action="{{form_action}}" method="POST" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        <label class='label-profile'>Nome</label><br>
+                        <div class='form-input'>{{user_form.first_name}}</div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='label-profile'>Sobrenome</label><br>
+                        <div class='form-input'>{{user_form.last_name}}</div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='label-profile'>Usuário</label><br>
+                        <div class='form-input'>{{user_form.username}}</div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='label-profile'>Email</label><br>
+                        <div class='form-input'>{{user_form.email}}</div>
+                    </div>
+                    <div class='form-group'>
+                        <a href="">Trocar Senha</a>
+                        <label class='label-profile'>Atualizar imagem</label><br>
+                        <div class='select-img'>{{profile_form.avatar}}</div>
+                    </div>
+                
 
-                <button class='btn btn-profile-change'type="submit">Salvar alterações</button>
-                <button class='btn btn-reset-profile' type="reset">Resetar</button>
-            </form>
+                    <button class='btn btn-profile-change'type="submit">Salvar alterações</button>
+                    <button class='btn btn-reset-profile' type="reset">Resetar</button>
+                </form>
+            </div>
         </div>
     </section>
 {% endblock content %}

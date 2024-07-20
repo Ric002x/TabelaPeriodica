@@ -64,6 +64,7 @@ class SearchElementPageview(ElementsListView):
             'additional_url_query': f'&q={search_term}',
             'element_page': True,
             'placeholder_input': 'Procurar um elemento...',
+            'element_page_search': True,
         })
 
         return context_data

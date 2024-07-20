@@ -1,12 +1,17 @@
 <div class="search-camp">
     {% if element_page %}
-    <form action="{% url "table_elements:search_element" %}" class='search-form'>
+        <form action="{% url "table_elements:search_element" %}" class='search-form'>
     {% endif %}
+
     {% if learn_lab_page %}
-    <form action="{% url "learn_lab:learn_lab_activity_search" %}" class='search-form'>
+        <form action="{% url "learn_lab:learn_lab_activity_search" %}" class='search-form'>
     {% endif %}
         <input type="search" name="q" class='search-input' value="{{search_term}}"
-        placeholder="{{placeholder_input}}" required>
+            placeholder="{{placeholder_input}}" required>
         <button type='submit' class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
+    {% if element_page_search %}
+        <a href="{% url "table_elements:elements_list" %}" class="default-button green-round">&laquo; Voltar</a>
+    {% endif %}
+    
 </div>

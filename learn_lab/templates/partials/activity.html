@@ -1,14 +1,21 @@
 {% if activity_list_page or profile_page %}
     <div class="activity-content">
         <h2><a href="{{activity.get_absolute_url}}">{{activity.title}}</a></h2>
-        {% comment %} {% if activity.file %}
+        {% if activity.file %}
             <div class="acitivity-file-list"><img src="{{activity.thumbnail.url}}" alt="pdf_thumbnail"></div>
         {% else %}
-            <div class="no-file-list"></div>
-        {% endif %} {% endcomment %}
-        <a href='#' class="no-file-list"></a>
+            <a href='#' class="no-file-list"></a>
+        {% endif %}
         <span class="activity-subject-list">Conteúdo: {{activity.subject}}</span><br>
         <span class="activity-level-list">Turma: {{activity.level}}</span>
+        {% if profile_page %}
+            <form action="{% url "learn_lab:activity_delete" activity.slug %}"
+            method="POST" class='form-delete-activity' id="form-delete-activity-{{ activity.slug }}">
+                {% csrf_token %}
+                <input type="hidden" name="activity_slug" value="{{ activity.slug }}">
+                <button onclick="confirmeAction(event, 'form-delete-activity-{{ activity.slug }}')" type="submit" id="form-delete-button">❌</button>
+            </form>
+        {% endif %}
     </div>
 {% endif %}
 
@@ -23,10 +30,14 @@
                     <li><strong>Matéria: </strong>{{activity.subject}}</li>
                     <li><strong>Turma: </strong>{{activity.level}}</li>
                 </ul>
+                <br>
+                <a href="{{activity.file.url}}" download class="default-button green-square">Baixar</a>
             </div>
-            <div class="detail-file">
-                
-            </div>
+            {% if activity.file %}
+                <img src="{{activity.thumbnail.url}}" alt="pdf_thumbnail" class='acitivity-file-detail'>
+            {% else %}
+                <div class="detail-file"></div>
+            {% endif %}
         </div>
     </div>
 {% endif %}
