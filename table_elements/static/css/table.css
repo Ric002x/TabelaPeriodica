@@ -71,6 +71,7 @@
     display: flex;
     height: 6.5rem;
     flex-direction: column;
+    justify-content: space-evenly;
     background: none;
     color: black;
     text-decoration: none;
@@ -81,7 +82,7 @@
 .grid-item p {
     color: black;
     font-weight: 600;
-    font-size: var(--font-size-sss);
+    font-size: 1rem;
 }
 
 .grid-item h2 {

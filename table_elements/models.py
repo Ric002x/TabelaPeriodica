@@ -1,71 +1,56 @@
 from django.db import models
+import os
+import json
 
 # Create your models here.
-ametal = ['H', 'C', 'N', 'O', 'P', 'S', 'Se']
-alcaline_metal = ['Li', 'Na', 'K', 'Rb', 'Cs', 'Fr']
-alcaline_metal2 = ['Be', 'Mg', 'Ca', 'Sr', 'Ba', 'Ra']
-semiconductors = ['Al', 'Ga', 'In', 'Sn', 'Tl', 'Nh',
-                  'Fl', 'Pb', 'Bi', 'Mc', 'Lv']
-trans_metals = [
-    'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn',
-    'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd',
-    'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg',
-    'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn'
-]
-semimetals = ['B', 'Si', 'Ge', 'As', 'Sb', 'Te', 'Po']
-halogens = ['Cl', 'F', 'Br', 'I', 'At', 'Ts']
-nobel_gas = ['He', 'Ne', 'Ar', 'Kr', 'Xe', 'Rn', 'Og']
-lantanides = [
-    'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-    'Ho', 'Er', 'Tm', 'Yb', 'Lu'
-]
-actinides = [
-    'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf',
-    'Es', 'Fm', 'Md', 'No', 'Lr'
-]
+elements_category = json.loads(os.environ.get('ELEMENTS_CATEGORIES'))
 
 
 class Elements(models.Model):
     name = models.CharField(max_length=30, unique=True)
     slug = models.SlugField(max_length=30, unique=True)
-    simbol = models.CharField(max_length=5)
+    symbol = models.CharField(max_length=5)
     element_cover = models.ImageField(
         upload_to='table_elements/elements_cover/',
         blank=True,
         default='')
-    atomic_number = models.IntegerField()
-    atomic_mass = models.FloatField()
+    bohr_model = models.ImageField(
+        upload_to='table_elements/elements_bohr_model/',
+        blank=True,
+        default=''
+    )
+    atomic_number = models.IntegerField(default=0)
+    atomic_mass = models.FloatField(default=0)
+    electrons_number = models.IntegerField(default=0)
+    neutrons_number = models.IntegerField(default=0)
+    density = models.FloatField(default=0)  # g/cm³
+    melting_point = models.FloatField(default=0)  # °C
+    boiling_point = models.FloatField(default=0)  # °C
+    state_matter = models.CharField(
+        max_length=20, default='')  # Solid, Gas, Liquid
+    electronic_configuration = models.TextField(default='')   # 1s²...
+    ionic_states = models.CharField(
+        max_length=100, blank=True)  # 1+, 2+...
+    discoverer = models.CharField(max_length=100, blank=True)
+    year_discovered = models.IntegerField(blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name
 
+    def melting_point_fahrenheit(self):
+        return round(self.melting_point * 9/5 + 32, 3)
+
+    def melting_point_kelvin(self):
+        return round(self.melting_point + 273.15, 3)
+
+    def boiling_point_fahrenheit(self):
+        return round(self.boiling_point * 9/5 + 32, 3)
+
+    def boiling_point_kelvin(self):
+        return round(self.boiling_point + 273.15, 3)
+
     def get_css_class(self):
-        if self.simbol in ametal:
-            return 'ametal'
-
-        if self.simbol in alcaline_metal:
-            return 'metal-alcaline'
-
-        if self.simbol in alcaline_metal2:
-            return 'metal-alcaline-2'
-
-        if self.simbol in nobel_gas:
-            return 'nobel-gas'
-
-        if self.simbol in trans_metals:
-            return 'trans-metal'
-
-        if self.simbol in semimetals:
-            return 'semimetal'
-
-        if self.simbol in halogens:
-            return 'halogen'
-
-        if self.simbol in semiconductors:
-            return 'semiconductor'
-
-        if self.simbol in actinides:
-            return 'actinide'
-
-        if self.simbol in lantanides:
-            return 'lantanide'
+        for category, symbols in elements_category.items():
+            if self.symbol in symbols:
+                return category
+        return 'unknown'

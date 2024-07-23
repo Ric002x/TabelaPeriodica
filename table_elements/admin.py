@@ -6,7 +6,7 @@ from table_elements.models import Elements
 
 @admin.register(Elements)
 class ElementsAdmin(admin.ModelAdmin):
-    list_display = ['name', 'atomic_number', 'simbol']
+    list_display = ['name', 'atomic_number', 'symbol']
     list_per_page = 30
     ordering = 'id',
     search_fields = 'name',

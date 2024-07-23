@@ -13,6 +13,10 @@
     flex-direction: row;
 }
 
+.hero-title h1 span {
+    font-size: var(--font-size-xl);
+}
+
 .hero-title::before {
     content: '';
     position: absolute;

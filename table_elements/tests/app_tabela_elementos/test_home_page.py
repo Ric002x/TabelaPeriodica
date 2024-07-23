@@ -6,7 +6,7 @@ from table_elements import views
 class TestTabelaMainPage(TestCase):
     def test_main_page_view(self):
         view = resolve(reverse("table_elements:home"))
-        self.assertIs(view.func, views.home)
+        self.assertIs(view.func, views.homepageview)
 
     def test_main_page_status_code_200(self):
         response = self.client.get(reverse("table_elements:home"))

@@ -67,9 +67,10 @@ class Activity(models.Model):
             os.makedirs(os.path.dirname(thumbnail_path), exist_ok=True)
 
             try:
+                poppler_path = os.environ.get("POPPER_PATH")
                 pages = convert_from_path(
                     file_path, first_page=1, last_page=1,
-                    poppler_path='D:/.C/Programs/poppler-24.02.0/Library/bin')
+                    poppler_path=poppler_path)
                 if pages:
                     image = pages[0]
                     image.thumbnail(size=(1050, 1485))

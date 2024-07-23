@@ -82,7 +82,7 @@ h4 {
     letter-spacing: 0.2rem;
 }
 
-p, a {
+p, a, span {
     font-size: var(--font-size-s);
 }
 

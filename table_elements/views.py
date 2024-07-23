@@ -77,3 +77,26 @@ class ElementsDetailView(DetailView):
     def get_template_names(self):
         slug = self.kwargs.get("slug")
         return [f'partials/element_detail/{slug}.html']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        element = self.get_object()
+
+        # Obter o próximo e o anterior elementos
+        try:
+            next_element = Elements.objects.filter(
+                atomic_number__gt=element.atomic_number).order_by(
+                    'atomic_number').first()
+        except Elements.DoesNotExist:
+            next_element = None
+
+        try:
+            prev_element = Elements.objects.filter(
+                atomic_number__lt=element.atomic_number).order_by(
+                    '-atomic_number').first()
+        except Elements.DoesNotExist:
+            prev_element = None
+
+        context['next_element'] = next_element
+        context['prev_element'] = prev_element
+        return context
