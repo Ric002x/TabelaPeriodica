@@ -40,7 +40,7 @@
                         <div class='form-input'>{{user_form.email}}</div>
                     </div>
                     <div class='form-group'>
-                        <a href="">Trocar Senha</a>
+                        <a href="{% url "users:change_password" %}">Trocar Senha</a>
                         <label class='label-profile'>Atualizar imagem</label><br>
                         <div class='select-img'>{{profile_form.avatar}}</div>
                     </div>

@@ -7,7 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from learn_lab.models import Activity
 from django.core.paginator import Paginator
-
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 
@@ -148,3 +149,24 @@ def logout_update(request):
     logout(request)
     messages.success(request, 'usuário saiu')
     return redirect(reverse('table_elements:home'))
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Senha alterada com sucesso!')
+            return redirect(reverse('users:profile'))
+        else:
+            messages.error(request, 'Erro no formulário')
+
+    form = PasswordChangeForm(request.user)
+
+    return render(request, 'pages/change_password.html', context={
+        'form': form,
+        'form_action': reverse('users:change_password')
+    })

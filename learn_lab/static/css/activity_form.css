@@ -161,6 +161,13 @@
     margin: 0 auto;
 }
 
-.activity-update h1, h2, p, span, a {
+.activity-update a {
+    color: black;
+}
+
+.activity-update h2 {
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: var(--spacing-s);
     color: black;
 }

@@ -3,13 +3,15 @@
 {% block title %}Editar{% endblock title %}
 
 {% block content %}
-{% for message in messages %}
-<div class="message-center {{message.tags}}">{{message}}</div>
-{% endfor %}
 
-<h2>Alterar dados da atividade:</h2>
+
 
 <section class="activity-update">
+    {% for message in messages %}
+    <div class="message-center {{message.tags}}">{{message}}</div>
+    {% endfor %}
+
+    <h2>Alterar dados da atividade:</h2>
     <div class="form-container-activity">
         <form action="{{form_action}}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
