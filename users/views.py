@@ -95,6 +95,7 @@ def login_create(request):
 def user_manager(request):
     activities = Activity.objects.filter(
         user=request.user,
+        is_published=False,
     )
     paginator = Paginator(activities, 9)
 

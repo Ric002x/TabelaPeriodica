@@ -8,95 +8,84 @@ from django.db.models import Q
 # Create your views here.
 
 
-def homepageview(request):
+def home_page_view(request):
     return render(request, 'pages/main_page.html')
 
 
-class TabelaElementsView(ListView):
-    model = Elements
-    context_object_name = 'elements'
-    template_name = 'pages/table.html'
-    ordering = 'id',
+def table_list_view(request):
+    elements = Elements.objects.filter(
+    ).order_by('id')
+
+    return render(request, 'pages/table.html', context={
+        'elements': elements,
+    })
 
 
-class ElementsListView(ListView):
-    model = Elements
-    context_object_name = 'elements'
-    template_name = 'pages/elements_list.html'
-    ordering = 'id'
-    paginate_by = 18
-    paginator_class = Paginator
-    page_kwarg = "page"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({
-            'element_page': True,
-            'placeholder_input': 'Procurar um elemento...',
-        })
-        return context
-
-
-class SearchElementPageview(ElementsListView):
-    template_name = 'pages/elements_list_search.html'
-
-    def get_queryset(self):
-        query_set = super().get_queryset()
-        search_term = self.request.GET.get('q', '').strip()
-
-        if not search_term:
-            raise Http404
-
-        query_set = query_set.filter(
+def elements_list_view(request):
+    search_term = request.GET.get('q', '').strip()
+    if search_term:
+        query_set = Elements.objects.filter(
             Q(
                 Q(name__icontains=search_term) |
                 Q(atomic_number__icontains=search_term)
             ),
-        )
-        return query_set
+        ).order_by('id')
+        paginator = Paginator(object_list=query_set, per_page=18)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
 
-    def get_context_data(self, *args, **kwargs):
-        context_data = super().get_context_data(*args, **kwargs)
-        search_term = self.request.GET.get('q', '').strip()
-
-        context_data.update({
+        return render(request, 'pages/elements_list_search.html', context={
             'search_term': search_term,
-            'additional_url_query': f'&q={search_term}',
+            'elements': page_obj.object_list,
             'element_page': True,
             'placeholder_input': 'Procurar um elemento...',
+            'page_obj': page_obj,
             'element_page_search': True,
         })
 
-        return context_data
+    elements = Elements.objects.all(
+    ).order_by('id')
+
+    if not elements:
+        raise Http404
+
+    paginator = Paginator(object_list=elements, per_page=18)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'pages/elements_list.html', context={
+        'elements': page_obj.object_list,
+        'element_page': True,
+        'placeholder_input': 'Procurar um elemento...',
+        'page_obj': page_obj,
+    })
 
 
-class ElementsDetailView(DetailView):
-    model = Elements
-    context_object_name = 'element'
+def element_detail_view(request, slug):
+    element = Elements.objects.filter(
+        slug=slug,
+    ).first()
+    slug = slug
 
-    def get_template_names(self):
-        slug = self.kwargs.get("slug")
-        return [f'partials/element_detail/{slug}.html']
+    if not element:
+        raise Http404
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        element = self.get_object()
+    try:
+        next_element = Elements.objects.filter(
+            atomic_number__gt=element.atomic_number
+        ).order_by('atomic_number').first()
+    except Elements.DoesNotExist:
+        next_element = None
 
-        # Obter o próximo e o anterior elementos
-        try:
-            next_element = Elements.objects.filter(
-                atomic_number__gt=element.atomic_number).order_by(
-                    'atomic_number').first()
-        except Elements.DoesNotExist:
-            next_element = None
+    try:
+        prev_element = Elements.objects.filter(
+            atomic_number__lt=element.atomic_number
+        ).order_by('-atomic_number').first()
+    except Elements.DoesNotExist:
+        prev_element = None
 
-        try:
-            prev_element = Elements.objects.filter(
-                atomic_number__lt=element.atomic_number).order_by(
-                    '-atomic_number').first()
-        except Elements.DoesNotExist:
-            prev_element = None
-
-        context['next_element'] = next_element
-        context['prev_element'] = prev_element
-        return context
+    return render(request, f'partials/element_detail/{slug}.html', context={
+        'element': element,
+        'next_element': next_element,
+        'prev_element': prev_element
+    })

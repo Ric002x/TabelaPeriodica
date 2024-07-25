@@ -1,0 +1,27 @@
+{% extends "global/base.html" %}
+
+{% block title %}Editar{% endblock title %}
+
+{% block content %}
+{% for message in messages %}
+<div class="message-center {{message.tags}}">{{message}}</div>
+{% endfor %}
+
+<h2>Alterar dados da atividade:</h2>
+
+<section class="activity-update">
+    <div class="form-container-activity">
+        <form action="{{form_action}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{field.id_for_label}}" class='activity-label'>{{field.label}}</label>
+                <div class='activity-input'>{{field}}</div>
+            {% endfor %}
+            <button type="submit">Atualizar</button>
+        </form>
+    </div>
+</section>
+
+<a href="{% url "users:profile" %}">Voltar</a>
+{% endblock content %}
+

@@ -15,6 +15,7 @@
                 <input type="hidden" name="activity_slug" value="{{ activity.slug }}">
                 <button onclick="confirmeAction(event, 'form-delete-activity-{{ activity.slug }}')" type="submit" id="form-delete-button">❌</button>
             </form>
+            <a href="{% url "learn_lab:activity_update" activity.slug %}">📝</a>
         {% endif %}
     </div>
 {% endif %}
@@ -31,7 +32,9 @@
                     <li><strong>Turma: </strong>{{activity.level}}</li>
                 </ul>
                 <br>
-                <a href="{{activity.file.url}}" download class="default-button green-square">Baixar</a>
+                {% if activity.file %}
+                    <a href="{{activity.file.url}}" download class="default-button green-square">Baixar</a>
+                {% endif %}
             </div>
             {% if activity.file %}
                 <img src="{{activity.thumbnail.url}}" alt="pdf_thumbnail" class='acitivity-file-detail'>

@@ -1,13 +1,8 @@
 from django.test import TestCase
 from table_elements.models import Elements
-from django.core.exceptions import ValidationError
 
 
-class TestTabelaElementPage(TestCase):
-    def setUp(self) -> None:
-        self.element = self.make_element()
-        return super().setUp()
-
+class ElementsMixin:
     def make_element(
             self,
             name='Hidrogênio',
@@ -40,31 +35,10 @@ class TestTabelaElementPage(TestCase):
             electronic_configuration=electronic_configuration,
             ionic_states=ionic_states,
             discoverer=discoverer,
-            year_discovered=year_discovered,
-        )
-        element.full_clean()
-        element.save()
+            year_discovered=year_discovered)
         return element
 
-    def test_model_returns_name(self):
-        self.element.name = "Teste"
-        self.assertEqual(str(self.element), 'Teste')
 
-    def test_slug_max_lengh(self):
-        self.element.slug = 'a' * 31
-        with self.assertRaises(ValidationError):
-            self.element.full_clean()
-
-    def test_symbol_max_lengh(self):
-        self.element.symbol = 'a' * 6
-        with self.assertRaises(ValidationError):
-            self.element.full_clean()
-
-    def test_atomic_number_is_integer(self):
-        self.element.atomic_number = ''
-        with self.assertRaises(ValidationError):
-            self.element.full_clean()
-
-        self.element.atomic_number = 3
-        self.element.full_clean()
-        self.assertEqual(self.element.atomic_number, 3)
+class TableElementsBaseTest(TestCase, ElementsMixin):
+    def setUp(self) -> None:
+        return super().setUp()

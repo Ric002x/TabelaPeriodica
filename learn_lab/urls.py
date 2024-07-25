@@ -5,14 +5,16 @@ app_name = 'learn_lab'
 
 urlpatterns = [
     path('',
-         views.LearnLabHomeView.as_view(), name='learn_lab_home'),
+         views.lear_lab_list_view, name='learn_lab_home'),
     path('atividade/buscar',
-         views.LearnLabActivitySearch.as_view(),
+         views.lear_lab_list_view,
          name='learn_lab_activity_search'),
     path('atividade/<slug:slug>',
-         views.LearnLabActivityView.as_view(), name='learn_lab_activity'),
+         views.learn_lab_detail_view, name='learn_lab_activity'),
     path('atividade/criar/',
          views.activity_create, name='activity_create'),
+    path('atividade/editar/<slug:slug>',
+         views.activity_update, name='activity_update'),
     path('atividade/deletar/<slug:slug>',
          views.activity_delete, name='activity_delete'),
 ]

@@ -1,7 +1,4 @@
-from typing import Any
 from django.http import Http404
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from .models import Activity
 from .forms import ActivityForm
 from django.core.paginator import Paginator
@@ -13,78 +10,40 @@ from django.contrib import messages
 # Create your views here.
 
 
-class LearnLabHomeView(ListView):
-    model = Activity
-    context_object_name = 'activities'
-    ordering = ['-id']
-    template_name = 'pages/learn_lab_home.html'
-    paginator_class = Paginator
-    paginate_by = 20
+def lear_lab_list_view(request):
+    search_term = request.GET.get('q', '').strip()
+    activities = Activity.objects.filter(is_published=True,).order_by('-id')
+    context = {}
 
-    def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset(*args, **kwargs)
-        query_set = query_set.filter(
-            is_published=True,
-        )
-        return query_set
-
-    def get_context_data(self, **kwargs: Any):
-        context_data = super().get_context_data(**kwargs)
-
-        context_data.update({
-            'learn_lab_page': True,
-            'placeholder_input': 'Buscar por uma atividade...',
-            'activity_list_page': True
-        })
-
-        return context_data
-
-
-class LearnLabActivitySearch(LearnLabHomeView):
-    template_name = 'pages/learn_lab_activity_search.html'
-
-    def get_queryset(self, *args, **kwargs):
-        query_set = super().get_queryset(*args, **kwargs)
-        search_term = self.request.GET.get('q', '').strip()
-
-        if not search_term:
-            raise Http404
-
-        query_set = query_set.filter(
+    if search_term:
+        activities.filter(
             Q(
                 Q(title__icontains=search_term) |
                 Q(description__icontains=search_term)
             ),
-        )
-        return query_set
+        ).order_by('-id')
+        context['search_term'] = search_term
+        context['learn_lab_search_page'] = True
 
-    def get_context_data(self, *args, **kwargs):
-        search_term = self.request.GET.get('q', '').strip()
+    paginator = Paginator(activities, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-        context = super().get_context_data(*args, **kwargs)
+    dict_home = {'activities': page_obj.object_list, 'page_obj': page_obj,
+                 'learn_lab_page': True, 'activity_list_page': True,
+                 'placeholder_input': 'Buscar por uma atividade...'}
+    context.update(dict_home)
 
-        context.update({
-            'search_term': search_term,
-            'additional_url_query': f'&q={search_term}',
-            'learn_lab_page': True,
-            'placeholder_input': 'Buscar por atividade...',
-            'activity_list_page': True
-        })
-
-        return context
+    return render(request, 'pages/learn_lab_home.html', context)
 
 
-class LearnLabActivityView(DetailView):
-    model = Activity
-    context_object_name = 'activity'
-    slug_field = "slug"
-    slug_url_kwarg = "slug"
-    template_name = 'pages/learn_lab_activitydetail.html'
+def learn_lab_detail_view(request, slug):
+    activity = get_object_or_404(Activity, slug=slug, is_published=True)
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["activiy_detail_page"] = True
-        return context
+    return render(request, 'pages/learn_lab_activity_detail.html', context={
+        'activity': activity,
+        "activiy_detail_page": True,
+    })
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -128,3 +87,40 @@ def activity_delete(request, slug):
     else:
         messages.error(request, 'Método de requisição inválido.')
         raise redirect('users:profile')
+
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def activity_update(request, slug=None):
+    activity = Activity.objects.filter(
+        user=request.user,
+        slug=slug,
+        is_published=False,
+    ).first()
+
+    if request.method == "POST":
+        form = ActivityForm(
+            data=request.POST or None,
+            files=request.FILES or None,
+            instance=activity,
+        )
+        if form.is_valid():
+            activity = form.save(commit=False)
+            activity.user = request.user
+            activity.is_published = False
+            activity.save()
+
+            messages.success(request, "Atividade atualizada!")
+            return redirect(reverse('learn_lab:activity_update',
+                                    kwargs={'slug': activity.slug}))
+
+    if not activity:
+        raise Http404
+
+    form = ActivityForm(
+        instance=activity
+    )
+
+    return render(request, 'pages/learn_lab_activity_update.html', context={
+        'activity': activity,
+        'form': form
+    })

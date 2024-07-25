@@ -147,3 +147,20 @@
     background-color: var(--secondary-green);
     cursor: pointer;
 }
+
+
+
+
+/* ----------------------------------- */
+
+/* Update Form */
+
+.activity-update{
+    width: 100%;
+    padding: var(--spacing-m);
+    margin: 0 auto;
+}
+
+.activity-update h1, h2, p, span, a {
+    color: black;
+}
