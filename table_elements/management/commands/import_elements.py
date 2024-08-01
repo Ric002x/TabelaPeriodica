@@ -30,7 +30,7 @@ class Command(BaseCommand):
                 element = Elements(
                     name=file.loc[row, 'name'],
                     slug=file.loc[row, 'slug'],
-                    simbol=file.loc[row, 'simbol'],
+                    symbol=file.loc[row, 'simbol'],
                     atomic_number=file.loc[row, 'atomic_number'],
                     atomic_mass=file.loc[row, 'atomic_mass'],
                     electrons_number=file.loc[row, 'electrons_number'],

@@ -13,5 +13,8 @@
     {% if element_page_search %}
         <a href="{% url "table_elements:elements_list" %}" class="default-button green-round">&laquo; Voltar</a>
     {% endif %}
+    {% if  learn_lab_search_page %}
+        <a href="{% url "learn_lab:learn_lab_home" %}" class="default-button green-round">&laquo; Voltar</a>
+    {% endif %}
     
 </div>

@@ -1,13 +1,16 @@
+{% load static %}
 {% if activity_list_page or profile_page %}
     <div class="activity-content">
         <h2><a href="{{activity.get_absolute_url}}">{{activity.title}}</a></h2>
-        {% if activity.file %}
-            <div class="acitivity-file-list"><img src="{{activity.thumbnail.url}}" alt="pdf_thumbnail"></div>
-        {% else %}
-            <a href='#' class="no-file-list"></a>
+        <a href="{{activity.get_absolute_url}}" class="no-file-list"><img src="{% static "imgs/pdf-file.png" %}" alt=""></a>
+        {% if profile_page %}
+            <span class="activity-subject-list">Conteúdo: {{activity.subject}}</span><br>
+            <span class="activity-level-list">Turma: {{activity.level}}</span>
         {% endif %}
-        <span class="activity-subject-list">Conteúdo: {{activity.subject}}</span><br>
-        <span class="activity-level-list">Turma: {{activity.level}}</span>
+        {% if activity_list_page %}
+            <a href="{% url "learn_lab:learn_lab_subject" activity.subject_id %}" class="activity-subject-list">Conteúdo: {{activity.subject}}</a><br>
+            <a href="{% url "learn_lab:learn_lab_level" activity.level_id %}" class="activity-level-list">Turma: {{activity.level}}</a>
+        {% endif %}
         {% if profile_page %}
             <form action="{% url "learn_lab:activity_delete" activity.slug %}"
             method="POST" class='form-delete-activity' id="form-delete-activity-{{ activity.slug }}">
@@ -22,7 +25,7 @@
 
 {% if activiy_detail_page %}
     <div class="activity-detail-content">
-        <h2>{{activity.title}}</h2>
+        <h2 class="default-center-title">{{activity.title}}</h2> <br><br>
 
         <div class="detail-description-and-file">
             <div class="detail-description">
@@ -36,11 +39,7 @@
                     <a href="{{activity.file.url}}" download class="default-button green-square">Baixar</a>
                 {% endif %}
             </div>
-            {% if activity.file %}
-                <img src="{{activity.thumbnail.url}}" alt="pdf_thumbnail" class='acitivity-file-detail'>
-            {% else %}
-                <div class="detail-file"></div>
-            {% endif %}
+            <img src="{% static "imgs/pdf-file.png" %}" alt="" class="acitivity-file-detail">
         </div>
     </div>
 {% endif %}

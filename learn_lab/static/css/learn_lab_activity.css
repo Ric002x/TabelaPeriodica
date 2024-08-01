@@ -1,12 +1,4 @@
 /* Activity List View */
-.activities {
-    padding: 0 var(--spacing-m);
-}
-
-.activities h1 {
-    color: black;
-    text-align: center;
-}
 
 .activities-grid {
     width: 80%;
@@ -41,17 +33,18 @@
     box-shadow: 0 2px 0 0 rgba(65, 65, 65, 0.274);
 }
 
+.no-file-list img {
+    width: 100%;
+    border-radius: 2rem;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
 .acitivity-file-list {
     margin: var(--spacing-ss) auto;
     width: 170px;
     height: 239px;
     border-radius: 3rem;
     box-shadow: 0 2px 0 0 rgba(65, 65, 65, 0.274);
-}
-
-.acitivity-file-list img {
-    width: 100%;
-    border-radius: 3rem;
 }
 
 .activity-subject-list,
@@ -76,10 +69,9 @@
     padding: var(--spacing-m);
 }
 
-.activity-detail-content h2 {
-    color: black;
-    text-align: center;
-    margin-bottom: var(--spacing-m);
+.activity-detail-content {
+    width: 90%;
+    margin: 0 auto;
 }
 
 .detail-description-and-file {
@@ -89,6 +81,7 @@
 
 .detail-description {
     width: max-content;
+    padding: var(--spacing-s);
 }
 
 .detail-description p {
@@ -109,7 +102,6 @@
 .detail-file {
     width: fit-content;
     padding: 3rem;
-    margin: 0 auto;
     background-color: var(--background-primary);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.167);
     border-radius: 3rem;

@@ -44,8 +44,9 @@ class ActivityMixin:
         self,
         user_data=None,
         title='Activity Title',
-        description='activity description',
+        description='activity Description',
         subject_data=None,
+        content='Activity content',
         level_data=None,
         is_published=True,
     ):
@@ -59,6 +60,7 @@ class ActivityMixin:
         activity = Activity.objects.create(
             user=self.create_user(**user_data),
             subject=self.create_subject(**subject_data),
+            content=content,
             level=self.create_level(**level_data),
             title=title,
             description=description,

@@ -20,8 +20,9 @@
                 </div>
                 {% endfor %}
                 <a href='' class="forget">Esqueceu sua senha?</a>
-                <button class='default-button' type="submit">Entrar</button>
+                <button class='default-button green-round center' type="submit">Entrar</button>
             </form>
+            <a class="center default-link" href="{% url "users:register" %}">Criar conta</a>
         </div>
     </section>
 {% endblock content %}

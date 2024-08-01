@@ -4,18 +4,24 @@
 
 {% block content %}
 
-{% include "global/partials/search.html" %}
 {% for message in messages %}
 <div class="message-center {{message.tags}}">{{message}}</div>
 {% endfor %}
 
 <section class='activities'>
-    <h1>Atividades</h1>
-    <div class='activities-grid'>
-        {% for activity in activities %}
-            {% include "partials/activity.html" %}
-        {% endfor %}
-    </div>
+    <h1 class="default-center-title">Atividades</h1> <br>
+
+    {% include "global/partials/search.html" %} <br>
+
+    {% if activities %}
+        <div class='activities-grid'>
+            {% for activity in activities %}
+                {% include "partials/activity.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>Nenhuma atividade encontrada</h2>
+    {% endif %}
 </section>
 
 {% include "global/partials/pagination.html" %}

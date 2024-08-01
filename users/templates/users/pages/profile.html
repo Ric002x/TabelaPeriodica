@@ -13,7 +13,6 @@
                 <ul>
                     <li><a href="#" data-section="user-data" class='active'><i class="fa-solid fa-user section-icon" style="color: #ffffff;"></i>Dados do Usuário</a></li>
                     <li><a href="#" data-section="user-items"><i class="fa-solid fa-pen-nib section-icon" style="color: #ffffff;"></i>Publicações</a></li>
-                    <li><a href="#" data-section="saved-items"><i class="fa-solid fa-bookmark section-icon" style="color: #ffffff;"></i>Itens Salvos</a></li>
                 </ul>
             </div>
             <div class="content">
@@ -30,7 +29,7 @@
                     <!-- Conteúdo dos itens salvos -->
 
                      <div class="publications">
-                        {% for activity in activities %} 
+                        {% for activity in activities %}
                             {% include "partials/activity.html" %}
                         {% endfor %}
                     </div>
@@ -39,11 +38,6 @@
                     <div class='new-activity'>Para criar uma nova atividade, clique aqui:
                         <a href="{% url "learn_lab:activity_create" %}" class='default-button green-square'>Nova atividade</a>
                     </div>
-                </div>
-
-                <div id="saved-items" class="section hidden">
-                    <h2 class='user-section-data'>Itens Salvos</h2>
-                    <!-- Conteúdo dos itens salvos -->
                 </div>
             </div>
         </div>

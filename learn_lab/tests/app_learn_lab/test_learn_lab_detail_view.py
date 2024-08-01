@@ -1,7 +1,6 @@
 from .test_learn_lab_base import LearnLabBaseTests
 from django.urls import reverse, resolve
 from learn_lab import views
-from learn_lab.models import Activity
 
 
 class LearnLabDetailViewTests(LearnLabBaseTests):

@@ -1,4 +1,5 @@
 
+// Function to show options of User Profile
 document.addEventListener('DOMContentLoaded', () => {
     const userIcon = document.getElementById('user-icon');
     const menuOptions = document.getElementById('menu-options');
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Function to confirm Logout
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logout');
     const formLogout = document.getElementById('form-logout')

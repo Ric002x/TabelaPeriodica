@@ -8,18 +8,17 @@
 
 :root {
     /* Background Colors */
-    --background-primary: #EFF0F0;  /* Preto */
-    --background-secondary: #D4D7D6;    /* Cinza Escuro */
+    --background-primary: #EFF0F0;
+    --background-secondary: #D4D7D6;
+    --background-darker: #aeaeae;
 
     /* Primary Colors */
-    --primary-blue: #000A3B;  /* Cinza Muito Escuro */
-    --primary-green: #008646; /* Verde Oliva */
+    --primary-blue: #000A3B;
+    --primary-green: #008646;
     --secondary-green: #006434;
-    --primary-orange: #E3651D;  /* Laranja */
-    --secondary-orange: #c5591b;  /* Laranja */
-    --white: #FFFFFF;
+    --primary-orange: #E3651D;
+    --secondary-orange: #c5591b;
     --primary-yellow: #f2d80f;
-    --link-blue: #0044ff;
 
     /* Fonts */
     --font-outfit: "Outfit", sans-serif;
@@ -31,7 +30,7 @@
     --font-size-s: 2.0rem; /* 20px */
     --font-size-m: 2.4rem;  /* 24px */
     --font-size-l: 3.2rem;  /* 32px */
-    --font-size-xl: 4.2rem; /* 36px */
+    --font-size-xl: 4.2rem; /* 42px */
 
     /* Spacings */
     --spacing-sss: 0.4rem;
@@ -97,26 +96,40 @@ ul, li {
     font-size: var(--font-size-s);
 }
 
+.default-center-title {
+    width: 100%;
+    text-align: center;
+    color: black;
+}
+
 .message-center {
     text-align: center;
-    padding: 0.8rem;
-    width: 100%;
+    padding: var(--spacing-ss);
+    width: 95%;
+    margin: var(--spacing-ss) auto;
+    border-radius: 1rem;
 }
 
 .success {
-    background-color: rgba(119, 255, 119, 0.681);
+    background-color: rgba(119, 255, 119, 0.488);
+    border: solid 2px rgba(119, 255, 119);
 }
 
 .error {
-    background-color: rgba(234, 33, 33, 0.681);
+    background-color: rgba(234, 33, 33, 0.305);
+    border: solid 2px rgba(234, 33, 33);
+
 }
 
-.default-button.green-round {
+.warning {
+    background-color: rgba(255, 252, 96, 0.462);
+    border: solid 2px rgba(255, 252, 96);
+}
+
+.default-button {
     width: fit-content;
     padding: 0.6rem 2.1rem;
     display: block;
-    background-color: var(--primary-green);
-    border-radius: 2rem;
     border: none;
     box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
     color: white;
@@ -124,71 +137,57 @@ ul, li {
     transition: all 0.2s;
 }
 
-.default-button.green-round:hover {
+.green-round {
+    background-color: var(--primary-green);
+    border-radius: 2rem;
+}
+
+.green-round:hover {
     cursor: pointer;
     background-color: var(--secondary-green);
     transform: translateY(-0.3rem);
 }
 
-.default-button.green-square {
-    width: fit-content;
-    padding: 0.6rem 2.1rem;
-    display: block;
+.green-square {
     background-color: var(--primary-green);
     border-radius: 0.5rem;
-    border: none;
-    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
-    color: white;
-    font-size: var(--font-size-s);
-    transition: all 0.2s;
 }
 
-.default-button.green-square:hover {
+.green-square:hover {
     cursor: pointer;
     background-color: var(--secondary-green);
     transform: translateY(-0.3rem);
 }
 
-.default-button.orange-square {
-    width: fit-content;
-    padding: 0.6rem 2.1rem;
-    display: block;
+.orange-square {
     background-color: var(--primary-orange);
     border-radius: 0.5rem;
-    border: none;
-    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
-    color: white;
-    font-size: var(--font-size-s);
-    transition: all 0.2s;
 }
 
-.default-button.orange-square:hover {
+.orange-square:hover {
     cursor: pointer;
     background-color: var(--secondary-orange);
     transform: translateY(-0.3rem);
 }
 
-.default-button.orange-round {
-    width: fit-content;
-    padding: 0.6rem 2.1rem;
-    display: block;
-    margin: 0 auto var(--spacing-s) auto;
+.orange-round {
     background-color: var(--primary-orange);
     border-radius: 2rem;
-    border: none;
-    box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
-    color: white;
-    font-size: var(--font-size-s);
-    transition: all 0.2s;
 }
 
-.default-button.orange-round:hover {
+.orange-round:hover {
     cursor: pointer;
     background-color: var(--secondary-orange);
     transform: translateY(-0.3rem);
+}
+
+.default-link {
+    color: var(--primary-blue);
 }
 
 .center {
+    width: fit-content;
+    display: block;
     margin: 0 auto;
 }
 

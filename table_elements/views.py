@@ -1,7 +1,5 @@
 from django.http import Http404
 from .models import Elements
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
@@ -9,7 +7,9 @@ from django.db.models import Q
 
 
 def home_page_view(request):
-    return render(request, 'pages/main_page.html')
+    return render(request, 'pages/main_page.html', {
+        'home_page': True,
+    })
 
 
 def table_list_view(request):
@@ -18,6 +18,8 @@ def table_list_view(request):
 
     return render(request, 'pages/table.html', context={
         'elements': elements,
+        'element_page': True,
+        'placeholder_input': "Procurar um elemento..."
     })
 
 

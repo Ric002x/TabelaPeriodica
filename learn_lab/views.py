@@ -46,6 +46,54 @@ def learn_lab_detail_view(request, slug):
     })
 
 
+def learn_lab_subject_list_view(request, id=None):
+    if id is not None:
+        activities = Activity.objects.filter(
+            is_published=True,
+            subject_id=id
+        ).order_by('-id')
+    if not activities:
+        raise Http404
+
+    paginator = Paginator(activities, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'activities': page_obj.object_list,
+        'page_obj': page_obj,
+        'learn_lab_page': True,
+        'activity_list_page': True,
+        'placeholder_input': 'Buscar por uma atividade...',
+    }
+
+    return render(request, 'pages/learn_lab_home.html', context)
+
+
+def learn_lab_level_list_view(request, id=None):
+    if id is not None:
+        activities = Activity.objects.filter(
+            is_published=True,
+            level_id=id
+        ).order_by('-id')
+    if not activities:
+        raise Http404
+
+    paginator = Paginator(activities, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'activities': page_obj.object_list,
+        'page_obj': page_obj,
+        'learn_lab_page': True,
+        'activity_list_page': True,
+        'placeholder_input': 'Buscar por uma atividade...',
+    }
+
+    return render(request, 'pages/learn_lab_home.html', context)
+
+
 @login_required(login_url='authors:login', redirect_field_name='next')
 def activity_create(request, id=None):
     if request.method == 'POST':

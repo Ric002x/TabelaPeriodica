@@ -1,6 +1,5 @@
 from django.test import RequestFactory
 from .test_base_app_tabela import TableElementsBaseTest
-from table_elements import views
 from django.urls import reverse
 
 

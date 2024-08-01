@@ -6,6 +6,10 @@ app_name = 'learn_lab'
 urlpatterns = [
     path('',
          views.lear_lab_list_view, name='learn_lab_home'),
+    path('subject/<int:id>',
+         views.learn_lab_subject_list_view, name='learn_lab_subject'),
+    path('level/<int:id>',
+         views.learn_lab_level_list_view, name='learn_lab_level'),
     path('atividade/buscar',
          views.lear_lab_list_view,
          name='learn_lab_activity_search'),
