@@ -3,6 +3,9 @@
 {% block title %}Criar atividade{% endblock title %}
 
 {% block content %}
+{% for message in messages %}
+<div class="message-center {{message.tags}}">{{message}}</div>
+{% endfor %}
 <section class='activity-create'>
     <div class="activity-form-details">
         <h2>Formulário de Atividade</h2>

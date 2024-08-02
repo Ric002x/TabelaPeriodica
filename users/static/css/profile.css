@@ -19,7 +19,8 @@
 }
 
 .user-img {
-    width: fit-content;
+    width: 100px;
+    height: 100px;
     display: block;
     margin: var(--spacing-s) auto;
     margin-bottom: var(--spacing-m);

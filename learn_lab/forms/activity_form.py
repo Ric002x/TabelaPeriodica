@@ -48,7 +48,18 @@ class ActivityForm(forms.ModelForm):
         },
         widget=forms.Select(attrs={
             'class': 'form-activity-input',
-            'onclick': 'teste()'
+        })
+    )
+
+    content = forms.CharField(
+        label="Conteúdo",
+        required=True,
+        error_messages={
+            'required': "Campo Obrigatório"
+        },
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Sustentabilidade',
+            'class': 'form-activity-input',
         })
     )
 
@@ -66,5 +77,5 @@ class ActivityForm(forms.ModelForm):
     class Meta:
         model = Activity
 
-        fields = ['title', 'description',
+        fields = ['title', 'description', 'content',
                   'level', 'subject', 'file']

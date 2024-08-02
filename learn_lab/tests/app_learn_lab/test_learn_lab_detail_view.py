@@ -18,9 +18,9 @@ class LearnLabDetailViewTests(LearnLabBaseTests):
                                    kwargs={'slug': 'something'}))
         self.assertEqual(response.status_code, 404)
 
-    """def test_learn_lab_detail_template(self):
+    def test_learn_lab_detail_template(self):
         activity = self.activity_create()
         response = self.client.get(reverse('learn_lab:learn_lab_activity',
                                            kwargs={'slug': activity.slug}))
         self.assertTemplateUsed(
-            response, 'pages/learn_lab_activity_detail.html')"""
+            response, 'pages/learn_lab_activity_detail.html')

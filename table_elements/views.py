@@ -72,19 +72,13 @@ def element_detail_view(request, slug):
     if not element:
         raise Http404
 
-    try:
-        next_element = Elements.objects.filter(
-            atomic_number__gt=element.atomic_number
-        ).order_by('atomic_number').first()
-    except Elements.DoesNotExist:
-        next_element = None
+    next_element = Elements.objects.filter(
+        atomic_number__gt=element.atomic_number
+    ).order_by('atomic_number').first()
 
-    try:
-        prev_element = Elements.objects.filter(
-            atomic_number__lt=element.atomic_number
-        ).order_by('-atomic_number').first()
-    except Elements.DoesNotExist:
-        prev_element = None
+    prev_element = Elements.objects.filter(
+        atomic_number__lt=element.atomic_number
+    ).order_by('-atomic_number').first()
 
     return render(request, f'partials/element_detail/{slug}.html', context={
         'element': element,

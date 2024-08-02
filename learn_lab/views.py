@@ -47,7 +47,7 @@ def learn_lab_detail_view(request, slug):
 
 
 def learn_lab_subject_list_view(request, id=None):
-    if id is not None:
+    if id:
         activities = Activity.objects.filter(
             is_published=True,
             subject_id=id
@@ -71,7 +71,7 @@ def learn_lab_subject_list_view(request, id=None):
 
 
 def learn_lab_level_list_view(request, id=None):
-    if id is not None:
+    if id:
         activities = Activity.objects.filter(
             is_published=True,
             level_id=id
@@ -107,6 +107,9 @@ def activity_create(request, id=None):
             form.save()
             messages.success(request, 'Atividade criada!')
             return redirect('users:profile')
+        else:
+            messages.error(request, 'Erro no formulário de atividade')
+            return redirect(reverse('learn_lab:activity_create'))
 
     else:
         activity = Activity.objects.filter(
@@ -125,7 +128,6 @@ def activity_create(request, id=None):
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def activity_delete(request, slug):
-
     if request.method == 'POST':
         activity = get_object_or_404(
             Activity, slug=slug, user=request.user)
@@ -133,8 +135,7 @@ def activity_delete(request, slug):
         messages.success(request, '✅ Atividade deletada com sucesso')
         return redirect('users:profile')
     else:
-        messages.error(request, 'Método de requisição inválido.')
-        raise redirect('users:profile')
+        raise Http404
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -160,6 +161,10 @@ def activity_update(request, slug=None):
             messages.success(request, "Atividade atualizada!")
             return redirect(reverse('learn_lab:activity_update',
                                     kwargs={'slug': activity.slug}))
+        else:
+            messages.error(request, 'Erro na validação da atividade')
+            redirect(reverse('learn_lab:activity_update',
+                             kwargs={'slug': activity.slug}))
 
     if not activity:
         raise Http404

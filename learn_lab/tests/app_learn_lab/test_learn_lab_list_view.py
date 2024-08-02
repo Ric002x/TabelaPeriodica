@@ -5,8 +5,6 @@ from learn_lab import views
 
 class LearnLabListViewTests(LearnLabBaseTests):
     def setUp(self) -> None:
-        self.subject = self.create_subject()
-        self.level = self.create_level()
         self.activity = self.activity_create()
         self.url = reverse('learn_lab:learn_lab_home')
         return super().setUp()

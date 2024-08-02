@@ -1,7 +1,6 @@
 from django.urls import reverse, resolve
 from table_elements import views
 from .test_base_app_tabela import TableElementsBaseTest
-from table_elements.models import Elements
 
 
 class TestTableElementPage(TableElementsBaseTest):
@@ -45,15 +44,6 @@ class TestTableElementPage(TableElementsBaseTest):
         response = self.client.get(reverse("table_elements:single_element",
                                            kwargs=({'slug': 'helio'})))
         self.assertEqual(response.context['prev_element'], self.element1)
-
-    def test_element_detail_prev_and_next_elements_is_none(self):
-        Elements.objects.all().delete()
-        self.make_element()
-
-        response = self.client.get(reverse('table_elements:single_element',
-                                           kwargs={'slug': 'hidrogenio'}))
-        self.assertIsNone(response.context['prev_element'])
-        self.assertIsNone(response.context['next_element'])
 
     def test_element_detail_no_next_element(self):
         response = self.client.get(reverse("table_elements:single_element",

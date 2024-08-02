@@ -32,14 +32,10 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].initial = None
-
 
 class UpdateProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    avatar = forms.ImageField(
+        widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
         model = Profile

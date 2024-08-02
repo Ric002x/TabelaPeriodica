@@ -119,11 +119,12 @@ def perfil_update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'perfil atualizado com sucesso!')
+            messages.success(request, '✅ perfil atualizado com sucesso!')
             return redirect('users:profile')
         else:
             messages.error(request, 'opa! verifique se você'
                            ' preencheu corretamente os campos')
+            return redirect(reverse('users:profile_update'))
 
     else:
         user_form = UpdateUserForm(instance=request.user)
@@ -163,6 +164,7 @@ def change_password(request):
             return redirect(reverse('users:profile'))
         else:
             messages.error(request, '❌ Erro no formulário')
+            redirect(reverse('users:change_password'))
 
     form = PasswordChangeForm(request.user)
 
