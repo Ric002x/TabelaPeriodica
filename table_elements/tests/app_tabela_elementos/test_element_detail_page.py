@@ -34,7 +34,7 @@ class TestTableElementPage(TableElementsBaseTest):
         response = self.client.get(reverse("table_elements:single_element",
                                            kwargs=({'slug': 'hidrogenio'})))
         self.assertTemplateUsed(
-            response, 'partials/element_detail/hidrogenio.html')
+            response, 'table_elements/partials/element_detail/hidrogenio.html')
 
     def test_element_detail_has_prev_and_next_elements(self):
         response = self.client.get(reverse("table_elements:single_element",

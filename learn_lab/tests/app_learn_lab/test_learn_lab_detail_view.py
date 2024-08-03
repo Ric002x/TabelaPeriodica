@@ -23,4 +23,4 @@ class LearnLabDetailViewTests(LearnLabBaseTests):
         response = self.client.get(reverse('learn_lab:learn_lab_activity',
                                            kwargs={'slug': activity.slug}))
         self.assertTemplateUsed(
-            response, 'pages/learn_lab_activity_detail.html')
+            response, 'learn_lab/pages/learn_lab_activity_detail.html')

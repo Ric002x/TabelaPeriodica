@@ -14,4 +14,4 @@ class TestTabelaMainPage(TestCase):
 
     def test_recipe_main_page_loads_correct_template(self):
         response = self.client.get(reverse("table_elements:home"))
-        self.assertTemplateUsed(response, 'pages/main_page.html')
+        self.assertTemplateUsed(response, 'table_elements/pages/main_page.html')

@@ -16,7 +16,7 @@ class LearnLabSubjectViewTests(LearnLabBaseTests):
 
     def test_learn_lab_subject_template_used(self):
         response = self.client.get(self.url)
-        self.assertTemplateUsed(response, 'pages/learn_lab_home.html')
+        self.assertTemplateUsed(response, 'learn_lab/pages/learn_lab_home.html')
 
     def test_learn_lab_subject_raise_404_if_no_activity(self):
         response = self.client.get(reverse(

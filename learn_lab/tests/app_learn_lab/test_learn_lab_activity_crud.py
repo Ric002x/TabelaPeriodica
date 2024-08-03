@@ -1,16 +1,24 @@
 from .test_learn_lab_base import LearnLabBaseTests
 from django.urls import reverse, resolve
 from learn_lab import views
+from django.conf import settings
+import os
 
 
 class LearnLabAppActivityCreateTests(LearnLabBaseTests):
     def setUp(self) -> None:
         self.execute_register()
         self.execute_login()
-        self.pdf_file = self.create_pdf_file
         self.activity_form_data = self.generate_form_activity()
         self.url_activity_create = reverse('learn_lab:activity_create')
         return super().setUp()
+
+    def tearDown(self) -> None:
+        media_root = settings.MEDIA_ROOT
+        arquive_path = f'{media_root}/learn_lab/files/test_file.pdf'
+        if os.path.exists(arquive_path):
+            os.remove(arquive_path)
+        return super().tearDown()
 
     def test_activity_create_view_function(self):
         view = resolve(self.url_activity_create)
@@ -19,7 +27,7 @@ class LearnLabAppActivityCreateTests(LearnLabBaseTests):
     def test_activity_create_template_used(self):
         response = self.client.get(self.url_activity_create)
         self.assertTemplateUsed(
-            response, 'pages/learn_lab_activity_create.html')
+            response, 'learn_lab/pages/learn_lab_activity_create.html')
 
     def test_activity_create_form_auto_id(self):
         response = self.client.get(self.url_activity_create)
@@ -54,6 +62,13 @@ class LearnLabAppActivityDeleteTests(LearnLabBaseTests):
         self.execute_login()
         return super().setUp()
 
+    def tearDown(self) -> None:
+        media_root = settings.MEDIA_ROOT
+        arquive_path = f'{media_root}/learn_lab/files/test_file.pdf'
+        if os.path.exists(arquive_path):
+            os.remove(arquive_path)
+        return super().tearDown()
+
     def test_activy_delete_view_func(self):
         view = resolve(reverse(
             'learn_lab:activity_delete', kwargs={'slug': 'teste'}))
@@ -82,14 +97,21 @@ class LearnLabAppActivityUpdateTests(LearnLabBaseTests):
             'learn_lab:activity_update', kwargs={'slug': self.activity.slug})
         return super().setUp()
 
+    def tearDown(self) -> None:
+        media_root = settings.MEDIA_ROOT
+        arquive_path = f'{media_root}/learn_lab/files/test_file.pdf'
+        if os.path.exists(arquive_path):
+            os.remove(arquive_path)
+        return super().tearDown()
+
     def test_activity_update_view_function(self):
         view = resolve(self.url_activity_update)
         self.assertEqual(view.func, views.activity_update)
 
     def test_activity_update_template_used(self):
         response = self.client.get(self.url_activity_update)
-        self.assertTemplateUsed(response,
-                                'pages/learn_lab_activity_update.html')
+        self.assertTemplateUsed(
+            response, 'learn_lab/pages/learn_lab_activity_update.html')
 
     def test_activity_update_raise_404_if_no_activity(self):
         response = self.client.get(reverse(

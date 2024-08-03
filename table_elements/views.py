@@ -7,7 +7,7 @@ from django.db.models import Q
 
 
 def home_page_view(request):
-    return render(request, 'pages/main_page.html', {
+    return render(request, 'table_elements/pages/main_page.html', {
         'home_page': True,
     })
 
@@ -16,7 +16,7 @@ def table_list_view(request):
     elements = Elements.objects.filter(
     ).order_by('id')
 
-    return render(request, 'pages/table.html', context={
+    return render(request, 'table_elements/pages/table.html', context={
         'elements': elements,
         'element_page': True,
         'placeholder_input': "Procurar um elemento..."
@@ -36,14 +36,16 @@ def elements_list_view(request):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'pages/elements_list_search.html', context={
-            'search_term': search_term,
-            'elements': page_obj.object_list,
-            'element_page': True,
-            'placeholder_input': 'Procurar um elemento...',
-            'page_obj': page_obj,
-            'element_page_search': True,
-        })
+        return render(
+            request, 'table_elements/pages/elements_list_search.html',
+            context={
+                'search_term': search_term,
+                'elements': page_obj.object_list,
+                'element_page': True,
+                'placeholder_input': 'Procurar um elemento...',
+                'page_obj': page_obj,
+                'element_page_search': True,
+            })
 
     elements = Elements.objects.all(
     ).order_by('id')
@@ -55,7 +57,7 @@ def elements_list_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'pages/elements_list.html', context={
+    return render(request, 'table_elements/pages/elements_list.html', context={
         'elements': page_obj.object_list,
         'element_page': True,
         'placeholder_input': 'Procurar um elemento...',
@@ -80,8 +82,10 @@ def element_detail_view(request, slug):
         atomic_number__lt=element.atomic_number
     ).order_by('-atomic_number').first()
 
-    return render(request, f'partials/element_detail/{slug}.html', context={
-        'element': element,
-        'next_element': next_element,
-        'prev_element': prev_element
-    })
+    return render(
+        request, f'table_elements/partials/element_detail/{slug}.html',
+        context={
+            'element': element,
+            'next_element': next_element,
+            'prev_element': prev_element
+        })

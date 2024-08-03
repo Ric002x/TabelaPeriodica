@@ -22,7 +22,8 @@ class ElementListViewTest(TableElementsBaseTest):
     def test_list_view_template(self):
         self.make_element()
         response = self.client.get(self.url_list)
-        self.assertTemplateUsed(response, 'pages/elements_list.html')
+        self.assertTemplateUsed(
+            response, 'table_elements/pages/elements_list.html')
 
     def test_list_view_search_page_find_element(self):
         self.make_element()

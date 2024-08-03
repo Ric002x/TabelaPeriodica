@@ -14,4 +14,4 @@ class TestTablePage(TestCase):
 
     def test_recipe_tabela_loads_correct_template(self):
         response = self.client.get(reverse("table_elements:table"))
-        self.assertTemplateUsed(response, 'pages/table.html')
+        self.assertTemplateUsed(response, 'table_elements/pages/table.html')

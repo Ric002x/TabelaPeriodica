@@ -15,7 +15,7 @@ class LearnLabListViewTests(LearnLabBaseTests):
 
     def test_learn_lab_list_view_template(self):
         response = self.client.get(self.url)
-        self.assertTemplateUsed(response, 'pages/learn_lab_home.html')
+        self.assertTemplateUsed(response, 'learn_lab/pages/learn_lab_home.html')
 
     def test_learn_lab_list_view_search_page(self):
         response = self.client.get(

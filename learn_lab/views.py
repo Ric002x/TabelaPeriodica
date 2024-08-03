@@ -34,16 +34,17 @@ def lear_lab_list_view(request):
                  'placeholder_input': 'Buscar por uma atividade...'}
     context.update(dict_home)
 
-    return render(request, 'pages/learn_lab_home.html', context)
+    return render(request, 'learn_lab/pages/learn_lab_home.html', context)
 
 
 def learn_lab_detail_view(request, slug):
     activity = get_object_or_404(Activity, slug=slug, is_published=True)
 
-    return render(request, 'pages/learn_lab_activity_detail.html', context={
-        'activity': activity,
-        "activiy_detail_page": True,
-    })
+    return render(request, 'learn_lab/pages/learn_lab_activity_detail.html',
+                  context={
+                      'activity': activity,
+                      'activiy_detail_page': True,
+                    })
 
 
 def learn_lab_subject_list_view(request, id=None):
@@ -67,7 +68,7 @@ def learn_lab_subject_list_view(request, id=None):
         'placeholder_input': 'Buscar por uma atividade...',
     }
 
-    return render(request, 'pages/learn_lab_home.html', context)
+    return render(request, 'learn_lab/pages/learn_lab_home.html', context)
 
 
 def learn_lab_level_list_view(request, id=None):
@@ -91,7 +92,7 @@ def learn_lab_level_list_view(request, id=None):
         'placeholder_input': 'Buscar por uma atividade...',
     }
 
-    return render(request, 'pages/learn_lab_home.html', context)
+    return render(request, 'learn_lab/pages/learn_lab_home.html', context)
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -120,10 +121,11 @@ def activity_create(request, id=None):
         form = ActivityForm(
             instance=activity
         )
-        return render(request, 'pages/learn_lab_activity_create.html', {
-            'form': form,
-            'form_action': reverse('learn_lab:activity_create')
-        })
+        return render(
+            request, 'learn_lab/pages/learn_lab_activity_create.html', {
+                'form': form,
+                'form_action': reverse('learn_lab:activity_create')
+                })
 
 
 @login_required(login_url='authors:login', redirect_field_name='next')
@@ -173,7 +175,8 @@ def activity_update(request, slug=None):
         instance=activity
     )
 
-    return render(request, 'pages/learn_lab_activity_update.html', context={
-        'activity': activity,
-        'form': form
-    })
+    return render(request, 'learn_lab/pages/learn_lab_activity_update.html',
+                  context={
+                    'activity': activity,
+                    'form': form
+                  })
