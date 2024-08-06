@@ -8,37 +8,49 @@
 
 :root {
     /* Background Colors */
-    --background-primary: #EFF0F0;
-    --background-secondary: #D4D7D6;
-    --background-darker: #aeaeae;
+    --background1: #f4f4f4;
+    --background2: #e0e0e0;
+    --background3: #aeaeae;
 
     /* Primary Colors */
-    --primary-blue: #000A3B;
-    --primary-green: #008646;
-    --secondary-green: #006434;
-    --primary-orange: #E3651D;
-    --secondary-orange: #c5591b;
-    --primary-yellow: #f2d80f;
+    --blue1: #000A3B;
+    --green1: #008646;
+    --green2: #006434;
+    --orange1: #E3651D;
+    --orange2: #c5591b;
+    --yellow1: #f2d80f;
+    --black: #000;
+    --white: #fff;
 
     /* Fonts */
     --font-outfit: "Outfit", sans-serif;
     --font-fira: "Fira Sans", sans-serif;
 
     /* Fonts Sizes */
-    --font-size-sss: 1.2rem;  /* 12px */
-    --font-size-ss: 1.6rem;  /* 16px */
-    --font-size-s: 2.0rem; /* 20px */
-    --font-size-m: 2.4rem;  /* 24px */
-    --font-size-l: 3.2rem;  /* 32px */
-    --font-size-xl: 4.2rem; /* 42px */
+    --font-size-xxs: 0.8rem;   /* Extra Extra Pequeno (8px) */
+    --font-size-xs: 1rem;      /* Extra Pequeno (10px) */
+    --font-size-ss: 1.2rem;    /* Muito Pequeno (12px) */
+    --font-size-s: 1.6rem;    /* Pequeno (16px) */
+    --font-size-m: 2rem;      /* Médio (20px) */
+    --font-size-l: 2.4rem;    /* Grande (24px) */
+    --font-size-xl: 2.8rem;   /* Muito Grande (28px) */
+    --font-size-2xl: 3.2rem;  /* Extra Grande (32px) */
+    --font-size-3xl: 3.6rem;   /* Gigante (36px) */
+    --font-size-4xl: 4rem;     /* Enorme (40px) */
+    --font-size-5xl: 4.4rem;   /* Extremamente Grande (44px) */
+    --font-size-6xl: 4.8rem;   /* Super Grande (48px) */
+    --font-size-7xl: 5.2rem;   /* Ultra Grande (52px) */
+    --font-adaptive-paragraph: calc(1rem + 1.5vw);
 
     /* Spacings */
-    --spacing-sss: 0.4rem;
-    --spacing-ss: 1.0rem;
-    --spacing-s: 2.0rem;
-    --spacing-m: 6.4rem;
-    --spacing-l: 12.8rem;
-    --spacing-xl: 19.2rem;
+    --spacing-xxs: 0.2rem;
+    --spacing-xs: 0.5rem; /* Extra Small */
+    --spacing-s: 1rem;    /* Small */
+    --spacing-m: 1.5rem;  /* Medium */
+    --spacing-l: 2.5rem;  /* Large */
+    --spacing-xl: 4rem;   /* Extra Large */
+    --spacing-xxl: 6rem;  /* Extra Extra Large */
+    --spacing-xxxl: 8rem; /* Extra Extra Extra Large */    
 }
 
 html {
@@ -50,56 +62,83 @@ html {
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-fira);
+    text-decoration: none;
+    list-style-type: none;
 }
 
 body {
-    background: var(--background-primary);
+    background: var(--background1);
     font-size: var(--font-size-m);
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h1, h2, h3, h4{
+    font-family: var(--font-outfit);
+    color: var(--black);
+    letter-spacing: 0.2rem;
 }
 
 h1 {
-    font-size: var(--font-size-xl);
-    font-family: var(--font-outfit);
-    letter-spacing: 0.2rem;
+    font-size: var(--font-size-4xl);
 }
-
 h2 {
-    font-size: var(--font-size-l);
-    font-family: var(--font-outfit);
-    letter-spacing: 0.2rem;
+    font-size: var(--font-size-2xl);
+}
+h3, h4 {
+    font-size: var(--font-size-xl);
 }
 
-h3 {
+p, a, span,i, button {
     font-size: var(--font-size-m);
-    font-family: var(--font-outfit);
-    letter-spacing: 0.2rem;
-}
-
-h4 {
-    font-size: var(--font-size-m);
-    font-family: var(--font-outfit);
-    letter-spacing: 0.2rem;
-}
-
-p, a, span {
-    font-size: var(--font-size-s);
-}
-
-h1, h2, h3, h4, p, a {
-    color: white;
-    text-decoration: none;
+    color: var(--black);
 }
 
 ul, li {
-    color: white;
     list-style-type: none;
     font-size: var(--font-size-s);
 }
 
-.default-center-title {
+@media screen and (max-width: 620px) {
+    h1 {
+        font-size: calc(var(--font-size-4xl) * 0.6);
+    }
+    h2 {
+        font-size: calc(var(--font-size-2xl) * 0.6);
+    }
+    h3, h4 {
+        font-size: calc(var(--font-size-xl) * 0.6);
+    }
+
+    p, a, span, i, button {
+        font-size: calc(var(--font-size-m)* 0.6);
+    }
+    
+    ul, li {
+        list-style-type: none;
+        font-size: calc(var(--font-size-s)* 0.6);
+    }
+}
+
+.main {
+    margin-top: 64px;
+}
+
+.title-center {
     width: 100%;
     text-align: center;
-    color: black;
+    padding: var(--spacing-l);
+}
+
+.paragraph-justify {
+    text-align: justify;
+}
+
+.link {
+    color: var(--blue1);
+    text-decoration: underline;
 }
 
 .message-center {
@@ -133,51 +172,50 @@ ul, li {
     border: none;
     box-shadow: 2px 2px 5px 0px rgba(125, 135, 145, 0.79);
     color: white;
-    font-size: var(--font-size-ss);
     transition: all 0.2s;
 }
 
 .green-round {
-    background-color: var(--primary-green);
+    background-color: var(--green1);
     border-radius: 2rem;
 }
 
 .green-round:hover {
     cursor: pointer;
-    background-color: var(--secondary-green);
+    background-color: var(--green2);
     transform: translateY(-0.3rem);
 }
 
 .green-square {
-    background-color: var(--primary-green);
+    background-color: var(--green1);
     border-radius: 0.5rem;
 }
 
 .green-square:hover {
     cursor: pointer;
-    background-color: var(--secondary-green);
+    background-color: var(--green2);
     transform: translateY(-0.3rem);
 }
 
 .orange-square {
-    background-color: var(--primary-orange);
+    background-color: var(--orange1);
     border-radius: 0.5rem;
 }
 
 .orange-square:hover {
     cursor: pointer;
-    background-color: var(--secondary-orange);
+    background-color: var(--orange2);
     transform: translateY(-0.3rem);
 }
 
 .orange-round {
-    background-color: var(--primary-orange);
+    background-color: var(--orange1);
     border-radius: 2rem;
 }
 
 .orange-round:hover {
     cursor: pointer;
-    background-color: var(--secondary-orange);
+    background-color: var(--orange2);
     transform: translateY(-0.3rem);
 }
 
@@ -227,6 +265,14 @@ ul, li {
     }
 }
 
+@keyframes showElement {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 .animate-on-scroll {
     opacity: 0;

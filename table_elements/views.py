@@ -1,5 +1,5 @@
 from django.http import Http404
-from .models import Elements
+from .models import Element
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
@@ -13,7 +13,7 @@ def home_page_view(request):
 
 
 def table_list_view(request):
-    elements = Elements.objects.filter(
+    elements = Element.objects.filter(
     ).order_by('id')
 
     return render(request, 'table_elements/pages/table.html', context={
@@ -26,7 +26,7 @@ def table_list_view(request):
 def elements_list_view(request):
     search_term = request.GET.get('q', '').strip()
     if search_term:
-        query_set = Elements.objects.filter(
+        query_set = Element.objects.filter(
             Q(
                 Q(name__icontains=search_term) |
                 Q(atomic_number__icontains=search_term)
@@ -47,7 +47,7 @@ def elements_list_view(request):
                 'element_page_search': True,
             })
 
-    elements = Elements.objects.all(
+    elements = Element.objects.all(
     ).order_by('id')
 
     if not elements:
@@ -66,7 +66,7 @@ def elements_list_view(request):
 
 
 def element_detail_view(request, slug):
-    element = Elements.objects.filter(
+    element = Element.objects.filter(
         slug=slug,
     ).first()
     slug = slug
@@ -74,16 +74,16 @@ def element_detail_view(request, slug):
     if not element:
         raise Http404
 
-    next_element = Elements.objects.filter(
+    next_element = Element.objects.filter(
         atomic_number__gt=element.atomic_number
     ).order_by('atomic_number').first()
 
-    prev_element = Elements.objects.filter(
+    prev_element = Element.objects.filter(
         atomic_number__lt=element.atomic_number
     ).order_by('-atomic_number').first()
 
     return render(
-        request, f'table_elements/partials/element_detail/{slug}.html',
+        request, 'table_elements/pages/single_element.html',
         context={
             'element': element,
             'next_element': next_element,

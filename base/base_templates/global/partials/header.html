@@ -7,7 +7,13 @@
             <img src="{% static "global/assets/logo.png" %}" alt=""><span>ATOMIC DISCOVERIES</span>
         </div>
 
-        <div class="navigation-items">
+        <div class="navigation-items-bar" id="dropdown-navigation-items">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <div class="navigation-items" id="dropdown-navigation-items-menu">
             <div class="link-group">
                 <a class="hover_element {% if home_page %}selected_page{% endif %}" href="/">Início</a>
             </div>
@@ -33,16 +39,24 @@
         </div>
 
         {% if user.is_authenticated %}
+        <div id="overlay" class="overlay"></div>
         <div class="user-menu">
-            <a href="{% url "users:profile" %}" id="user-icon"><span>{{user.username}}</span><img src="{{user.profile.avatar.url}}"></a>
-            <ul class="menu-options animate-on-scroll little-slide-left" id="menu-options">
-                <li class='button-animate'><a href="{% url "users:profile" %}">Perfil</a></li>
-                <li class='button-animate'><form action="{% url "users:logout" %}" method="POST" id="form-logout">
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value={{request.user.username}}>
-                    <button type="submit" id="logout">Sair</button>
-                </form></li>
-            </ul>
+            <div class="user-icon" id="dropdown-user"><span>{{user.first_name}}</span><img src="{{user.profile.avatar.url}}"></div>
+            <div class="user-options" id="dropdown-user-menu">
+                <hr>
+                <ul class="menu-options">
+                    <li><i class="fa-solid fa-user" style="color: #008646;"></i><a class="link-user" href="{% url "users:profile" %}">Perfil do usuário</a></li>
+                    <li>
+                        <form action="{% url "users:logout" %}" method="POST" id="form-logout">
+                            {% csrf_token %}
+                            <input type="hidden" name="username" value={{request.user.username}}>
+                            <i class="fa-solid fa-right-from-bracket" style="color: #008646;"></i>
+                            <button class="link-user" type="submit" id="logout">Sair</button>
+                        </form>
+                    </li>
+                </ul>
+                <hr>
+            </div>
         </div>
         {% else %}
         <div class="link-login">

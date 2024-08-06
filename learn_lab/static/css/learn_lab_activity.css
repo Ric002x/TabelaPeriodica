@@ -1,61 +1,80 @@
 /* Activity List View */
 
 .activities-grid {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-s);
+    gap: var(--spacing-l);
+    grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    justify-content: center;
 }
 
 .activity-content {
-    background-color: var(--background-secondary);
-    width: 100%;
-    padding: var(--spacing-s);
-    border-radius: 3rem;
-    box-shadow: 0 2px 3px 0px rgba(57, 57, 57, 0.555);
-}
-
-.activity-content h2,
-.activity-content h2 a {
-    text-align: center;
-    color: black;
-    font-size: var(--font-size-s);
-}
-
-.no-file-list {
-    display: block;
-    margin: var(--spacing-ss) auto;
-    width: 170px;
-    height: 239px;
-    background-color: white;
-    border-radius: 3rem;
-    box-shadow: 0 2px 0 0 rgba(65, 65, 65, 0.274);
-}
-
-.no-file-list img {
-    width: 100%;
+    background-color: var(--background1);
+    border: solid 1px #ccc;
+    box-shadow: 0 2px 5px #ccc;
     border-radius: 2rem;
-    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    min-width: 256px;
+    min-height: 17.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-m) var(--font-size-l);
+    gap: var(--spacing-m);
+    justify-content: space-between;
 }
 
-.acitivity-file-list {
-    margin: var(--spacing-ss) auto;
-    width: 170px;
-    height: 239px;
-    border-radius: 3rem;
-    box-shadow: 0 2px 0 0 rgba(65, 65, 65, 0.274);
+.activity-content h2 {
+    font-size: calc(1.6rem + 0.5vw);
+    text-align: center;
+    margin-bottom: var(--spacing-m);
 }
 
-.activity-subject-list,
-.activity-level-list {
-    font-size: var(--font-size-ss);
-    font-weight: 500;
+.activity-content ul li,
+.activity-content ul li a {
+    font-size: calc(0.8rem + 0.5vw);
 }
 
-.activity-delete {
-    display: block;
-    margin-top: var(--spacing-ss);
+.activity-content .activity-file {
+    width: calc(15rem + 1vw);
+    height: calc(18rem + 1vw);
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px #ccc;
+}
+
+@media screen and (max-width: 500px) {
+    .activities-grid {
+        gap: var(--spacing-m);
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .activity-content {
+        min-width: 160px;
+        min-height: 40vh;
+        display: flex;
+        flex-direction: column;
+        padding: var(--spacing-m) var(--font-size-m);
+        gap: var(--spacing-s);
+        justify-content: space-between;
+    }
+    
+    .activity-content h2 {
+        font-size: calc(var(--font-size-m) * 0.6);
+        text-align: center;
+        margin-bottom: var(--spacing-s);
+    }
+    
+    .activity-content ul li,
+    .activity-content ul li a {
+        font-size: calc(var(--font-size-s) * 0.5);
+    }
+    
+    .activity-content .activity-file {
+        width: calc(8rem + 2vw);
+        height: calc(12rem + 2vw);
+    }
+    
 }
 
 

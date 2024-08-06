@@ -1,10 +1,14 @@
 /* Base Footer */
 
 footer {
-    background-color: var(--primary-blue);
+    background-color: var(--blue1);
+    padding: var(--spacing-xl) 0;
+}
+
+.footer-section p,
+.footer-section span,
+.footer-section h4 {
     color: var(--white);
-    padding: var(--spacing-s) 0;
-    font-size: var(--font-size-ss);
 }
 
 #register-login {
@@ -21,7 +25,7 @@ footer {
 
 .footer-section {
     flex: 1;
-    margin: var(--spacing-ss);
+    margin: var(--spacing-s);
 }
 
 
@@ -38,11 +42,11 @@ footer {
 }
 
 .footer-section p, .footer-section a, .footer-section ul, .footer-section li {
-    margin-bottom: var(--spacing-ss);
+    margin-bottom: var(--spacing-s);
 }
 
 .footer-section a {
-    color: var(--primary-green);
+    color: var(--green1);
     text-decoration: none;
 }
 
@@ -52,6 +56,9 @@ footer {
 
 .footer-bottom {
     text-align: center;
-    padding: var(--spacing-ss) 0;
-    border-top: 1px solid var(--background-secondary);
+    padding: var(--spacing-s) 0;
+    border-top: 1px solid var(--background2);
+}
+.footer-bottom p {
+    color: var(--white);
 }

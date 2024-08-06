@@ -6,11 +6,12 @@ import json
 elements_category = json.loads(os.environ.get('ELEMENTS_CATEGORIES'))
 
 
-class Elements(models.Model):
-    name = models.CharField(max_length=30, unique=True)
-    slug = models.SlugField(max_length=30, unique=True)
-    symbol = models.CharField(max_length=5)
-    element_cover = models.ImageField(
+class Element(models.Model):
+    name = models.CharField(unique=True, max_length=50)
+    slug = models.SlugField(unique=True)
+    symbol = models.CharField(default='', max_length=50)
+    description = models.TextField(default='')
+    cover_image = models.ImageField(
         upload_to='table_elements/elements_cover/',
         blank=True,
         default='')
@@ -23,16 +24,19 @@ class Elements(models.Model):
     atomic_mass = models.FloatField(default=0)
     electrons_number = models.IntegerField(default=0)
     neutrons_number = models.IntegerField(default=0)
-    density = models.FloatField(default=0)  # g/cm³
-    melting_point = models.FloatField(default=0)  # °C
-    boiling_point = models.FloatField(default=0)  # °C
+    density = models.FloatField(default=0, blank=True)  # g/cm³
+    melting_point = models.FloatField(default=0, blank=True)  # °C
+    boiling_point = models.FloatField(default=0, blank=True)  # °C
     state_matter = models.CharField(
         max_length=20, default='')  # Solid, Gas, Liquid
     electronic_configuration = models.TextField(default='')   # 1s²...
+    electron_distribution = models.CharField(default='', max_length=50)
     ionic_states = models.CharField(
         max_length=100, blank=True)  # 1+, 2+...
-    discoverer = models.CharField(max_length=100, blank=True)
-    year_discovered = models.IntegerField(blank=True, null=True)
+    history_and_discovery = models.TextField(default='', blank=True)
+    chemical_properties = models.TextField(default='', blank=True)
+    usage = models.TextField(default='', blank=True)
+    extra_information = models.TextField(default='', blank=True)
 
     def __str__(self) -> str:
         return self.name

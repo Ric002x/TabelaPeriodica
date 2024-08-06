@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-from table_elements.models import Elements
+from table_elements.models import Element
 
 
 class Command(BaseCommand):
@@ -18,8 +18,8 @@ class Command(BaseCommand):
             expected_columns = {'name', 'slug', 'simbol', 'atomic_number', 'atomic_mass',   # noqa: E501
                                 'electrons_number', 'neutrons_number', 'density',   # noqa: E501
                                 'melting_point', 'boiling_point', 'state_matter',   # noqa: E501
-                                'electronic_configuration', 'ionic_states',
-                                'discoverer', 'year_discovered'}
+                                'electronic_configuration', 'electron_distribution',    # noqa: E501
+                                'ionic_states'}
 
             if not expected_columns.issubset(file.columns):
                 raise ValueError("CSV file is missing one or more required columns.")   # noqa: E501
@@ -27,7 +27,7 @@ class Command(BaseCommand):
             elements = []
             for row in file.index:
                 # Criando um novo elemento
-                element = Elements(
+                element = Element(
                     name=file.loc[row, 'name'],
                     slug=file.loc[row, 'slug'],
                     symbol=file.loc[row, 'simbol'],
@@ -40,14 +40,13 @@ class Command(BaseCommand):
                     boiling_point=file.loc[row, 'boiling_point'],
                     state_matter=file.loc[row, 'state_matter'],
                     electronic_configuration=file.loc[row, 'electronic_configuration'],   # noqa: E501
+                    electron_distribution=file.loc[row, 'electron_distribution'],   # noqa: E501
                     ionic_states=file.loc[row, 'ionic_states'],
-                    discoverer=file.loc[row, 'discoverer'],
-                    year_discovered=file.loc[row, 'year_discovered'],
                 )
                 elements.append(element)
 
             # Salvando todos os elementos de uma vez
-            Elements.objects.bulk_create(elements)
+            Element.objects.bulk_create(elements)
 
             self.stdout.write(self.style.SUCCESS('Successfully imported elements from CSV'))   # noqa: E501
 

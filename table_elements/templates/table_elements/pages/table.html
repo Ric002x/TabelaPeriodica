@@ -6,16 +6,17 @@
 
 
 <section class="periodic-table">
+    <h1 class="title-center">Tabela Periódica</h1>
     
     {% include "global/partials/search.html" %} <br>
 
-    <h1 class="default-center-title">Tabela Periódica</h1> <br>
 
     <div class="table-content">
         <div class="grid-tabela">
             {% include "table_elements/partials/table/elements_grid.html" %}
         </div>
-        <br><hr>
+    </div><br><hr>
+    <div class="table-label-container">
         <div class="table-labels">
             <div class='label-element-group'><div class="metal-alcaline"></div><span class='element-group-name'>Metais Alcalinos</span></div>
             <div class='label-element-group'><div class="metal-alcaline-2"></div><span class='element-group-name'>Metais Alcalinos Terrosos</span></div>
@@ -25,9 +26,10 @@
             <div class='label-element-group'><div class="semiconductor"></div><span class='element-group-name'>Semicondutores</span></div>
             <div class='label-element-group'><div class="nobel-gas"></div><span class='element-group-name'>Gases Nobres</span></div>
         </div>
-        <div class="link-to-elements-list">
-            <a class="default-button green-square center" href="{% url 'table_elements:elements_list' %}">Ver lista de Elementos</a>
-        </div>
+    </div>
+    <div class="link-to-elements-list">
+        <a class="default-button green-square center" href="{% url 'table_elements:elements_list' %}">Ver lista de Elementos</a>
+    </div>
     </div>
 </section>
 {% endblock content %}

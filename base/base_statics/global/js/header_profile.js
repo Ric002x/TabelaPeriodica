@@ -1,25 +1,20 @@
 
 // Function to show options of User Profile
 document.addEventListener('DOMContentLoaded', () => {
-    const userIcon = document.getElementById('user-icon');
-    const menuOptions = document.getElementById('menu-options');
+    const userIcon = document.getElementById('dropdown-user');
+    const userMenu = document.getElementById('dropdown-user-menu');
+    const overlay = document.getElementById('overlay');
 
-    userIcon.addEventListener('mouseover', () => {
-        menuOptions.style.display = 'flex';
-    });
+    userIcon.addEventListener('click', () => {
+        userMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    })
 
-    userIcon.addEventListener('mouseout', () => {
-        menuOptions.style.display = 'none';
-    });
-
-    menuOptions.addEventListener('mouseover', () => {
-        menuOptions.style.display = 'flex';
-    });
-
-    menuOptions.addEventListener('mouseout', () => {
-        menuOptions.style.display = 'none';
-    });
-});
+    overlay.addEventListener('click', () => {
+        userMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+    })
+})
 
 // Function to confirm Logout
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,3 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const navMenuBar = document.getElementById('dropdown-navigation-items');
+    const navMenu = document.getElementById('dropdown-navigation-items-menu');
+
+    navMenuBar.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    })
+})

@@ -1,5 +1,21 @@
 {% load static %}
-{% if activity_list_page or profile_page %}
+
+{% if activity_list_page %}
+    <div class="activity-content">
+        <h2>{{activity.title}}</h2>
+        <div class="activity-file">
+        </div>
+        <ul class="activity-infos">
+            <li><strong>Matéria:</strong> <a href="">{{activity.subject}}</a></li>
+            <li><strong>Conteúdo:</strong> <a href="">{{activity.content}}</a></li>
+            <li><strong>Turma:</strong> <a href="">{{activity.level}}</a></li>
+            <li><strong>Autor:</strong> <a href="">{{activity.user}}</a></li>
+        </ul>   
+        
+    </div>
+{% endif %}
+
+{% if profile_page %}
     <div class="activity-content">
         <h2><a href="{{activity.get_absolute_url}}">{{activity.title}}</a></h2>
         <a href="{{activity.get_absolute_url}}" class="no-file-list"><img src="{% static "imgs/pdf-file.png" %}" alt=""></a>

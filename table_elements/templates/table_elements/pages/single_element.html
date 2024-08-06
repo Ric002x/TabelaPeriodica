@@ -1,9 +1,139 @@
 {% extends "global/base.html" %}
 
+{% block title %}{{element.name}}{% endblock title %}
+
 {% block content %}
-    <section class="element-content-info">
-        
-        {% block element_detail %}{% endblock element_detail %}
+    <section class="element-detail">
+                
+        <h2 class="title-center">{{ element.name }} ({{element.symbol}})</h2>
+
+        <div class="navigation-buttons">
+            {% if prev_element %}
+                <a href="{% url 'table_elements:single_element' prev_element.slug %}" class="prev-element link">&laquo;  {{ prev_element.name }} </a>
+            {% else %}
+                <div class='no_prev'></div>
+            {% endif %}
+            {% if next_element %}
+                <a href="{% url 'table_elements:single_element' next_element.slug %}" class="next-element link">{{ next_element.name }}  &raquo;</a>
+            {% else %}
+                <div class='no_next'></div>
+            {% endif %}
+        </div>
+
+        <div class="element-container">
+            <div class="element-description-container">
+                <div class="element-description-section1">
+                    <p>
+                        {% if element.cover_image %}
+                            <img class='element-img' src="{{element.cover_image.url}}" alt="{{element.name}}">
+                        {% else %}
+                            <div class="element-img"></div>
+                        {% endif %}
+                        {{element.description}}
+                    </p>
+                    <br><hr><br>
+                </div>
+
+                <div class="element-description-section2">
+                    <h3>Sobre os Elétrons:</h3><br>
+                    <p>Para identificar-mos a configuração visual de elétrons do elemento, utilizarems da teoria atômica de <a class="link" href="">Niels Henrik David Bohr, </a>no qual propôs que os níveis de energia dos elétrons são quantizadas e que os elétrons se movem em órbitas estáveis ao redor do núcleo atômico.</p>
+
+                    <div class="electron-distribution-container">
+                        
+                        <div class="electron-distribution-infos">
+                            <div class="electron-distribution-img">
+                                {% if element.bohr_model %}
+                                    <img src="{{element.bohr_model.url}}" alt="">
+                                {% else %}
+                                    <div></div>
+                                {% endif %}
+                            </div>
+                            <div class="group-info">
+                                <P><strong>Camadas e subnível de energia:</strong>
+                                    <br>Os elementos químicos possuem até sete camadas eletrônicas, que são organizadas em ordem crescente de distância do núcleo e representadas pelas letras K, L, M, N, O, P e Q.
+                                </p><br>
+                                <span><strong>Distribuição:</strong> {{element.electron_distribution}}</span>
+                            </div>
+                            <div class="group-info">
+                                <ul><strong>Quantidade de partículas:</strong>
+                                    <li>Prótons: {{element.atomic_number}}</li>
+                                    <li>Elétrons: {{element.electrons_number}}</li>
+                                    <li>Nêutrons: {{element.neutrons_number}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section3">
+                    <h3>Propriedades Físicas:</h3><br>
+
+                    <p class="property-group"><strong>Peso atômico: </strong><span>{{element.atomic_mass}} (g/mol)</span></p>
+
+                    <p class="property-group"><strong>Densidade: </strong><span>{{element.density}} (g/cm³)</span></p>
+
+                    <p class="property-group"><strong>Ponto de Fusão: </strong><span>{{element.melting_point}} ºC</span> / <span>{{element.melting_point_fahrenheit}} ºF</span> / <span>{{element.melting_point_kelvin}} K</span></p>
+
+                    <p class="property-group"><strong>Ponto de Ebulição: </strong><span>{{element.boiling_point}} ºC</span> / <span>{{element.boiling_point_fahrenheit}} ºF</span> / <span>{{element.boiling_point_kelvin}} K</span></p>
+
+                    <p class="property-group"><strong>Estado: </strong><span>{{element.state_matter}}</span></p>
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section4">
+                    <h3>Propriedades Atômicas</h3><br>
+
+                    <p class="property-group"><strong>Configuração de elétrons:</strong><br>
+                        <span>{{element.electronic_configuration}}</span>
+                    </p>
+
+                    <p class="property-group"><strong>Variações de íons:</strong><br>
+                        <span>{{element.ionic_states}}</span><br><br>
+                        <span>Para saber mais sobre íons e estados de oxidação, <a class="link" href="">clique aqui!</a></span>
+                    </p>
+
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section5">
+                    <h3>História e Descoberta:</h3><br>
+                    <p>
+                        {{element.history_and_discovery}}
+                    </p>
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section6">
+                    <h3>Propriedades Químicas:</h3><br>
+                    <p>
+                        {{element.chemical_properties}}
+                    </p>
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section7">
+                    <h3>Aplicações:</h3><br>
+                    <p>
+                        {{element.usage}}
+                    </p>
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section8">
+                    <h3>Fatos Interessantes:</h3><br>
+                    <p>
+                        {{element.extra_information}}
+                    </p>
+                </div>
+            </div>
+        </div>
 
     </section>
 {% endblock content %}
