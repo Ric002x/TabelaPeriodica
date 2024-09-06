@@ -3,7 +3,7 @@
 # tabela_periodica to the name of the gunicorn file you want
 # ricvenicius to your user name
 # app_repo to the folder name of your project
-# periodic_table to the folder name where you find a file called wsgi.py
+# setup to the folder name where you find a file called wsgi.py
 #
 ###############################################################################
 # Criando o arquivo tabela_periodica.socket
@@ -47,7 +47,7 @@ ExecStart=/home/ricvenicius/app_repo/venv/bin/gunicorn \
           --access-logfile - \
           --workers 6 \
           --bind unix:/run/tabela_periodica.socket \
-          periodic_table.wsgi:application
+          setup.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

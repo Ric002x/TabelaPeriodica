@@ -1,15 +1,25 @@
-import json
-import os
-
 from django.db import models
 
-elements_category_str = os.environ.get('ELEMENTS_CATEGORIES')
-
-# Verifica se a variável de ambiente não é None antes de carregar
-if elements_category_str:
-    elements_category = json.loads(elements_category_str)
-else:
-    ...
+elements_category = {
+    "ametal": ["H", "C", "N", "O", "P", "S", "Se"],
+    "metal-alcaline": ["Li", "Na", "K", "Rb", "Cs", "Fr"],
+    "metal-alcaline-2": ["Be", "Mg", "Ca", "Sr", "Ba", "Ra"],
+    "semiconductor": ["Al", "Ga", "In", "Sn", "Tl", "Nh",
+                      "Pb", "Bi", "Mc", "Lv", "Fl"],
+    "trans-metal": ["Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co",
+                    "Ni", "Cu", "Zn", "Y", "Zr", "Nb", "Mo",
+                    "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "Hf",
+                    "Ta", "W", "Re", "Os", "Ir", "Pt", "Au",
+                    "Hg", "Rf", "Db", "Sg", "Bh", "Hs", "Mt",
+                    "Ds", "Rg", "Cn"],
+    "semimetal": ["B", "Si", "Ge", "As", "Sb", "Te", "Po"],
+    "halogen": ["Cl", "F", "Br", "I", "At", "Ts"],
+    "nobel-gas": ["He", "Ne", "Ar", "Kr", "Xe", "Rn", "Og"],
+    "lantanide": ["La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu",
+                  "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu"],
+    "actinide": ["Ac", "Th", "Pa", "U", "Np", "Pu", "Am",
+                 "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr"]
+}
 
 
 class Element(models.Model):
