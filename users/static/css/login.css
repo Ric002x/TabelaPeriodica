@@ -1,0 +1,83 @@
+.login {
+    width: 100%;
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+}
+
+.login::after {
+    content: '';
+    position: absolute;
+    display: block;
+    background-image: url(imgs/main-bg.png);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+.form-login-container {
+    width: 40rem;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    border: solid 2px #ccc;
+    box-shadow: 0px 2px 5px #ccc;
+    background-color: #0086450c;
+    backdrop-filter: blur(12px);
+}
+
+.form-login-container h2 {
+    color: var(--blue1);
+}
+
+.form-login {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.login-item label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: var(--spacing-s);
+    color: var(--blue1);
+}
+
+.login-item input {
+    padding: var(--spacing-s) var(--spacing-s);
+    width: 100%;
+    border: solid 1px transparent;
+    border-radius: 10px;
+    background-color: transparent;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0px 0px 3px #ccc;
+}
+
+.login-item input:focus {
+    box-shadow: inset 0 1px 2px #ccc;
+    border: solid 1px #888;
+}
+
+.login-item input::placeholder {
+    color: #888;
+}
+
+.form-login-container button {
+    margin: var(--spacing-m) auto;
+    width: 100%;
+}
+
+.form-login-container a {
+    margin-bottom: var(--spacing-m);
+}
+
+@media screen and (max-width: 500px) {
+    .form-login-container {
+        width: 80%;
+    }
+}

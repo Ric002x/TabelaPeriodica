@@ -1,0 +1,267 @@
+
+/* Rating Form */
+.activity-rating {
+    width: 100%;
+    padding: var(--spacing-l) 0;
+}
+
+.rating-edit-form_container,
+.rating-form_container {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: var(--spacing-l);
+    position: relative;
+}
+
+/* Star Styles */
+.stars_edit,
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    margin-bottom: var(--spacing-m);
+    width: fit-content;
+}
+
+.stars_edit input,
+.stars input {
+    display: none;
+}
+
+/* Preencher estrelas Irmãs com Hover */
+.stars_edit label .fa-solid,
+.stars label .fa-solid {
+    display: none;
+    color: var(--yellow1);
+    cursor: pointer;
+}
+
+.stars_edit label:hover .fa-regular ~ .fa-solid,
+.stars label:hover .fa-regular ~ .fa-solid {
+    display: inline;
+}
+
+.stars_edit label:hover .fa-regular,
+.stars label:hover .fa-regular {
+    display: none;
+}
+
+.stars_edit label:hover ~ label .fa-solid,
+.stars label:hover ~ label .fa-solid {
+    display: inline;
+}
+
+.stars_edit label:hover ~ label .fa-regular,
+.stars label:hover ~ label .fa-regular {
+    display: none;
+}
+
+/* Preencher estrelas Irmãs com Checked */
+
+.stars_edit input:checked ~ label .fa-regular,
+.stars input:checked ~ label .fa-regular {
+    display: none;
+}
+
+.stars_edit input:checked ~ label .fa-solid,
+.stars input:checked ~ label .fa-solid {
+    display: inline;
+}
+
+
+/* Container form */
+.rating-form_edit_comment textarea,
+.rating-form_comment textarea {
+    width: 100%;
+    padding: var(--spacing-s) var(--spacing-s);
+    background-color: var(--white);
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    transition: border-color 0.3s ease;
+    box-shadow: inset 0 0 2px #ccc;
+    outline: none;
+    resize: none;
+    margin-bottom: var(--spacing-m);
+    height: 15rem;
+}
+
+.rating-form_edit_comment textarea:focus,
+.rating-form_comment textarea:focus {
+    box-shadow: inset 0 1px 3px #ccc;
+    border: solid 1px #888;
+}
+
+/* Aniamtion to show the rating sistem */
+.rating-form_comment {
+    display: none;
+}
+
+.rating-form #rating-form_buttons {
+    display: none;
+}
+
+.rating-form_comment.active {
+    display: block;
+    animation: ElementGrow 0.5s;
+}
+
+.rating-form #rating-form_buttons.active {
+    display: block;
+    animation: ElementGrow 0.5s;
+}
+
+.rating-cancel_button {
+    display: none;
+    border: none;
+    background-color: transparent;
+    color: var(--black);
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    padding: var(--spacing-xs) var(--spacing-s);
+}
+
+.rating-cancel_button.active {
+    display: block;
+}
+
+.rating-cancel_button:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Ratings user */
+.others-users-rating,
+.user-rating {
+    width: 50%;
+    margin: 0 auto;
+    padding: var(--spacing-l) 0;
+    position: relative;
+    border-bottom: solid 1px #888;
+}
+
+.user-rate_infos {
+    width: 100%;
+    display: flex;
+    gap: var(--spacing-s);
+}
+
+.user-rate_infos img {
+
+}
+
+.rate-username {
+    font-weight: 600;
+}
+
+.user-rate_infos i {
+    font-size: var(--font-size-ss);
+    color: var(--yellow1);
+}
+
+.user-rating_comment {
+    width: 100%;
+    padding: var(--spacing-m) 0;
+}
+
+.user-rating_options {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: var(--spacing-l);
+}
+
+.user-rating_options_menu,
+.rating_options_menu,
+.user-rating_options input {
+    display: none;
+}
+
+.user-rating_options i {
+    padding: var(--spacing-xs) var(--spacing-s);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.user-rating_options ul li button {
+    background-color: transparent;
+    border: none;
+}
+
+.user-rating_options ul li button:hover,
+.user-rating_options_menu li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Rating from other users */
+.other-ratings {
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--spacing-l) 0;
+    position: relative;
+}
+
+.user-rating_options_menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding: var(--spacing-m);
+    z-index: 10;
+    background-color: var(--background1);
+    box-shadow: 1px 1px 2px #ccc;
+    border: solid 1px #ccc;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.user-rating_options_menu.active {
+    display: flex;
+}
+
+.users-rating_options {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: var(--spacing-l);
+}
+
+.users-rating_options input {
+    display: none;
+}
+
+.users-rating_options i {
+    padding: var(--spacing-xs) var(--spacing-s);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.users-rating_options input:checked ~ .users-rating_options_menu {
+    display: flex;
+}
+
+
+
+
+
+
+
+/* Form to update rate from user */
+.rating-edit-form_container {
+    display: none;
+}
+
+.rating-form_container {
+    display: block;
+}

@@ -1,0 +1,228 @@
+/* Element_detail */
+
+.element-detail {
+    width: 80%;
+    margin: 128px auto 64px auto;
+    border-radius: 3rem;
+    border: 1px solid #ccc;
+    background-color: var(--background2);
+    padding-bottom: var(--spacing-l);
+}
+
+.element-detail header {
+    border-radius: 3rem 3rem 0 0;
+    position: relative;
+}
+
+.element_count {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: (0, -50%);
+}
+
+.element_count p:last-child {
+    padding: var(--spacing-xs) var(--spacing-s) var(--spacing-xs) var(--spacing-m);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.element-container {
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 3rem;
+}
+
+.navigation-buttons {
+    width: 50%;
+    margin: var(--spacing-l) auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navigation-buttons a {
+    width: fit-content;
+    text-align: center;
+}
+
+.element-container p {
+    text-align: justify;
+}
+
+.element-content-info h2 {
+    text-align: center;
+}
+
+.element-content-info h2 span {
+    text-align: center;
+    font-style: italic;
+}
+
+.element-description-section1 p {
+    margin-bottom: var(--spacing-m);
+}
+
+.element-img {
+    float: left;
+    display: block;
+    width: 15rem;
+    height: 15rem;
+    padding: var(--spacing-s);
+    margin: 0 var(--spacing-m) var(--spacing-s) 0;
+    background-color: var(--white);
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.electron-distribution-container {
+    display: flex;
+    width: 100%;
+}
+
+.electron-distribution-img {
+    margin: var(--spacing-m) auto;
+    width: 20vw;
+    height: 20vw;
+    animation: rotation 15s infinite linear;
+}
+
+.electron-distribution-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.electron-distribution-infos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-ss);
+}
+
+.group-info {
+    width: 100%;
+    margin: var(--spacing-s) auto;
+    padding: var(--spacing-m);
+    border-radius: 2rem;
+    background-color: var(--background3);
+}
+
+.group-info span {
+    font-size: var(--font-size-s);
+}
+
+.group-info li {
+    margin-top: var(--spacing-xs);
+}
+
+.property-group {
+    margin-bottom: var(--spacing-xs);
+}
+
+.property-group strong {
+    color: var(--green1);
+    margin-right: var(--spacing-xs);
+}
+
+@media screen and (max-width: 800px) {
+    .electron-distribution-img {
+        width: 30vw;
+        height: 30vw;
+    }
+}
+
+@media screen and (max-width: 640px) {
+
+    .element-detail {
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        width: 90%;
+        margin: var(--spacing-l) auto;
+    }
+    .element-img {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    .electron-distribution-img {
+        width: 30vw;
+        height: 30vw;
+    }
+}
+
+
+
+
+
+
+
+
+/*  */
+.element-not-ready {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    padding: var(--spacing-xl) 0;
+}
+
+.element-not-ready div {
+    flex: 1;
+}
+
+.element-not-ready img {
+    width: 30rem;
+    margin: 0 auto;
+    display: block;
+}
+
+
+
+/*  */
+
+.ametal-detail {
+    background-color: #E5E50E;
+    color: var(--black);
+}
+
+.nobel-gas-detail {
+    background-color: #C757F7;
+}
+
+.metal-alcaline-detail {
+    background-color: #fb4141;
+}
+
+.metal-alcaline-2-detail {
+    background-color: #40cfff;
+}
+
+.halogen-detail {
+    background-color: #00B916;
+}
+
+.trans-metal-detail {
+    background-color: #FFB727;
+}
+
+.semimetal-detail {
+    background-color: #f43b3b;
+}
+
+.semiconductor-detail {
+    background-color: #3e7eff;
+}
+
+.lantanide-detail {
+    background-color: #FF720E;
+}
+
+.actinide-detail {
+    background-color: #0EFF52;
+}

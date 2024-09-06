@@ -1,0 +1,261 @@
+/* profile.css */
+
+.user-manager {
+    width: 100%;
+    height: calc(100vh - 64px);
+    padding: var(--spacing-xl);
+}
+
+.user-manager .container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    box-shadow: 2px 2px 5px #ccc;
+    border: solid 1px #ccc;
+}
+
+.user-manage_sidebar {
+    flex: 2;
+    height: 100%;
+    background-color: var(--blue2);
+    padding: var(--spacing-m);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-manage_sidebar ul li {
+    margin: var(--spacing-s) 0;
+}
+
+.user-manage_sidebar ul li a {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-manage_sidebar ul li i {
+    margin-right: var(--spacing-s);
+}
+
+.user-manage_sidebar ul li a:hover,
+.user-manage_sidebar ul li a.active {
+    background-color: var(--blue3);
+}
+
+@media screen and (max-width:430px) {
+    .user-manager {
+        padding: var(--spacing-m);
+    }
+
+    .user-manage_sidebar img {
+        width: 60px;
+        height: 60px;
+        margin: var(--spacing-l) 0;
+    }
+}
+
+
+
+
+
+.user-manager_content {
+    flex: 6;
+    padding: var(--spacing-l);
+    height: 100%;
+    overflow: scroll;
+}
+
+.manage-section {
+    display: none;
+}
+
+.manage-section.active {
+    display: block;
+}
+
+.manage-section h2 {
+    margin-bottom: var(--spacing-xl);
+    color: var(--blue2);
+}
+
+
+
+/* User Data */
+.manage-section.user-data p {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* User-items */
+.user-items_publications {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    justify-content: center;
+    gap: var(--spacing-s);
+}
+
+@media screen and (max-width:430px) {
+    .user-manager .container {
+        flex-direction: column;
+    }
+
+    .user-manage_sidebar {
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        gap: var(--spacing-l);
+        align-items: center;
+        flex: 1;
+    }
+
+    .user-manage_sidebar ul li {
+        margin: 0;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .user-manage_img_profile {
+        margin: 0;
+    }
+}
+
+
+
+
+
+
+
+/* Profire update form */
+
+.update-profile {
+    width: 100%;
+    padding: var(--spacing-xxl);
+    display: flex;
+    gap: var(--spacing-l);
+}
+
+.instructions-form-containter {
+    width: 50%;
+    background-color: var(--green1);
+    padding: var(--spacing-l);
+    border-radius: 2rem;
+    box-shadow: -4px 4px 5px 0 rgba(0, 0, 0, 0.304);
+}
+
+.suport {
+    padding-left: var(--spacing-s);
+}
+
+.suport li {
+    margin-bottom: var(--spacing-xs);
+    color: var(--white);
+}
+
+.form-profile-container {
+    width: 50%;
+    border-radius: 2rem;
+    border: solid 1px #ccc;
+    padding: 0 var(--spacing-l);
+    box-shadow: 0 2px 10px #ccc;
+}
+
+.profile-update-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-update-form input {
+    padding: var(--spacing-s) var(--spacing-s);
+    width: 100%;
+    border: solid 1px transparent;
+    border-radius: 10px;
+    background-color: transparent;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0px 0px 3px #ccc;
+}
+
+.profile-update-form input:focus {
+    box-shadow: inset 0 1px 2px #ccc;
+    border: solid 1px #888;
+}
+
+.profile-update-form input[type='file']::file-selector-button {
+    border: none;
+    background-color: #e9e9e9;
+    box-shadow: 0 2px 5px #ccc;
+    padding: var(--spacing-xs);
+    border-radius: 0.8rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 430px) {
+    .update-profile {
+        flex-direction: column;
+        padding: var(--spacing-l);
+    }
+
+    .instructions-form-containter {
+        width: 100%;
+    }
+
+    .form-profile-container {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+/* Change Password Form */
+.change-password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 64px);
+}
+
+.change-password::after {
+    content: '';
+    position: absolute;
+    display: block;
+    background-image: url(imgs/main-bg.png);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+.change-password-container {
+    width: 50rem;
+    border-radius: 1rem;
+    padding: 0 var(--spacing-xl);
+}
+
+.change-password_form input {
+    padding: var(--spacing-s) var(--spacing-s);
+    width: 100%;
+    border: solid 1px transparent;
+    border-radius: 10px;
+    background-color: transparent;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0px 0px 3px #ccc;
+}
+
+.change-password_form input:focus {
+    box-shadow: inset 0 1px 2px #ccc;
+    border: solid 1px #888;
+}
+
+.change-password_form input::placeholder {
+    color: #888;
+}
+
+
+

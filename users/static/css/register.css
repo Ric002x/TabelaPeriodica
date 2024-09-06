@@ -1,0 +1,135 @@
+.register {
+    width: 100%;
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+}
+
+.register::after {
+    content: '';
+    position: absolute;
+    display: block;
+    background-image: url(imgs/main-bg.png);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+.form-register-container {
+    display: block;
+    width: 50rem;
+    margin: 0 auto;
+    border-radius: 2rem;
+    border: solid 1px #ccc;
+    box-shadow: 0 2px 5px #ccc;
+    padding: var(--spacing-s) 0;
+    background-color: #0086450c;
+    backdrop-filter: blur(20px);
+}
+
+.form-register-container h2 {
+    color: var(--blue1);
+}
+
+.register-form {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.grid-register-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.register-item label {
+    color: var(--blue1);
+    font-weight: 500;
+    display: block;
+    margin-bottom: var(--spacing-s);
+}
+
+.register-item input {
+    padding: var(--spacing-s) var(--spacing-s);
+    width: 100%;
+    border: solid 1px transparent;
+    border-radius: 10px;
+    background-color: transparent;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0px 0px 3px #ccc;
+}
+
+.register-item input::placeholder {
+    color: #888;
+}
+
+.register-item input:focus {
+    box-shadow: inset 0 1px 2px #ccc;
+    border: solid 1px #888;
+}
+
+.register-help {
+    font-size: var(--font-size-xs);
+    color: black;
+    margin: var(--spacing-s) 0;
+    font-weight: 500;
+}
+
+.register-errors {
+    color: red;
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+}
+
+.register-errors li {
+    list-style-type: none;
+    padding: 0.3rem 0;
+}
+
+.has-account {
+    margin: calc(var(--spacing-s)*2) auto;
+    text-align: center;
+}
+
+.register-form button {
+    width: 100%;
+    margin: var(--spacing-s) 0;
+}
+
+.register-item:has(input[type="checkbox"]) {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: var(--spacing-m) 0;
+}
+
+.register-item label:has(a) {
+    font-size: var(--font-size-s);
+    margin: 0;
+}
+
+.register-item input[type="checkbox"] {
+    width: fit-content;
+    height: fit-content;
+    margin-right: var(--spacing-s);
+    outline: none;
+}
+
+@media screen and (max-width: 770px) {
+    .register-item label:has(a) {
+        font-size: calc(var(--font-size-s) * 0.75);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-register-container {
+        width: 80%;
+    }
+
+    .register-item label:has(a) {
+        font-size: calc(var(--font-size-s) * 0.5);
+    }
+}

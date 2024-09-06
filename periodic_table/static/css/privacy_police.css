@@ -1,0 +1,219 @@
+/* Privacy Police */
+
+.privacy-police {
+    width: 100%;
+}
+.terms-of-use {
+    width: 100%;
+}
+.legal-notice {
+    width: 100%;
+}
+
+
+.policies-introduction {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: var(--spacing-xxxl) 0;
+    align-items: center;
+}
+
+.policies-introduction div {
+    width: 50%;
+}
+
+.policies-introduction h1 {
+    font-size: var(--font-size-2xl);
+    color: var(--blue1);
+    margin-bottom: var(--spacing-l);
+}
+
+.policies-introduction p {
+    font-size: var(--font-size-m);
+}
+
+.image-container img {
+    display: block;
+    width: 30rem;
+    margin: 0 auto;
+}
+
+.terms {
+    width: 100%;
+    padding-top: var(--spacing-s);
+    background-color: var(--blue3);
+    padding: var(--spacing-xxxl);
+    display: flex;
+    flex-direction: row;
+    counter-reset: headings;
+}
+
+.terms .container {
+    width: 60%;
+}
+
+.terms .container h2 {
+    padding-top: var(--spacing-l);
+    font-size: var(--font-size-l);
+    color: var(--blue1);
+    margin-bottom: var(--spacing-m);
+    counter-increment: headings;
+}
+
+.terms .container p {
+    margin-bottom: var(--spacing-m);
+    font-size: var(--font-size-s);
+}
+
+.terms .container li {
+    list-style-type: disc;
+    margin-left: var(--spacing-m);
+    margin-bottom: var(--spacing-ss);
+    font-size: var(--font-size-s);
+}
+
+.terms .container h2::before {
+    content: counter(headings)'.';
+    padding-right: var(--spacing-m);
+    opacity: 0.5;
+}
+
+.terms .container h3 {
+    font-size: var(--font-size-m);
+    margin-bottom: var(--spacing-s);
+    color: var(--blue1);
+    font-weight: 800;
+}
+
+.terms .container h3::before {
+    content: '>';
+    margin-right: var(--spacing-s);
+}
+
+.terms .summary {
+    padding-top: var(--spacing-l);
+}
+
+.terms .summary nav {
+    position: sticky;
+    top: var(--spacing-xxxl);
+    width: 100%;
+    margin-left: var(--spacing-xxxl);
+}
+
+.terms .summary h4 {
+    font-size: var(--font-size-m);
+    color: var(--blue1);
+    margin-bottom: var(--spacing-m);
+    opacity: 0.8;
+}
+
+.terms .summary li {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-ss);
+    list-style-type: decimal;
+    color: var(--blue1);
+}
+
+.terms .summary li a {
+    color: var(--blue2);
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 770px) {
+    .policies-introduction h1 {
+        font-size: calc(var(--font-size-2xl) * 0.75);
+    }
+    .policies-introduction p {
+        font-size: calc(var(--font-size-m) * 0.75);
+    }
+
+    .terms .container h2 {
+        font-size: calc(var(--font-size-l) * 0.75);
+    }
+    .terms .container p {
+        font-size: calc(var(--font-size-s) * 0.75);
+    }
+    .terms .summary h4 {
+        font-size: calc(var(--font-size-m) * 0.75);
+    }
+    .terms .summary li {
+        font-size: calc(var(--font-size-ss) * 0.75);
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .policies-introduction h1 {
+        font-size: calc(var(--font-size-2xl) * 0.5);
+    }
+    .policies-introduction p {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+
+    .terms .container h2 {
+        font-size: calc(var(--font-size-l) * 0.5);
+    }
+    .terms .container p {
+        font-size: calc(var(--font-size-s) * 0.5);
+    }
+    .terms .summary h4 {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+    .terms .summary li {
+        font-size: calc(var(--font-size-ss) * 0.5);
+    }
+
+    .policies-introduction {
+        flex-direction: column-reverse;
+        gap: var(--spacing-m);
+    }
+
+    .policies-introduction p {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+
+    .image-container img {
+        width: 20rem;
+    }
+
+    .policies-introduction div {
+        width: 100%;
+    }
+
+    .terms .container h2 {
+        font-size: calc(var(--font-size-2xl) * 0.5);
+    }
+
+    .terms .container h2::before {
+        padding-right: var(--spacing-xs);
+    }
+
+    .terms .container h3 {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+
+    .terms {
+        padding: var(--spacing-l);
+    }
+
+    .terms .summary nav {
+        margin-left: var(--spacing-m);
+    }
+
+    .terms .summary h4 {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+
+    .terms .summary ol {
+        margin-left: var(--spacing-ss);
+    }
+
+}
+
+
+
+

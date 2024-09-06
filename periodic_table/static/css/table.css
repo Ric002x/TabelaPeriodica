@@ -1,0 +1,235 @@
+/* Structure */
+
+.periodic-table {
+    width: 100%;
+}
+
+.table-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Elements Grid */
+
+.grid-tabela {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    gap: var(--spacing-xs);
+}
+
+@media screen and (max-width: 1430px) {
+    .table-content {
+        overflow-x: auto;
+        padding-bottom: var(--spacing-m);
+    }
+}
+
+.grid-item {
+    min-width: 6.2rem;
+    max-height: 12.1rem;
+    min-height: 6.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: none;
+    color: black;
+    text-decoration: none;
+    padding: var(--spacing-xxs) 0;
+}
+
+.grid-item span,
+.grid-item p {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.grid-item h2 {
+    color: black;
+    font-size: var(--font-size-ss);
+    text-align: center;
+}
+
+.grid-item p {
+    text-align: center;
+}
+
+.num-atom-num-mass {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+/* Classes para tipos de elementos */
+.ametal {
+    background-color: #E5E50E; /* Amarelo */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.nobel-gas {
+    background-color: #C757F7; /* Roxo Claro */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.metal-alcaline {
+    background-color: #fb4141; /* Vermelho Claro */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.metal-alcaline-2 {
+    background-color: #40cfff; /* Azul Claro */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.semimetal {
+    background-color: #f43b3b; /* Vermelho */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.halogen {
+    background-color: #00B916; /* Verde Claro */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.semiconductor {
+    background-color: #3e7eff; /* Azul */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.trans-metal {
+    background-color: #FFB727; /* Laranja Claro */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.lantanide {
+    background-color: #FF720E; /* Laranja */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+.actinide {
+    background-color: #0EFF52; /* Verde Neon */
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 #515151;
+}
+
+/* Classe de quebra de linha para elementos */
+
+.lantanide-se span,
+.actinide-se span{
+    color: black;
+    font-size: var(--font-size-s);
+    text-decoration: underline;
+}
+
+.space-17 {
+    grid-column-start: 2;
+    grid-column-end: 18;
+}
+
+.space-10 {
+    grid-column-start: 3;
+    grid-column-end: 13;
+}
+
+.space-3 {
+    grid-column: span 2;
+}
+
+.space-row {
+    grid-column-start: 1;
+    grid-column-end: 19;
+    grid-row-start: 8;
+    grid-row-end: 10;
+}
+
+
+@media (max-width: 500px) {
+    
+    .grid-tabela {
+        gap: 0;
+    }
+
+    .grid-item-container {
+        min-width: 5rem;
+        min-height: 5rem;
+        padding: var(--spacing-xxs);
+    }
+
+    .grid-item {
+        display: flex;
+        flex-direction: column;
+        min-width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        min-height: 100%;
+        padding: var(--spacing-xs);
+    }
+    
+    .grid-item span,
+    .grid-item p {
+        color: black;
+        font-size: calc(1rem * 0.6);
+    }
+    
+    .grid-item h2 {
+        color: black;
+        font-size: calc(2rem * 0.6);
+        text-align: center;
+    }
+    
+    .grid-item p {
+        text-align: center;
+    }
+
+    .num-atom-num-mass {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        font-size: calc(1rem * 0.5);
+    }
+}
+
+
+/* Label for Elements */
+.table-labels {
+    width: 80%;
+    margin: var(--spacing-m) auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+}
+
+.label-element-group {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: var(--spacing-s);
+}
+
+.label-element-group div {
+    width: 2rem;
+    height: 2rem;
+    margin-right: var(--spacing-s);
+}
+
+.element-group-name {
+    margin-left: var(--spacing-ss);
+}
+
+.link-to-elements-list {
+    margin: var(--spacing-s);
+}
