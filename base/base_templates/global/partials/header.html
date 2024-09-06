@@ -1,0 +1,80 @@
+{% load static %}
+
+{% if register_page or login_page or change_password %}
+<header class="header" style="background-color:#f9f9f9">
+{% elif privacy_police_page %}
+<header class="header">
+{% else %}
+<header class="header" style="position:fixed">
+{% endif %}
+    <div class="container">
+        <nav class="nav-bar">
+            <div class="logo-home">
+                <a class="m-x-l" href="/"><img src="{% static "global/assets/logo.png" %}" alt=""><p class="text-s cursive bold text-center"><span class="cursive" style="color:#008646; display:block;">ATOMIC</span><span class="cursive" style="color:#3d4988; display:block;"> DISCOVERIES</span></p></a>
+            </div>
+
+            {% if not register_page and not login_page %}
+                <div class="navigation-items-bar" id="dropdown-navigation-items">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <div class="navigation-items" id="dropdown-navigation-items-menu">
+                    <div class="link-group dropdown">
+                        <a  class="hover_element text-s text-black {% if element_page %}selected_page{% endif %}" href="{% url "periodic_table:table" %}">Elementos</a>
+                        <div class="dropdown-content">
+                            <ul class="link-options p-s w-100">
+                                <li><a class="text-s text-black block m-y-s" href="{% url "periodic_table:table" %}">Tabela Periódica</a></li>
+                                <li><a class="text-s text-black block m-y-s" href="{% url "periodic_table:elements_list" %}">Lista de Elementos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="link-group dropdown">
+                        <a class="hover_element text-s text-black {% if learn_lab_page %}selected_page{% endif %}" href="{% url "learn_lab:learn_lab_home" %}">Atividades</a>
+                        <div class="dropdown-content">
+                            <ul class="link-options p-s w-100">
+                                <li><a class="text-s text-black block m-y-s" href="{% url "learn_lab:learn_lab_home" %}">Lista de atividades</li></a>
+                                <li><a class="text-s text-black block m-y-s" href="{% url "learn_lab:activity_create" %}">Criar atividade</li></a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </nav>
+
+
+        {% if user.is_authenticated %}
+            <div class="overlay" id="overlay"></div>
+            <div class="user-menu">
+                <div class="user-icon" id="dropdown-user">
+                    <p class="text-m">{{user.username}}</p>
+                    {% if user.profile.avatar %}
+                        <img class="user-image-medium image-circle m-x-m" src="{{user.profile.avatar.url}}">
+                    {% else %}
+                        <img class="user-image-medium image-circle m-x-m" src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image">
+                    {% endif %}
+                </div>
+                    <div class="user-options" id="dropdown-user-menu">
+                    <hr>
+                        <ul class="menu-options">
+                            <li><a class="link-user text-black text-s" href="{% url "users:profile_data" %}"><i class="fa-solid fa-user" style="color: #008646;"></i>Perfil do usuário</a></li>
+                            <li><a class="link-user text-black text-s" href="{% url "users:profile_posts" %}"><i class="fa-solid fa-file-arrow-up" style="color: #008646;"></i>Suas publicações</a></li>
+                            <li>
+                                <form action="{% url "users:logout" %}" method="POST" id="form-logout">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="username" value={{request.user.username}}>
+                                    <button class="link-user text-black text-s" type="submit" id="logout"><i class="fa-solid fa-right-from-bracket" style="color: #008646;"></i>Sair</button>
+                                </form>
+                            </li>
+                        </ul>
+                    <hr>
+                </div>
+            </div>
+        {% else %}
+            <div class="links-account user-menu text-s text-black">
+                <a class="default-button small-button text-blue" href="{% url "users:login" %}">Entrar</a><a class="default-button small-button inside_blue text-blue" href="{% url "users:register" %}">Cadastre-se</a>
+            </div>
+        {% endif %}
+    </div>
+</header>

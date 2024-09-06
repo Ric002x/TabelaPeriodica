@@ -1,0 +1,46 @@
+{% extends "global/base.html" %}
+
+{% block title %}Criar atividade{% endblock title %}
+
+{% block content %}
+
+<section class='activity-create'>
+    <div class="activity-form-details text-s">
+        <h2 class="title-xl">Formulário de Atividade</h2>
+        <p class="m-y-s">Preencha o formulário abaixo para criar e compartilhar uma atividade educacional. Contribua para o nosso site com conteúdo de qualidade que outros usuários podem utilizar em suas salas de aula. Sua colaboração é essencial para enriquecer a experiência de aprendizado de todos.</p>
+        <hr>
+        <h3 class="title-l p-y-s">📋 Instruções para Preenchimento:</h3>
+        <ul class="instructions-activity">
+            <li><h4 class="title-m">📌 Título:</h4><p>No título deve conter a temática principal da atividade.</p></li>
+            <li><h4 class="title-m">📝 Descrição:</h4><p>Na descrição, resuma da melhor maneira a atividade proposta.</p></li>
+            <li><h4 class="title-m">📚 Matéria e Turma:</h4><p>Certifique-se de selecionar as opções corretas de matéria e turma.</p></li>
+            <li><h4 class="title-m">📁 Arquivo:</h4><p>Priorize adicionar arquivos do tipo PDF, pois corre menos risco de haver falhas com envio e download.</p></li>
+            <li>
+                <h4 class="title-m">💡 Dicas:</h4>
+                <ul class="hints-form">
+                    <li><p><strong>Enriqueça sua Atividade:</strong> Além da atividade em si, inclua recomendações sobre como utilizá-la em sala de aula.</p></li>
+                    <li><p><strong>Adicione um Plano de Aula:</strong> Um plano de aula detalhado pode tornar sua atividade ainda mais útil para outros educadores.</p></li>
+                    <li><p><strong>Inove:</strong> Considere adicionar materiais adicionais, como recursos visuais ou links para leituras complementares, para tornar a experiência mais enriquecedora.</p></li>
+                </ul>
+            </li>
+        </ul>
+        <h3 class="title-m">🔧 Em caso de suporte, contate:</h3>
+        <ul class='suport suport-activity'>
+            <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i>    ricvenicius@gmail.com</li>
+            <li><i class="fa-solid fa-phone" style="color: #ffffff;"></i>    (00) 00000-0000</li>
+        </ul>
+    </div>
+
+    <div class="form-container-activity">
+        <form class="form-activity text-s" action="{{form_action}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <label class="title-l text-blue bold" for="{{field.id_for_label}}">{{field.label}}</label>
+                {{field}}
+            {% endfor %}
+            <button class="default-button inside_green medium-button" style="width: 100%;" type="submit">Criar Atividade</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}
+

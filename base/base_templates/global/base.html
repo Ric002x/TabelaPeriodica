@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% include "global/partials/head_meta.html" %}
+    <title>{% block title %}{% endblock title %} | Tabela Periódica</title>
+</head>
+
+<body>
+        {% include "global/partials/header.html" %}
+
+    {% if privacy_police_page or register_page or login_page or change_password %}
+    <div class="main">
+    {% else %}
+    <div class="main" style="margin-top: 64px">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div style="margin-top: 79px;" class="message-center {{message.tags}} text-s"><i class="fa-solid fa-circle-check" style="color: #008646;"></i> {{message}}</div>
+            {% elif message.tags == 'error' %}
+                <div style="margin-top: 79px;" class="message-center {{message.tags}} text-s"><i class="fa-solid fa-circle-xmark" style="color: #ff2929;"></i> {{message}}</div>
+            {% elif message.tags == 'warning' %}
+                <div style="margin-top: 79px;" class="message-center {{message.tags}} text-s"><i class="fa-solid fa-triangle-exclamation" style="color: #f2d80f;"></i> {{message}}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+        {% block content %}{% endblock content %}
+    </div>
+
+    {% include "global/partials/footer.html" %}
+</body>
+</html>

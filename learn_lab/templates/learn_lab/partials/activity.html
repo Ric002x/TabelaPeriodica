@@ -1,0 +1,99 @@
+{% load static %}
+
+{% if activity_list_page %}
+    <div class="activity-card">
+        <div class="activity-file">
+            <a href="{{activity.get_absolute_url}}">
+                <img src="{% static "imgs/pdf-file.png" %}" alt="">
+            </a>
+        </div>
+        <div class="activity-description">
+            <h2 class="activity-title"><a href="{{activity.get_absolute_url}}">{{activity.title}}</a></h2>
+            <a class="activity-subject" href="{% url "learn_lab:learn_lab_subject" activity.subject.id %}">{{activity.subject}} - {{activity.content}}</a>
+            <ul class="activity-infos">
+                <li><a href="{% url "learn_lab:learn_lab_level" activity.level.id %}"><i class="fa-solid fa-puzzle-piece"></i>{{activity.level}}</a></li>
+                <li><a href=""><i class="fa-solid fa-user-pen"></i>{{activity.user}}</a></li>
+            </ul>   
+        </div>
+    </div>
+{% endif %}
+
+{% if profile_user_posts %}
+    <div class="profile-activities_container">
+        <h2>{{activity.title}}</h2>
+        <ul class="profile-activity_infos">
+            <li><strong>Matéria:</strong> {{activity.subject}}</li>
+            <li><strong>Conteúdo:</strong> {{activity.content}}</li>
+            <li><strong>Turma:</strong> {{activity.level}}</li>
+        </ul>
+        {% if activity.is_published %}
+            <p class="aproved_activity">Atividade aprovada e publicada! <i class="fa-solid fa-circle-check"></i></p>
+        {% else %}
+            <p class="not_aproved_activity">Atividade sob análise <i class="fa-solid fa-hourglass-start"></i></p>
+        {% endif %}
+        <div class="profile-activity_actions">
+            <form action="{% url "learn_lab:activity_delete" activity.slug %}"
+            method="POST" class='form-delete-activity' id="form-delete-activity-{{ activity.slug }}">
+                {% csrf_token %}
+                <input type="hidden" name="activity_slug" value="{{ activity.slug }}">
+                <button onclick="confirmeAction(event, 'form-delete-activity-{{ activity.slug }}')" class="default-button inside_red small-button" type="submit" id="form-delete-button"><i class="fa-solid fa-trash"></i> Excluir</button>
+            </form>
+            {% if activity.is_published %}
+            {% comment %} Popup falando que precisa pedir permissão para aprovar as mudanças {% endcomment %}
+            <p class="default-button activity_edit_button" data-target="edit-{{activity.id}}"><i class="fa-solid fa-pen-to-square"></i> Editar</p>
+            {% else %}
+            <a href="{% url "learn_lab:activity_update" activity.slug %}" class="default-button"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+            {% endif %}
+
+            <div class="overlay-edit_warning" id="edit-{{activity.id}}">
+                <div class="activity-edit_warning">
+                    <div class="warning-container">
+                        <h3>Aviso:</h3>
+                        <p>Antes de alterar uma atividade, por favor, note que: <br><br>
+        
+                            Esta ação fará com que essa atividade que está atualmente disponível ao público, passe por uma nova análise para garantir que ela continue adequada para o site. Se concorda e deseja seguir, clique em 'continuar' logo abaixo.
+                        </p>
+
+                        <div class="activity-waring_edit_buttons">
+                            <p class="default-button cancel" style="color: #008646;" id="edit-cancel">< Voltar</p>
+                            <a class="default-button inside_green small-button confirm" href="{% url "learn_lab:activity_update" activity.slug %}">Continuar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if activiy_detail_page %}
+    <div class="activity-detail-container">
+        <div class="activity-detail-description text-s">
+            <div class="title-and-autor">
+                <h1 class="text-center title-2xl">{{activity.title}}</h1>
+                <div class="container m-y-m text-m">
+                    <a class="author" href="">
+                        {% if user.profile.avatar %}
+                            <img class="user-image-small image-circle m-x-s" src="{{activity.user.profile.avatar.url}}" alt="">{{activity.user}}
+                        {% else %}
+                            <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class="user-image-small image-circle m-x-s">
+                        {% endif %}
+                    </a>
+                    <a href="{% url "learn_lab:learn_lab_subject" activity.subject.id %}">{{activity.subject}}</a>
+                </div>
+            </div>
+            <hr> <br>
+
+            <p>{{activity.description}}</p>
+            <ul>
+                <li><strong>Conteúdo: </strong>{{activity.content}}</li>
+                <li><strong>Turma: </strong>{{activity.level}}</li>
+            </ul>
+            {% if activity.file %}
+                <a href="{{activity.file.url}}" download class="default-button border_green medium-button" style="margin: 2rem 0;"><i class="fa-solid fa-file-arrow-down"></i>Baixar</a>
+            {% endif %}
+        </div>
+        <div class="activity-detail-file">
+            <img src="{% static "imgs/pdf-file.png" %}" alt="">
+        </div>
+    </div>
+{% endif %}

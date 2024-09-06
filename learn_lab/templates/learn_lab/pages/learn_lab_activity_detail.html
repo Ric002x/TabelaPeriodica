@@ -1,0 +1,19 @@
+{% extends "global/base.html" %}
+
+{% block title %}Detalhes da atividade{% endblock title %}
+
+{% block content %}
+
+<section class='activitiy-detail'>
+    {% include "learn_lab/partials/activity.html" %}
+</section>
+
+<hr>
+
+<section class="activity-rating">
+    {% include "learn_lab/partials/rating.html" %}
+</section>
+
+<br>
+
+{% endblock content %}

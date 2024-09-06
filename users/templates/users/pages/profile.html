@@ -1,0 +1,51 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}Perfil de Usuário{% endblock title %}
+
+{% block content %}
+
+<section class="user-manager">
+    <div class="container text-s">
+        <div class="user-manage_sidebar">
+            {% if user.profile.avatar %}
+                <img src="{{user.profile.avatar.url}}" alt="" class='user-image-big image-circle m-y-l-center block'>
+            {% else %}
+                <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class='user-image-big image-circle m-y-l-center block'>
+            {% endif %}
+            <nav>
+                <ul>
+                    <li><a href="{% url "users:profile_data" %}" class="{% if profile_user_data %}active{% endif %}"><i class="fa-solid fa-user section-icon" style="color: #ffffff;"></i><span>Dados do Usuário</span></a></li>
+                    <li><a href="{% url "users:profile_posts" %}" class="{% if profile_user_posts %}active{% endif %}"><i class="fa-solid fa-pen-nib section-icon" style="color: #ffffff;"></i><span>Publicações</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="user-manager_content">
+
+            <div class="manage-section user-data {% if profile_user_data %}active{% endif %}">
+                <h2 class="title-xl">Dados do Usuário</h2>
+                <p><strong>Nome completo:</strong> {{user.first_name}} {{user.last_name}}</p>
+                <p><strong>Email:</strong> {{user.email}}</p>
+                <a class='default-button inside_blue medium-button' style="margin-top: 2rem;" href="{% url "users:profile_update" %}">Alterar dados</a>
+            </div>
+
+            <div class="manage-section user-items {% if profile_user_posts %}active{% endif %}">
+                <h2 class="title-xl">Suas Publicações</h2>
+                <!-- Conteúdo dos itens salvos -->
+
+                 <div class="user-items_publications">
+                    {% for activity in activities %}
+                        {% include "learn_lab/partials/activity.html" %}
+                    {% endfor %}
+                </div>
+                {% include "global/partials/pagination.html" %}
+                <p class='new-activity'>Para criar uma nova atividade, clique aqui:
+                    <a href="{% url "learn_lab:activity_create" %}" class='default-button inside_blue medium-button' style="margin-top: 2rem;">Nova atividade</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock content %}

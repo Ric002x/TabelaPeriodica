@@ -1,0 +1,35 @@
+{% extends "global/base.html" %}
+
+{% block title %}Tabela{% endblock title %}
+
+{% block content %}
+
+
+<section class="periodic-table">
+    <h1 class="text-center title-2xl bold p-y-l">Tabela Periódica</h1>
+    
+    {% include "global/partials/search.html" %} <br>
+
+
+    <div class="table-content">
+        <div class="grid-tabela">
+            {% include "periodic_table/partials/table/elements_grid.html" %}
+        </div>
+    </div><br><hr>
+    <div class="table-label-container">
+        <div class="table-labels">
+            <div class='label-element-group'><div class="metal-alcaline"></div><p class='element-group-name text-s'>Metais Alcalinos</p></div>
+            <div class='label-element-group'><div class="metal-alcaline-2"></div><p class='element-group-name text-s'>Metais Alcalinos Terrosos</p></div>
+            <div class='label-element-group'><div class="trans-metal"></div><p class='element-group-name text-s'>Metais de Transição</p></div>
+            <div class='label-element-group'><div class="ametal"></div><p class='element-group-name text-s'>Ametais</p></div>
+            <div class='label-element-group'><div class="semimetal"></div><p class='element-group-name text-s'>Semimetais</p></div>
+            <div class='label-element-group'><div class="semiconductor"></div><p class='element-group-name text-s'>Semicondutores</p></div>
+            <div class='label-element-group'><div class="nobel-gas"></div><p class='element-group-name text-s'>Gases Nobres</p></div>
+        </div>
+    </div>
+    <div class="link-to-elements-list p-y-m">
+        <a class="default-button inside_green medium-button center text-s" href="{% url 'periodic_table:elements_list' %}">Ver lista de Elementos</a>
+    </div>
+    </div>
+</section>
+{% endblock content %}

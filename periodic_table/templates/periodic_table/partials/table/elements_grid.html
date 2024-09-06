@@ -1,0 +1,57 @@
+    <!-- Primeira linha -->
+     
+    {% for element in elements %}
+    {% if element.atomic_number <= 56 or element.atomic_number >= 72 and element.atomic_number <= 88 or element.atomic_number >= 104 %}
+        <div class='grid-item-container'>
+            <a href="{% url "periodic_table:single_element" element.slug %}" class="grid-item {{element.get_css_class}}">
+                <div class='num-atom-num-mass'><span>{{element.atomic_number}}</span><span>{{element.atomic_mass}}</span></div>
+                <h2>{{element.symbol}}</h2>
+                <p>{{element.name}}</p>
+            </a>
+        </div>
+        
+    {% elif element.atomic_number == 57 %}
+        <div class="grid_item actinide-se"><span>57-71</span></div>
+    {% elif element.atomic_number == 89 %}
+        <div class="grid_item lantanide-se"><span>89-103</span></div>
+    {% endif %}
+
+        {% if element.slug == 'hidrogenio' %}
+            <div class="grid-item space-17"></div>
+        {% endif %}
+        {% if element.slug == 'berilio' %}
+            <div class="grid-item space-10"></div>
+        {% endif %}
+        {% if element.slug == 'magnesio' %}
+            <div class="grid-item space-10"></div>
+        {% endif %}
+    {% endfor %}
+    
+    <div class=" grid-item space-row"></div>
+    <div class="grid-item space-3"></div>
+
+    {% for element in elements %}
+        {% if element.atomic_number >= 57 and element.atomic_number <= 71 %}
+            <div class='grid-item-container'>
+                <a href="{% url "periodic_table:single_element" element.slug %}" class="grid-item {{element.get_css_class}}">
+                    <div class='num-atom-num-mass'><span>{{element.atomic_number}}</span><span>{{element.atomic_mass}}</span></div>
+                    <h2>{{element.symbol}}</h2>
+                    <p>{{element.name}}</p>
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="grid-item"></div>
+    <div class="grid-item space-3"></div>
+
+    {% for element in elements %}
+        {% if element.atomic_number >= 89 and element.atomic_number <= 103 %}
+        <div class='grid-item-container'>
+            <a href="{% url "periodic_table:single_element" element.slug %}" class="grid-item {{element.get_css_class}}">
+                <div class='num-atom-num-mass'><span>{{element.atomic_number}}</span><span>{{element.atomic_mass}}</span></div>
+                <h2>{{element.symbol}}</h2>
+                <p>{{element.name}}</p>
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}

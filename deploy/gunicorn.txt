@@ -1,0 +1,75 @@
+###############################################################################
+# Replace
+# tabela_periodica to the name of the gunicorn file you want
+# ricvenicius to your user name
+# app_repo to the folder name of your project
+# periodic_table to the folder name where you find a file called wsgi.py
+#
+###############################################################################
+# Criando o arquivo tabela_periodica.socket
+sudo nano /etc/systemd/system/tabela_periodica.socket
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=gunicorn blog socket
+
+[Socket]
+ListenStream=/run/tabela_periodica.socket
+
+[Install]
+WantedBy=sockets.target
+
+###############################################################################
+# Criando o arquivo tabela_periodica.service
+sudo nano /etc/systemd/system/tabela_periodica.service
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=Gunicorn daemon (You can change if you want)
+Requires=tabela_periodica.socket
+After=network.target
+
+[Service]
+User=ricvenicius
+Group=www-data
+Restart=on-failure
+EnvironmentFile=/home/ricvenicius/app_repo/.env
+WorkingDirectory=/home/ricvenicius/app_repo
+# --error-logfile --enable-stdio-inheritance --log-level and --capture-output
+# are all for debugging purposes.
+ExecStart=/home/ricvenicius/app_repo/venv/bin/gunicorn \
+          --error-logfile /home/ricvenicius/app_repo/gunicorn-error-log \
+          --enable-stdio-inheritance \
+          --log-level "debug" \
+          --capture-output \
+          --access-logfile - \
+          --workers 6 \
+          --bind unix:/run/tabela_periodica.socket \
+          periodic_table.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+###############################################################################
+# Ativando
+sudo systemctl start tabela_periodica.socket
+sudo systemctl enable tabela_periodica.socket
+
+# Checando
+sudo systemctl status tabela_periodica.socket
+curl --unix-socket /run/tabela_periodica.socket localhost
+sudo systemctl status tabela_periodica
+
+# Restarting
+sudo systemctl restart tabela_periodica.service
+sudo systemctl restart tabela_periodica.socket
+sudo systemctl restart tabela_periodica
+
+# After changing something
+sudo systemctl daemon-reload
+
+# Debugging
+sudo journalctl -u tabela_periodica.service
+sudo journalctl -u tabela_periodica.socket

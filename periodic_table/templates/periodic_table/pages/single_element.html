@@ -1,0 +1,188 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}{{element.name}}{% endblock title %}
+
+{% block content %}
+{% if element.cover_image %}
+    <section class="element-detail shadow-light-small">
+        <header class="text-white background-blue">
+            <div class="w-fit center p-y-l">
+                <p class="text-center title-7xl bold">{{element.symbol}} <span class="text-m normal">({{element.atomic_mass}})</span></p>
+                <h1 class="text-center title-2xl">{{ element.name }}</h1>
+            </div>
+            <div class="element_count">
+                <p class="title-l bold p-x-m">{{element.atomic_number}}.</p>
+                <p class="{{element.get_css_class}}-detail text-s">{{element.get_css_class}}</p>
+            </div>
+        </header>
+        
+
+        <div class="navigation-buttons text-m">
+            {% if prev_element and next_element %}
+                <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+                <div class="w-10"></div>
+                <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+            {% elif not prev_element %}
+                <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+            {% elif not next_element %}
+                <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+            {% endif %}
+        </div>
+
+
+        <div class="element-container">
+            <div class="element-description-container">
+                <div class="element-description-section1">
+                    <p class="text-s">
+                        <img class='element-img shadow-dark-big' src="{{element.cover_image.url}}" alt="{{element.name}}">
+                        {{element.description}}
+                    </p>
+                    <br><br><hr>
+                </div>
+
+                <div class="element-description-section2 p-y-m">
+                    <h3 class="title-xl p-y-m text-blue bold">Sobre os Elétrons:</h3>
+                    <p class="text-s">Para identificar-mos a configuração visual de elétrons do elemento, utilizarems da teoria atômica de <a class="link" href="https://pt.wikipedia.org/wiki/Niels_Bohr">Niels Henrik David Bohr</a>, no qual propôs que os níveis de energia dos elétrons são quantizadas e que os elétrons se movem em órbitas estáveis ao redor do núcleo atômico.</p>
+
+                    <div class="electron-distribution-container">
+                        <div class="electron-distribution-infos w-100">
+                            <div class="electron-distribution-img">
+                                <img src="{{element.bohr_model.url}}" alt="">
+                            </div>
+                            <div class="group-info text-s">
+                                <P class="p-y-s bold">Camadas e subnível de energia:</p>
+                                    <p>Os elementos químicos possuem até sete camadas eletrônicas, que são organizadas em ordem crescente de distância do núcleo e representadas pelas letras K, L, M, N, O, P e Q.</p>
+                                </p>
+                                <p class="text-s p-y-s"><strong>Distribuição:</strong> {{element.electron_distribution}}</p>
+                            </div>
+                            <div class="group-info">
+                                <ul class="text-s"><strong>Quantidade de partículas:</strong>
+                                    <li>Prótons: {{element.atomic_number}}</li>
+                                    <li>Elétrons: {{element.electrons_number}}</li>
+                                    <li>Nêutrons: {{element.neutrons_number}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="element-description-section3 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">Propriedades Físicas:</h3>
+
+                    <p class="property-group text-s"><strong>Peso atômico: </strong><span>{{element.atomic_mass}} (g/mol)</span></p>
+
+                    <p class="property-group text-s"><strong>Densidade: </strong><span>{{element.density}} (g/cm³)</span></p>
+
+                    <p class="property-group text-s"><strong>Ponto de Fusão: </strong><span>{{element.melting_point}} ºC</span> / <span>{{element.melting_point_fahrenheit}} ºF</span> / <span>{{element.melting_point_kelvin}} K</span></p>
+
+                    <p class="property-group text-s"><strong>Ponto de Ebulição: </strong><span>{{element.boiling_point}} ºC</span> / <span>{{element.boiling_point_fahrenheit}} ºF</span> / <span>{{element.boiling_point_kelvin}} K</span></p>
+
+                    <p class="property-group text-s"><strong>Estado: </strong><span>{{element.state_matter}}</span></p>
+                </div>
+
+                <hr>
+
+                <div class="element-description-section4 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">Propriedades Atômicas</h3>
+
+                    <p class="property-group text-s"><strong>Configuração de elétrons:</strong><br>
+                        <span>{{element.electronic_configuration}}</span>
+                    </p>
+
+                    <p class="property-group text-s"><strong>Variações de íons:</strong><br>
+                        <p class="text-s">{{element.ionic_states}}</p><br><br>
+                        <p class="text-s">Para saber mais sobre íons e estados de oxidação, <a class="link" href="https://pt.wikipedia.org/wiki/Íon">clique aqui!</a></p>
+                    </p>
+
+                </div>
+
+                <hr>
+
+                <div class="element-description-section5 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">História e Descoberta:</h3>
+                    <p class="text-s">
+                        {{element.history_and_discovery|safe}}
+                    </p>
+                </div>
+
+                <br><hr><br>
+
+                <div class="element-description-section6 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">Propriedades Químicas:</h3>
+                    <p class="text-s">
+                        {{element.chemical_properties}}
+                    </p>
+                </div>
+
+                <hr>
+
+                <div class="element-description-section7 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">Aplicações:</h3>
+                    <p class="text-s">
+                        {{element.usage}}
+                    </p>
+                </div>
+
+                <hr>
+
+                <div class="element-description-section8 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">Fatos Interessantes:</h3>
+                    <p class="text-s">
+                        {{element.extra_information}}
+                    </p>
+                </div>
+                <hr>
+                <div class="element-description-section8 p-y-m">
+                    <h3 class="title-l text-blue p-y-m">Referências:</h3>
+                    <p class="text-s">
+                        As informações sobre os elementos químicos, assim como as imagens que os referenciam, foram obtidas da <a href="https://pt.wikipedia.org/">Wikipedia</a>, sob a licença <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.pt">CC BY-SA</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+{% if not element.description %}
+<section class="element-detail">
+    <header class="text-white background-blue">
+        <div class="w-fit center p-y-l">
+            <p class="text-center title-7xl bold">{{element.symbol}} <span class="text-m normal">({{element.atomic_mass}})</span></p>
+            <h1 class="text-center title-2xl">{{ element.name }}</h1>
+        </div>
+        <div class="element_count">
+            <p class="title-l bold p-x-m">{{element.atomic_number}}.</p>
+            <p class="{{element.get_css_class}}-detail text-s">{{element.get_css_class}}</p>
+        </div>
+    </header>
+
+
+    <div class="navigation-buttons text-m">
+        {% if prev_element and next_element %}
+            <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+            <div class="w-10"></div>
+            <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+        {% elif not prev_element %}
+            <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+        {% elif not next_element %}
+            <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+        {% endif %}
+    </div>
+<hr>
+    <div class="element-not-ready">
+        <div class="text-s">
+            <h2 class="title-xl text-blue">Pedimos desculpas!</h2>
+            <p class="m-y-m">Infelizmente, ainda não foi possível reunir o mínimo de informações para o elemento {{element.name}}.</p>
+            <p class="m-y-m">Estamos trabalhando arduamente para garantir que todos os detalhes sobre este elemento estejam disponíveis em breve. A ciência é fascinante e, com um pouco mais de paciência, você terá acesso a todas as informações que procura.</p>
+            <p>Obrigado pela compreensão!</p>
+        </div>
+        <div>
+            <img src="{% static "assets/in_production.png" %}" alt="">
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock content %}

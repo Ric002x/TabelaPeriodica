@@ -1,0 +1,141 @@
+{% extends "table_elements/pages/single_element.html" %}
+{% load static %}
+
+{% block title %}{{element.name}}{% endblock title %}
+
+{% block element_detail %}
+
+<h2 class="title-center">
+    {{ element.name }} ({{ element.symbol }}) <br>
+    <span>Lithium</span>
+</h2>
+
+<div class="navigation-buttons">
+    {% if prev_element %}
+        <a href="{% url 'table_elements:single_element' prev_element.slug %}" class="default-button green-square prev-element">Elemento Anterior:<br>{{ prev_element.name }}</a>
+    {% else %}
+        <div class='no_prev'></div>
+    {% endif %}
+    {% if next_element %}
+        <a href="{% url 'table_elements:single_element' next_element.slug %}" class="default-button green-square next-element">Próximo Elemento:<br>{{ next_element.name }}</a>
+    {% else %}
+        <div class='no_next'></div>
+    {% endif %}
+</div>
+
+<div class="element-container">
+    <div class="element-description-container">
+        <div class="element-description-section1">
+            <p>
+                {% if element.element_cover %}
+                    <img class='element-img' src="{{ element.element_cover.url }}" alt="{{ element.name }}">
+                {% else %}
+                    <div class="element-img"></div>
+                {% endif %}
+                O hélio, símbolo He e número atômico 2, é um gás nobre incolor, inodoro e insípido que é o segundo elemento mais leve e o segundo mais abundante no universo observável. Este gás inerte, que não reage facilmente com outros elementos, é utilizado em diversas aplicações que vão desde balões e dirigíveis até sistemas de respiração para mergulho profundo e resfriamento de ímãs supercondutores em equipamentos de ressonância magnética. Descoberto em 1868 através do espectro da luz solar, o hélio é formado pela fusão nuclear no núcleo das estrelas, incluindo o nosso sol, e é obtido comercialmente a partir de reservas de gás natural.
+            </p>
+            <br><hr><br>
+        </div>
+
+        <div class="element-description-section2">
+            <h3>Sobre os Elétrons:</h3><br>
+            <p>Para identificar a configuração visual de elétrons do elemento, utilizaremos a teoria atômica de <a class="link" href="">Niels Henrik David Bohr</a>, que propôs que os níveis de energia dos elétrons são quantizados e que os elétrons se movem em órbitas estáveis ao redor do núcleo atômico.</p>
+
+            <div class="electron-distribution-container">
+                
+                <div class="electron-distribution-infos">
+                    <div class="electron-distribution-img">
+                        {% if element.bohr_model %}
+                            <img src="{{element.bohr_model.url}}" alt="">
+                        {% else %}
+                            <div></div>
+                        {% endif %}
+                    </div>
+                    <div class="group-info">
+                        <p><strong>Camadas e subnível de energia:</strong>
+                            <br>Os elementos químicos possuem até sete camadas eletrônicas, que são organizadas em ordem crescente de distância do núcleo e representadas pelas letras K, L, M, N, O, P e Q.
+                        </p><br>
+                        <span><strong>Distribuição:</strong> K2 L0 M0 N0 O0 Q0 R0</span>
+                    </div>
+                    <div class="group-info">
+                        <ul><strong>Quantidade de partículas:</strong>
+                            <li>Prótons: {{ element.atomic_number }}</li>
+                            <li>Elétrons: {{ element.electrons_number }}</li>
+                            <li>Nêutrons: {{ element.neutrons_number }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><hr><br>
+
+        <div class="element-description-section3">
+            <h3>Propriedades Físicas:</h3><br>
+
+            <p class="property-group"><strong>Peso atômico: </strong><span>{{ element.atomic_mass }} (g/mol)</span></p>
+
+            <p class="property-group"><strong>Densidade: </strong><span>{{ element.density }} (g/cm³)</span></p>
+
+            <p class="property-group"><strong>Ponto de Fusão: </strong><span>{{ element.melting_point }} ºC</span> / <span>{{ element.melting_point_fahrenheit }} ºF</span> / <span>{{ element.melting_point_kelvin }} K</span></p>
+
+            <p class="property-group"><strong>Ponto de Ebulição: </strong><span>{{ element.boiling_point }} ºC</span> / <span>{{ element.boiling_point_fahrenheit }} ºF</span> / <span>{{ element.boiling_point_kelvin }} K</span></p>
+
+            <p class="property-group"><strong>Estado: </strong><span>{{ element.state_matter }}</span></p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="element-description-section4">
+            <h3>Propriedades Atômicas</h3><br>
+
+            <p class="property-group"><strong>Configuração de elétrons:</strong><br>
+                <span>{{ element.electronic_configuration }}</span>
+            </p>
+
+            <p class="property-group"><strong>Variações de íons:</strong><br>
+                <span>{{ element.ionic_states }}</span><br><br>
+                <span>Para saber mais sobre íons e estados de oxidação, <a href="">clique aqui!</a></span>
+            </p>
+
+        </div>
+
+        <br><hr><br>
+
+        <div class="element-description-section5">
+            <h3>História e Descoberta:</h3><br>
+            <p>
+                O {{ element.name }} foi descoberto por {{ element.discoverer }} em {{ element.year_discovered }}.<br>
+                Ele foi identificado pela primeira vez no espectro da luz solar durante um eclipse solar total.
+            </p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="element-description-section6">
+            <h3>Propriedades Químicas:</h3><br>
+            <p>
+                O {{ element.name }} é altamente inerte e não forma compostos facilmente. É um dos gases nobres e é utilizado em muitas aplicações que requerem um ambiente não reativo.
+            </p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="element-description-section7">
+            <h3>Aplicações:</h3><br>
+            <p>
+                O {{ element.name }} é usado em várias indústrias, incluindo balões e dirigíveis, sistemas de respiração para mergulho profundo, resfriamento de ímãs supercondutores em equipamentos de ressonância magnética, e como um gás de proteção em soldagem.
+            </p>
+        </div>
+
+        <br><hr><br>
+
+        <div class="element-description-section8">
+            <h3>Fatos Interessantes:</h3><br>
+            <p>
+                O {{ element.name }} é o segundo elemento mais abundante no universo, compondo cerca de 24% de sua massa elementar. É essencial para a formação das estrelas e do universo como o conhecemos.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock element_detail %}

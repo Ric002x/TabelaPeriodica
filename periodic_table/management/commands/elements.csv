@@ -1,0 +1,119 @@
+name,slug,simbol,atomic_number,atomic_mass,electrons_number,neutrons_number,density,melting_point,boiling_point,state_matter,electronic_configuration,electron_distribution,ionic_states
+Hidrogênio,hidrogenio,H,1,1.008,1,0,0.0000899,-259.16,-252.87,Gasoso,1s¹,K¹ L⁰ M⁰ N⁰ O⁰ Q⁰ R⁰,H⁺
+Hélio,helio,He,2,4.0026,2,2,0.0001786,-272.20,-268.93,Gasoso,1s²,K² L⁰ M⁰ N⁰ O⁰ Q⁰ R⁰,He⁺
+Lítio,litio,Li,3,6.94,3,4,0.534,180.54,1342.00,Sólido,1s² 2s¹, K² L¹ M⁰ N⁰ O⁰ Q⁰ R⁰,Li⁺
+Berílio,berilio,Be,4,9.0122,4,5,1.848,1287.00,2470.00,Sólido,1s² 2s²,K² L² M⁰ N⁰ O⁰ Q⁰ R⁰,Be²⁺
+Boro,boro,B,5,10.81,5,6,2.46,2075.00,4000.00,Sólido,1s² 2s² 2p¹,K² L³ M⁰ N⁰ O⁰ Q⁰ R⁰,B³⁺
+Carbono,carbono,C,6,12.011,6,6,2.267,3550.00,4827.00,Sólido,1s² 2s² 2p²,K² L⁴ M⁰ N⁰ O⁰ Q⁰ R⁰,C⁴⁺
+Nitrogênio,nitrogenio,N,7,14.007,7,7,0.0012506,-210.00,-195.79,Gasoso,1s² 2s² 2p³,K² L⁵ M⁰ N⁰ O⁰ Q⁰ R⁰,N³⁻
+Oxigênio,oxigenio,O,8,15.999,8,8,0.001429,-218.79,-182.96,Gasoso,1s² 2s² 2p⁴,K² L⁶ M⁰ N⁰ O⁰ Q⁰ R⁰,O²⁻
+Flúor,fluor,Fl,9,18.998,9,10,0.001696,-219.67,-188.12,Gasoso,1s² 2s² 2p⁵,K² L⁷ M⁰ N⁰ O⁰ Q⁰ R⁰,F⁻
+Neônio,neon,Ne,10,20.180,10,10,0.0008999,-248.59,-246.05,Gasoso,1s² 2s² 2p⁶, K² L⁸ M⁰ N⁰ O⁰ Q⁰ R⁰,Ne⁺
+Sódio,sodio,Na,11,22.990,11,12,0.971,97.72,883.00,Sólido,1s² 2s² 2p⁶ 3s¹,K² L⁸ M¹ N⁰ O⁰ Q⁰ R⁰,Na⁺
+Magnésio,magnesio,Mg,12,24.305,12,12,1.738,650.00,1090.00,Sólido,1s² 2s² 2p⁶ 3s², K² L⁸ M² N⁰ O⁰ Q⁰ R⁰,Mg²⁺
+Alumínio,aluminio,Al,13,26.982,13,14,2.70,660.32,2519.00,Sólido,1s² 2s² 2p⁶ 3s² 3p¹,K² L⁸ M³ N⁰ O⁰ Q⁰ R⁰,Al³⁺
+Silício,silicio,Si,14,28.085,14,14,2.329,1414.00,2900.00,Sólido,1s² 2s² 2p⁶ 3s² 3p²,K² L⁸ M⁴ N⁰ O⁰ Q⁰ R⁰,Si⁴⁺
+Fósforo,fosforo,P,15,30.974,15,16,1.823,44.15,280.50,Sólido,1s² 2s² 2p⁶ 3s² 3p³,K² L⁸ M⁵ N⁰ O⁰ Q⁰ R⁰,P³⁻
+Enxofre,enxofre,S,16,32.06,16,16,2.07,115.21,444.60,Sólido,1s² 2s² 2p⁶ 3s² 3p⁴,K² L⁸ M⁶ N⁰ O⁰ Q⁰ R⁰,S²⁻
+Cloro,cloro,Cl,17,35.45,17,18,0.003214,-101.5,-34.04,Gasoso,1s² 2s² 2p⁶ 3s² 3p⁵,K² L⁸ M⁷ N⁰ O⁰ Q⁰ R⁰,Cl⁻
+Argônio,argon,Ar,18,39.948,18,22,0.001783,-189.34,-185.85,Gasoso,1s² 2s² 2p⁶ 3s² 3p⁶,K² L⁸ M⁸ N⁰ O⁰ Q⁰ R⁰,Ar⁺
+Potássio,potassio,K,19,39.098,19,20,0.856,63.50,759.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹,K² L⁸ M⁸ N¹ O⁰ Q⁰ R⁰,K⁺
+Cálcio,calcio,Ca,20,40.078,20,20,1.54,842.00,1484.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s²,K² L⁸ M⁸ N² O⁰ Q⁰ R⁰,Ca²⁺
+Escândio,escandio,Sc,21,44.956,21,24,2.989,1541.00,2836.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹,K² L⁸ M¹⁵ N⁰ O⁰ Q⁰ R⁰,Sc³⁺
+Titânio,titanio,Ti,22,47.867,22,26,4.506,1885.00,3287.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d²,K² L⁸ M¹⁶ N⁰ O⁰ Q⁰ R⁰,Ti⁴⁺
+Vanádio,vanadio,V,23,50.942,23,28,6.11,1910.00,3380.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d³,K² L⁸ M¹⁷ N⁰ O⁰ Q⁰ R⁰,V⁵⁺
+Cromo,cromo,Cr,24,51.996,24,28,7.14,1907.00,2671.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵,K² L⁸ M¹⁸ N⁰ O⁰ Q⁰ R⁰,Cr³⁺
+Manganês,manganes,Mn,25,54.938,25,30,7.43,1244.00,2095.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵,K² L⁸ M¹⁹ N⁰ O⁰ Q⁰ R⁰,Mn²⁺
+Ferro,ferro,Fe,26,55.845,26,30,7.874,1538.00,2862.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶,K² L⁸ M²⁰ N⁰ O⁰ Q⁰ R⁰,Fe²⁺
+Cobalto,cobalto,Co,27,58.933,27,32,8.90,1495.00,2927.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷,K² L⁸ M²¹ N⁰ O⁰ Q⁰ R⁰,Co²⁺
+Níquel,nickel,Ni,28,58.933,28,30,8.908,1455.00,2913.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁸,K² L⁸ M²² N⁰ O⁰ Q⁰ R⁰,Ni²⁺
+Cobre,cobre,Cu,29,63.546,29,35,8.96,1084.62,2562.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰,K² L⁸ M²³ N⁰ O⁰ Q⁰ R⁰,Cu²⁺
+Zinco,zinco,Zn,30,65.38,30,35,7.14,419.53,907.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰,K² L⁸ M²⁴ N⁰ O⁰ Q⁰ R⁰,Zn²⁺
+Gálio,galio,Ga,31,69.723,31,39,5.903,29.76,2204.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p¹,K² L⁸ M²⁵ N⁰ O⁰ Q⁰ R⁰,Ga³⁺
+Germanium,germanio,Ge,32,72.630,32,41,5.323,938.00,2833.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p²,K² L⁸ M²⁶ N⁰ O⁰ Q⁰ R⁰,Ge²⁺
+Arsênio,arsenio,As,33,74.922,33,42,5.727,817.00,613.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p³,K² L⁸ M²⁷ N⁰ O⁰ Q⁰ R⁰,As³⁺
+Selênio,selenio,Se,34,78.971,34,45,4.82,221.00,685.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁴,K² L⁸ M²⁸ N⁰ O⁰ Q⁰ R⁰,Se²⁻
+Bromo,bromo,Br,35,79.904,35,45,3.102,-7.20,58.8,Líquido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁵,K² L⁸ M²⁹ N⁰ O⁰ Q⁰ R⁰,Br⁻
+Kriptônio,kriptonio,Kr,36,83.798,36,48,0.003733,-157.37,-153.22,Gasoso,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶,K² L⁸ M³⁰ N⁰ O⁰ Q⁰ R⁰,Kr⁺
+Rubídio,rubidio,Rb,37,85.468,37,48,1.532,39.31,688.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s¹,K² L⁸ M³¹ N¹ O⁰ Q⁰ R⁰,Rb⁺
+Estrôncio,estroncio,Sr,38,87.62,38,50,2.63,777.00,1382.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s²,K² L⁸ M³¹ N² O⁰ Q⁰ R⁰,Sr²⁺
+Ítrio,itrio,Y,39,88.906,39,50,4.47,1526.00,3339.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹,K² L⁸ M³¹ N³ O⁰ Q⁰ R⁰,Y³⁺
+Zircônio,zirconio,Zr,40,91.224,40,51,6.52,1855.00,4409.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d²,K² L⁸ M³¹ N⁴ O⁰ Q⁰ R⁰,Zr⁴⁺
+Nióbio,niobio,Nb,41,92.906,41,52,8.57,2477.00,4744.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d⁴,K² L⁸ M¹⁵ N⁰ O⁰ Q⁰ R⁰,Nb⁵⁺
+Molibdênio,molibdenio,Mo,42,95.95,42,54,10.28,2623.00,4639.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d⁵,K² L⁸ M¹⁶ N⁰ O⁰ Q⁰ R⁰,Mo⁶⁺
+Tecnécio,tecnicio,Tc,43,98.907,43,55,11.50,2157.00,4265.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d⁵,K² L⁸ M¹⁷ N⁰ O⁰ Q⁰ R⁰,Tc⁷⁺
+Rutênio,rutenio,Ru,44,101.07,44,57,12.37,2334.00,3950.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d⁷,K² L⁸ M¹⁸ N⁰ O⁰ Q⁰ R⁰,Ru⁴⁺
+Ródio,rodio,Rh,45,102.91,45,58,12.41,1964.00,3695.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d⁸,K² L⁸ M¹⁹ N⁰ O⁰ Q⁰ R⁰,Rh³⁺
+Paládio,paladio,Pd,46,106.42,46,60,12.02,1554.00,2963.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰,K² L⁸ M²⁰ N⁰ O⁰ Q⁰ R⁰,Pd²⁺
+Prata,prata,Ag,47,107.87,47,61,10.49,961.78,2162.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 4d¹⁰,K² L⁸ M²¹ N⁰ O⁰ Q⁰ R⁰,Ag⁺
+Cádmio,cadmio,Cd,48,112.41,48,64,8.65,321.07,767.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰,K² L⁸ M²² N⁰ O⁰ Q⁰ R⁰,Cd²⁺
+Índio,indio,In,49,114.82,49,66,7.31,156.60,2072.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s¹,K² L⁸ M²² N¹ O⁰ Q⁰ R⁰,In³⁺
+Estanho,estanho,Sn,50,118.71,50,69,7.31,231.93,2602.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s²,K² L⁸ M²² N² O⁰ Q⁰ R⁰,Sn²⁺
+Antimônio,antimonio,Sb,51,121.76,51,71,6.697,631.00,1587.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁵,K² L⁸ M²² N³ O⁰ Q⁰ R⁰,Sb³⁺
+Telúrio,telurio,Te,52,127.60,52,76,6.24,449.85,988.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁴,K² L⁸ M²¹ N⁴ O⁰ Q⁰ R⁰,Te²⁻
+Iodo,iodo,I,53,126.90,53,74,4.94,-101.5,184.3,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁵,K² L⁸ M²¹ N⁵ O⁰ Q⁰ R⁰,I⁻
+Xenônio,xenonio,Xe,54,131.29,54,77,0.005887,-111.75,-108.00,Gasoso,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁶,K² L⁸ M²¹ N⁶ O⁰ Q⁰ R⁰,Xe²⁺
+Césio,cesio,Cs,55,132.91,55,77,1.93,28.50,671.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s¹,K² L⁸ M²² N¹ O⁰ Q⁰ R⁰,Cs⁺
+Bário,bario,Ba,56,137.33,56,81,3.62,725.00,1140.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s²,K² L⁸ M²² N² O⁰ Q⁰ R⁰,Ba²⁺
+Lantânio,lantanio,La,57,138.91,57,82,6.15,920.00,3464.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹,K² L⁸ M²² N³ O⁰ Q⁰ R⁰,La³⁺
+Cério,cerio,Ce,58,140.12,58,82,6.77,798.00,3257.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N⁴ O¹ Q⁰ R⁰,Ce³⁺
+Praseodímio,praseodimio,Pr,59,140.91,59,81,6.77,931.00,3520.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p²,K² L⁸ M²² N⁵ O⁰ Q⁰ R⁰,Pr³⁺
+Neodímio,neodimio,Nd,60,144.24,60,82,7.01,1021.00,3014.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p³,K² L⁸ M²² N⁶ O⁰ Q⁰ R⁰,Nd³⁺
+Promécio,promecio,Pm,61,145.00,61,84,7.26,1042.00,3000.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁴,K² L⁸ M²² N⁷ O⁰ Q⁰ R⁰,Pm³⁺
+Samário,samario,Sm,62,150.36,62,88,8.10,1072.00,1900.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁸ O² Q⁰ R⁰,Sm³⁺
+Európio,europio,Eu,63,151.96,63,89,5.24,822.00,1597.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O² Q⁰ R⁰,Eu³⁺
+Gadolínio,gadolinio,Gd,64,157.25,64,97,7.90,1312.00,3266.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O³ Q⁰ R⁰,Gd³
+Térbio,terbio,Tb,65,158.93,65,98,8.23,1356.00,3129.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O⁴ Q⁰ R⁰,Tb³⁺
+Disprósio,disprosio,Dy,66,162.50,66,97,8.54,1412.00,2567.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O⁵ Q⁰ R⁰,Dy³⁺
+Hólmio,holmio,Ho,67,164.93,67,98,9.03,1474.00,2700.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O⁶ Q⁰ R⁰,Ho³⁺
+Ertério,erterio,Er,68,167.26,68,100,9.07,1522.00,2860.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O⁷ Q⁰ R⁰,Er³⁺
+Túlio,tulio,Tm,69,168.93,69,101,9.32,1545.00,1950.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶ 6s²,K² L⁸ M²² N⁶ O⁸ Q⁰ R⁰,Tm³⁺
+Itérbio,iterbio,Yb,70,173.045,70,103,6.9,824,1196,Sólido,[Xe] 4f¹⁴ 6s²,[Xe] 4f¹⁴ 6s²,Yb²⁺
+Lutécio,lutecio,Lu,71,174.9668,71,104,9.84,1663,3395,Sólido,[Xe] 4f¹⁴ 5d¹ 6s²,[Xe] 4f¹⁴ 5d¹ 6s²,Lu³⁺
+Háfnio,hafnio,Hf,72,178.49,72,106,13.31,2233.00,4150.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N² O⁰ Q² R⁰,Hf⁴⁺
+Tântalo,tantalo,Ta,73,180.95,73,108,16.6,3017.00,5458.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N⁵ O⁰ Q⁰ R⁰,Ta⁵⁺
+Wolfram,wolfram,W,74,183.84,74,110,19.25,3422.00,5930.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,W⁶⁺
+Rênio,renio,Re,75,186.21,75,112,21.02,3186.00,5596.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Re⁷⁺
+Ósmio,osmio,Os,76,190.23,76,114,22.59,3033.00,5027.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Os⁴⁺
+Irídio,iridio,Ir,77,192.22,77,115,22.56,2446.00,4470.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p¹,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Ir⁴⁺
+Platina,platina,Pt,78,195.08,78,118,21.45,1772.00,3825.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 4d¹ 5p⁶,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Pt²⁺
+Ouro,ouro,Au,79,196.97,79,118,19.32,1064.18,2807.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 4d¹⁰,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Au³⁺
+Mercúrio,mercurio,Hg,80,200.59,80,121,13.55,-38.83,356.73,Líquido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Hg²⁺
+Tálio,talio,Tl,81,204.38,81,123,11.85,304.00,1457.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s²,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Tl³⁺
+Chumbo,chumbo,Pb,82,207.2,82,126,11.34,327.46,1749.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s²,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Pb²⁺
+Bismuto,bismuto,Bi,83,208.98,83,208,9.78,271.30,1560.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁶,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Bi³⁺
+Polônio,polonio,Po,84,209.98,84,209,9.17,254.00,962.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁶,K² L⁸ M²² N⁶ O¹ Q⁰ R⁰,Po²⁺
+Astato,astato,At,85,210.00,85,210,7.00,302.00,337.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁵,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁰,At⁻
+Radônio,radonio,Rn,86,222.02,86,222,0.00973,-71.15,-61.8,Gasoso,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 4d¹⁰ 5s² 4p⁶,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹,Rn²⁺
+Frâncio,francio,Fr,87,223.02,87,223,1.87,27.00,677.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s¹,K² L⁸ M¹⁸ N¹⁸ O⁶ P²,Fr⁺
+Rádio,radio,Ra,88,226.03,88,226,0.50,700.00,1413.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s²,K² L⁸ M¹⁸ N¹⁸ O⁶ P³,Ra²⁺
+Atos,actinio,Ac,89,227.03,89,227,1.62,1050.00,1500.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁴,Ac³⁺
+Tório,torio,Th,90,232.04,90,232,11.72,1750.00,3396.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁵,Th⁴⁺
+Protactínio,protactinio,Pa,91,231.04,91,231,15.37,1568.00,2150.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶,Pa⁵⁺
+Urânio,uranio,U,92,238.03,92,238,18.95,4131.00,4131.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q¹,U⁶⁺
+Néptunio,neptunio,Np,93,237.05,93,237,20.45,6440.00,3900.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s² 5f¹,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q²,Np⁶
+Plutônio,plutonio,Pu,94,244.06,94,244,19.86,6390.00,6390.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s² 5f⁶,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q³,Pu⁶⁺
+Amerício,americio,Am,95,243.06,95,243,13.67,1176.00,1500.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s² 5f⁷,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁴ R¹,Am³⁺
+Cúrio,curio,Cm,96,247.07,96,247,13.51,1340.00,3100.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 5s² 6s² 5f⁷,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁴ R²,Cm³⁺
+Bérquelio,berquelio,Bk,97,247.07,97,247,14.80,1100.00,2927.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f⁷,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁴ R³,Bk³⁺
+Califórnio,californio,Cf,98,251.08,98,251,15.1,900.00,1740.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f¹⁰,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁴ R⁴,Cf³⁺
+Einsteínio,einstenio,Es,99,252.08,99,252,13.80,860.00,1130.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f¹¹,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁴ R⁵,Es³⁺
+Férmio,fermio,Fm,100,257.10,100,257,10.00,1527.00,2600.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f¹²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁴ R⁶,Fm²⁺
+Mendelévio,mendelevio,Md,101,258.10,101,258,8.80,827.00,1100.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f¹³,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R¹,Md³⁺
+Nobélio,nobelio,No,102,259.10,102,259,7.00,827.00,1100.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f¹⁴,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R²,No³⁺
+Lawrêncio,lawrencio,Lr,103,266.12,103,266,6.12,1627.00,3340.00,Sólido,1s² 2s² 2p⁶ 3s² 3p² 4s² 5s² 6s² 5f¹³ 7s²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R³,Lr³⁺
+Rutherfordio,rutherfordio,Rf,104,261.11,104,157,15.6,2410.00,3900.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d²,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R⁴,Rf⁴⁺
+Dubnium,dubnio,Db,105,262.11,105,159,15.3,2570.00,4000.00,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d³,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R⁵,Dub⁵⁺
+Seaborgio,seaborgio,Sg,106,271.13,106,160,13.6,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁴,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R⁶,Sg⁶
+Bohriobio,bohriobio,Bh,107,270.13,107,161,14.9,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁵,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁵ R⁷,Bh⁷⁺
+Hassio,hassio,Hs,108,277.15,108,171,14.0,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁶,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁶ R¹,Hs⁸⁺
+Meitnério,meitnerio,Mt,109,276.15,109,173,13.0,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁷,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁶ R²,Mt⁹⁺
+Darmstádio,darmstadio,Ds,110,281.17,110,175,11.0,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁸,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁶ R⁷ S¹,Ds¹⁰⁺
+Roentgênio,roentgenio,Rg,111,272.15,111,161,11.0,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁹,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁶ R⁷ S⁸,Rg¹¹⁺
+Copernício,copernicio,Cn,112,285.18,112,173,8.65,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰,K² L⁸ M¹⁸ N¹⁸ O⁶ P⁶ Q⁶ R⁷ S⁹,Cn¹²⁺
+Nihônio,nihonio,Nh,113,286.19,113,175,9.17,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹¹,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹¹ Q¹,Nh¹³⁺
+Fleróvio,flerovio,Fl,114,289.19,114,173,7.50,0,0,Sólido,1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹²,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹¹ Q²,Fl¹⁴⁺
+Moscóvio,moscovio,Mc,115,288.1,115,173,0.0,0,0,Sólido,[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹¹ Q³,não informado
+Livermômio,livermomio,Lv,116,293.2,116,177,0.0,0,0,Sólido,[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹¹ Q⁴,não informado
+Tennessino,tenessino,Ts,117,294.2,117,177,0.0,0,0,Sólido,[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹¹ Q⁵,não informado
+Organessônio,organessonio,Og,118,294.2,118,176,0.0,0,0,Sólido,[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶,K² L⁸ M¹⁸ N¹⁸ O⁶ P¹¹ Q⁶,não informado

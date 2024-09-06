@@ -1,0 +1,542 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100..900&display=swap');
+@import url(footer.css);
+@import url(header.css);
+@import url(pagination.css);
+@import url(search.css);
+
+
+:root {
+    /* Background Colors */
+    --background1: #fcfcfc;
+    --background2: #f9f9f9;
+    --background3: #e3e3e3;
+
+    /* Primary Colors */
+    --blue1: #000A3B;
+    --blue2: #3d4988;
+    --blue3: #939dcf4a;
+    --blue4: #303a6b;
+    --green1: #008646;
+    --green2: #006434;
+    --orange1: #d95c14;
+    --orange2: #c5591b;
+    --yellow1: #f2d80f;
+    --yellow2: #faf0a3;
+    --red: #ff2929;
+    --red2: #dd2121;
+    --black: #000;
+    --white: #fff;
+
+    /* Fonts */
+    --font-outfit: "Outfit", sans-serif;
+    --font-fira: "Fira Sans", sans-serif;
+    --font-cursive: "Chilanka", cursive;
+
+    /* Fonts Sizes */
+    --font-size-xxs: 0.8rem;   /* Extra Extra Pequeno (8px) */
+    --font-size-xs: 1rem;      /* Extra Pequeno (10px) */
+    --font-size-ss: 1.2rem;    /* Muito Pequeno (12px) */
+    --font-size-s: 1.6rem;    /* Pequeno (16px) */
+    --font-size-m: 2rem;      /* Médio (20px) */
+    --font-size-l: 2.4rem;    /* Grande (24px) */
+    --font-size-xl: 2.8rem;   /* Muito Grande (28px) */
+    --font-size-2xl: 3.2rem;  /* Extra Grande (32px) */
+    --font-size-3xl: 3.6rem;   /* Gigante (36px) */
+    --font-size-4xl: 4rem;     /* Enorme (40px) */
+    --font-size-5xl: 4.4rem;   /* Extremamente Grande (44px) */
+    --font-size-6xl: 4.8rem;   /* Super Grande (48px) */
+    --font-size-7xl: 5.2rem;   /* Ultra Grande (52px) */
+    --font-adaptive-paragraph: calc(1rem + 1.5vw);
+
+    /* Spacings */
+    --spacing-xxs: 0.2rem;
+    --spacing-xs: 0.5rem; /* Extra Small */
+    --spacing-ss: 0.8rem; /* Extra Small */
+    --spacing-s: 1rem;    /* Small */
+    --spacing-m: 1.5rem;  /* Medium */
+    --spacing-l: 2.5rem;  /* Large */
+    --spacing-xl: 4rem;   /* Extra Large */
+    --spacing-xxl: 6rem;  /* Extra Extra Large */
+    --spacing-xxxl: 8rem; /* Extra Extra Extra Large */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-fira);
+    text-decoration: none;
+    list-style-type: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+body {
+    background-color: var(--background1);
+    scroll-behavior: smooth;
+    color: var(--black);
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-outfit);
+}
+
+.main {
+    position: relative;
+}
+
+.message-center {
+    text-align: center;
+    padding: var(--spacing-s) var(--spacing-m);
+    width: 95%;
+    margin: var(--spacing-m) auto;
+    border-radius: 1rem;
+}
+
+.success {
+    background-color: rgba(119, 255, 119, 0.488);
+    border: solid 2px rgba(119, 255, 119);
+}
+
+.error {
+    background-color: rgba(234, 33, 33, 0.305);
+    border: solid 2px rgba(234, 33, 33);
+
+}
+
+.warning {
+    background-color: var(--yellow2);
+    border: solid 2px var(--yellow1);
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.block {display: block;}
+
+.background-1 {background-color: var(--background1);}
+.background-2 {background-color: var(--background2);}
+.background-3 {background-color: var(--background3);}
+.background-blue {background-color: var(--blue1);}
+.background-green {background-color: var(--green1);}
+
+.shadow-light-small {box-shadow: 0px 1px 2px #ccc;}
+.shadow-light-big {box-shadow: 0px 2px 5px #ccc;}
+.shadow-dark-small {box-shadow: 0px 1px 2px #888;}
+.shadow-dark-big {box-shadow: 0px 2px 5px #c888cc;}
+
+
+
+
+
+
+
+/* Text Styles */
+
+.cursive {font-family: var(--font-cursive);}
+.fira {font-family: var(--font-fira);}
+.outfit {font-family: var(--font-outfit);}
+.justify-text  {text-align: justify;}
+.text-white {color: var(--white);}
+.text-black {color: var(--black);}
+.text-red {color: var(--red);}
+.text-center {text-align: center;}
+.link {
+    color: var(--blue1);
+    text-decoration: underline;
+}
+.text-green {color: var(--green1);}
+.text-blue {color: var(--blue1);}
+
+.normal {font-weight: 400;}
+.light {font-weight: 600;}
+.bold {font-weight: 800;}
+
+.title-7xl {
+    font-size: var(--font-size-7xl);
+    letter-spacing: 0.2rem;
+}
+
+.title-4xl {
+    font-size: var(--font-size-4xl);
+    letter-spacing: 0.2rem;
+}
+
+.title-3xl {
+    font-size: var(--font-size-3xl);
+    letter-spacing: 0.2rem;
+}
+
+.title-2xl {
+    font-size: var(--font-size-2xl);
+    letter-spacing: 0.2rem;
+}
+
+.title-xl {
+    font-size: var(--font-size-xl);
+    letter-spacing: 0.2rem;
+}
+
+.title-l {
+    font-size: var(--font-size-l);  
+}
+
+.title-m {
+    font-size: var(--font-size-m);  
+}
+
+.text-m {
+    font-size: var(--font-size-m);
+}
+
+.text-s {
+    font-size: var(--font-size-s);
+}
+
+.text-ss {
+    font-size: var(--font-size-ss);
+}
+
+.text-xs {
+    font-size: var(--font-size-xs);
+}
+
+input::placeholder {font-size: var(--font-size-ss);}
+
+
+@media screen and (max-width: 770px) {
+    .title-7xl {
+        font-size: calc(var(--font-size-7xl) * 0.75);
+    }
+    .title-4xl {
+        font-size: calc(var(--font-size-4xl) * 0.75);
+    }
+    .title-3xl {
+        font-size: calc(var(--font-size-3xl) * 0.75);
+    }
+    .title-2xl {
+        font-size: calc(var(--font-size-2xl) * 0.75);
+    }
+    .title-xl {
+        font-size: calc(var(--font-size-xl) * 0.75);
+    }
+    .title-l {
+        font-size: calc(var(--font-size-l) * 0.75);
+    }
+    .title-m {
+        font-size: calc(var(--font-size-m) * 0.75);
+    }
+    .text-m {
+        font-size: calc(var(--font-size-m) * 0.75);
+    }
+    .text-s {
+        font-size: calc(var(--font-size-s) * 0.75);
+    }
+    .text-ss {
+        font-size: calc(var(--font-size-ss) * 0.75);
+    }
+    .text-xs {
+        font-size: calc(var(--font-size-xs) * 0.75);
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .title-7xl {
+        font-size: calc(var(--font-size-7xl) * 0.5);
+    }
+    .title-4xl {
+        font-size: calc(var(--font-size-4xl) * 0.5);
+    }
+    .title-3xl {
+        font-size: calc(var(--font-size-3xl) * 0.5);
+    }
+    .title-2xl {
+        font-size: calc(var(--font-size-2xl) * 0.5);
+    }
+    .title-xl {
+        font-size: calc(var(--font-size-xl) * 0.5);
+    }
+    .title-l {
+        font-size: calc(var(--font-size-l) * 0.5);
+    }
+    .title-m {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+    .text-m {
+        font-size: calc(var(--font-size-m) * 0.5);
+    }
+    .text-s {
+        font-size: calc(var(--font-size-s) * 0.5);
+    }
+    .text-ss {
+        font-size: calc(var(--font-size-ss) * 0.5);
+    }
+    .text-xs {
+        font-size: calc(var(--font-size-xs) * 0.5);
+    }
+}
+
+
+
+
+
+
+/* Spacing Sizes */
+.w-100 {width: 100%;}
+.w-90 {width: 90%;}
+.w-80 {width: 80%;}
+.w-75 {width: 75%;}
+.w-50 {width: 50%;}
+.w-25 {width: 25%;}
+.w-10 {width: 10%;}
+.w-fit {width: fit-content;}
+
+.h-100 {width: 100%;}
+.h-75 {width: 75%;}
+.h-50 {width: 50%;}
+.h-25 {width: 25%;}
+.h-fit {width: fit-content;}
+
+.m-y-s {margin: var(--spacing-s) 0;}
+.m-y-m {margin: var(--spacing-m) 0;}
+.m-y-l {margin: var(--spacing-l) 0;}
+.m-y-s-center {margin: var(--spacing-s) auto;}
+.m-y-m-center {margin: var(--spacing-m) auto;}
+.m-y-l-center {margin: var(--spacing-l) auto;}
+
+.p-y-s {padding: var(--spacing-s) 0;}
+.p-y-m {padding: var(--spacing-m) 0;}
+.p-y-l {padding: var(--spacing-l) 0;}
+
+.m-x-s {margin: 0 var(--spacing-s);}
+.m-x-m {margin: 0 var(--spacing-m);}
+.m-x-l {margin: 0 var(--spacing-l);}
+
+.p-x-s {padding: 0 var(--spacing-s);}
+.p-x-m {padding: 0 var(--spacing-m);}
+.p-x-l {padding: 0 var(--spacing-l);}
+.p-x-xl {padding: 0 var(--spacing-xl);}
+.p-x-xxl {padding: 0 var(--spacing-xxl);}
+
+.m-s {margin: var(--spacing-s);}
+.m-m {margin: var(--spacing-m);}
+.m-l {margin: var(--spacing-l);}
+
+.p-s {padding: var(--spacing-s);}
+.p-m {padding: var(--spacing-m);}
+.p-l {padding: var(--spacing-l);}
+.p-xl {padding: var(--spacing-xl);}
+.p-xxl {padding: var(--spacing-xxl);}
+
+.default-section {padding: var(--spacing-xl);}
+
+.user-image-small {width: 3rem; height: 3rem;}
+.user-image-medium {width: 4rem; height: 4rem;}
+.user-image-big {width: 8rem; height: 8rem;}
+
+.image-circle {border-radius: 50%; border: solid 1px var(--black);}
+
+
+
+
+/* Entrance Animations */
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(80vh);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes littleSlideInLeft {
+    from {
+        transform: translateX(5vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-80vw);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(5rem);
+        opacity: 0.2;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes ElementGrow {
+    from {
+        transform: scale(0.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes showElement {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+
+.animate-on-scroll.slide-left.animate-enter {
+    opacity: 1;
+    animation: slideInLeft 1s forwards;
+}
+
+.animate-on-scroll.little-slide-left.animate-enter {
+    opacity: 1;
+    animation: littleSlideInLeft 1s forwards;
+}
+
+.animate-on-scroll.slide-right.animate-enter {
+    opacity: 1;
+    animation: slideInRight 1s forwards;
+}
+
+.animate-on-scroll.slide-up.animate-enter {
+    opacity: 1;
+    animation: slideInUp 1s forwards;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Buttons */
+
+.default-button {
+    width: fit-content;
+    display: block;
+    transition: all 0.2s;
+    border: solid 2px transparent;
+    cursor: pointer;
+    background-color: transparent;
+    position: relative;
+}
+
+.small-button {
+    padding: var(--spacing-xs) var(--spacing-ss);
+    border-radius: 2rem;
+}
+
+.medium-button {
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: 0.5rem;
+}
+
+.big-button {
+    padding: var(--spacing-m) var(--spacing-s);
+    border-radius: 0.5rem;
+}
+
+.border_blue {
+    border-radius: 2rem;
+    color: var(--blue2);
+    border: solid 2px var(--blue2);
+}
+
+.inside_blue {
+    color: var(--white);
+    border: solid 2px var(--blue2);
+    background-color: var(--blue2);
+}
+
+.border_red{
+    border-radius: 2rem;
+    color: var(--red);
+    border: solid 2px var(--red);
+}
+
+.inside_red {
+    color: var(--white);
+    border: solid 2px var(--red);
+    background-color: var(--red);
+}
+
+.border_green {
+    color: var(--green1);
+    border: solid 2px var(--green1);
+}
+
+.inside_green {
+    color: var(--white);
+    border: solid 2px var(--green1);
+    background-color: var(--green1);
+}
+
+/* buttons animations */
+
+.default-button:active {
+    transform: scale(0.95);
+}
+
+.inside_green:hover {
+    background-color: var(--green2);
+    border: solid 2px var(--green2);
+}
+
+.inside_blue:hover {
+    background-color: var(--blue4);
+    border: solid 2px var(--blue4);
+}
+
+.inside_red:hover {
+    background-color: var(--red2);
+    border: solid 2px var(--red2);
+}
+
+.border_blue:active,
+.border_green:active,
+.border_red:active {
+    background-color: var(--background2);
+}

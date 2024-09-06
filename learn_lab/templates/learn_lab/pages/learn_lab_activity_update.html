@@ -1,0 +1,25 @@
+{% extends "global/base.html" %}
+
+{% block title %}Editar{% endblock title %}
+
+{% block content %}
+
+
+
+<section class="activity-update">
+    <h2 class="text-center title-2xl p-y-l">Alterar dados da atividade:</h2>
+    <div class="form-container-activity">
+        <form class="form-activity text-s" action="{{form_action}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <label class="title-l text-blue" for="{{field.id_for_label}}">{{field.label}}</label>
+                {{field}}
+            {% endfor %}
+            <button class="default-button inside_green medium-button" style="width: 100%;" type="submit">Atualizar</button>
+        </form>
+        <a class="text-s link block text-center p-y-m" href="{% url "users:profile_posts" %}"><< Voltar</a>
+    </div>
+</section>
+
+{% endblock content %}
+

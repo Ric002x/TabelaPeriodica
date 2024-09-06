@@ -1,0 +1,45 @@
+{% extends "global/base.html" %}
+
+{% load static %}
+{% block title %}Cadastro{% endblock title %}
+
+{% block content %}
+<section class="register">
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-circle-check" style="color: #008646;"></i> {{message}}</div>
+        {% elif message.tags == 'error' %}
+            <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-circle-xmark" style="color: #ff2929;"></i> {{message}}</div>
+        {% elif message.tags == 'warning' %}
+            <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-triangle-exclamation" style="color: #f2d80f;"></i> {{message}}</div>
+        {% endif %}
+    {% endfor %}
+    <div class="form-register-container">
+        <h2 class="text-center title-2xl p-y-l">Crie sua conta</h2>
+
+        <form action="{{form_action}}" method="post" class='register-form'>
+            {% csrf_token %}
+            <div class="grid-register-form text-s">
+                {% for field in form %}
+                    {% if field.id_for_label == "id_agree_to_terms" %}
+                        <div class="register-item">
+                            <p class="terms_text">Eu li e concordo com as <a href="{% url "periodic_table:privacy_police" %}">Políticas de privacidade</a>, assim como os <a href="{% url "periodic_table:privacy_police" %}#terms-of-use">Termos de Uso do Site</a></p>
+                            {{field}}
+                        </div>
+                    {% else %}
+                        <div class="register-item">
+                            <label class="title-l" for="{{field.id_for_label}}">{{field.label|safe}}</label>
+                            {{field}}
+                            <p class="register-help">{{field.help_text}}</p>
+                            <span class="register-errors">{{field.errors}}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <button class='default-button inside_green medium-button' type="submit">Cadastrar</button>
+            <p class="has-account text-s">Já possui conta? <a class="link" href="{% url "users:login" %}">clique aqui</a> para entrar</p>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

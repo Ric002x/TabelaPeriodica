@@ -1,0 +1,45 @@
+{% extends "global/base.html" %}
+
+{% block title %}Perfil de Usuário{% endblock title %}
+
+{% block content %}
+    <section class='update-profile'>
+        <div class="instructions-form-containter text-s text-white">
+            <h2 class="title-xl">📋 Intruções para atualização:</h2><br>
+            <p>Os campos já iniciam preenchidos com seus dados. Certifique-se de alterar somente os campos desejados.</p>
+            <br><hr><br>
+            <h3 class="title-m">🔧 Em caso de suporte, contate:</h3>
+            <ul class='suport'>
+                <br>
+                <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i>    ricvenicius@gmail.com</li>
+                <li><i class="fa-solid fa-phone" style="color: #ffffff;"></i>    (00) 00000-0000</li>
+            </ul>
+        </div>
+
+        <div class="form-profile-container">
+            <h2 class="text-center p-y-l title-2xl">Atualizar dados</h2>
+            <form class="profile-update-form text-s" action="{{form_action}}" method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+
+                {% for field in user_form %}
+                    <div class="m-y-s">
+                        <label class="title-l text-blue light p-y-s block" for="id_for_label">{{field.label}}</label>
+                        {{field}}
+                    </div>
+                {% endfor %}
+
+                {% for field in profile_form %}
+                    <div class="m-y-m">
+                        <label class="title-l text-blue light p-y-s block" for="id_for_label">{{field.label}}</label>
+                        {{field}}
+                    </div>
+                {% endfor %}
+
+                <p class="text-m p-y-m">Deseja alterar sua senha? <a class="link" href="{% url "users:change_password" %}">Clique aqui!</a></p>
+            
+                <button class='default-button inside_green medium-button' style="width: 100%; margin-top:2rem" type="submit">Salvar alterações</button>
+                <button class='default-button' style="margin: 2rem auto;" type="reset">Resetar</button>
+            </form>
+        </div>
+    </section>
+{% endblock content %}

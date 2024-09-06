@@ -1,0 +1,32 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content %}
+    <section class='login'>
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-circle-check" style="color: #008646;"></i> {{message}}</div>
+            {% elif message.tags == 'error' %}
+                <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-circle-xmark" style="color: #ff2929;"></i> {{message}}</div>
+            {% elif message.tags == 'warning' %}
+                <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-triangle-exclamation" style="color: #f2d80f;"></i> {{message}}</div>
+            {% endif %}
+        {% endfor %}
+        <div class="form-login-container">
+            <h2 class="text-center title-2xl p-y-l">Login</h2>
+            <form action="{{form_action}}" method='POST' class='form-login'>
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="login-item">
+                    <label class="title-l" for="field.id_for_label">{{field.label}}</label>
+                    {{field}}
+                    <span>{{field.errors}}</span>
+                </div>
+                {% endfor %}
+                <button class='default-button inside_green medium-button' type="submit">Entrar</button>
+            </form>
+            <a class="text-center block link text-s" href="{% url "users:register" %}">Criar conta</a>
+        </div>
+    </section>
+{% endblock content %}
+

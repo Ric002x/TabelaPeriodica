@@ -1,0 +1,139 @@
+{% load static %}
+
+{% if user.is_authenticated %}
+    <div class="rating-form_container" id="rating-form_container">
+        <h2 class="title-l text-blue">Faça sua avaliação</h2>
+        <form action="{{rating_form_create_action}}" class="rating-form" method="post">
+            {% csrf_token %}
+            <div class="stars text-s" id="stars">
+                {% for radio in rating_form.rating.field.choices reversed %}
+                    <input type="radio" id="rating_{{forloop.revcounter}}" name="{{ rating_form.rating.name }}" value="{{ radio.0 }}">
+                    <label for="rating_{{ forloop.revcounter }}"><i class="fa-regular fa-star"></i><i class="fa-solid fa-star"></i></label>
+                {% endfor %}
+            </div>
+            <div class="rating-form_comment text-s" id="rating-form_comment">
+                <p id="charCount">0/250 caracteres</p>
+                <textarea name="comment" id="id_comment", rows="10", cols="40", placeholder="Deixe uma descrição da sua avaliação (opcional)" maxlength="250"></textarea>
+            </div>
+            <div id="rating-form_buttons" class="rating-form_buttons">
+                <button type="submit" class="default-button inside_green medium-button" style="display: inline;">Enviar</button>
+                <button class="restart-charcount default-button border_green medium-button"  style="display: inline;" type="reset">Apagar</button>
+            </div>
+            <button class="rating-cancel_button restart-charcount text-s" id="rating-cancel_button" type="reset">x</button>
+        </form>
+    </div>
+
+    <div class="rating-edit-form_container" id="rating-edit-form_container">
+        <h2 class="title-l">Atualize sua avaliação</h2>
+        <form action="{{rating_form_edit_action}}" class="rating-form_edit" method="post">
+            {% csrf_token %}
+            <div class="stars_edit text-s" id="stars_edit">
+                {% for radio in rating_form_edit.rating.field.choices reversed %}
+                    <input type="radio" id="rating_edit_{{forloop.revcounter}}" name="{{ rating_form_edit.rating.name }}" value="{{ radio.0 }}">
+                    <label for="rating_edit_{{ forloop.revcounter }}"><i class="fa-regular fa-star"></i><i class="fa-solid fa-star"></i></label>
+                {% endfor %}
+            </div>
+            <div class="rating-form_edit_comment text-s" id="rating-form_comment">
+                <p id="charCount">0/250 caracteres</p>
+                {% for field in rating_form_edit.comment %}
+                    {{field}}
+                {% endfor %}
+            </div>
+            <div class="rating-form_edit_buttons">
+                <button type="submit" class="default-button inside_green medium-button" style="display: inline;">Atualizar</button>
+                <button id="rating-cancel_edit_form" class="restart-charcount default-button border_green medium-button" style="display: inline;" type="reset">Cancelar</button>
+            </div>
+        </form>
+    </div>
+{% endif %}
+
+{% if user_rating %}
+<div class="user-rating" id="user_rating">
+    <div class="user-rate_infos">
+        {% if user.profile.avatar %}
+            <img class="user-image-medium image-circle" src="{{user_rating.user.profile.avatar.url}}" alt="">
+        {% else %}
+            <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class="user-image-medium image-circle">
+        {% endif %}
+        <div class="text-s">
+            <p class="rate-username">{{user_rating.user}}</p>
+            <p class="user-rating_stars">
+                {% for i in stars_range %}
+                    {% if i <= user_rating.rating %}
+                        <i class="fa-solid fa-star"></i>
+                    {% else %}
+                        <i class="fa-regular fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+    
+    <div class="user-rating_comment text-s">
+        <p>{{user_rating.comment}}</p>
+    </div>
+
+    {% if user_rating.updated_at %}
+        <p class="updated_at text-s">{{user_rating.updated_at|date:"j \d\e F \d\e Y"}} - editado</p>
+    {% else %}
+        <p class="created_at text-s">{{user_rating.created_at|date:"j \d\e F \d\e Y"}}</p>
+    {% endif %}
+
+    <div class="user-rating_options text-s">
+        <p><i class="user-rating_options_show fa-solid fa-ellipsis-vertical" id="user-rating_options_show"></i></p>
+        <ul class="user-rating_options_menu" id="user-rating_options_menu">
+            <li id="button-form_edit">Editar</li>
+            <li>
+                <form action="{% url "learn_lab:activity_rate_delete" activity.slug %}" method="post" id="rating-form_delete">
+                    {% csrf_token %}
+                    <input type="hidden" name="activity_slug" value={{ activity.slug }}>
+                    <button class="text-s" onclick="confimRateDelete(event, 'rating-form_delete')" type="submit" id="rating_delete_button">excluir</button>
+                </form>     
+            </li>        
+        </ul>
+    </div>
+</div>
+{% endif %}
+
+{% if others_ratings %}
+<div class="others-ratings">
+    {% for rating in others_ratings %}
+    <div class="user-rating">
+        <div class="user-rate_infos">
+            {% if user.profile.avatar %}
+                <img class="user-image-medium image-circle" src="{{user_rating.user.profile.avatar.url}}" alt="">
+            {% else %}
+                <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class="user-image-medium image-circle">
+            {% endif %}
+            <div class="text-s">
+                <p class="rate-username">{{ rating.user }}</p>
+                <p class="user-rating_stars">
+                    {% for i in stars_range %}
+                        {% if i <= rating.rating %}
+                            <i class="fa-solid fa-star"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+
+        <div class="user-rating_comment text-s">
+            <p>{{rating.comment}}</p>
+        </div>
+
+        {% if rating.updated_at %}
+            <p class="updated_at text-s">{{rating.updated_at|date:"j \d\e F \d\e Y"}} - editado</p>
+        {% else %}
+            <p class="created_at text-s">{{rating.created_at|date:"j \d\e F \d\e Y"}}</p>
+        {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<hr>
+<div class="no-ratings text-m text-center p-y-m">
+    <h2>Ainda não existem avaliações para essa atividade</h2>
+</div>
+{% endif %}

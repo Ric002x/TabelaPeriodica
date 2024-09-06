@@ -1,0 +1,25 @@
+{% extends "global/base.html" %}
+
+{% block title %}Learn Lab{% endblock title%}
+
+{% block content %}
+
+<section class='activities'>
+    <h1 class="text-center title-2xl p-y-l">Atividades</h1>
+
+    {% include "global/partials/search.html" %} <br>
+
+    {% if activities %}
+        <div class='activities-grid'>
+            {% for activity in activities %}
+                {% include "learn_lab/partials/activity.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2 class="text-center title-2xl m-y-l">Nenhuma atividade encontrada</h2>
+    {% endif %}
+    {% include "global/partials/pagination.html" %}
+</section>
+
+
+{% endblock content %}

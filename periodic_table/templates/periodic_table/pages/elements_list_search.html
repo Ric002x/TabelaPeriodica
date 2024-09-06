@@ -1,0 +1,15 @@
+{% extends "global/base.html" %}
+
+{% block title %}Elementos{% endblock title %}
+
+{% block content %}
+<section class="elements-list">
+    <h1 class="text-center title-2xl p-y-l">Lista de Elementos</h1>
+    {% include "global/partials/search.html" %} <br>
+
+    {% include "periodic_table/partials/element.html" %}
+
+    {% include "global/partials/pagination.html" %}
+</section>
+
+{% endblock content %}

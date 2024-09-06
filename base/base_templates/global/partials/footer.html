@@ -1,0 +1,37 @@
+{% load static %}
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <img src="{% static 'global/assets/main-logo.png' %}" alt="Logo do Projeto" class="footer-logo">
+            <p class="text-s">Conheça o Mundo da Ciências de forma rápida e intuitiva.</p>
+        </div>
+        <div class="footer-section text-s">
+            <h4 class="title-m">Contato</h4>
+            <p><i class="fa-regular fa-envelope"></i> <a href="mailto:seuemail@exemplo.com">ricvenicius@gmail.com</a></p>
+            <p><i class="fa-solid fa-phone"></i> (85) 99102-5632</p>
+            <div class="social-links">
+                <a class="text-s" href="https://www.instagram.com/r_venicius0/" target="_blank"><i class="fa-brands fa-instagram"> </i> Instagram</a>
+                <a class="text-s" href="https://www.linkedin.com/in/ricardo-oliveira-a48516223/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4 class="title-m">Navegação</h4>
+            <ul class="text-s">
+                <li><a href="{% url "periodic_table:table" %}">Tabela Periódica</a></li>
+                <li><a href="{% url "learn_lab:learn_lab_home" %}">Atividades</a></li>
+                <li><a href="{% url "users:register" %}">Junte-se a nós</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4 class="title-m">Políticas</h4>
+            <ul class="text-s" >
+                <li><a href="{% url "periodic_table:privacy_police" %}">Política de Privacidade</a></li>
+                <li><a href="{% url "periodic_table:privacy_police" %}#terms-of-use">Termos de Uso</a></li>
+                <li><a href="{% url "periodic_table:privacy_police" %}#legal-notice">Aviso Legal</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom text-s">
+        <p>&copy; 2024 Mundo da Ciências. Todos os direitos reservados.</p>
+    </div>
+</footer>

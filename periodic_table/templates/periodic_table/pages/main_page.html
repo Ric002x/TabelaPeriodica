@@ -1,0 +1,91 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block title %}Atomic Discoveries{% endblock title %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-introduction animate-on-scroll slide-right">
+            <h1 class="title-4xl bold m-y-m">Conheça o <span class="text-green">Mundo da Ciências</span> de forma rápida e intuitiva.</h1>
+            <p class="text-s m-y-m">
+                Contribua com publicações de atividades, jogos e notícias do mundo da ciências.
+                Interaja com uma Comunidade de Estudantes e Educadores.
+                Explore o Elementos Químicos com apenas um click.
+            </p>
+            <a class="default-button inside_green big-button blink_animation m-y-m text-s" href="{% url "periodic_table:table" %}">Comece a explorar</a>
+        </div>
+        <div class="hero-img-container animate-on-scroll slide-left"><img src="{% static "assets/hero-image.png" %}" alt="Imagem criada por Storyset - https://storyset.com" class='animate-on-scroll slide-left'><a class="text-xs text-white" href="https://storyset.com/medical">Medical illustrations by Storyset</a></div>
+    </section>
+
+
+    <section class='site-content'>
+        <h2 class='text-center title-2xl text-white animate-on-scroll slide-up'>ÁREAS ABORDADAS</h3>
+
+        <div class="subject-section chemistry animate-on-scroll slide-right">
+            <div class="subject-image">
+                <img src="{% static "assets/chemistry.png" %}" alt="Imagem criada por Storyset - https://storyset.com">
+                <a class="text-xs text-white" href="https://storyset.com/education">Education illustrations by Storyset</a>
+            </div>
+            <div class="subject-content">
+                <h3 class="subject-title title-l text-white m-y-m">A <span>Química</span> explora a composição, estrutura, propriedades e mudanças da matéria.</h3>
+                <p class="text-s text-white m-y-m">A Química é a ciência que estuda a composição, estrutura, propriedades e transformações da matéria. Ela explora como átomos e moléculas se combinam e reagem para formar novas substâncias, investigando as interações e ligações químicas que determinam as características dos materiais. Compreender essas propriedades é essencial para desenvolver novos materiais e tecnologias, e para criar medicamentos. A Química, portanto, explica o mundo ao nosso redor e desempenha um papel crucial na inovação tecnológica.</p>
+                <a href="https://pt.wikipedia.org/wiki/Química" class='default-button inside_blue medium-button text-s m-y-m'>Saiba mais sobre química</a>
+            </div>
+        </div>
+
+        <div class="subject-section right animate-on-scroll slide-left">
+                <div class="subject-image right">
+                    <img src="{% static "assets/biology.png" %}" alt="Imagem criada por Storyset - https://storyset.com">
+                    <a class="text-xs text-white" href="https://storyset.com/analysis">Analysis illustrations by Storyset</a>
+                </div>
+                <div class="subject-content right">
+                    <h3 class="subject-title right title-l text-white m-y-m">A <span>Biologia</span> é a ciência que estuda os seres vivos, suas interações e processos vitais.</h3>
+                    <p class="text-s text-white m-y-m">A Biologia é a ciência que se dedica ao estudo dos seres vivos e dos processos que regem sua vida. Ela investiga a estrutura, função, crescimento e evolução dos organismos, além das interações entre eles e seu ambiente. A Biologia busca entender como os seres vivos se adaptam e sobrevivem, explorando desde o nível molecular até os ecossistemas. Essa compreensão é fundamental para avanços em áreas como medicina, conservação ambiental e biotecnologia.</p>
+                    <a href="https://pt.wikipedia.org/wiki/Biologia" class='default-button inside_blue medium-button text-s m-y-m'>Saiba mais sobre biologia</a>
+                </div>
+        </div>
+
+        <div class="subject-section animate-on-scroll slide-right">
+            <div class="subject-image">
+                <img src="{% static "assets/physics.png" %}" alt="Imagem criada por Storyset - https://storyset.com">
+                <a class="text-xs text-white" href="https://storyset.com/business">Business illustrations by Storyset</a>
+            </div>
+            <div class="subject-content">
+                <h3 class="subject-title title-l text-white m-y-m">A <span>Física</span> investiga os princípios fundamentais que governam o universo, desde partículas subatômicas até galáxias.</h3>
+                <p class="text-s text-white m-y-m">A Física explora os princípios básicos que regem o funcionamento do universo, desde as menores partículas subatômicas até as maiores estruturas, como galáxias. Ela busca compreender as leis da natureza e as interações entre diferentes formas de energia e matéria. Ao examinar fenômenos como a gravidade, a eletromagnetismo e a mecânica quântica, a Física fornece uma base para entender o comportamento do cosmos e suas complexidades. Esses conhecimentos são essenciais para o avanço tecnológico e científico, moldando nossa visão do mundo.</p>
+                <a href="https://pt.wikipedia.org/wiki/Física" class='default-button inside_blue medium-button text-s m-y-m'>Saiba mais sobre física</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-us animate-on-scroll slide-right">
+            <h2 class='animate-on-scroll slide-up title-7xl cursive m-y-m'><span class="text-m light">Sobre o</span><br>Atomic Discoveries</h2>
+            <p class="text-s">O Atomic Discoveries é uma plataforma dedicada à disseminação do conhecimento científico, com especial ênfase em química. O site oferece acesso facilitado a informações essenciais sobre a tabela periódica e outros tópicos científicos, tornando-o um recurso valioso tanto para alunos quanto para professores. Navegue por conteúdos confiáveis e contribua para a comunidade educacional ao compartilhar suas próprias atividades. Envolva-se e ajude a enriquecer o aprendizado de outros educadores com materiais práticos e informativos.</p>
+            <img src="{% static "global/assets/logo.png" %}" alt="">
+            <p></p>
+        </div>
+
+        <div class="objectives animate-on-scroll slide-left">
+            <div class="container">
+                <i class="fa-solid fa-book"></i>
+                <p class="text-ss text-white">Buscamos <strong>Facilitar o Acesso ao Conhecimento Científico</strong>, disponibilizando informações claras e acessíveis sobre elementos químicos e conceitos científicos.</p>
+            </div>
+
+            <div class="container">
+                <i class="fa-solid fa-users"></i>
+                <p class="text-ss text-white">Fomentamos a <strong>Colaboração e a Contribuição da Comunidade</strong>, permitindo que usuários compartilhem atividades, experiências e descobertas no campo da ciência.</p>
+            </div>
+
+            <div class="container">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p class="text-ss text-white">Estimulamos a <strong>Criatividade e o Interesse pela Ciência</strong>, oferecerendo recursos e jogos didáticos que tornam o aprendizado divertido e envolvente.</p>
+            </div>
+
+            <div class="container">
+                <i class="fa-solid fa-puzzle-piece"></i>
+                <p class="text-ss text-white"><strong>Promover a Educação Interativa e Prática</strong>: Oferecemos ferramentas e atividades que incentivam a prática e o engajamento ativo dos usuários, criando uma experiência de aprendizado mais eficaz e dinâmica.</p>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
