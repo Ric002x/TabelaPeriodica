@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'INSECURE')
 DEBUG = os.getenv('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS: list[str] = [
-    'atomicdiscoveries.ricardovenicius.com.br', '127.0.0.1']
+    'atomicdiscoveries.ricardovenicius.com.br', '127.0.0.1:8000']
 CSRF_TRUSTED_ORIGINS = [
     'https://atomicdiscoveries.ricardovenicius.com.br'
 ]
@@ -89,12 +89,12 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DATABASE_ENGINE'),
-        'NAME': os.getenv("DATABASE_NAME"),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+        'ENGINE': "django.db.backends.postgresql",
+        'NAME': "basededados",
+        'USER': "usuario",
+        'PASSWORD': "senha",
+        'HOST': "127.0.0.1",
+        'PORT': "5432",
     }
 }
 
