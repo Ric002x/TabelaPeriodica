@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'INSECURE')
-
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = os.getenv('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS: list[str] = [
@@ -89,12 +89,12 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': "django.db.backends.postgresql",
-        'NAME': "basededados",
-        'USER': "usuario",
-        'PASSWORD': "senha",
-        'HOST': "127.0.0.1",
-        'PORT': "5432",
+        'ENGINE': os.getenv('DATABASE_ENGINE'),
+        'NAME': os.getenv("DATABASE_NAME"),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
