@@ -22,8 +22,8 @@ class ActivityLevel(models.Model):
 
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    title = models.CharField(max_length=80, unique=True)
-    slug = models.SlugField(unique=True, max_length=80)
+    title = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(unique=True, max_length=100)
     description = models.TextField()
     file = models.FileField(
         upload_to='learn_lab/files/',
@@ -34,7 +34,7 @@ class Activity(models.Model):
     subject = models.ForeignKey(
         ActivitySubject, on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
-    content = models.CharField(max_length=50)
+    content = models.CharField(max_length=100)
     level = models.ForeignKey(
         ActivityLevel, on_delete=models.SET_NULL,
         blank=True, null=True, default=None)
