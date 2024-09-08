@@ -20,7 +20,7 @@ class TestTableElementPage(TableElementsBaseTest):
     def test_element_view(self):
         view = resolve(reverse("periodic_table:single_element",
                                kwargs=({'slug': 'something'})))
-        self.assertIs(view.func, views.element_detail_view)
+        self.assertIs(view.func.view_class, views.ElementDetailView)
 
     def test_element_status_code_404_if_element_doesnt_exist(self):
         response = self.client.get(reverse("periodic_table:single_element",

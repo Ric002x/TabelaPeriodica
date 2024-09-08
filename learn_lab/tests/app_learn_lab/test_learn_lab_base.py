@@ -1,4 +1,8 @@
+import os
+
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 
@@ -94,7 +98,15 @@ class ActivityMixin:
     def generate_form_activity(self):
         subject = self.create_subject()
         level = self.create_level()
-        pdf_file = self.create_pdf_file()
+        pdf_path = os.path.join(
+            settings.BASE_DIR, 'learn_lab', 'tests', 'app_learn_lab',
+            'files', 'teste.pdf')
+        with open(pdf_path, 'rb') as f:
+            pdf_file = SimpleUploadedFile(
+                'test.pdf',
+                f.read(),
+                content_type='application/pdf'
+            )
         activity_form_data = {
             'title': 'Activity Title',
             'description': 'activity Description',

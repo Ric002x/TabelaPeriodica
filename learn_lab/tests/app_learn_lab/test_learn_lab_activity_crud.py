@@ -18,7 +18,7 @@ class LearnLabAppActivityCreateTests(LearnLabBaseTests):
 
     def tearDown(self) -> None:
         media_root = settings.MEDIA_ROOT
-        arquive_path = f'{media_root}/learn_lab/files/test_file.pdf'
+        arquive_path = f'{media_root}/learn_lab/files/test.pdf'
         if os.path.exists(arquive_path):
             os.remove(arquive_path)
         return super().tearDown()
@@ -67,7 +67,7 @@ class LearnLabAppActivityDeleteTests(LearnLabBaseTests):
 
     def tearDown(self) -> None:
         media_root = settings.MEDIA_ROOT
-        arquive_path = f'{media_root}/learn_lab/files/test_file.pdf'
+        arquive_path = f'{media_root}/learn_lab/files/test.pdf'
         if os.path.exists(arquive_path):
             os.remove(arquive_path)
         return super().tearDown()
@@ -102,7 +102,7 @@ class LearnLabAppActivityUpdateTests(LearnLabBaseTests):
 
     def tearDown(self) -> None:
         media_root = settings.MEDIA_ROOT
-        arquive_path = f'{media_root}/learn_lab/files/test_file.pdf'
+        arquive_path = f'{media_root}/learn_lab/files/test.pdf'
         if os.path.exists(arquive_path):
             os.remove(arquive_path)
         return super().tearDown()

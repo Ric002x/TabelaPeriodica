@@ -1,6 +1,8 @@
-from .test_learn_lab_base import LearnLabBaseTests
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
+
 from learn_lab import views
+
+from .test_learn_lab_base import LearnLabBaseTests
 
 
 class LearnLabListViewTests(LearnLabBaseTests):
@@ -11,11 +13,12 @@ class LearnLabListViewTests(LearnLabBaseTests):
 
     def test_learn_lab_list_view_function(self):
         view = resolve(self.url)
-        self.assertIs(view.func, views.lear_lab_list_view)
+        self.assertIs(view.func.view_class, views.LearnLabListView)
 
     def test_learn_lab_list_view_template(self):
         response = self.client.get(self.url)
-        self.assertTemplateUsed(response, 'learn_lab/pages/learn_lab_home.html')
+        self.assertTemplateUsed(
+            response, 'learn_lab/pages/learn_lab_home.html')
 
     def test_learn_lab_list_view_search_page(self):
         response = self.client.get(

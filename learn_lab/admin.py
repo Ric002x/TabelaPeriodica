@@ -1,12 +1,13 @@
 from django.contrib import admin
-from .models import Activity, ActivityLevel, ActivitySubject, ActivityRating
+
+from .models import Activity, ActivityLevel, ActivityRating, ActivitySubject
 
 # Register your models here.
 
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    fields = ['title', 'slug', 'description',
+    fields = ['title', 'slug', 'description', 'content',
               'file', 'subject', 'level', 'user', 'is_published']
     search_fields = ['title', 'description']
     list_filter = ['created_at', 'subject', 'level', 'is_published']

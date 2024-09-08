@@ -75,7 +75,7 @@
                         {% if user.profile.avatar %}
                             <img class="user-image-small image-circle m-x-s" src="{{activity.user.profile.avatar.url}}" alt="">{{activity.user}}
                         {% else %}
-                            <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class="user-image-small image-circle m-x-s">
+                            <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class="user-image-small image-circle m-x-s">{{activity.user}}
                         {% endif %}
                     </a>
                     <a href="{% url "learn_lab:learn_lab_subject" activity.subject.id %}">{{activity.subject}}</a>

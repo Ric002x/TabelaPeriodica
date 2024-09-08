@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'INSECURE')
 DEBUG = os.getenv('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS: list[str] = [
-    'atomicdiscoveries.ricardovenicius.com.br', '127.0.0.1:8000']
+    'atomicdiscoveries.ricardovenicius.com.br', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = [
     'https://atomicdiscoveries.ricardovenicius.com.br'
 ]

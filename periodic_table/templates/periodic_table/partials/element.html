@@ -1,3 +1,4 @@
+{% if elements %}
 <div class="list-content">
     {% for element in elements %}
     <div class="element-box">
@@ -12,3 +13,6 @@
     </div>
     {% endfor %}
 </div>
+{% else %}
+<h2 class="title-2xl text-center m-y-l">Nenhum elemento encontrado</h2>
+{% endif %}

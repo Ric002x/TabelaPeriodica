@@ -1,94 +1,110 @@
-from django.http import Http404
-from .models import Activity, ActivityRating
-from .forms import ActivityForm, RatingForm
-from django.core.paginator import Paginator
-from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db import IntegrityError
+from django.db.models import Q
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+
+from .forms import ActivityForm, RatingForm
+from .models import Activity, ActivityRating
+
 # Create your views here.
 
 
-def lear_lab_list_view(request):
-    search_term = request.GET.get('q', '').strip()
+class LearnLabListView(ListView):
+    template_name = "learn_lab/pages/learn_lab_home.html"
+    paginate_by = 20
+    model = Activity
+    context_object_name = "activities"
+    ordering = '-id'
 
-    if search_term:
-        activities = Activity.objects.filter(
-            Q(
-                Q(title__icontains=search_term) |
-                Q(description__icontains=search_term)
-            ),
-            is_published=True
-        ).order_by('-id')
-        paginator = Paginator(activities, 20)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
+    def get_queryset(self):
+        search_term = self.request.GET.get('q', '').strip()
+        if search_term:
+            return Activity.objects.filter(
+                Q(
+                    Q(title__icontains=search_term) |
+                    Q(description__icontains=search_term) |
+                    Q(content__icontains=search_term)
+                ),
+                is_published=True,
+            ).order_by('-id')
+        return Activity.objects.filter(is_published=True).order_by('-id')
 
-        return render(
-            request, 'learn_lab/pages/learn_lab_home.html',
-            {'activities': page_obj.object_list, 'page_obj': page_obj,
-             'learn_lab_page': True, 'activity_list_page': True,
-             'placeholder_input': 'Buscar por uma atividade...',
-             'search_term': search_term, 'learn_lab_search_page': True})
-
-    activities = Activity.objects.filter(is_published=True,).order_by('-id')
-
-    paginator = Paginator(activities, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    context = {'activities': page_obj.object_list, 'page_obj': page_obj,
-               'learn_lab_page': True, 'activity_list_page': True,
-               'placeholder_input': 'Buscar por uma atividade...'}
-
-    return render(request, 'learn_lab/pages/learn_lab_home.html', context)
+    def get_context_data(self, **kwargs):
+        search_term = self.request.GET.get('q', '').strip()
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'learn_lab_page': True, 'activity_list_page': True,
+            'placeholder_input': 'Buscar por uma atividade...',
+            'search_term': search_term})
+        if search_term:
+            context['learn_lab_search_page'] = True
+        return context
 
 
-def learn_lab_detail_view(request, slug):
-    # Get the object of selected Activity
-    activity = get_object_or_404(Activity, slug=slug, is_published=True)
+class LearnLabDetailView(DetailView):
+    model = Activity
+    template_name = "learn_lab/pages/learn_lab_activity_detail.html"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    context_object_name = "activity"
 
-    # Get all the rating of select activity.
-    try:  # If a user is logged
-        user_rating = ActivityRating.objects.filter(
-            activity=activity,
-            user=request.user
-        ).first()
-        others_ratings = ActivityRating.objects.filter(
-            activity=activity
-        ).order_by('-id').exclude(user=request.user)
-    except TypeError:  # If a user is not logged
-        user_rating = None
-        others_ratings = ActivityRating.objects.filter(
-            activity=activity
-        ).order_by('-id')
+    def get_object(self, queryset=None):
+        try:
+            activity = Activity.objects.get(
+                slug=self.kwargs.get('slug'),
+                is_published=True)
+        except Activity.DoesNotExist:
+            raise Http404
+        return activity
 
-    # Start the form for user rating
-    rating_form_create = RatingForm()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        activity = self.get_object()
 
-    # Form to edit a rate made by de user
-    rating_form_edit = RatingForm(
-        instance=user_rating,
-    )
+        try:
+            user_rating = ActivityRating.objects.filter(
+                activity=activity,
+                user=self.request.user
+            ).first()
+            others_ratings = ActivityRating.objects.filter(
+                activity=activity
+            ).order_by('-id').exclude(user=self.request.user)
+        except TypeError:  # Se o usuário não estiver logado
+            user_rating = None
+            others_ratings = ActivityRating.objects.filter(
+                activity=activity
+            ).order_by('-id')
 
-    context = {
-        'activity': activity,
-        'activiy_detail_page': True,
-        'rating_form': rating_form_create,
-        'rating_form_create_action': reverse('learn_lab:activity_rate_create',
-                                             kwargs={'slug': activity.slug}),
-        'rating_form_edit_action': reverse('learn_lab:activity_rate_edit',
-                                           kwargs={'slug': activity.slug}),
-        'others_ratings': others_ratings,
-        'user_rating': user_rating,
-        'stars_range': (1, 2, 3, 4, 5,),
-        'rating_form_edit': rating_form_edit,
-    }
+        # Start the form for user rating
+        rating_form_create = RatingForm()
 
-    return render(
-        request, 'learn_lab/pages/learn_lab_activity_detail.html', context)
+        # Form to edit a rate made by de user
+        rating_form_edit = RatingForm(
+            instance=user_rating,
+        )
+
+        context.update({
+            'activity': activity,
+            'activiy_detail_page': True,
+            'rating_form': rating_form_create,
+            'rating_form_create_action': (
+                reverse('learn_lab:activity_rate_create',
+                        kwargs={'slug': activity.slug})),
+            'rating_form_edit_action': (
+                reverse('learn_lab:activity_rate_edit',
+                        kwargs={'slug': activity.slug})),
+            'others_ratings': others_ratings,
+            'user_rating': user_rating,
+            'stars_range': (1, 2, 3, 4, 5,),
+            'rating_form_edit': rating_form_edit,
+        })
+        return context
 
 
 def learn_lab_subject_list_view(request, id=None):
@@ -155,20 +171,19 @@ def activity_create(request, id=None):
             messages.error(request, 'Erro no formulário de atividade')
             return redirect(reverse('learn_lab:activity_create'))
 
-    else:
-        activity = Activity.objects.filter(
-            pk=id,
-            user=request.user
-        ).first()
+    activity = Activity.objects.filter(
+        pk=id,
+        user=request.user
+    ).first()
 
-        form = ActivityForm(
-            instance=activity
-        )
-        return render(
-            request, 'learn_lab/pages/learn_lab_activity_create.html', {
-                'form': form,
-                'form_action': reverse('learn_lab:activity_create')
-            })
+    form = ActivityForm(
+        instance=activity
+    )
+    return render(
+        request, 'learn_lab/pages/learn_lab_activity_create.html', {
+            'form': form,
+            'form_action': reverse('learn_lab:activity_create')
+        })
 
 
 @login_required(login_url='users:login', redirect_field_name='next')

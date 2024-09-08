@@ -131,7 +131,9 @@
         </div>
     {% endfor %}
 </div>
-{% else %}
+{% endif %}
+
+{% if not others_ratings and not user_rating %}
 <hr>
 <div class="no-ratings text-m text-center p-y-m">
     <h2>Ainda não existem avaliações para essa atividade</h2>
