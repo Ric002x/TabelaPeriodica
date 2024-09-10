@@ -84,15 +84,10 @@ def login_create(request):
             messages.success(request, "usuário logado!")
             login(request, authenticated_user)
             return redirect('learn_lab:learn_lab_home')
-        else:
-            messages.error(request, 'erro no login. confira '
-                           'se o usuário ou senha estão corretos')
-            return redirect('users:login')
 
-    else:
-        messages.error(request, 'erro na validação')
-
-    return redirect('learn_lab:learn_lab_home')
+    messages.error(request, 'erro no login. confira '
+                   'se o usuário ou senha estão corretos')
+    return redirect('users:login')
 
 
 @login_required(login_url='users:login', redirect_field_name='next')

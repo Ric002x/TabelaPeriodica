@@ -43,6 +43,10 @@
     gap: var(--spacing-s);
 }
 
+.register-item {
+    position: relative;
+}
+
 .register-item label {
     color: var(--blue1);
     font-weight: 500;
@@ -99,7 +103,7 @@
     margin: var(--spacing-s) 0;
 }
 
-.register-item:has(input[type="checkbox"]) {
+.register-item:has(#id_agree_to_terms) {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -118,6 +122,32 @@
     outline: none;
 }
 
+.see-password {
+    position: absolute;
+    right: 10px;
+    bottom: 55px;
+}
+
+.see-password input {
+    display: none;
+}
+
+.see-password label {
+    padding: 0.2rem 0.3rem;
+    border-radius: 50%;
+    display: inline;
+    color: #888;
+    transition: all 0.2s;
+}
+
+.see-password input:checked ~ label {
+    color: var(--black);
+}
+
+.see-password label:active {
+    background-color: #a8a8a8;
+}
+
 @media screen and (max-width: 770px) {
     .register-item label:has(a) {
         font-size: calc(var(--font-size-s) * 0.75);
@@ -132,4 +162,9 @@
     .register-item label:has(a) {
         font-size: calc(var(--font-size-s) * 0.5);
     }
+
+    .see-password label {
+        font-size: calc(var(--font-size-s) *0.75);
+    }
 }
+

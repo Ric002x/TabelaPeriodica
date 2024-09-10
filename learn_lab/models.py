@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -20,13 +22,19 @@ class ActivityLevel(models.Model):
         return (self.name)
 
 
+def file_upload(instance, filename):
+    filename, ext = os.path.splitext(filename)
+    filename = slugify(filename)
+    return f'learn_lab/files/{filename}{ext}'
+
+
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True, max_length=100)
     description = models.TextField()
     file = models.FileField(
-        upload_to='learn_lab/files/',
+        upload_to=file_upload,
         blank=True,
         null=True,
         default=None,
@@ -50,10 +58,9 @@ class Activity(models.Model):
                        kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            slug = slugify(self.title)
-            str(slug)
-            self.slug = slug
+        slug = slugify(self.title)
+        str(slug)
+        self.slug = slug
         super().save(*args, **kwargs)
 
 

@@ -20,6 +20,12 @@
                 <div class="login-item">
                     <label class="title-l" for="field.id_for_label">{{field.label}}</label>
                     {{field}}
+                    {% if field.id_for_label == "id_password" %}
+                        <div class="see-password">
+                            <input type="checkbox" name="see-password" id="see-password">
+                            <label for="see-password"><i onclick="passwordShow()" class="fa-regular fa-eye"></i></label>
+                        </div>
+                    {% endif %}
                     <span>{{field.errors}}</span>
                 </div>
                 {% endfor %}

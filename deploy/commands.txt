@@ -1,0 +1,2 @@
+# Puxar commits pelo servidor e atualizar
+ssh tabela-periodica 'cd ~/app_repo ; git pull origin main ; sudo systemctl restart tabela_periodica'

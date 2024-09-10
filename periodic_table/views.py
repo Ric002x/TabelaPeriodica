@@ -1,7 +1,10 @@
+
 from typing import Any
 
 from django.db.models import Q
-from django.http import Http404
+from django.forms import model_to_dict
+from django.http import Http404, JsonResponse
+from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -57,6 +60,38 @@ class ElementsListView(ListView):
         return context
 
 
+class ElementsListViewApi(ElementsListView):
+    def render_to_response(self, context, **response_kwargs):
+        elements = self.get_context_data()['elements']
+        elements_list = [{
+            'id': element.id,
+            'name': element.name,
+            "symbol": element.symbol,
+            "description": element.description,
+            "atomic_number": element.atomic_number,
+            "atomic_mass": element.atomic_mass,
+            "electrons_number": element.electrons_number,
+            "neutrons_number": element.neutrons_number,
+            "density": element.density,
+            "melting_point": element.melting_point,
+            "boiling_point": element.boiling_point,
+            "state_matter": element.state_matter,
+            "electronic_configuration": element.electronic_configuration,
+            "electron_distribution": element.electron_distribution,
+            "ionic_states": element.ionic_states,
+            "history_and_discovery": element.history_and_discovery,
+            "chemical_properties": element.chemical_properties,
+            "usage": element.usage,
+            "extra_information": element.extra_information,
+        }
+            for element in elements
+        ]
+        return JsonResponse(
+            elements_list,
+            safe=False
+        )
+
+
 class ElementDetailView(DetailView):
     model = Element
     template_name = 'periodic_table/pages/single_element.html'
@@ -71,7 +106,7 @@ class ElementDetailView(DetailView):
             raise Http404
         return element
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         element = self.get_object()
 
@@ -89,6 +124,20 @@ class ElementDetailView(DetailView):
             'prev_element': prev_element,
         })
         return context
+
+
+class ElementDetailViewApi(ElementDetailView):
+    def render_to_response(self, context, **response_kwargs):
+        element = self.get_context_data()['element']
+        element_dict = model_to_dict(element)
+
+        del element_dict['cover_image']
+        del element_dict['bohr_model']
+
+        return JsonResponse(
+            element_dict,
+            safe=False
+        )
 
 
 def privacy_police_view(request):

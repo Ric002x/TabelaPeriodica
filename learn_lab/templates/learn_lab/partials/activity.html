@@ -9,9 +9,9 @@
         </div>
         <div class="activity-description">
             <h2 class="activity-title"><a href="{{activity.get_absolute_url}}">{{activity.title}}</a></h2>
-            <a class="activity-subject" href="{% url "learn_lab:learn_lab_subject" activity.subject.id %}">{{activity.subject}} - {{activity.content}}</a>
+            <a class="activity-subject" href="{% url "learn_lab:learn_lab_subject" activity.subject.name %}">{{activity.subject}} - {{activity.content}}</a>
             <ul class="activity-infos">
-                <li><a href="{% url "learn_lab:learn_lab_level" activity.level.id %}"><i class="fa-solid fa-puzzle-piece"></i>{{activity.level}}</a></li>
+                <li><a href="{% url "learn_lab:learn_lab_level" activity.level.name %}"><i class="fa-solid fa-puzzle-piece"></i>{{activity.level}}</a></li>
                 <li><a href=""><i class="fa-solid fa-user-pen"></i>{{activity.user}}</a></li>
             </ul>   
         </div>

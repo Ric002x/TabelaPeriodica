@@ -30,6 +30,12 @@
                         <div class="register-item">
                             <label class="title-l" for="{{field.id_for_label}}">{{field.label|safe}}</label>
                             {{field}}
+                            {% if field.id_for_label == "id_password" %}
+                                <div class="see-password">
+                                    <input type="checkbox" name="see-password" id="see-password">
+                                    <label for="see-password"><i onclick="passwordShow()" class="fa-regular fa-eye"></i></label>
+                                </div>
+                            {% endif %}
                             <p class="register-help">{{field.help_text}}</p>
                             <span class="register-errors">{{field.errors}}</span>
                         </div>

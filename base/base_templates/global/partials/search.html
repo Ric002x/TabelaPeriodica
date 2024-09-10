@@ -1,12 +1,5 @@
 <div class="search-camp">
-    {% if element_page %}
-        <form action="{% url "periodic_table:search_element" %}" class='search-form'>
-    {% endif %}
-
-    {% if learn_lab_page %}
-        <form action="{% url "learn_lab:learn_lab_activity_search" %}" class='search-form'>
-    {% endif %}
-
+    <form action="{{form_search}}" class='search-form'>
         <input type="search" name="q" class='search-input' value="{{search_term}}"
             placeholder="{{placeholder_input}}" required>
         <button type='submit' class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -18,5 +11,4 @@
     {% if  learn_lab_search_page %}
         <a href="{% url "learn_lab:learn_lab_home" %}" class="link">&laquo; Voltar</a>
     {% endif %}
-    
 </div>

@@ -55,6 +55,11 @@
     text-transform: capitalize;
     font-size: var(--font-size-ss);
     font-weight: 500;
+    transition: all 0.2s;
+}
+
+.activity-subject:active {
+    transform: scale(0.95);
 }
 
 .activity-infos a,
@@ -67,6 +72,17 @@
     margin-bottom: var(--spacing-ss);
     color: black;
     font-size: var(--font-size-ss);
+    transition: all 0.2s;
+}
+
+.activity-infos li:hover {
+    color: var(--blue1);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.activity-infos li:active {
+    transform: scale(0.95);
 }
 
 .activity-infos li a i {

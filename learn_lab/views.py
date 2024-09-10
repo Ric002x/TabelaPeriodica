@@ -1,16 +1,19 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.db.models import Q
-from django.http import Http404
+from django.forms import model_to_dict
+from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 
 from .forms import ActivityForm, RatingForm
-from .models import Activity, ActivityRating
+from .models import Activity, ActivityLevel, ActivityRating, ActivitySubject
 
 # Create your views here.
 
@@ -22,18 +25,22 @@ class LearnLabListView(ListView):
     context_object_name = "activities"
     ordering = '-id'
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         search_term = self.request.GET.get('q', '').strip()
+        qs = Activity.objects.filter(
+            is_published=True,
+        ).order_by('-id').select_related('user', 'level', 'subject')
         if search_term:
-            return Activity.objects.filter(
+            qs_search = qs.filter(
                 Q(
                     Q(title__icontains=search_term) |
                     Q(description__icontains=search_term) |
                     Q(content__icontains=search_term)
                 ),
                 is_published=True,
-            ).order_by('-id')
-        return Activity.objects.filter(is_published=True).order_by('-id')
+            ).order_by('-id').select_related('user', 'level', 'subject')
+            return qs_search
+        return qs
 
     def get_context_data(self, **kwargs):
         search_term = self.request.GET.get('q', '').strip()
@@ -41,10 +48,34 @@ class LearnLabListView(ListView):
         context.update({
             'learn_lab_page': True, 'activity_list_page': True,
             'placeholder_input': 'Buscar por uma atividade...',
-            'search_term': search_term})
+            'form_search': reverse('learn_lab:learn_lab_activity_search'),
+        })
         if search_term:
+            context['search_term'] = search_term
             context['learn_lab_search_page'] = True
         return context
+
+
+class LearnLabListViewApi(LearnLabListView):
+    def render_to_response(self, context, **response_kwargs):
+        activities = self.get_context_data()['activities']
+        activities_list = [
+            {
+                "id": activity.id,
+                "title": activity.title,
+                "description": activity.description,
+                "content": activity.content,
+                'level': ActivityLevel.objects.get(name=activity.level).name,
+                'subjects': ActivitySubject.objects.get(
+                    name=activity.subject).name,
+            }
+            for activity in activities
+        ]
+
+        return JsonResponse(
+            activities_list,
+            safe=False
+        )
 
 
 class LearnLabDetailView(DetailView):
@@ -107,28 +138,51 @@ class LearnLabDetailView(DetailView):
         return context
 
 
-def learn_lab_subject_list_view(request, id=None):
-    if id:
-        activities = Activity.objects.filter(
+class LearnLabDetailViewApi(LearnLabDetailView):
+    def render_to_response(self, context, **response_kwargs):
+        activity = self.get_context_data()['activity']
+        activity_dict = model_to_dict(activity)
+
+        engine = os.getenv("DATABASE_ENGINE")
+
+        if activity_dict.get('file'):
+            if engine == "django.db.backends.sqlite3":
+                activity_dict['file'] = "http://127.0.1:8000" + \
+                    activity_dict['file'].url
+
+            elif engine == "django.db.backends.postgresql":
+                activity_dict['file'] = (
+                    "https://atomicdiscoveries.ricardovenicius.com.br") + \
+                    activity_dict['file'].url
+        else:
+            activity_dict['file'] = ""
+
+        activity_dict['level'] = ActivityLevel.objects.get(
+            name=activity.level).name
+
+        activity_dict['subject'] = ActivitySubject.objects.get(
+            name=activity.subject).name
+
+        del activity_dict['is_published']
+
+        return JsonResponse(
+            activity_dict,
+            safe=False
+        )
+
+
+class LearnLabSubjectListView(LearnLabListView):
+    def get_queryset(self, *args, **kwargs):
+        subject_request = self.kwargs.get('subject')
+        try:
+            subject_query = ActivitySubject.objects.get(name=subject_request)
+        except ActivitySubject.DoesNotExist:
+            raise Http404
+        subject_list = Activity.objects.filter(
+            subject=subject_query,
             is_published=True,
-            subject_id=id
-        ).order_by('-id')
-    if not activities:
-        raise Http404
-
-    paginator = Paginator(activities, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    context = {
-        'activities': page_obj.object_list,
-        'page_obj': page_obj,
-        'learn_lab_page': True,
-        'activity_list_page': True,
-        'placeholder_input': 'Buscar por uma atividade...',
-    }
-
-    return render(request, 'learn_lab/pages/learn_lab_home.html', context)
+        ).order_by('-id').select_related('user', 'level', 'subject')
+        return subject_list
 
 
 def learn_lab_level_list_view(request, id=None):
@@ -155,7 +209,7 @@ def learn_lab_level_list_view(request, id=None):
     return render(request, 'learn_lab/pages/learn_lab_home.html', context)
 
 
-@login_required(login_url='users:login', redirect_field_name='next')
+@ login_required(login_url='users:login', redirect_field_name='next')
 def activity_create(request, id=None):
     if request.method == 'POST':
         form = ActivityForm(
@@ -186,7 +240,7 @@ def activity_create(request, id=None):
         })
 
 
-@login_required(login_url='users:login', redirect_field_name='next')
+@ login_required(login_url='users:login', redirect_field_name='next')
 def activity_delete(request, slug):
     if request.method == 'POST':
         activity = get_object_or_404(
@@ -198,7 +252,7 @@ def activity_delete(request, slug):
         raise Http404
 
 
-@login_required(login_url='users:login', redirect_field_name='next')
+@ login_required(login_url='users:login', redirect_field_name='next')
 def activity_update(request, slug=None):
     activity = Activity.objects.filter(
         user=request.user,
@@ -239,7 +293,7 @@ def activity_update(request, slug=None):
                   })
 
 
-@login_required(login_url='users:login', redirect_field_name='next')
+@ login_required(login_url='users:login', redirect_field_name='next')
 def rating_create(request, slug):
     if request.method == 'POST':
         try:
