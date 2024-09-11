@@ -102,7 +102,7 @@ def profile_user_data(request):
 def profile_user_posts(request):
     activities = Activity.objects.filter(
         user=request.user,
-    ).order_by('is_published')
+    ).order_by('is_published').select_related('level', 'subject')
 
     paginator = Paginator(activities, 9)
 
@@ -110,7 +110,7 @@ def profile_user_posts(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'users/pages/profile.html', context={
-        'activities': activities,
+        'activities': page_obj.object_list,
         'profile_user_posts': True,
         'page_obj': page_obj,
     })

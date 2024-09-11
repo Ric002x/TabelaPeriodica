@@ -27,8 +27,8 @@ subject_list = [
     'Física',
     'Biologia'
 ]
-file_path = os.path.join(settings.BASE_DIR, 'learn_lab',
-                         'tests', 'app_learn_lab', 'files', 'teste.pdf')
+file_path = os.path.join(settings.MEDIA_ROOT, 'learn_lab',
+                         'files', 'teste.pdf')
 
 
 class Command(BaseCommand):

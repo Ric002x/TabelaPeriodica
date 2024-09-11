@@ -12,7 +12,7 @@ from learn_lab.models import Activity, ActivityLevel, ActivitySubject
 class ActivityMixin:
     def create_subject(self, name='Ciências'):
         subject = ActivitySubject.objects.create(
-            name=name
+            name=name,
         )
         subject.full_clean()
         subject.save()
@@ -20,7 +20,7 @@ class ActivityMixin:
 
     def create_level(self, name='9º ano EF'):
         level = ActivityLevel.objects.create(
-            name=name
+            name=name,
         )
         level.full_clean()
         level.save()
@@ -55,6 +55,7 @@ class ActivityMixin:
         content='Activity content',
         level_data=None,
         is_published=True,
+        file=None,
     ):
         if user_data is None:
             user_data = {}
@@ -71,6 +72,7 @@ class ActivityMixin:
             title=title,
             description=description,
             is_published=is_published,
+            file=file,
         )
         activity.full_clean()
         activity.save()
@@ -96,8 +98,6 @@ class ActivityMixin:
         return login_form_data
 
     def generate_form_activity(self):
-        subject = self.create_subject()
-        level = self.create_level()
         pdf_path = os.path.join(
             settings.BASE_DIR, 'learn_lab', 'tests', 'app_learn_lab',
             'files', 'teste.pdf')
@@ -110,11 +110,20 @@ class ActivityMixin:
         activity_form_data = {
             'title': 'Activity Title',
             'description': 'activity Description',
-            'subject': subject.id,
             'content': 'Activity content',
-            'level': level.id,
             'file': pdf_file,
         }
+        if len(ActivitySubject.objects.all()) == 0:
+            subject = self.create_subject()
+            activity_form_data['subject'] = subject.id
+        else:
+            pass
+        if len(ActivityLevel.objects.all()) == 0:
+            level = self.create_level()
+            activity_form_data['level'] = level.id
+        else:
+            pass
+
         return activity_form_data
 
     def execute_register(self):

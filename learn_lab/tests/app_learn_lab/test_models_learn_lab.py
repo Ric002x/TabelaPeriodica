@@ -1,21 +1,20 @@
-from .test_learn_lab_base import LearnLabBaseTests
 from django.urls import reverse
+
+from .test_learn_lab_base import LearnLabBaseTests
 
 
 class LearnLabModelsTests(LearnLabBaseTests):
     def setUp(self) -> None:
-        self.subject = self.create_subject()
-        self.level = self.create_level()
         self.activity = self.activity_create()
         return super().setUp()
 
     def test_subject_str(self):
-        self.subject.name = "Testsujbect"
-        self.assertEqual('Testsujbect', str(self.subject))
+        self.activity.subject.name = "Testsujbect"
+        self.assertEqual('Testsujbect', str(self.activity.subject))
 
     def test_level_str(self):
-        self.level.name = "Testlevel"
-        self.assertEqual('Testlevel', str(self.level))
+        self.activity.level.name = "Testlevel"
+        self.assertEqual('Testlevel', str(self.activity.level))
 
     def test_activity_str(self):
         self.activity.title = "TestActivity"

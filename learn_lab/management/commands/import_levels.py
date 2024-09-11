@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
-from learn_lab.models import ActivityLevel
 from django.db import transaction
+
+from learn_lab.models import ActivityLevel
 
 
 class Command(BaseCommand):
@@ -27,7 +28,8 @@ class Command(BaseCommand):
 
                 for level_name in level_list:
                     if level_name not in existing_levels:
-                        level_name = ActivityLevel(name=level_name)
+                        level_name = ActivityLevel(
+                            name=level_name)
                         levels_to_create.append(level_name)
 
                 if levels_to_create:

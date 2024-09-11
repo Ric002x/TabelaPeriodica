@@ -2,7 +2,6 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.db.models import Q
 from django.forms import model_to_dict
@@ -173,9 +172,9 @@ class LearnLabDetailViewApi(LearnLabDetailView):
 
 class LearnLabSubjectListView(LearnLabListView):
     def get_queryset(self, *args, **kwargs):
-        subject_request = self.kwargs.get('subject')
+        subject = self.kwargs.get('subject')
         try:
-            subject_query = ActivitySubject.objects.get(name=subject_request)
+            subject_query = ActivitySubject.objects.get(name=subject)
         except ActivitySubject.DoesNotExist:
             raise Http404
         subject_list = Activity.objects.filter(
@@ -185,28 +184,18 @@ class LearnLabSubjectListView(LearnLabListView):
         return subject_list
 
 
-def learn_lab_level_list_view(request, id=None):
-    if id:
-        activities = Activity.objects.filter(
+class LearnLabLevelListView(LearnLabListView):
+    def get_queryset(self, *args, **kwargs):
+        level = self.kwargs.get('level')
+        try:
+            level_query = ActivityLevel.objects.get(name=level)
+        except ActivityLevel.DoesNotExist:
+            raise Http404
+        level_list = Activity.objects.filter(
+            level=level_query,
             is_published=True,
-            level_id=id
-        ).order_by('-id')
-    if not activities:
-        raise Http404
-
-    paginator = Paginator(activities, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    context = {
-        'activities': page_obj.object_list,
-        'page_obj': page_obj,
-        'learn_lab_page': True,
-        'activity_list_page': True,
-        'placeholder_input': 'Buscar por uma atividade...',
-    }
-
-    return render(request, 'learn_lab/pages/learn_lab_home.html', context)
+        ).order_by('-id').select_related('user', 'level', 'subject')
+        return level_list
 
 
 @ login_required(login_url='users:login', redirect_field_name='next')

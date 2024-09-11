@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
-from learn_lab.models import ActivitySubject
 from django.db import transaction
+
+from learn_lab.models import ActivitySubject
 
 
 class Command(BaseCommand):
@@ -22,7 +23,8 @@ class Command(BaseCommand):
 
                 for subject_name in subject_list:
                     if subject_name not in existing_subjects:
-                        subject_name = ActivitySubject(name=subject_name)
+                        subject_name = ActivitySubject(
+                            name=subject_name)
                         subjects_to_create.append(subject_name)
 
                 if subjects_to_create:

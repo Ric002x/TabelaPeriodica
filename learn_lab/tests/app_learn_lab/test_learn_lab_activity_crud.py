@@ -122,9 +122,8 @@ class LearnLabAppActivityUpdateTests(LearnLabBaseTests):
         self.assertEqual(response.status_code, 404)
 
     def test_activity_update_form_instance(self):
-        activity_form_data = self.generate_form_activity()
         response = self.client.get(self.url_activity_update)
-        self.assertIn(activity_form_data['title'],
+        self.assertIn('Activity Title',
                       response.content.decode('utf-8'))
 
     def test_activity_update_invalid_form(self):
@@ -139,6 +138,8 @@ class LearnLabAppActivityUpdateTests(LearnLabBaseTests):
     def test_activity_update_form_sussessful(self):
         activity_form_data = self.generate_form_activity()
         activity_form_data['title'] = "NewTitle"
+        activity_form_data['subject'] = self.activity.subject.id
+        activity_form_data['level'] = self.activity.level.id
         response = self.client.post(
             self.url_activity_update, data=activity_form_data, follow=True)
         msg = "Atividade atualizada!"

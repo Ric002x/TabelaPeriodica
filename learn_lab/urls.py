@@ -11,11 +11,11 @@ urlpatterns = [
     path('api/atividades', views.LearnLabListViewApi.as_view(),
          name='activities_api'),
 
-    path('matéria/<str:subject>',
+    path('materia/<str:subject>',
          views.LearnLabSubjectListView.as_view(), name='learn_lab_subject'),
 
-    path('level/<int:id>',
-         views.learn_lab_level_list_view, name='learn_lab_level'),
+    path('turma/<str:level>',
+         views.LearnLabLevelListView.as_view(), name='learn_lab_level'),
 
     path('atividade/buscar/',
          views.LearnLabListView.as_view(),
