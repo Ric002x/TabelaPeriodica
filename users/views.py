@@ -3,9 +3,10 @@ from django.contrib.auth import (authenticate, login, logout,
                                  update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from learn_lab.models import Activity
@@ -18,7 +19,9 @@ from .forms import LoginForm, RegisterForm, UpdateProfileForm, UpdateUserForm
 def register_view(request):
     if request.user.is_authenticated:
         messages.warning(request, 'usuário já logado')
-        return redirect('users:profile_data')
+        return redirect(reverse(
+            'users:profile_posts',
+            kwargs={'username': request.user}))
 
     register_form_data = request.session.get('register_form_data', None)
     form = RegisterForm(register_form_data)
@@ -59,7 +62,9 @@ def register_create(request):
 def login_view(request):
     if request.user.is_authenticated:
         messages.warning(request, 'usuário já logado')
-        return redirect('users:profile_data')
+        return redirect(reverse(
+            'users:profile_posts',
+            kwargs={'username': request.user}))
 
     form = LoginForm()
     return render(request, 'users/pages/login.html', context={
@@ -91,29 +96,52 @@ def login_create(request):
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
-def profile_user_data(request):
+def profile_user_data(request, username):
+    try:
+        profile_user = get_object_or_404(User, username=username)
+    except User.DoesNotExist:
+        raise Http404
 
-    return render(request, 'users/pages/profile.html', context={
-        'profile_user_data': True
-    })
+    if profile_user == request.user:
+        return render(request, 'users/pages/profile.html', context={
+            'profile_user_data': True,
+            'profile_user': profile_user
+        })
+    else:
+        messages.error(
+            request, "Ainda não está disponível a \
+                visualização de outro perfil")
+        return redirect(reverse('periodic_table:home'))
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
-def profile_user_posts(request):
-    activities = Activity.objects.filter(
-        user=request.user,
-    ).order_by('is_published').select_related('level', 'subject')
+def profile_user_posts(request, username):
+    try:
+        profile_user = get_object_or_404(User, username=username)
+    except User.DoesNotExist:
+        raise Http404
 
-    paginator = Paginator(activities, 9)
+    if profile_user == request.user:
+        activities = Activity.objects.filter(
+            user=profile_user,
+        ).order_by('is_published').select_related('level', 'subject')
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+        paginator = Paginator(activities, 9)
 
-    return render(request, 'users/pages/profile.html', context={
-        'activities': page_obj.object_list,
-        'profile_user_posts': True,
-        'page_obj': page_obj,
-    })
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'users/pages/profile.html', context={
+            'activities': page_obj.object_list,
+            'profile_user_posts': True,
+            'page_obj': page_obj,
+            'profile_user': profile_user,
+        })
+    else:
+        messages.error(
+            request, "Ainda não está disponível a \
+                visualização de outro perfil")
+        return redirect(reverse('periodic_table:home'))
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
@@ -126,7 +154,9 @@ def perfil_update(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'perfil atualizado com sucesso!')
-            return redirect('users:profile_data')
+            return redirect(
+                reverse('users:profile_data',
+                        kwargs={'username': request.user}))
         else:
             messages.error(request, 'opa! verifique se você'
                            ' preencheu corretamente os campos')
@@ -167,7 +197,9 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)
             messages.success(request, 'Senha alterada com sucesso!')
-            return redirect(reverse('users:profile_data'))
+            return redirect(reverse(
+                'users:profile_posts',
+                kwargs={'username': request.user}))
         else:
             messages.error(request, 'Erro no formulário')
             redirect(reverse('users:change_password'))

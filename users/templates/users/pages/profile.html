@@ -15,8 +15,8 @@
             {% endif %}
             <nav>
                 <ul>
-                    <li><a href="{% url "users:profile_data" %}" class="{% if profile_user_data %}active{% endif %}"><i class="fa-solid fa-user section-icon" style="color: #ffffff;"></i><span>Dados do Usuário</span></a></li>
-                    <li><a href="{% url "users:profile_posts" %}" class="{% if profile_user_posts %}active{% endif %}"><i class="fa-solid fa-pen-nib section-icon" style="color: #ffffff;"></i><span>Publicações</span></a></li>
+                    <li><a href="{% url "users:profile_data" request.user %}" class="{% if profile_user_data %}active{% endif %}"><i class="fa-solid fa-user section-icon" style="color: #ffffff;"></i><span>Dados do Usuário</span></a></li>
+                    <li><a href="{% url "users:profile_posts" request.user %}" class="{% if profile_user_posts %}active{% endif %}"><i class="fa-solid fa-pen-nib section-icon" style="color: #ffffff;"></i><span>Publicações</span></a></li>
                 </ul>
             </nav>
         </div>

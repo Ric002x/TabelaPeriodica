@@ -1,11 +1,15 @@
-from .test_app_users_base import TestBaseUsersApp
+from django.urls import resolve, reverse
+
 from users import views
-from django.urls import reverse, resolve
+
+from .test_app_users_base import TestBaseUsersApp
 
 
 class UsersAppProfilePageTests(TestBaseUsersApp):
     def setUp(self) -> None:
-        self.url_profile = reverse('users:profile_data')
+        self.url_profile = reverse(
+            'users:profile_data',
+            kwargs={'username': 'something'})
         self.url_profile_update = reverse('users:profile_update')
         self.execute_register()
         return super().setUp()
@@ -20,7 +24,10 @@ class UsersAppProfilePageTests(TestBaseUsersApp):
 
     def test_profile_template_used(self):
         self.execute_login()
-        response = self.client.get(self.url_profile)
+        user_data = self.generate_form_login()
+        response = self.client.get(reverse(
+            'users:profile_data',
+            kwargs={'username': user_data['username']}))
         self.assertTemplateUsed(response, 'users/pages/profile.html')
 
 

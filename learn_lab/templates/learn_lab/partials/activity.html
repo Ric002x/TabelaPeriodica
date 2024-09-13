@@ -78,7 +78,7 @@
                             <img src="{% static "assets/default_img_users.png" %}" alt="Defaltu User Image" class="user-image-small image-circle m-x-s">{{activity.user}}
                         {% endif %}
                     </a>
-                    <a href="{% url "learn_lab:learn_lab_subject" activity.subject.id %}">{{activity.subject}}</a>
+                    <a href="{% url "learn_lab:learn_lab_subject" activity.subject %}">{{activity.subject}}</a>
                 </div>
             </div>
             <hr> <br>

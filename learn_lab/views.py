@@ -209,7 +209,8 @@ def activity_create(request, id=None):
             activity.user = request.user
             activity.save()
             messages.success(request, 'Atividade criada!')
-            return redirect('users:profile_posts')
+            return redirect(reverse('users:profile_posts',
+                            kwargs={'username': request.user}))
         else:
             messages.error(request, 'Erro no formulário de atividade')
             return redirect(reverse('learn_lab:activity_create'))
@@ -236,7 +237,9 @@ def activity_delete(request, slug):
             Activity, slug=slug, user=request.user)
         activity.delete()
         messages.success(request, '✅ Atividade deletada com sucesso')
-        return redirect('users:profile_posts')
+        return redirect(reverse(
+            'users:profile_posts',
+            kwargs={'username': request.user}))
     else:
         raise Http404
 

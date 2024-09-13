@@ -17,7 +17,7 @@
             {% endfor %}
             <button class="default-button inside_green medium-button" style="width: 100%;" type="submit">Atualizar</button>
         </form>
-        <a class="text-s link block text-center p-y-m" href="{% url "users:profile_posts" %}"><< Voltar</a>
+        <a class="text-s link block text-center p-y-m" href="{% url "users:profile_posts" request.user %}"><< Voltar</a>
     </div>
 </section>
 

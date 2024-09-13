@@ -143,7 +143,7 @@
         border: none;
         box-shadow: none;
         width: 90%;
-        margin: var(--spacing-l) auto;
+        margin: 100px auto 64px auto;
     }
     .element-img {
         width: 30vw;
@@ -180,6 +180,17 @@
     width: 30rem;
     margin: 0 auto;
     display: block;
+}
+
+@media screen and (max-width: 500px) {
+    .element-not-ready {
+        flex-direction: column-reverse;
+    }
+
+    .element-not-ready img {
+        width: 50%;
+        margin: 0 auto;
+    }
 }
 
 

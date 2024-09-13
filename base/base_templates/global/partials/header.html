@@ -58,8 +58,8 @@
                     <div class="user-options" id="dropdown-user-menu">
                     <hr>
                         <ul class="menu-options">
-                            <li><a class="link-user text-black text-s" href="{% url "users:profile_data" %}"><i class="fa-solid fa-user" style="color: #008646;"></i>Perfil do usuário</a></li>
-                            <li><a class="link-user text-black text-s" href="{% url "users:profile_posts" %}"><i class="fa-solid fa-file-arrow-up" style="color: #008646;"></i>Suas publicações</a></li>
+                            <li><a class="link-user text-black text-s" href="{% url "users:profile_data" request.user %}"><i class="fa-solid fa-user" style="color: #008646;"></i>Perfil do usuário</a></li>
+                            <li><a class="link-user text-black text-s" href="{% url "users:profile_posts" request.user %}"><i class="fa-solid fa-file-arrow-up" style="color: #008646;"></i>Suas publicações</a></li>
                             <li>
                                 <form action="{% url "users:logout" %}" method="POST" id="form-logout">
                                     {% csrf_token %}
