@@ -90,6 +90,8 @@
             </ul>
             {% if activity.file %}
                 <a href="{{activity.file.url}}" download class="default-button border_green medium-button" style="margin: 2rem 0;"><i class="fa-solid fa-file-arrow-down"></i>Baixar</a>
+            {% else %}
+                <a class="default-button border_green medium-button" style="margin: 2rem 0;"><i class="fa-solid fa-file-arrow-down"></i>Baixar</a>
             {% endif %}
         </div>
         <div class="activity-detail-file">
