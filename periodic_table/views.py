@@ -1,10 +1,6 @@
-
-from typing import Any
-
 from django.db.models import Q
 from django.forms import model_to_dict
 from django.http import Http404, JsonResponse
-from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
