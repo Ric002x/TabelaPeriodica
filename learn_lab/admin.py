@@ -25,5 +25,5 @@ class ActivityLevelAdmin(admin.ModelAdmin):
 
 @admin.register(ActivityRating)
 class ActivityRatingAdmin(admin.ModelAdmin):
-    fields = ['rating', 'comment', 'created_at', 'updated_at']
+    fields = ['rating', 'comment']
     list_display = ['activity', 'user', 'rating', 'created_at', 'updated_at']
