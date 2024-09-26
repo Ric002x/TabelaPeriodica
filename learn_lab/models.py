@@ -1,4 +1,6 @@
 import os
+import random
+import string
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -30,14 +32,13 @@ def file_upload(instance, filename):
 
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, max_length=100)
     description = models.TextField()
     file = models.FileField(
         upload_to=file_upload,
         blank=True,
-        null=True,
-        default=None,
+        default='',
     )
     subject = models.ForeignKey(
         ActivitySubject, on_delete=models.SET_NULL,
@@ -58,10 +59,12 @@ class Activity(models.Model):
                        kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
-        slug = slugify(self.title)
-        str(slug)
-        self.slug = slug
-        super().save(*args, **kwargs)
+        if not self.slug:
+            random_string = ''.join(random.choices(string.ascii_letters, k=5))
+            slug = slugify(f'{self.title}-{random_string}')
+            str(slug)
+            self.slug = slug
+        return super().save(*args, **kwargs)
 
 
 class ActivityRating(models.Model):
