@@ -1,5 +1,7 @@
 from django import forms
+
 from ..models import Activity, ActivityLevel, ActivitySubject
+from ..validators import ActivityValidator
 
 
 class ActivityForm(forms.ModelForm):
@@ -79,3 +81,8 @@ class ActivityForm(forms.ModelForm):
 
         fields = ['title', 'description', 'content',
                   'level', 'subject', 'file']
+
+    def clean(self, *args, **kwargs):
+        super_clean = super().clean(*args, **kwargs)
+        ActivityValidator(data=self.cleaned_data)
+        return super_clean

@@ -11,6 +11,8 @@ class ActivityAdmin(admin.ModelAdmin):
               'file', 'subject', 'level', 'user', 'is_published']
     search_fields = ['title', 'description']
     list_filter = ['created_at', 'subject', 'level', 'is_published']
+    list_display = ['id', 'title', 'user', 'is_published']
+    list_editable = ['is_published']
 
 
 @admin.register(ActivitySubject)
