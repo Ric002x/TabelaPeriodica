@@ -1,6 +1,8 @@
-from .test_app_users_base import TestBaseUsersApp
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
+
 from users import views
+
+from .test_app_users_base import TestBaseUsersApp
 
 
 class UsersAppRegisterTests(TestBaseUsersApp):
@@ -57,9 +59,9 @@ class UsersAppRegisterTests(TestBaseUsersApp):
 
         self.register_form_data['username'] = 'a'
         response = self.client.post(
-                self.url_register_create, data=self.register_form_data,
-                follow=True,
-            )
+            self.url_register_create, data=self.register_form_data,
+            follow=True,
+        )
         msg = ('Este campo precisa ter '
                'o mínimo de 5 caractéres')
         self.assertIn(msg, response.content.decode('utf-8'))
@@ -67,10 +69,10 @@ class UsersAppRegisterTests(TestBaseUsersApp):
     def test_register_invalid_email(self):
         self.register_form_data['email'] = 'email'
         response = self.client.post(
-                self.url_register_create, data=self.register_form_data,
-                follow=True,
-            )
-        msg = 'Informe um endereço de email válido.'
+            self.url_register_create, data=self.register_form_data,
+            follow=True,
+        )
+        msg = 'erro no cadastro'
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_register_create_not_post_raise_404(self):

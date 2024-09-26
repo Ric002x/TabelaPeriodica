@@ -50,7 +50,7 @@ class LearnLabAppActivityCreateTests(LearnLabBaseTests):
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_activity_create_form_post_invalid(self):
-        self.activity_form_data['title'] = ''
+        self.activity_form_data['title'] = 'a'
         response = self.client.post(
             self.url_activity_create, data=self.activity_form_data,
             follow=True)
@@ -128,7 +128,7 @@ class LearnLabAppActivityUpdateTests(LearnLabBaseTests):
 
     def test_activity_update_invalid_form(self):
         activity_form_data = {
-            'title': '',
+            'title': 'a',
         }
         response = self.client.post(
             self.url_activity_update, data=activity_form_data, follow=True)
