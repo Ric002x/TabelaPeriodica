@@ -14,6 +14,13 @@
             {% for field in form %}
                 <label class="title-l text-blue" for="{{field.id_for_label}}">{{field.label}}</label>
                 {{field}}
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li class="text-red">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             {% endfor %}
             <button class="default-button inside_green medium-button" style="width: 100%;" type="submit">Atualizar</button>
         </form>

@@ -11,8 +11,8 @@ from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 
-from .forms import ActivityForm, RatingForm
-from .models import Activity, ActivityLevel, ActivityRating, ActivitySubject
+from ..forms import ActivityForm, RatingForm
+from ..models import Activity, ActivityLevel, ActivityRating, ActivitySubject
 
 # Create your views here.
 
@@ -269,7 +269,7 @@ def activity_update(request, slug=None):
         else:
             messages.error(request, 'Erro na validação da atividade')
             redirect(reverse('learn_lab:activity_update',
-                             kwargs={'slug': activity.slug}))
+                             kwargs={'slug': activity.slug}))  # type: ignore
 
     if not activity:
         raise Http404
@@ -349,7 +349,7 @@ def rating_delete(request, slug):
             activity=activity,
             user=request.user
         ).first()
-        user_rating.delete()
+        user_rating.delete()  # type: ignore
         messages.success(request, "Avalição deletada")
         return redirect(reverse(
             'learn_lab:learn_lab_activity', kwargs={'slug': slug}
