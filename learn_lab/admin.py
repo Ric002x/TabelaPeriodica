@@ -8,7 +8,7 @@ from .models import Activity, ActivityLevel, ActivityRating, ActivitySubject
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     fields = ['title', 'slug', 'description', 'content',
-              'file', 'subject', 'level', 'user', 'is_published']
+              'file', 'thumbnail', 'subject', 'level', 'user', 'is_published']
     search_fields = ['title', 'description']
     list_filter = ['created_at', 'subject', 'level', 'is_published']
     list_display = ['id', 'title', 'user', 'is_published']

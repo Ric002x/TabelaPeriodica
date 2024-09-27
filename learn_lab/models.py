@@ -2,12 +2,21 @@ import os
 import random
 import string
 
+import fitz
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
 # Create your models here.
+random_string = ''.join(random.choices(string.ascii_letters, k=5))
+
+
+def file_upload(instance, filename):
+    filename, ext = os.path.splitext(filename)
+    filename = {slugify(filename)}
+    return f'learn_lab/files/{filename}{ext}'
 
 
 class ActivitySubject(models.Model):
@@ -24,12 +33,6 @@ class ActivityLevel(models.Model):
         return (self.name)
 
 
-def file_upload(instance, filename):
-    filename, ext = os.path.splitext(filename)
-    filename = slugify(filename)
-    return f'learn_lab/files/{filename}{ext}'
-
-
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
@@ -39,6 +42,11 @@ class Activity(models.Model):
         upload_to=file_upload,
         blank=True,
         default='',
+    )
+    thumbnail = models.ImageField(
+        upload_to='learn_lab/thumbnails/',
+        blank=True,
+        default=''
     )
     subject = models.ForeignKey(
         ActivitySubject, on_delete=models.SET_NULL,
@@ -60,11 +68,27 @@ class Activity(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            random_string = ''.join(random.choices(string.ascii_letters, k=5))
             slug = slugify(f'{self.title}-{random_string}')
             str(slug)
             self.slug = slug
-        return super().save(*args, **kwargs)
+
+        super().save(*args, **kwargs)
+
+        if self.file:
+            pdf = fitz.open(self.file.path)
+            page = pdf.load_page(0)
+            pix = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0))  # type: ignore
+            file_slug = slugify(self.file.name).replace("learn_labfiles", "") \
+                .replace("pdf", "")
+            save_path = os.path.join(
+                settings.MEDIA_ROOT, 'learn_lab', 'thumbnails')
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            pix.save(f'{save_path}/{file_slug}.png')
+
+            self.thumbnail = f'learn_lab/thumbnails/{file_slug}.png'
+
+        super().save(update_fields=['thumbnail'])
 
 
 class ActivityRating(models.Model):

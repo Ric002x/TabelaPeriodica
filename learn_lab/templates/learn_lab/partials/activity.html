@@ -4,7 +4,11 @@
     <div class="activity-card">
         <div class="activity-file">
             <a href="{{activity.get_absolute_url}}">
-                <img src="{% static "imgs/pdf-file.png" %}" alt="">
+                {% if activity.thumbnail %}
+                    <img src="{{activity.thumbnail.url}}" alt="">
+                {% else %}
+                    <img src="{% static "imgs/pdf-file.png" %}" alt="">
+                {% endif %}
             </a>
         </div>
         <div class="activity-description">
@@ -95,7 +99,11 @@
             {% endif %}
         </div>
         <div class="activity-detail-file">
-            <img src="{% static "imgs/pdf-file.png" %}" alt="">
+            {% if activity.thumbnail %}
+                <img src="{{activity.thumbnail.url}}" alt="">
+            {% else %}
+                <img src="{% static "imgs/pdf-file.png" %}" alt="">
+            {% endif %}
         </div>
     </div>
 {% endif %}

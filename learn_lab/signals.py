@@ -6,9 +6,10 @@ from django.dispatch import receiver
 from learn_lab.models import Activity
 
 
-def delete_file(instance):
+def delete_files(instance):
     try:
         os.remove(instance.file.path)
+        os.remove(instance.thumbnail.path)
     except (ValueError, FileNotFoundError, AttributeError):
         ...
 
@@ -18,16 +19,15 @@ def delete_old_file(signal, instance, *args, **kwargs):
     old_instance = Activity.objects.filter(pk=instance.id).first()
 
     if old_instance:
-        delete_file(old_instance)
+        delete_files(old_instance)
 
 
 @receiver(pre_save, sender=Activity)
 def update_activity_file(signal, instance, *args, **kwargs):
     old_instance = Activity.objects.filter(pk=instance.id).first()
-    is_new_instance = old_instance != instance.file
 
     if not old_instance:
         return
 
-    if is_new_instance:
-        delete_file(old_instance)
+    if old_instance.file and old_instance.file.name != instance.file.name:
+        delete_files(old_instance)
