@@ -213,7 +213,11 @@ def activity_create(request, id=None):
                             kwargs={'username': request.user}))
         else:
             messages.error(request, 'Erro no formulário de atividade')
-            return redirect(reverse('learn_lab:activity_create'))
+            return render(
+                request, 'learn_lab/pages/learn_lab_activity_create.html', {
+                    'form': form,
+                    'form_action': reverse('learn_lab:activity_create')
+                })
 
     activity = Activity.objects.filter(
         pk=id,
