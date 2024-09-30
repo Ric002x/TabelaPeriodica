@@ -57,6 +57,18 @@ class LearnLabAppActivityCreateTests(LearnLabBaseTests):
         msg = 'Erro no formulário de atividade'
         self.assertIn(msg, response.content.decode('utf-8'))
 
+    # def test_activity_title_cannot_be_equal_to_description(self):
+    #     self.activity_form_data['title'] = 'test_equal'
+    #     self.activity_form_data['description'] = 'test_equal'
+
+    #     response = self.client.post(
+    #         self.url_activity_create, data=self.activity_form_data, follow=True
+    #     )
+    #     msg1 = "O título não pode ser igual a descrição"
+    #     msg2 = "A descrição não pode ser igual ao título"
+    #     self.assertIn(msg1, response.content.decode('utf-8'))
+    #     self.assertIn(msg2, response.content.decode('utf-8'))
+
 
 # Delete Activity Tests
 class LearnLabAppActivityDeleteTests(LearnLabBaseTests):

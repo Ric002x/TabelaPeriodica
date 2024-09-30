@@ -56,6 +56,7 @@ class ActivityMixin:
         level_data=None,
         is_published=True,
         file=None,
+        simple=False,
     ):
         if user_data is None:
             user_data = {}
@@ -64,16 +65,26 @@ class ActivityMixin:
         if level_data is None:
             level_data = {}
 
-        activity = Activity.objects.create(
-            user=self.create_user(**user_data),
-            subject=self.create_subject(**subject_data),
-            content=content,
-            level=self.create_level(**level_data),
-            title=title,
-            description=description,
-            is_published=is_published,
-            file=file,
-        )
+        if simple is False:
+
+            activity = Activity.objects.create(
+                user=self.create_user(**user_data),
+                subject=self.create_subject(**subject_data),
+                content=content,
+                level=self.create_level(**level_data),
+                title=title,
+                description=description,
+                is_published=is_published,
+                file=file,
+            )
+        elif simple is True:
+            activity = Activity.objects.create(
+                user=User.objects.get(id=1),
+                title=title,
+                description=description,
+                content=content,
+                is_published=is_published,
+            )
         activity.full_clean()
         activity.save()
         return activity
@@ -115,23 +126,23 @@ class ActivityMixin:
         }
         if len(ActivitySubject.objects.all()) == 0:
             subject = self.create_subject()
-            activity_form_data['subject'] = subject.id
+            activity_form_data['subject'] = subject.id  # type: ignore
         else:
             pass
         if len(ActivityLevel.objects.all()) == 0:
             level = self.create_level()
-            activity_form_data['level'] = level.id
+            activity_form_data['level'] = level.id  # type: ignore
         else:
             pass
 
         return activity_form_data
 
     def execute_register(self):
-        self.client.post(reverse(
+        self.client.post(reverse(  # type: ignore
             'users:register_create'), data=self.generate_form_register())
 
     def execute_login(self):
-        self.client.post(reverse(
+        self.client.post(reverse(  # type: ignore
             'users:login_create'), data=self.generate_form_login())
 
     def generate_form_rating(self):
@@ -155,6 +166,23 @@ class ActivityMixin:
             file=pdf_file,
         )
         return activity
+
+    def bulk_create_activity(
+            self, range, create_user=True, subject=None, level=None):
+        if create_user is True:
+            user = User.objects.create(
+                username="Test"
+            )
+        else:
+            user = User.objects.get(id=1)
+        for i in range:
+            Activity.objects.create(
+                title=f"Activity {i}",
+                user=user,
+                subject=subject,
+                level=level,
+                is_published=True
+            )
 
 
 class LearnLabBaseTests(TestCase, ActivityMixin):
