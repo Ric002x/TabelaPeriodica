@@ -1,8 +1,15 @@
 from django.urls import path
+from rest_framework.routers import SimpleRouter
 
 from users import views
 
 app_name = 'users'
+routers_api = SimpleRouter()
+routers_api.register(
+    'api-v2',
+    views.UsersAPISet,
+    basename='users-api-v2'
+)
 
 urlpatterns = [
     path(
@@ -23,3 +30,5 @@ urlpatterns = [
     path('logout/', views.logout_update, name='logout'),
     path('alterar-senha/', views.change_password, name='change_password'),
 ]
+
+urlpatterns += routers_api.urls

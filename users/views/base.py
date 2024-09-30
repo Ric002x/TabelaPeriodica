@@ -11,7 +11,7 @@ from django.urls import reverse
 
 from learn_lab.models import Activity
 
-from .forms import LoginForm, RegisterForm, UpdateProfileForm, UpdateUserForm
+from ..forms import LoginForm, RegisterForm, UpdateProfileForm, UpdateUserForm
 
 # Create your views here.
 
