@@ -141,6 +141,21 @@ class ActivityMixin:
         }
         return rating_form_data
 
+    def upload_file(self):
+        pdf_path = os.path.join(
+            settings.BASE_DIR, 'learn_lab', 'tests', 'app_learn_lab',
+            'files', 'teste.pdf')
+        with open(pdf_path, 'rb') as f:
+            pdf_file = SimpleUploadedFile(
+                'test.pdf',
+                f.read(),
+                content_type='application/pdf'
+            )
+        activity = Activity.objects.create(
+            file=pdf_file,
+        )
+        return activity
+
 
 class LearnLabBaseTests(TestCase, ActivityMixin):
     def setUp(self) -> None:

@@ -71,5 +71,13 @@ urlpatterns = [
 
 
     # Urls for APIs
-    path('', include(activity_router_api.urls))
+    path('', include(activity_router_api.urls)),
+
+    path('api-v2/atividades/materia/<int:pk>/',
+         views.ActivitiesSubjectListAPIv2.as_view(),
+         name='activity-api-v2-subject'),
+
+    path('api-v2/atividades/turma/<int:pk>/',
+         views.ActivitiesLevelListAPIv2.as_view(),
+         name='activity-api-v2-level')
 ]
