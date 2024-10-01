@@ -46,16 +46,12 @@ def register_create(request):
         user.set_password(form.cleaned_data['password'])
         user.save()
         messages.success(request, 'usuário cadastrado!')
-
         del (request.session['register_form_data'])
-
         return redirect('users:login')
 
     else:
         form = RegisterForm()
-
         messages.error(request, 'erro no cadastro')
-
         return redirect('users:register')
 
 

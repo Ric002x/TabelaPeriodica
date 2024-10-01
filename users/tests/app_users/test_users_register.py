@@ -87,5 +87,5 @@ class UsersAppRegisterTests(TestBaseUsersApp):
         response = self.client.post(
             self.url_register_create, data=self.register_form_data,
             follow=True)
-        msg = 'invalido. Já existe um usuário cadastrado com esse email'
+        msg = 'Inválido! Já existe um usuário cadastrado com esse email.'
         self.assertIn(msg, response.content.decode('utf-8'))
