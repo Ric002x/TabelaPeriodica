@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
-class UsersValidators:
+class UsersValidatorsForCreate:
     def __init__(self, data, errors=None, ErrorClass=None):
         self.data = data
         self.errors = defaultdict(list) if errors is None else errors
@@ -24,22 +24,23 @@ class UsersValidators:
 
     def final_clean(self, *args, **kwargs):
         self.clean_password()
-        self.clean_email()
-        self.clean_first_and_last_name()
         self.validate_passwords_match()
+        self.clean_email()
+        self.clean_first_name()
+        self.clean_last_name()
         self.clean_agree_to_terms()
+        self.clean_username()
 
         if self.errors:
             raise self.ErrorClass(self.errors)  # type: ignore
 
     def validate_passwords_match(self, *args, **kwargs):
-        clean_data = self.data
-        password1 = clean_data.get('password')
-        password2 = clean_data.get('password2')
+        password1 = self.data.get('password')
+        password2 = self.data.get('password2')
 
-        if password1 != password2:
+        if password1 and password2 and password1 != password2:
             password_error = self.ErrorClass(
-                'As senha precisam ser iguais',
+                'As senhas precisam ser iguais',
                 code="invalid"
             )
             self.errors['password'].append(password_error)
@@ -66,26 +67,36 @@ class UsersValidators:
 
     def clean_password(self, *args, **kwargs):
         password = self.data.get('password')
+        password2 = self.data.get('password2')
+
+        no_password_error = self.ErrorClass(
+            "Esse campo é obrigatório",
+            code="required"
+        )
         if not password:
-            self.errors['password'].append(self.ErrorClass(
-                "Esse campo é obrigatório",
-                code="required"
-            ))
-        self.strong_password(password)
+            self.errors['password'].append(no_password_error)
+        else:
+            self.strong_password(password)
+        if not password2:
+            self.errors['password2'].append(no_password_error)
+
         return password
 
-    def clean_first_and_last_name(self, *args, **kwargs):
+    def clean_first_name(self, *args, **kwargs):
         first_name = self.data.get('first_name')
-        last_name = self.data.get('last_name')
-
-        cannot_be_empty_error = self.ErrorClass(
-            'Esse campo é obrigatório',
-            code='required'
-        )
         if not first_name:
-            self.errors['first_name'].append(cannot_be_empty_error)
+            self.errors['first_name'].append(self.ErrorClass(
+                'Esse campo é obrigatório',
+                code='required'
+            ))
+
+    def clean_last_name(self, *args, **kwargs):
+        last_name = self.data.get('last_name')
         if not last_name:
-            self.errors['last_name'].append(cannot_be_empty_error)
+            self.errors['last_name'].append(self.ErrorClass(
+                'Esse campo é obrigatório',
+                code='required'
+            ))
 
     def clean_agree_to_terms(self, *args, **kwargs):
         agreed = self.data.get('agree_to_terms')
@@ -98,3 +109,38 @@ class UsersValidators:
                 )
             )
         return agreed
+
+    def clean_username(self, *args, **kwargs):
+        username = self.data.get('username')
+        if username:
+            if len(username) < 5:
+                self.errors['username'].append(
+                    self.ErrorClass(
+                        'O nome de usuário precisa '
+                        'ter o mínimo de 5 caractéres',
+                        code='min_length'
+                    )
+                )
+        return username
+
+
+class UsersValidatorsForUpdate(UsersValidatorsForCreate):
+    def __init__(self, data, errors=None, ErrorClass=None):
+        super().__init__(data, errors, ErrorClass)
+
+    def final_clean(self, *args, **kwargs):
+        if 'password' in self.data:
+            self.clean_password()
+        if 'password' in self.data and 'password2' in self.data:
+            self.validate_passwords_match()
+        if 'email' in self.data:
+            self.clean_email()
+        if 'first_name' in self.data:
+            self.clean_first_name()
+        if 'last_name' in self.data:
+            self.clean_agree_to_terms()
+        if 'username' in self.data:
+            self.clean_username()
+
+        if self.errors:
+            raise self.ErrorClass(self.errors)  # type: ignore

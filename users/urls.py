@@ -7,9 +7,11 @@ app_name = 'users'
 routers_api = SimpleRouter()
 routers_api.register(
     'api-v2',
-    views.UsersAPISet,
+    views.UsersAPIViewSet,
     basename='users-api-v2'
 )
+
+print(routers_api.urls)
 
 urlpatterns = [
     path(

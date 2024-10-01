@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from ..validators import UsersValidators
+from ..validators import UsersValidatorsForCreate
 
 
 class RegisterForm(forms.ModelForm):
@@ -11,8 +11,6 @@ class RegisterForm(forms.ModelForm):
             'placeholder': 'Insira aqui seu nome de usuário. '
             'Ex.: LucasOliveira22'
         }),
-        min_length=5,
-        max_length=20,
         required=True,
         error_messages={
             'required': 'Esse campo é obrigatório',
@@ -77,5 +75,5 @@ class RegisterForm(forms.ModelForm):
 
     def clean(self, *args, **kwargs):
         super_clean = super().clean(*args, **kwargs)
-        UsersValidators(data=self.cleaned_data)
+        UsersValidatorsForCreate(data=self.cleaned_data)
         return super_clean

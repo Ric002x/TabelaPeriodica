@@ -62,8 +62,7 @@ class UsersAppRegisterTests(TestBaseUsersApp):
             self.url_register_create, data=self.register_form_data,
             follow=True,
         )
-        msg = ('Este campo precisa ter '
-               'o mínimo de 5 caractéres')
+        msg = ('O nome de usuário precisa ter o mínimo de 5 caractéres')
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_register_invalid_email(self):

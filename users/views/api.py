@@ -1,16 +1,26 @@
 from django.contrib.auth import get_user_model
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
+from ..permissions import IsAuthenticatedUser
 from ..serializers import UsersSerializer
 
 
-class UsersAPISet(ReadOnlyModelViewSet):
+class UsersAPIViewSet(ModelViewSet):
     serializer_class = UsersSerializer
-    permission_classes = [IsAuthenticated, ]
+    http_method_names = ['get', 'post', 'patch', 'head', 'options']
+    User = get_user_model()
+    queryset = User.objects.all()  # type:ignore
+    lookup_field = 'username'
 
-    def get_queryset(self):
-        User = get_user_model()
-        qs = User.objects.filter(
-            username=self.request.user.username)  # type:ignore
-        return qs
+    def get_permissions(self):
+        if self.request.method in ['GET', 'PATCH']:
+            return [IsAuthenticatedUser(), IsAuthenticated()]
+        return super().get_permissions()
+
+    def list(self, request, *args, **kwargs):
+        return Response({
+            'detail': 'Página não encontrada'
+        }, status=status.HTTP_404_NOT_FOUND)
