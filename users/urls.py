@@ -11,8 +11,6 @@ routers_api.register(
     basename='users-api-v2'
 )
 
-print(routers_api.urls)
-
 urlpatterns = [
     path(
         'cadastro/', views.register_view, name='register'),

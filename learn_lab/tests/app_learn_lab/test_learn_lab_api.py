@@ -1,7 +1,6 @@
 from django.urls import resolve, reverse
 from rest_framework import status
-from rest_framework.test import APIClient, APITestCase
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.test import APITestCase
 
 from learn_lab.models import Activity
 
@@ -17,7 +16,12 @@ def url_list(page=None):
     return url_list
 
 
-class ActivityAPIsTests(APITestCase, ActivityMixin):
+def api_token_urls():
+    url = reverse('learn_lab:token_obtain_pair')
+    return url
+
+
+class ActivityAPIGetListTests(APITestCase, ActivityMixin):
     def test_view_function(self):
         view = resolve(url_list())
         self.assertIn('ActivityViewSet', str(view.func))
@@ -48,19 +52,14 @@ class ActivityAPIsTests(APITestCase, ActivityMixin):
 class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
     def setUp(self) -> None:
         self.user = self.create_user()
+        user_data = {'username': 'username', 'password': 'Password123'}
 
-        refresh = RefreshToken.for_user(user=self.user)
-        self.access = str(refresh.access_token)  # type: ignore
-
-        self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access)
+        self.token = self.get_login_jwt_access_token(False, user_data)
 
         self.user2 = self.create_user(
             username='username2',
             email='teste2@email.com'
         )
-        self.client_not_owner = APIClient()
-        self.client_not_owner.force_authenticate(user=self.user2)
 
         self.data = self.generate_form_activity()
         del self.data['file']
@@ -69,11 +68,29 @@ class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
 
         return super().setUp()
 
+    def get_login_jwt_access_token(self, create_user=True, data=None):
+        # Function to create an access token for logged user
+        if create_user is True:
+            self.create_user()
+        else:
+            ...
+        response = self.client.post(
+            api_token_urls(), data=data, format='json')
+        access_token = response.data.get('access')  # type: ignore
+        return access_token
+
+    def test_client_cannot_create_activity_without_send_jwt(self):
+        response = self.client.post(url_list(), data=self.data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_create_activity_with_logged_user(self):
-        response = self.client.post(url_list(), self.data, format='json')
+        response = self.client.post(
+            url_list(), self.data, format='json',
+            headers={'Authorization': f"Bearer {self.token}"})
         self.assertEqual(response.data['user'], 1)  # type: ignore
         self.assertEqual(
             response.data['user_name'], "username")  # type: ignore
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_activity_owner_can_patch(self):
         activity = Activity.objects.create(
@@ -83,18 +100,20 @@ class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
         )
         response = self.client.patch(
             reverse('learn_lab:activity-api-v2-detail',
-                    kwargs={'slug': activity.slug}), self.data, format="json")
+                    kwargs={'slug': activity.slug}), self.data, format="json",
+            headers={'Authorization': f"Bearer {self.token}"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_activity_not_owner_cannot_patch(self):
         activity = self.activity_create(
             simple=True,
-            user_data=self.user)
-        response = self.client_not_owner.patch(
+            id=2)
+        response = self.client.patch(
             reverse('learn_lab:activity-api-v2-detail',
-                    kwargs={'slug': activity.slug}), self.data, format="json")
+                    kwargs={'slug': activity.slug}), self.data, format="json",
+            headers={'Authorization': f"Bearer {self.token}"})
         self.assertEqual(
-            response.status_code, status.HTTP_403_FORBIDDEN)  # type: ignore
+            response.status_code, status.HTTP_403_FORBIDDEN)
 
 
 def url_list_foreignkeys(foreignkey='subject', id=1):

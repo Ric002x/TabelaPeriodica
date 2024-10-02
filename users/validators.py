@@ -138,6 +138,8 @@ class UsersValidatorsForUpdate(UsersValidatorsForCreate):
         if 'first_name' in self.data:
             self.clean_first_name()
         if 'last_name' in self.data:
+            self.clean_last_name()
+        if 'agree_to_terms' in self.data:
             self.clean_agree_to_terms()
         if 'username' in self.data:
             self.clean_username()

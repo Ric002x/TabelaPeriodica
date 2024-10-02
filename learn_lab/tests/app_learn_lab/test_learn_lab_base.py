@@ -57,6 +57,7 @@ class ActivityMixin:
         is_published=True,
         file=None,
         simple=False,
+        id=1
     ):
         if user_data is None:
             user_data = {}
@@ -79,7 +80,7 @@ class ActivityMixin:
             )
         elif simple is True:
             activity = Activity.objects.create(
-                user=User.objects.get(id=1),
+                user=User.objects.get(id=id),
                 title=title,
                 description=description,
                 content=content,

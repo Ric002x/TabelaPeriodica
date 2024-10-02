@@ -9,11 +9,12 @@ class UsersSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = [
             'id', 'username', 'first_name', 'last_name', 'email',
-            'password', 'password2'
+            'password', 'password2', 'agree_to_terms'
         ]
 
     password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
+    agree_to_terms = serializers.BooleanField(write_only=True, required=True)
 
     def validate(self, attrs):
         super_validate = super().validate(attrs)

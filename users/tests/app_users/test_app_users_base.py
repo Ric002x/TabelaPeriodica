@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
@@ -46,6 +47,26 @@ class UsersMixin:
     def execute_login(self):
         self.client.post(reverse(  # type: ignore
             'users:login_create'), data=self.generate_form_login())
+
+    def create_user(
+        self,
+        first_name='User',
+        last_name='Name',
+        username='username',
+        password='Password123',
+        email='teste@email.com'
+    ):
+        user = User.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            password=password,
+            email=email,
+        )
+        user.set_password(password)
+        user.full_clean()
+        user.save()
+        return user
 
 
 class TestBaseUsersApp(TestCase, UsersMixin):
