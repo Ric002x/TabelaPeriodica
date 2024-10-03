@@ -113,12 +113,28 @@ class UsersValidatorsForCreate:
     def clean_username(self, *args, **kwargs):
         username = self.data.get('username')
         if username:
+            if not re.match(r'^[\w-]+$', username):
+                self.errors['username'].append(
+                    self.ErrorClass(
+                        'O nome de usuário só pode conter letras, '
+                        'números, hífens (-) e sublinhados (_).',
+                        code='invalid'
+                    )
+                )
             if len(username) < 5:
                 self.errors['username'].append(
                     self.ErrorClass(
                         'O nome de usuário precisa '
                         'ter o mínimo de 5 caractéres',
                         code='min_length'
+                    )
+                )
+            if len(username) > 20:
+                self.errors['username'].append(
+                    self.ErrorClass(
+                        'O nome não pode ultrapassar '
+                        'o máximo de 20 caractéres',
+                        code='max_length'
                     )
                 )
         return username

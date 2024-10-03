@@ -1,3 +1,5 @@
+import string
+
 from django.urls import resolve, reverse
 
 from users import views
@@ -87,4 +89,30 @@ class UsersAppRegisterTests(TestBaseUsersApp):
             self.url_register_create, data=self.register_form_data,
             follow=True)
         msg = 'Inválido! Já existe um usuário cadastrado com esse email.'
+        self.assertIn(msg, response.content.decode('utf-8'))
+
+    def test_invalid_username_characters(self):
+        for i in string.punctuation.replace('.', '').replace('-', '') \
+                .replace('_', ''):
+            self.register_form_data['username'] = f'user{i}name'
+            response = self.client.post(
+                self.url_register_create, data=self.register_form_data,
+                follow=True)
+            msg_error = 'O nome de usuário só pode conter letras, ' \
+                'números, hífens (-) e sublinhados (_).'
+            self.assertIn(msg_error, response.content.decode('utf-8'))
+
+    def test_usernane_max_lenght_20_characters(self):
+        self.register_form_data['username'] = 'A' * 21
+        response = self.client.post(
+            self.url_register_create, self.register_form_data, follow=True
+        )
+        msg_error = 'O nome não pode ultrapassar o máximo de 20 caractéres'
+        self.assertIn(msg_error, response.content.decode('utf-8'))
+
+    def test_cannot_register_if_not_agree_to_terms(self):
+        self.register_form_data['agree_to_terms'] = False
+        response = self.client.post(
+            self.url_register_create, self.register_form_data, follow=True)
+        msg = "erro no cadastro"
         self.assertIn(msg, response.content.decode('utf-8'))

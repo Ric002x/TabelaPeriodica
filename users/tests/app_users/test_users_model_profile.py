@@ -12,4 +12,4 @@ class UsersAppModelProfileTests(TestBaseUsersApp):
 
     def test_user_return_username_str(self):
         user = self.user
-        self.assertEqual(str(user.profile.user), 'username')
+        self.assertEqual(str(user.profile), 'username')
