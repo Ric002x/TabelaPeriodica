@@ -1,5 +1,7 @@
+import mimetypes
 from collections import defaultdict
 
+import fitz
 from django.core.exceptions import ValidationError
 
 
@@ -12,6 +14,10 @@ class ActivityValidator:
 
     def clean(self, *args, **kwargs):
         self.clean_title()
+        try:
+            self.clean_file()
+        except TypeError:
+            ...
 
         clean_data = self.data
 
@@ -37,3 +43,29 @@ class ActivityValidator:
                 "O título precisa ter um mínimo de 5 caracteres")
 
         return title
+
+    def clean_file(self, *args, **kwargs):
+        file = self.data.get('file')
+
+        if not file.name.endswith('.pdf'):
+            self.errors['file'].append(
+                "Você deve enviar um arquivo do tipo PDF"
+            )
+            return file
+
+        file_mime_type, _ = mimetypes.guess_type(file.name)
+        if file_mime_type != 'application/pdf':
+            self.errors['file'].append(
+                "Você deve enviar um arquivo do tipo PDF"
+            )
+            return file
+
+        try:
+            # Abrindo arquivo do tipo InMemoryUpdatedFile
+            with fitz.open(stream=file.read(), filetype="pdf") as pdf:
+                if pdf.page_count == 0:
+                    self.errors['file'].append(
+                        "O PDF enviado está vazio ou corrompido.")
+        except Exception:
+            self.errors['file'].append(
+                "Erro ao processar o arquivo PDF: arquivo inválido")

@@ -272,8 +272,12 @@ def activity_update(request, slug=None):
                                     kwargs={'slug': activity.slug}))
         else:
             messages.error(request, 'Erro na validação da atividade')
-            redirect(reverse('learn_lab:activity_update',
-                             kwargs={'slug': activity.slug}))  # type: ignore
+            return render(
+                request, 'learn_lab/pages/learn_lab_activity_update.html',
+                context={
+                    'activity': activity,
+                    'form': form
+                })
 
     if not activity:
         raise Http404
