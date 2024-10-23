@@ -47,18 +47,19 @@ class ActivityValidator:
     def clean_file(self, *args, **kwargs):
         file = self.data.get('file')
 
-        if not file.name.endswith('.pdf'):
+        if file and not file.name.endswith('.pdf'):
             self.errors['file'].append(
                 "Você deve enviar um arquivo do tipo PDF"
             )
             return file
 
-        file_mime_type, _ = mimetypes.guess_type(file.name)
-        if file_mime_type != 'application/pdf':
-            self.errors['file'].append(
-                "Você deve enviar um arquivo do tipo PDF"
-            )
-            return file
+        if file:
+            file_mime_type, _ = mimetypes.guess_type(file.name)
+            if file_mime_type != 'application/pdf':
+                self.errors['file'].append(
+                    "Você deve enviar um arquivo do tipo PDF"
+                )
+                return file
 
         try:
             # Abrindo arquivo do tipo InMemoryUpdatedFile
@@ -67,5 +68,6 @@ class ActivityValidator:
                     self.errors['file'].append(
                         "O PDF enviado está vazio ou corrompido.")
         except Exception:
-            self.errors['file'].append(
-                "Erro ao processar o arquivo PDF: arquivo inválido")
+            if file:
+                self.errors['file'].append(
+                    "Erro ao processar o arquivo PDF: arquivo inválido")

@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'INSECURE')
 DEBUG = os.getenv('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS: list[str] = [
-    'atomicdiscoveries.ricardovenicius.com.br', 'localhost']
+    'atomicdiscoveries.ricardovenicius.com.br', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = [
     'https://atomicdiscoveries.ricardovenicius.com.br'
 ]
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'periodic_table',
     'users',
     'learn_lab',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -173,3 +175,11 @@ SIMPLE_JWT = {
     "SIGNING_KEY": SECRET_KEY,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+CORS_ALLOWED_ORIGINS = [
+    # 'http://127.0.0.1:5500',
+]
+
+CORS_ALLOW_METHODS = (
+    'GET'
+)

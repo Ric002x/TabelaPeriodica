@@ -198,7 +198,7 @@ class LearnLabLevelListView(LearnLabListView):
         return level_list
 
 
-@ login_required(login_url='users:login', redirect_field_name='next')
+@login_required(login_url='users:login', redirect_field_name='next')
 def activity_create(request, id=None):
     if request.method == 'POST':
         form = ActivityForm(
@@ -234,7 +234,7 @@ def activity_create(request, id=None):
         })
 
 
-@ login_required(login_url='users:login', redirect_field_name='next')
+@login_required(login_url='users:login', redirect_field_name='next')
 def activity_delete(request, slug):
     if request.method == 'POST':
         activity = get_object_or_404(
@@ -248,7 +248,7 @@ def activity_delete(request, slug):
         raise Http404
 
 
-@ login_required(login_url='users:login', redirect_field_name='next')
+@login_required(login_url='users:login', redirect_field_name='next')
 def activity_update(request, slug=None):
     activity = Activity.objects.filter(
         user=request.user,
@@ -293,7 +293,7 @@ def activity_update(request, slug=None):
                   })
 
 
-@ login_required(login_url='users:login', redirect_field_name='next')
+@login_required(login_url='users:login', redirect_field_name='next')
 def rating_create(request, slug):
     if request.method == 'POST':
         try:
