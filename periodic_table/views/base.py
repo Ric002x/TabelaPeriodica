@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 
-from .models import Element
+from ..models import Element
 
 # Create your views here.
 
