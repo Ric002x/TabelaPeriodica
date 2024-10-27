@@ -8,7 +8,7 @@ class ElementListViewTest(TableElementsBaseTest):
     def setUp(self) -> None:
         self.factory = RequestFactory()
         self.url_list = reverse('periodic_table:elements_list')
-        self.url_search = reverse('periodic_table:search_element')
+        self.url_search = reverse('periodic_table:elements_list')
         return super().setUp()
 
     def test_list_view_status_code_200_if_elements(self):

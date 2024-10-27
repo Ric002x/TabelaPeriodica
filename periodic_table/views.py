@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.forms import model_to_dict
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 
@@ -23,7 +24,8 @@ def table_list_view(request):
     return render(request, 'periodic_table/pages/table.html', context={
         'elements': elements,
         'element_page': True,
-        'placeholder_input': "Procurar um elemento..."
+        'placeholder_input': "Procurar um elemento...",
+        "form_search": reverse("periodic_table:elements_list")
     })
 
 
