@@ -1,11 +1,8 @@
-import os
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import Q
-from django.forms import model_to_dict
-from django.http import Http404, JsonResponse
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import ListView
@@ -53,28 +50,6 @@ class LearnLabListView(ListView):
             context['search_term'] = search_term
             context['learn_lab_search_page'] = True
         return context
-
-
-class LearnLabListViewApi(LearnLabListView):
-    def render_to_response(self, context, **response_kwargs):
-        activities = self.get_context_data()['activities']
-        activities_list = [
-            {
-                "id": activity.id,
-                "title": activity.title,
-                "description": activity.description,
-                "content": activity.content,
-                'level': ActivityLevel.objects.get(name=activity.level).name,
-                'subjects': ActivitySubject.objects.get(
-                    name=activity.subject).name,
-            }
-            for activity in activities
-        ]
-
-        return JsonResponse(
-            activities_list,
-            safe=False
-        )
 
 
 class LearnLabDetailView(DetailView):
@@ -135,39 +110,6 @@ class LearnLabDetailView(DetailView):
             'rating_form_edit': rating_form_edit,
         })
         return context
-
-
-class LearnLabDetailViewApi(LearnLabDetailView):
-    def render_to_response(self, context, **response_kwargs):
-        activity = self.get_context_data()['activity']
-        activity_dict = model_to_dict(activity)
-
-        engine = os.getenv("DATABASE_ENGINE")
-
-        if activity_dict.get('file'):
-            if engine == "django.db.backends.sqlite3":
-                activity_dict['file'] = "http://127.0.1:8000" + \
-                    activity_dict['file'].url
-
-            elif engine == "django.db.backends.postgresql":
-                activity_dict['file'] = (
-                    "https://atomicdiscoveries.ricardovenicius.com.br") + \
-                    activity_dict['file'].url
-        else:
-            activity_dict['file'] = ""
-
-        activity_dict['level'] = ActivityLevel.objects.get(
-            name=activity.level).name
-
-        activity_dict['subject'] = ActivitySubject.objects.get(
-            name=activity.subject).name
-
-        del activity_dict['is_published']
-
-        return JsonResponse(
-            activity_dict,
-            safe=False
-        )
 
 
 class LearnLabSubjectListView(LearnLabListView):

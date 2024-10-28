@@ -18,9 +18,6 @@ urlpatterns = [
     path('',
          views.LearnLabListView.as_view(), name='learn_lab_home'),
 
-    path('api/atividades', views.LearnLabListViewApi.as_view(),
-         name='activities_api'),
-
     path('materia/<str:subject>',
          views.LearnLabSubjectListView.as_view(), name='learn_lab_subject'),
 
@@ -33,9 +30,6 @@ urlpatterns = [
 
     path('atividade/<slug:slug>',
          views.LearnLabDetailView.as_view(), name='learn_lab_activity'),
-
-    path('api/atividade/<slug:slug>', views.LearnLabDetailViewApi.as_view(),
-         name='activity_detail_api'),
 
     path('atividade/criar/',
          views.activity_create, name='activity_create'),

@@ -1,3 +1,4 @@
+from django.template.defaultfilters import slugify
 from django.test import TestCase
 
 from periodic_table.models import Element
@@ -7,16 +8,15 @@ class ElementsMixin:
     def make_element(
         self,
         name='Hidrogênio',
-        slug='hidrogenio',
         symbol='H',
-        description='element description',
+        description='element sdescription',
         atomic_number=1,
         atomic_mass=1.006,
         electrons_number=1,
         neutrons_number=0,
         density=1,
         melting_point=1,
-        boiling_point=1,
+        boiling_point=5,
         state_matter='Líquido',
         electronic_configuration="1s¹",
         electron_distribution='K1 L0...',
@@ -28,7 +28,7 @@ class ElementsMixin:
     ):
         element = Element.objects.create(
             name=name,
-            slug=slug,
+            slug=slugify(name),
             symbol=symbol,
             description=description,
             atomic_number=atomic_number,

@@ -1,5 +1,6 @@
-from .test_base_app_tabela import TableElementsBaseTest
 from django.core.exceptions import ValidationError
+
+from .test_base_app_tabela import TableElementsBaseTest
 
 
 class TestTabelaElementPage(TableElementsBaseTest):
@@ -38,3 +39,16 @@ class TestTabelaElementPage(TableElementsBaseTest):
         self.element.full_clean()
         self.element.elements_caregory = elements_caregory
         self.assertEqual(self.element.get_css_class(), 'unknown')
+
+    def test_class_methods_to_return_different_type_of_temperature(self):
+        # Celcius
+        self.assertEqual(self.element.melting_point, 1)
+        self.assertEqual(self.element.boiling_point, 5)
+
+        # Fahrenheit
+        self.assertEqual(self.element.melting_point_fahrenheit(), 33.8)
+        self.assertEqual(self.element.boiling_point_fahrenheit(), 41)
+
+        # Kelvin
+        self.assertEqual(self.element.melting_point_kelvin(), 274.15)
+        self.assertEqual(self.element.boiling_point_kelvin(), 278.15)

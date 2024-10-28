@@ -9,10 +9,10 @@ class TestTableElementPage(TableElementsBaseTest):
     def setUp(self) -> None:
         self.element1 = self.make_element()
         self.element2 = self.make_element(
-            name='Hélio', slug='helio', atomic_number=2,
+            name='Hélio', atomic_number=2,
         )
         self.element3 = self.make_element(
-            name='Lítio', slug='litio', atomic_number=3,
+            name='Lítio', atomic_number=3,
         )
 
         return super().setUp()

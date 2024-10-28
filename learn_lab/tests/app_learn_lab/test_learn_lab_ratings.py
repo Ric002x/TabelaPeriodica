@@ -1,5 +1,6 @@
-from .test_learn_lab_base import LearnLabBaseTests
 from django.urls import reverse
+
+from .test_learn_lab_base import LearnLabBaseTests
 
 
 class RatingCrudTests(LearnLabBaseTests):
