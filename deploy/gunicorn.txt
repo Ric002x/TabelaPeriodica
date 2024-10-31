@@ -60,7 +60,7 @@ sudo systemctl enable tabela_periodica.socket
 # Checando
 sudo systemctl status tabela_periodica.socket
 curl --unix-socket /run/tabela_periodica.socket localhost
-sudo systemctl status tabela_periodica
+sudo systemctl status tabela_periodica.service
 
 # Restarting
 sudo systemctl restart tabela_periodica.service

@@ -1,17 +1,23 @@
+from datetime import timedelta
+
 from django.contrib import messages
 from django.contrib.auth import (authenticate, login, logout,
                                  update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import AccessToken
 
 from learn_lab.models import Activity
 
-from ..forms import LoginForm, RegisterForm, UpdateProfileForm, UpdateUserForm
+from ..forms import (LoginForm, RegisterForm, ResetPasswordForm,
+                     UpdateProfileForm, UpdateUserForm)
 
 # Create your views here.
 
@@ -207,3 +213,125 @@ def change_password(request):
         'form_action': reverse('users:change_password'),
         'change_password': True
     })
+
+
+def forgot_my_password(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'usuário já logado')
+        return redirect(reverse(
+            'users:profile_posts',
+            kwargs={'username': request.user}))
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not email:
+            messages.error(request, "Por favor, insira um e-mail válido.")
+            return redirect("users:forgot_my_password")
+
+        try:
+            user = User.objects.get(email=email)
+            token = AccessToken.for_user(user)
+            token.set_exp(lifetime=timedelta(minutes=5))
+
+            reset_link = request.build_absolute_uri(
+                reverse("users:reset_password") + f"?token={token}"
+            )
+
+            mail = EmailMultiAlternatives(
+                subject="Solicitação de Alteração de Senha",
+                body=(
+                    "Houve uma solicitação de redefinição de senha para o"
+                    " seu cadastro no site:\n"
+                    "atomicdiscoveries.ricardovenicius.com.br.\n\n"
+
+                    "Para continuar com a solicitação, clique no link abaixo"
+                    " para seguir com a redefinição de senha:\n"
+                    f"{reset_link}\n\n"
+
+                    "Este link tem uma validade de 5 minutos, após passado"
+                    " esse tempo, será necessário fazer uma nova solicitação."
+
+                    "\n\nCaso não tenha solicitado esta alteração, ignore este"
+                    " e-mail e sua senha permanecerá a mesma.\n\n"
+
+                    "Atenciosamente,\n\n"
+                    "Equipe de Suporte"
+                ),
+                from_email="no-reply@em704.ricardovenicius.com.br",
+                to=[email],
+            )
+            mail.send()
+            messages.success(request, "Solicitação enviada! Verifique seu"
+                             " e-mail para o link de redefinição de senha")
+            return redirect("users:forgot_my_password")
+
+        except User.DoesNotExist:
+            messages.error(request, "Falha na solicitação!"
+                           " Certifique-se que solicitou para o email correto")
+            return redirect("users:forgot_my_password")
+
+        except Exception as e:
+            messages.error(request, f"Falha na solicitação! {e}")
+            return redirect("users:forgot_my_password")
+
+    return render(request, "users/pages/forgot_my_password.html", context={
+        "form_action": reverse("users:forgot_my_password")
+    })
+
+
+def reset_password(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'usuário já logado')
+        return redirect(reverse(
+            'users:profile_posts',
+            kwargs={'username': request.user}))
+
+    token = request.GET.get("token")
+    if not token:
+        messages.error(
+            request, "Falha na solicitação. Por favor, tente novamente")
+        return redirect("users:forgot_my_password")
+
+    try:
+        access_token = AccessToken(token)
+    except TokenError:
+        messages.error(
+            request, "Link inválido ou expirado."
+            " Para uma nova tentativa, solicite novamente enviando seu email!")
+        return redirect("users:forgot_my_password")
+
+    user_id = access_token['user_id']
+    user = User.objects.get(pk=user_id)
+
+    if user is not None:
+        if request.method == "POST":
+            form = ResetPasswordForm(request.POST)
+            if form.is_valid():
+                new_password = form.cleaned_data.get('new_password')
+                user.set_password(new_password)
+                user.save()
+                messages.success(
+                    request, "Senha redefinida com sucesso."
+                    " Faça login para continuar")
+                return redirect("users:login")
+            else:
+                messages.error(request, "Erro na alteração de senha")
+                return render(
+                    request, 'users/pages/reset_password.html', {
+                        'form': form,
+                        'form_action': reverse(
+                            'users:reset_password') + f"?token={token}"
+                    })
+
+        form = ResetPasswordForm()
+        return render(
+            request, 'users/pages/reset_password.html', {
+                'form': form,
+                'form_action': reverse(
+                    'users:reset_password') + f"?token={token}"
+            })
+
+    else:
+        messages.error(
+            request, "Link inválido ou expirado. Por favor, tente novamente")
+        return redirect("users:forgot_my_password")

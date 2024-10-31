@@ -1,6 +1,7 @@
 {% load static %}
 
 {% if user.is_authenticated %}
+    {% if not user_rating %}
     <div class="rating-form_container" id="rating-form_container">
         <h2 class="title-l text-blue">Faça sua avaliação</h2>
         <form action="{{rating_form_create_action}}" class="rating-form" method="post">
@@ -22,6 +23,7 @@
             <button class="rating-cancel_button restart-charcount text-s" id="rating-cancel_button" type="reset">x</button>
         </form>
     </div>
+    {% endif %}
 
     <div class="rating-edit-form_container" id="rating-edit-form_container">
         <h2 class="title-l">Atualize sua avaliação</h2>
@@ -45,8 +47,9 @@
             </div>
         </form>
     </div>
-
+    {% if not user_rating.rating %}
     <hr>
+    {% endif %}
 {% endif %}
 
 {% if user_rating %}

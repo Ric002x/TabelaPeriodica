@@ -56,6 +56,9 @@ class ElementsAPIGETDetail(APITestCase, ElementsMixin):
     def test_element_detail_shows_element_temperatures_as_dict(self):
         self.make_element()
         response = self.client.get(self.url)
-        self.assertIn("Celcius", response.data['melting_point'])
-        self.assertIn("Fahrenheit", response.data['melting_point'])
-        self.assertIn("Kelvin", response.data['melting_point'])
+        melting_point_data = response.data[
+            "physical_properties"]['melting_point']
+
+        self.assertIn("Celsius", melting_point_data)
+        self.assertIn("Fahrenheit", melting_point_data)
+        self.assertIn("Kelvin", melting_point_data)

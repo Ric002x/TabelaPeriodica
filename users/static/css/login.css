@@ -76,10 +76,6 @@
     width: 100%;
 }
 
-.form-login-container a {
-    margin-bottom: var(--spacing-m);
-}
-
 .login-item .see-password {
     bottom: 0;
 }

@@ -183,3 +183,10 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_METHODS = (
     'GET'
 )
+
+
+# EMAIL:
+
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+DEFAULT_FROM_EMAIL = "no-reply@em704.ricardovenicius.com.br"

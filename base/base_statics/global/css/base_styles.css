@@ -135,7 +135,10 @@ h1, h2, h3, h4 {
 .shadow-dark-small {box-shadow: 0px 1px 2px #888;}
 .shadow-dark-big {box-shadow: 0px 2px 5px #c888cc;}
 
-
+.errorlist {
+    color: var(--red);
+    font-size: var(--font-size-ss)
+}
 
 
 

@@ -12,7 +12,7 @@
                 <div class="message-center {{message.tags}} text-s"><i class="fa-solid fa-triangle-exclamation" style="color: #f2d80f;"></i> {{message}}</div>
             {% endif %}
         {% endfor %}
-        <div class="form-login-container">
+        <div class="form-login-container p-s">
             <h2 class="text-center title-2xl p-y-l">Login</h2>
             <form action="{{form_action}}" method='POST' class='form-login'>
                 {% csrf_token %}
@@ -29,9 +29,10 @@
                     <span>{{field.errors}}</span>
                 </div>
                 {% endfor %}
+                <a href="{% url "users:forgot_my_password" %}" class="text-s m-y-s link">Esqueci minha senha</a>
                 <button class='default-button inside_green medium-button' type="submit">Entrar</button>
             </form>
-            <a class="text-center block link text-s" href="{% url "users:register" %}">Criar conta</a>
+            <a class="text-center block link text-s" style="margin-bottom:20px" href="{% url "users:register" %}">Criar conta</a>
         </div>
     </section>
 {% endblock content %}

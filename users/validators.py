@@ -162,3 +162,57 @@ class UsersValidatorsForUpdate(UsersValidatorsForCreate):
 
         if self.errors:
             raise self.ErrorClass(self.errors)  # type: ignore
+
+
+class ResetPasswordValidator:
+    def __init__(self, data, errors=None, ErrorClass=None):
+        self.data = data
+        self.errors = defaultdict(list) if errors is None else errors
+        self.ErrorClass = ValidationError if ErrorClass is None else ErrorClass
+        self.final_clean()
+
+    def final_clean(self, *args, **kwargs):
+        self.clean_password()
+        self.validate_passwords_match()
+
+        if self.errors:
+            raise self.ErrorClass(self.errors)  # type: ignore
+
+    def validate_passwords_match(self, *args, **kwargs):
+        password1 = self.data.get('new_password')
+        password2 = self.data.get('repeat_password')
+
+        if password1 and password2 and password1 != password2:
+            password_error = self.ErrorClass(
+                'As senhas precisam ser iguais',
+                code="invalid"
+            )
+            self.errors['new_password'].append(password_error)
+            self.errors['repeat_password'].append(password_error)
+
+    def strong_password(self, password):
+        regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[1-9]).{8,}$')
+
+        if not regex.match(password):
+            self.errors['new_password'].append(self.ErrorClass(
+                'A senha deve contar pelo menos 8 caracteres, '
+                'incluindo letras maiúsculas e números',
+                code='invalid',
+            ))
+
+    def clean_password(self, *args, **kwargs):
+        password = self.data.get('new_password')
+        password2 = self.data.get('repeat_password')
+
+        no_password_error = self.ErrorClass(
+            "Esse campo é obrigatório",
+            code="required"
+        )
+        if not password:
+            self.errors['new_password'].append(no_password_error)
+        else:
+            self.strong_password(password)
+        if not password2:
+            self.errors['repeat_password'].append(no_password_error)
+
+        return password

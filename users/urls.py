@@ -29,6 +29,11 @@ urlpatterns = [
          views.profile_user_posts, name='profile_posts'),
     path('logout/', views.logout_update, name='logout'),
     path('alterar-senha/', views.change_password, name='change_password'),
+
+    path('esqueci-minha-senha/', views.forgot_my_password,
+         name="forgot_my_password"),
+    path('redefinir-senha/', views.reset_password,
+         name="reset_password"),
 ]
 
 urlpatterns += routers_api.urls

@@ -233,7 +233,6 @@
 .change-password-container {
     width: 50rem;
     border-radius: 1rem;
-    padding: 0 var(--spacing-xl);
 }
 
 .change-password_form input {
@@ -256,6 +255,4 @@
 .change-password_form input::placeholder {
     color: #888;
 }
-
-
 
