@@ -5,12 +5,13 @@ from rest_framework.test import APITestCase
 from .test_app_users_base import UsersMixin
 
 
-def url_user_api(method='list', username=None):
-    if method == 'list':
-        url = reverse(f'users:users-api-v2-{method}')
-    elif method == 'detail':
-        url = reverse(f'users:users-api-v2-{method}',
+def url_user_api(type='list', username=None):
+    if type == 'list':
+        url = reverse(f'users:users-api-v2-{type}')
+    elif type == 'detail':
+        url = reverse(f'users:users-api-v2-{type}',
                       kwargs={'username': username})
+
     return url
 
 
@@ -23,6 +24,14 @@ class UsersAPITests(APITestCase, UsersMixin):
     def setUp(self) -> None:
         self.user_data = self.generate_form_register()
         return super().setUp()
+
+    def test_users_get_list_return_error_404(self):
+        token = self.get_login_jwt_access_token(data=self.user_data)
+        response = self.client.get(
+            url_user_api(),
+            headers={'Authorization': f"Bearer {token}"}
+        )
+        self.assertEqual(response.status_code, 404)
 
     def test_create_user_api(self):
         # Test method POST - Creating user through API
@@ -81,3 +90,38 @@ class UsersAPITests(APITestCase, UsersMixin):
         self.assertEqual(
             response.status_code, status.HTTP_401_UNAUTHORIZED
         )
+
+    def test_user_update_return_200_if_no_data(self):
+        user = self.create_user()
+        token_1 = self.get_login_jwt_access_token(False, data={
+            "username": user.username,
+            "password": "Password123"
+        })
+
+        response = self.client.patch(
+            url_user_api('detail', user.username),
+            headers={'Authorization': f"Bearer {token_1}"}
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_user_update_validations_errors(self):
+        user = self.create_user()
+        token_1 = self.get_login_jwt_access_token(False, data={
+            "username": user.username,
+            "password": "Password123"
+        })
+        self.user_data = self.generate_form_profile()
+        del self.user_data['username']
+        for key, value in self.user_data.items():
+            response = self.client.patch(
+                url_user_api('detail', user.username),
+                data={key: ""},
+                headers={'Authorization': f"Bearer {token_1}"}
+            )
+            self.assertIn("Esse campo é obrigatório", str(response.data))
+        response = self.client.patch(
+            url_user_api('detail', user.username),
+            data={'username': ""},
+            headers={'Authorization': f"Bearer {token_1}"}
+        )
+        self.assertIn("Este campo não pode ser em branco", str(response.data))

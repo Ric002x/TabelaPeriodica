@@ -129,6 +129,14 @@ class ResetPasswordTests(TestBaseUsersApp):
                       "incluindo letras maiúsculas e números",
                       response.content.decode('utf-8'))
 
+    def test_reset_password_empty_filds_in_form_password(self):
+        for key, value in self.password_form.items():
+            self.password_form[key] = ""
+            response = self.client.post(
+                self.link, self.password_form, follow=True)
+            msg = "Esse campo é obrigatório"
+            self.assertIn(msg, response.content.decode('utf-8'))
+
     def test_reset_password_successfull(self):
         response = self.client.post(
             self.link, self.password_form, follow=True)

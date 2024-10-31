@@ -112,6 +112,12 @@ class UsersValidatorsForCreate:
 
     def clean_username(self, *args, **kwargs):
         username = self.data.get('username')
+        if not username:
+            self.errors['username'].append(self.ErrorClass(
+                'Esse campo é obrigatório',
+                code='blank'
+            ))
+
         if username:
             if not re.match(r'^[\w-]+$', username):
                 self.errors['username'].append(
@@ -145,20 +151,14 @@ class UsersValidatorsForUpdate(UsersValidatorsForCreate):
         super().__init__(data, errors, ErrorClass)
 
     def final_clean(self, *args, **kwargs):
-        if 'password' in self.data:
-            self.clean_password()
-        if 'password' in self.data and 'password2' in self.data:
-            self.validate_passwords_match()
+        if 'username' in self.data:
+            self.clean_username()
         if 'email' in self.data:
             self.clean_email()
         if 'first_name' in self.data:
             self.clean_first_name()
         if 'last_name' in self.data:
             self.clean_last_name()
-        if 'agree_to_terms' in self.data:
-            self.clean_agree_to_terms()
-        if 'username' in self.data:
-            self.clean_username()
 
         if self.errors:
             raise self.ErrorClass(self.errors)  # type: ignore
