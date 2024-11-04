@@ -543,3 +543,14 @@ input::placeholder {font-size: var(--font-size-ss);}
 .border_red:active {
     background-color: var(--background2);
 }
+
+
+
+/* Error Handling */
+
+.page-not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}

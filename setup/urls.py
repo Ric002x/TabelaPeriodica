@@ -27,4 +27,6 @@ urlpatterns = [
     path('learn-lab/', include('learn_lab.urls')),
 ] + debug_toolbar_urls()
 
+handler404 = "periodic_table.views.base.handler404"
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

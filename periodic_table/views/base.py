@@ -16,6 +16,10 @@ def home_page_view(request):
     })
 
 
+def handler404(request, exception):
+    return render(request, "not_found.html")
+
+
 def table_list_view(request):
     elements = Element.objects.filter(
     ).order_by('id')
