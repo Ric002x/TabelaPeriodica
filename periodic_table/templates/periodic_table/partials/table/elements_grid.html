@@ -3,7 +3,7 @@
     {% for element in elements %}
     {% if element.atomic_number <= 56 or element.atomic_number >= 72 and element.atomic_number <= 88 or element.atomic_number >= 104 %}
         <div class='grid-item-container'>
-            <a href="{% url "periodic_table:single_element" element.slug %}" class="grid-item {{element.get_css_class}}">
+            <a href="{% url "periodic_table:single_element" element.symbol %}" class="grid-item {{element.get_css_class}}">
                 <div class='num-atom-num-mass'><span>{{element.atomic_number}}</span><span>{{element.atomic_mass}}</span></div>
                 <h2>{{element.symbol}}</h2>
                 <p>{{element.name}}</p>
@@ -33,7 +33,7 @@
     {% for element in elements %}
         {% if element.atomic_number >= 57 and element.atomic_number <= 71 %}
             <div class='grid-item-container'>
-                <a href="{% url "periodic_table:single_element" element.slug %}" class="grid-item {{element.get_css_class}}">
+                <a href="{% url "periodic_table:single_element" element.symbol %}" class="grid-item {{element.get_css_class}}">
                     <div class='num-atom-num-mass'><span>{{element.atomic_number}}</span><span>{{element.atomic_mass}}</span></div>
                     <h2>{{element.symbol}}</h2>
                     <p>{{element.name}}</p>
@@ -47,7 +47,7 @@
     {% for element in elements %}
         {% if element.atomic_number >= 89 and element.atomic_number <= 103 %}
         <div class='grid-item-container'>
-            <a href="{% url "periodic_table:single_element" element.slug %}" class="grid-item {{element.get_css_class}}">
+            <a href="{% url "periodic_table:single_element" element.symbol %}" class="grid-item {{element.get_css_class}}">
                 <div class='num-atom-num-mass'><span>{{element.atomic_number}}</span><span>{{element.atomic_mass}}</span></div>
                 <h2>{{element.symbol}}</h2>
                 <p>{{element.name}}</p>

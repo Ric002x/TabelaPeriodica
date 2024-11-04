@@ -2,7 +2,7 @@
 <div class="list-content">
     {% for element in elements %}
     <div class="element-box">
-        <a href="{% url "periodic_table:single_element" element.slug %}">
+        <a href="{% url "periodic_table:single_element" element.symbol %}">
             <div class="element-item {{element.get_css_class}}">
                 <h2 class='element-simbol title-l'>{{element.symbol}}</h2>
             </div>

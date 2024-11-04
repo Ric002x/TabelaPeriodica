@@ -13,7 +13,7 @@ class ElementsSerializer(serializers.ModelSerializer):
 
     element_link = serializers.HyperlinkedIdentityField(
         view_name="periodic_table:api_elements_detail_view",
-        lookup_field='slug'
+        lookup_field='symbol'
     )
 
 

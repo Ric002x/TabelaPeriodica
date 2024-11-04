@@ -12,16 +12,16 @@ urlpatterns = [
     path('elementos/lista/', views.ElementsListView.as_view(),
          name='elements_list'),
 
-    path('elementos/<slug:slug>/', views.ElementDetailView.as_view(),
+    path('elementos/<str:symbol>/', views.ElementDetailView.as_view(),
          name='single_element'),
 
     path('politicas-de-privacidade', views.privacy_police_view,
          name='privacy_police'),
 
     # Url's for API
-    path("api/elementos/lista", views.ElementListViewAPI.as_view(),
+    path("api/elementos/", views.ElementListViewAPI.as_view(),
          name="api_elements_list_view"),
 
-    path("api/elementos/<slug:slug>", views.ElementDetailViewAPI.as_view(),
+    path("api/elementos/<str:symbol>/", views.ElementDetailViewAPI.as_view(),
          name="api_elements_detail_view")
 ]

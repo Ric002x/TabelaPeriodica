@@ -9,30 +9,34 @@ class ActivitySerializer(serializers.ModelSerializer):
         model = Activity
         fields = [
             'id', 'title', 'activity_slug', 'description', 'activity_link',
-            'subject', 'subject_name', 'content', 'level',
-            'level_name', 'user', 'user_name', 'file'
+            'content', 'subject', 'level', 'user', 'file',
+            'thumbnail'
         ]
 
     activity_link = serializers.HyperlinkedIdentityField(
-        view_name='learn_lab:activity-api-v2-detail',
+        view_name='learn_lab:activity-api-detail',
         lookup_field='slug'
-    )
-    subject_name = serializers.StringRelatedField(
-        source='subject',
-        read_only=True
-    )
-    level_name = serializers.StringRelatedField(
-        source='level',
-        read_only=True
-    )
-    user_name = serializers.StringRelatedField(
-        source='user',
-        read_only=True
     )
     activity_slug = serializers.StringRelatedField(
         source='slug',
         read_only=True
     )
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['subject'] = {
+            "id": instance.subject.id,
+            "name": instance.subject.name
+        }
+        representation['level'] = {
+            "id": instance.level.id,
+            "name": instance.level.name
+        }
+        representation['user'] = {
+            "id": instance.user.id,
+            "username": instance.user.username
+        }
+        return representation
 
     def validate(self, attrs):
         super_validade = super().validate(attrs)

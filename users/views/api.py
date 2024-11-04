@@ -12,7 +12,7 @@ class UsersAPIViewSet(ModelViewSet):
     serializer_class = UsersSerializer
     http_method_names = ['get', 'post', 'patch', 'head', 'options']
     User = get_user_model()
-    queryset = User.objects.all()  # type:ignore
+    queryset = User.objects.all()
     lookup_field = 'username'
 
     def get_permissions(self):

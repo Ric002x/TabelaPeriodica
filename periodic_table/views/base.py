@@ -61,12 +61,12 @@ class ElementDetailView(DetailView):
     model = Element
     template_name = 'periodic_table/pages/single_element.html'
     context_object_name = "element"
-    slug_field = "slug"
-    slug_url_kwarg = "slug"
+    slug_field = "symbol"
+    slug_url_kwarg = "symbol"
 
     def get_object(self, queryset=None):
         try:
-            element = Element.objects.get(slug=self.kwargs.get('slug'))
+            element = Element.objects.get(symbol=self.kwargs.get('symbol'))
         except Element.DoesNotExist:
             raise Http404
         return element

@@ -16,7 +16,7 @@ class ElementListViewAPI(ListAPIView):
 class ElementDetailViewAPI(RetrieveAPIView):
     queryset = Element.objects.order_by('id').all()
     serializer_class = ElementDetailSerializer
-    lookup_field = 'slug'
+    lookup_field = 'symbol'
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):

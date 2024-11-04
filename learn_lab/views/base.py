@@ -96,7 +96,7 @@ class LearnLabDetailView(DetailView):
 
         context.update({
             'activity': activity,
-            'activiy_detail_page': True,
+            'activity_detail_page': True,
             'rating_form': rating_form_create,
             'rating_form_create_action': (
                 reverse('learn_lab:activity_rate_create',
@@ -245,7 +245,7 @@ def rating_create(request, slug):
                 rate.user = request.user
                 rate.activity = Activity.objects.get(slug=slug)
                 rate.save()
-                messages.success(request, 'Avalição enviada')
+                messages.success(request, 'Avaliação enviada')
                 return redirect(reverse('learn_lab:learn_lab_activity',
                                         kwargs={'slug': slug}))
             else:
@@ -278,7 +278,7 @@ def rating_edit(request, slug):
             rate.activity = activity
             rate.save()
 
-            messages.success(request, 'Sua avalição foi alterada!')
+            messages.success(request, 'Sua avaliação foi alterada!')
             return redirect(reverse(
                 'learn_lab:learn_lab_activity', kwargs={'slug': slug}
             ))
@@ -300,7 +300,7 @@ def rating_delete(request, slug):
             user=request.user
         ).first()
         user_rating.delete()  # type: ignore
-        messages.success(request, "Avalição deletada")
+        messages.success(request, "Avaliação deletada")
         return redirect(reverse(
             'learn_lab:learn_lab_activity', kwargs={'slug': slug}
         ))

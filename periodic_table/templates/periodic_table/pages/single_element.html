@@ -20,13 +20,13 @@
 
         <div class="navigation-buttons text-m">
             {% if prev_element and next_element %}
-                <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+                <a href="{% url 'periodic_table:single_element' prev_element.symbol %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
                 <div class="w-10"></div>
-                <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+                <a href="{% url 'periodic_table:single_element' next_element.symbol %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
             {% elif not prev_element %}
-                <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+                <a href="{% url 'periodic_table:single_element' next_element.symbol %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
             {% elif not next_element %}
-                <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+                <a href="{% url 'periodic_table:single_element' prev_element.symbol %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
             {% endif %}
         </div>
 
@@ -168,13 +168,13 @@
 
     <div class="navigation-buttons text-m">
         {% if prev_element and next_element %}
-            <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+            <a href="{% url 'periodic_table:single_element' prev_element.symbol %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
             <div class="w-10"></div>
-            <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+            <a href="{% url 'periodic_table:single_element' next_element.symbol %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
         {% elif not prev_element %}
-            <a href="{% url 'periodic_table:single_element' next_element.slug %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
+            <a href="{% url 'periodic_table:single_element' next_element.symbol %}" class="next-element default-button border_green small-button">{{ next_element.name }}  &raquo;</a>
         {% elif not next_element %}
-            <a href="{% url 'periodic_table:single_element' prev_element.slug %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
+            <a href="{% url 'periodic_table:single_element' prev_element.symbol %}" class="prev-element default-button border_green small-button">&laquo;  {{ prev_element.name }} </a>
         {% endif %}
     </div>
 <hr>

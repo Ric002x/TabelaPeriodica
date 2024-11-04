@@ -1,7 +1,5 @@
 from django.urls import include, path
 from rest_framework.routers import SimpleRouter
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView, TokenVerifyView)
 
 from . import views
 
@@ -9,9 +7,9 @@ app_name = 'learn_lab'
 
 activity_router_api = SimpleRouter()
 activity_router_api.register(
-    'api-v2/atividades',
+    'api/atividades',
     views.ActivityViewSet,
-    basename='activity-api-v2'
+    basename='activity-api'
 )
 
 urlpatterns = [
@@ -49,29 +47,14 @@ urlpatterns = [
     path('atividade/<slug:slug>/excluir', views.rating_delete,
          name='activity_rate_delete'),
 
-
-    # SimpleJWT routs
-    path('api/token/',
-         TokenObtainPairView.as_view(),
-         name='token_obtain_pair'),
-
-    path('api/token/refresh/',
-         TokenRefreshView.as_view(),
-         name='token_refresh'),
-
-    path('api/token/verify/',
-         TokenVerifyView.as_view(),
-         name='token_verify'),
-
-
     # Urls for APIs
     path('', include(activity_router_api.urls)),
 
-    path('api-v2/atividades/materia/<int:pk>/',
+    path('api/atividades/materia/<int:pk>/',
          views.ActivitiesSubjectListAPIv2.as_view(),
-         name='activity-api-v2-subject'),
+         name='activity-api-subject'),
 
-    path('api-v2/atividades/turma/<int:pk>/',
+    path('api/atividades/turma/<int:pk>/',
          views.ActivitiesLevelListAPIv2.as_view(),
-         name='activity-api-v2-level')
+         name='activity-api-level')
 ]
