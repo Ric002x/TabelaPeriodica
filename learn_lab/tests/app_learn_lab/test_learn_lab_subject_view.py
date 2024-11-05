@@ -25,7 +25,7 @@ class LearnLabSubjectViewTests(LearnLabBaseTests):
     def test_learn_lab_subject_raise_404_if_no_activity(self):
         response = self.client.get(reverse(
             'learn_lab:learn_lab_subject', kwargs={'subject': 'not_subject'}))
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")
 
     def test_learn_lab_subject_has_context(self):
         response = self.client.get(self.url)

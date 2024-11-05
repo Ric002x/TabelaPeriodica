@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .validators import UsersValidatorsForCreate, UsersValidatorsForUpdate
+from .validators import (ResetPasswordValidator, UsersValidatorsForCreate,
+                         UsersValidatorsForUpdate)
 
 
 class UsersSerializer(serializers.ModelSerializer):
@@ -39,3 +40,37 @@ class UsersSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class UsersChangePasswordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = [
+            'old_password', 'new_password', 'repeat_password'
+        ]
+
+    old_password = serializers.CharField(write_only=True, required=True)
+    new_password = serializers.CharField(write_only=True, required=True)
+    repeat_password = serializers.CharField(write_only=True, required=True)
+
+    def validate(self, attrs):
+        super_validate = super().validate(attrs)
+
+        # Validação para old password
+        User = get_user_model()
+        user = User.objects.get(id=self.context['request'].user.id)
+
+        if "old_password" in attrs:
+            if not user.check_password(attrs['old_password']):
+                raise serializers.ValidationError(
+                    {"old_password": "A senha antiga está incorreta."}
+                )
+        else:
+            raise serializers.ValidationError(
+                {"old_password": "Campo obrigatório."}
+            )
+
+        # Validação para nova senha:
+        ResetPasswordValidator(data=attrs,
+                               ErrorClass=serializers.ValidationError)
+        return super_validate

@@ -9,15 +9,15 @@ from .test_learn_lab_base import ActivityMixin
 
 def url_list(page=None):
     if not page:
-        url_list = reverse('learn_lab:activity-api-v2-list')
+        url_list = reverse('learn_lab:activity-api-list')
     else:
         url_list = reverse(
-            'learn_lab:activity-api-v2-list') + f'?page={page}'
+            'learn_lab:activity-api-list') + f'?page={page}'
     return url_list
 
 
 def api_token_urls():
-    url = reverse('learn_lab:token_obtain_pair')
+    url = reverse('users:token_obtain_pair')
     return url
 
 
@@ -32,7 +32,11 @@ class ActivityAPIGetListTests(APITestCase, ActivityMixin):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_itens_per_page_pagination_for_activity(self):
-        self.bulk_create_activity(range(30))
+        self.subject1 = self.create_subject()
+        self.level1 = self.create_level()
+
+        self.bulk_create_activity(
+            range(1, 31), subject=self.subject1, level=self.level1)
         response = self.client.get(url_list())
         results = len(response.data['results'])  # type: ignore
         self.assertEqual(results, 20)
@@ -42,7 +46,12 @@ class ActivityAPIGetListTests(APITestCase, ActivityMixin):
         self.assertEqual(results, 10)
 
     def test_get_only_published_activities(self):
-        self.bulk_create_activity(range(10))
+        self.subject1 = self.create_subject()
+        self.level1 = self.create_level()
+
+        self.bulk_create_activity(
+            range(1, 11), subject=self.subject1, level=self.level1)
+
         self.activity_create(is_published=False)
         response = self.client.get(url_list())
         results = len(response.data['results'])  # type: ignore
@@ -87,9 +96,9 @@ class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
         response = self.client.post(
             url_list(), self.data, format='json',
             headers={'Authorization': f"Bearer {self.token}"})
-        self.assertEqual(response.data['user'], 1)  # type: ignore
+        self.assertEqual(response.data['user']['id'], 1)  # type: ignore
         self.assertEqual(
-            response.data['user_name'], "username")  # type: ignore
+            response.data['user']['username'], "username")  # type: ignore
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_activity_owner_can_patch(self):
@@ -99,7 +108,7 @@ class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
             is_published=True
         )
         response = self.client.patch(
-            reverse('learn_lab:activity-api-v2-detail',
+            reverse('learn_lab:activity-api-detail',
                     kwargs={'slug': activity.slug}), self.data, format="json",
             headers={'Authorization': f"Bearer {self.token}"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -109,7 +118,7 @@ class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
             simple=True,
             id=2)
         response = self.client.patch(
-            reverse('learn_lab:activity-api-v2-detail',
+            reverse('learn_lab:activity-api-detail',
                     kwargs={'slug': activity.slug}), self.data, format="json",
             headers={'Authorization': f"Bearer {self.token}"})
         self.assertEqual(
@@ -117,7 +126,7 @@ class ActivityAPIsAuthorizationTests(APITestCase, ActivityMixin):
 
 
 def url_list_foreignkeys(foreignkey='subject', id=1):
-    url = reverse(f'learn_lab:activity-api-v2-{foreignkey}',
+    url = reverse(f'learn_lab:activity-api-{foreignkey}',
                   kwargs={'pk': id})
     return url
 
@@ -147,17 +156,15 @@ class ActivityListSubjectAndLevelTests(APITestCase, ActivityMixin):
         results = response.data['results']   # type: ignore
         for item in results:
             subject1 = item['subject']
-            self.assertEqual(subject1, 1)
-            subject_name = item['subject_name']
-            self.assertEqual(subject_name, 'Ciências')
+            self.assertEqual(subject1['id'], 1)
+            self.assertEqual(subject1['name'], 'Ciências')
 
         response2 = self.client.get(url_list_foreignkeys(id=2))
         results2 = response2.data['results']   # type: ignore
         for item in results2:
             subject2 = item['subject']
-            self.assertEqual(subject2, 2)
-            subject_name = item['subject_name']
-            self.assertEqual(subject_name, 'Matemática')
+            self.assertEqual(subject2['id'], 2)
+            self.assertEqual(subject2['name'], 'Matemática')
 
     def test_get_level_list_status_200(self):
         response = self.client.get(url_list_foreignkeys('level'))
@@ -169,12 +176,12 @@ class ActivityListSubjectAndLevelTests(APITestCase, ActivityMixin):
         results = response.data['results']  # type: ignore
         for item in results:
             level1 = item['level']
-            self.assertEqual(level1, 1)
-            self.assertEqual(item['level_name'], "8º ano EF")
+            self.assertEqual(level1['id'], 1)
+            self.assertEqual(level1['name'], "8º ano EF")
 
         response2 = self.client.get(url_list_foreignkeys('level', id=2))
         results2 = response2.data['results']  # type: ignore
         for item in results2:
             level2 = item['level']
-            self.assertEqual(level2, 2)
-            self.assertEqual(item['level_name'], '9º ano EF')
+            self.assertEqual(level2['id'], 2)
+            self.assertEqual(level2['name'], '9º ano EF')

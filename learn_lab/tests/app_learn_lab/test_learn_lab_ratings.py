@@ -15,7 +15,7 @@ class RatingCrudTests(LearnLabBaseTests):
             reverse('learn_lab:activity_rate_create',
                     kwargs={'slug': self.activity.slug}),
             data=self.rating_form_data, follow=True,)
-        msg = 'Avalição enviada'
+        msg = 'Avaliação enviada'
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_rating_create_invalid_form(self):
@@ -33,7 +33,7 @@ class RatingCrudTests(LearnLabBaseTests):
             reverse('learn_lab:activity_rate_create',
                     kwargs={'slug': self.activity.slug}),
             data=self.rating_form_data, follow=True,)
-        msg = 'Avalição enviada'
+        msg = 'Avaliação enviada'
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_rating_update(self):
@@ -47,7 +47,7 @@ class RatingCrudTests(LearnLabBaseTests):
                     kwargs={'slug': self.activity.slug}),
             data=self.rating_form_data, follow=True
         )
-        msg = 'Sua avalição foi alterada!'
+        msg = 'Sua avaliação foi alterada!'
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_rating_update_invalid(self):
@@ -76,21 +76,21 @@ class RatingCrudTests(LearnLabBaseTests):
                     kwargs={'slug': self.activity.slug}),
             follow=True
         )
-        msg = 'Avalição deletada'
+        msg = 'Avaliação deletada'
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_rating_raise_404_if_get(self):
         response = self.client.get(
             reverse('learn_lab:activity_rate_create',
                     kwargs={'slug': self.activity.slug}))
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")
 
         response = self.client.get(
             reverse('learn_lab:activity_rate_edit',
                     kwargs={'slug': self.activity.slug}))
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")
 
         response = self.client.get(
             reverse('learn_lab:activity_rate_delete',
                     kwargs={'slug': self.activity.slug}))
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")

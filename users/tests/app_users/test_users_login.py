@@ -30,7 +30,7 @@ class UsersAppLoginTests(TestBaseUsersApp):
 
     def test_login_create_raise_404_if_not_post(self):
         response = self.client.get(self.url_login_create)
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")
 
     def test_login_user_not_found(self):
         self.login_form_data['username'] = 'not_user'

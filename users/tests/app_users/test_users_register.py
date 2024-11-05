@@ -64,7 +64,7 @@ class UsersAppRegisterTests(TestBaseUsersApp):
             self.url_register_create, data=self.register_form_data,
             follow=True,
         )
-        msg = ('O nome de usuário precisa ter o mínimo de 5 caractéres')
+        msg = ('O nome de usuário precisa ter o mínimo de 5 caracteres')
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_register_invalid_email(self):
@@ -78,7 +78,7 @@ class UsersAppRegisterTests(TestBaseUsersApp):
 
     def test_register_create_not_post_raise_404(self):
         response = self.client.get(self.url_register_create)
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")
 
     def test_register_email_already_being_used(self):
         self.client.post(
@@ -99,7 +99,7 @@ class UsersAppRegisterTests(TestBaseUsersApp):
                 self.url_register_create, data=self.register_form_data,
                 follow=True)
             msg_error = 'O nome de usuário só pode conter letras, ' \
-                'números, hífens (-) e sublinhados (_).'
+                'números, hifens (-) e sublinhados (_).'
             self.assertIn(msg_error, response.content.decode('utf-8'))
 
     def test_usernane_max_lenght_20_characters(self):
@@ -107,7 +107,7 @@ class UsersAppRegisterTests(TestBaseUsersApp):
         response = self.client.post(
             self.url_register_create, self.register_form_data, follow=True
         )
-        msg_error = 'O nome não pode ultrapassar o máximo de 20 caractéres'
+        msg_error = 'O nome não pode ultrapassar o máximo de 20 caracteres'
         self.assertIn(msg_error, response.content.decode('utf-8'))
 
     def test_cannot_register_if_not_agree_to_terms(self):

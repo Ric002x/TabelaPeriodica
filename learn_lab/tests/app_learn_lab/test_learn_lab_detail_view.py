@@ -18,7 +18,7 @@ class LearnLabDetailViewTests(LearnLabBaseTests):
     def test_learn_lab_detail_raise_http_404_if_no_activity(self):
         response = self.client.get(reverse('learn_lab:learn_lab_activity',
                                    kwargs={'slug': 'something'}))
-        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, "not_found.html")
 
     def test_learn_lab_detail_template(self):
         activity = self.activity_create()

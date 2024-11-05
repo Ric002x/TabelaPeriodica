@@ -37,7 +37,7 @@ class ElementsAPIGETDetail(APITestCase, ElementsMixin):
     def setUp(self) -> None:
         self.url = reverse(
             "periodic_table:api_elements_detail_view",
-            kwargs={'slug': 'hidrogenio'})
+            kwargs={'symbol': 'H'})
         return super().setUp()
 
     def test_element_detail_view_function(self):

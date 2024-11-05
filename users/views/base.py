@@ -270,10 +270,6 @@ def forgot_my_password(request):
                            " Certifique-se que solicitou para o email correto")
             return redirect("users:forgot_my_password")
 
-        except Exception as e:
-            messages.error(request, f"Falha na solicitação! {e}")
-            return redirect("users:forgot_my_password")
-
     return render(request, "users/pages/forgot_my_password.html", context={
         "form_action": reverse("users:forgot_my_password")
     })

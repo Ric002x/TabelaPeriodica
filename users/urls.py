@@ -50,6 +50,11 @@ urlpatterns = [
          TokenVerifyView.as_view(),
          name='token_verify'),
 
+    # API Urls
+    path("api/<str:username>/change-password/",
+         views.UsersChangePasswordAPI.as_view(),
+         name="change_password_api")
+
 ]
 
 urlpatterns += routers_api.urls

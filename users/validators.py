@@ -123,7 +123,7 @@ class UsersValidatorsForCreate:
                 self.errors['username'].append(
                     self.ErrorClass(
                         'O nome de usuário só pode conter letras, '
-                        'números, hífens (-) e sublinhados (_).',
+                        'números, hifens (-) e sublinhados (_).',
                         code='invalid'
                     )
                 )
@@ -131,7 +131,7 @@ class UsersValidatorsForCreate:
                 self.errors['username'].append(
                     self.ErrorClass(
                         'O nome de usuário precisa '
-                        'ter o mínimo de 5 caractéres',
+                        'ter o mínimo de 5 caracteres',
                         code='min_length'
                     )
                 )
@@ -139,7 +139,7 @@ class UsersValidatorsForCreate:
                 self.errors['username'].append(
                     self.ErrorClass(
                         'O nome não pode ultrapassar '
-                        'o máximo de 20 caractéres',
+                        'o máximo de 20 caracteres',
                         code='max_length'
                     )
                 )
@@ -159,6 +159,13 @@ class UsersValidatorsForUpdate(UsersValidatorsForCreate):
             self.clean_first_name()
         if 'last_name' in self.data:
             self.clean_last_name()
+        if 'password' in self.data or 'password2' in self.data:
+            self.errors['password'].append(
+                self.ErrorClass(
+                    'Não é possível atualizar a senha neste endpoint',
+                    code='forbidden_field'
+                )
+            )
 
         if self.errors:
             raise self.ErrorClass(self.errors)  # type: ignore

@@ -7,16 +7,16 @@ from .test_app_users_base import UsersMixin
 
 def url_user_api(type='list', username=None):
     if type == 'list':
-        url = reverse(f'users:users-api-v2-{type}')
+        url = reverse(f'users:users-api-{type}')
     elif type == 'detail':
-        url = reverse(f'users:users-api-v2-{type}',
+        url = reverse(f'users:users-api-{type}',
                       kwargs={'username': username})
 
     return url
 
 
 def api_token_urls():
-    url = reverse('learn_lab:token_obtain_pair')
+    url = reverse('users:token_obtain_pair')
     return url
 
 

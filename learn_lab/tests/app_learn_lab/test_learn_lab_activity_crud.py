@@ -89,10 +89,10 @@ class LearnLabAppActivityDeleteTests(LearnLabBaseTests):
             'learn_lab:activity_delete', kwargs={'slug': 'teste'}))
         self.assertEqual(view.func, views.activity_delete)
 
-    def test_activity_delete_not_post_raise_404(self):
+    def test_activity_delete_not_post_raise_404_template(self):
         response = self.client.get(reverse(
             'learn_lab:activity_delete', kwargs={'slug': 'teste'}))
-        self.assertEqual(404, response.status_code)
+        self.assertTemplateUsed(response, "not_found.html")
 
     def test_activity_delete_sussessful(self):
         response = self.client.post(reverse(
@@ -131,7 +131,7 @@ class LearnLabAppActivityUpdateTests(LearnLabBaseTests):
     def test_activity_update_raise_404_if_no_activity(self):
         response = self.client.get(reverse(
             'learn_lab:activity_update', kwargs={'slug': 'no-activity'}))
-        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, "not_found.html")
 
     def test_activity_update_form_instance(self):
         response = self.client.get(self.url_activity_update)
