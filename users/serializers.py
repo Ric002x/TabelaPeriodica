@@ -74,3 +74,8 @@ class UsersChangePasswordSerializer(serializers.ModelSerializer):
         ResetPasswordValidator(data=attrs,
                                ErrorClass=serializers.ValidationError)
         return super_validate
+
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data['new_password'])
+        instance.save()
+        return instance
