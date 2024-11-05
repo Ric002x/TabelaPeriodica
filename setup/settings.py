@@ -190,3 +190,6 @@ CORS_ALLOW_METHODS = (
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 DEFAULT_FROM_EMAIL = "no-reply@em704.ricardovenicius.com.br"
+
+# Password Token
+PASSWORD_RESET_TIMEOUT = 600

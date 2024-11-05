@@ -34,7 +34,7 @@ urlpatterns = [
 
     path('esqueci-minha-senha/', views.forgot_my_password,
          name="forgot_my_password"),
-    path('redefinir-senha/', views.reset_password,
+    path('redefinir-senha/<str:uidb64>/<str:token>', views.reset_password,
          name="reset_password"),
 
     # SimpleJWT routs

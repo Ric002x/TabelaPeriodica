@@ -1,25 +1,24 @@
-from datetime import timedelta
-
 from django.contrib import messages
 from django.contrib.auth import (authenticate, login, logout,
                                  update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from rest_framework_simplejwt.exceptions import TokenError
-from rest_framework_simplejwt.tokens import AccessToken
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from learn_lab.models import Activity
 
 from ..forms import (LoginForm, RegisterForm, ResetPasswordForm,
                      UpdateProfileForm, UpdateUserForm)
 
-# Create your views here.
+token_password = PasswordResetTokenGenerator()
 
 
 def register_view(request):
@@ -230,11 +229,11 @@ def forgot_my_password(request):
 
         try:
             user = User.objects.get(email=email)
-            token = AccessToken.for_user(user)
-            token.set_exp(lifetime=timedelta(minutes=5))
-
+            uid = urlsafe_base64_encode(force_bytes(user.id))
+            token = token_password.make_token(user)
             reset_link = request.build_absolute_uri(
-                reverse("users:reset_password") + f"?token={token}"
+                reverse("users:reset_password", kwargs={
+                        "uidb64": uid, 'token': token})
             )
 
             mail = EmailMultiAlternatives(
@@ -270,36 +269,31 @@ def forgot_my_password(request):
                            " Certifique-se que solicitou para o email correto")
             return redirect("users:forgot_my_password")
 
+        except Exception as e:
+            messages.error(request, f"Falha na solicitação!: {e}")
+            return redirect("users:forgot_my_password")
+
     return render(request, "users/pages/forgot_my_password.html", context={
         "form_action": reverse("users:forgot_my_password")
     })
 
 
-def reset_password(request):
+def reset_password(request, uidb64, token):
     if request.user.is_authenticated:
         messages.warning(request, 'usuário já logado')
         return redirect(reverse(
             'users:profile_posts',
             kwargs={'username': request.user}))
 
-    token = request.GET.get("token")
-    if not token:
+    uid = urlsafe_base64_decode(uidb64).decode()
+    user = User.objects.get(pk=uid)
+
+    if user is None or not token_password.check_token(user, token):
         messages.error(
-            request, "Falha na solicitação. Por favor, tente novamente")
+            request, "O link de redefinição de senha é inválido ou expirou.")
         return redirect("users:forgot_my_password")
 
-    try:
-        access_token = AccessToken(token)
-    except TokenError:
-        messages.error(
-            request, "Link inválido ou expirado."
-            " Para uma nova tentativa, solicite novamente enviando seu email!")
-        return redirect("users:forgot_my_password")
-
-    user_id = access_token['user_id']
-    user = User.objects.get(pk=user_id)
-
-    if user is not None:
+    elif user is not None:
         if request.method == "POST":
             form = ResetPasswordForm(request.POST)
             if form.is_valid():
@@ -316,7 +310,8 @@ def reset_password(request):
                     request, 'users/pages/reset_password.html', {
                         'form': form,
                         'form_action': reverse(
-                            'users:reset_password') + f"?token={token}"
+                            "users:reset_password",
+                            kwargs={"uidb64": uidb64, 'token': token})
                     })
 
         form = ResetPasswordForm()
@@ -324,7 +319,8 @@ def reset_password(request):
             request, 'users/pages/reset_password.html', {
                 'form': form,
                 'form_action': reverse(
-                    'users:reset_password') + f"?token={token}"
+                    "users:reset_password",
+                    kwargs={"uidb64": uidb64, 'token': token})
             })
 
     else:
