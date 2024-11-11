@@ -41,7 +41,3 @@ class UsersChangePasswordAPI(UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
-
-
-class UserResetPasswordAPI(UpdateAPIView):
-    ...

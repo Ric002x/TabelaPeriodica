@@ -3,6 +3,8 @@ import re
 from django.contrib.auth.models import User
 from django.core import mail
 from django.urls import resolve, reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 
 from users import views
 
@@ -57,7 +59,7 @@ class ForgotMyPasswordTests(TestBaseUsersApp):
 
         email = mail.outbox[0]
         self.assertIn(
-            "http://testserver/usuarios/redefinir-senha/?token=", email.body)
+            "http://testserver/usuarios/redefinir-senha/MQ/", email.body)
 
     def test_forget_my_password_send_email_successful(self):
         self.execute_register()
@@ -103,16 +105,19 @@ class ResetPasswordTests(TestBaseUsersApp):
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_reset_password_redirects_if_not_token(self):
+        uid = urlsafe_base64_encode(force_bytes(1))
         response = self.client.get(
-            reverse("users:reset_password"), follow=True)
-        msg = "Falha na solicitação. Por favor, tente novamente"
+            reverse("users:reset_password", kwargs={
+                "uidb64": uid, "token": "invalid"
+            }), follow=True)
+        msg = "O link de redefinição de senha é inválido ou expirou."
         self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_reset_password_returns_200_if_valid_url(self):
         response = self.client.get(self.link)
         self.assertEqual(response.status_code, 200)
 
-    def test_reset_password_post_error_differente_passwords(self):
+    def test_reset_password_post_error_different_passwords(self):
         self.password_form['repeat_password'] = "different_password"
         response = self.client.post(
             self.link, self.password_form)

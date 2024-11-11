@@ -1,0 +1,500 @@
+{% extends "periodic_table/pages/api/base.html" %}
+
+{% block api_content_main %}
+
+<h1 class="title-xl outfit">API de Atividades</h1>
+
+<br>
+<p class="text-s justify-text">
+    A API de Atividades é desenvolvida para gerenciar o controle de atividades educacionais, permitindo que os usuários realizem operações de criação, leitura, atualização e exclusão de atividades. Cada método da API é projetado com funcionalidades específicas para atender às diferentes necessidades de gerenciamento de atividades de maneira eficiente.
+</p>
+
+<table class=" endpoints_table">
+    <thead>
+        <tr class="text-ss">
+        <th scope="col">Função</th>
+        <th scope="col">Endpoint</th>
+        <th scope="col">Método</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-ss">
+        <th scope="row">Retorna uma lista de atividades</th>
+        <td>&lt;base_url&gt;/learn-lab/api/atividades/</td>
+        <td>GET</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Retorna uma atividade específica</th>
+        <td>&lt;base_url&gt;/learn-lab/api/atividades/&lt;atividade&gt;/</td>
+        <td>GET</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Cria uma atividade</th>
+        <td>&lt;base_url&gt;/learn-lab/api/atividades/</td>
+        <td>POST</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Atualiza uma atividade</th>
+        <td>&lt;base_url&gt;/learn-lab/api/atividades/&lt;atividade&gt;/</td>
+        <td>PATCH</td>
+        </tr>
+    </tbody>
+</table>
+
+<section>
+    <h2 class="outfit-m">1. Endpoint: <span class="url_api">/learn-lab/api/atividades/</span></h2><br><br>
+    <p class="text-s">
+        <strong>Método HTTP:</strong> GET <br>
+        Retorna uma lista com as atividades criadas e publicadas, ordenadas por ID.
+    </p>
+
+    <table class="data_list_table text-ss">
+        <caption>Dados Retornados</caption>
+        <thead>
+            <tr>
+                <th scope="col">Campo</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">id</th>
+                <td>ID da atividade</td>
+                <td>int</td>
+            </tr>
+            <tr>
+                <th scope="row">title</th>
+                <td>Título da atividade</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">description</th>
+                <td>Descrição da atividade</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">content</th>
+                <td>Conteúdo da atividade</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">subject</th>
+                <td>Matéria da atividade</td>
+                <td>int</td>
+            </tr>
+            <tr>
+                <th scope="row">level</th>
+                <td>Turma da atividade</td>
+                <td>int</td>
+            </tr>
+            <tr>
+                <th scope="row">file</th>
+                <td>Arquivo da atividade</td>
+                <td>file</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de Retorno da Requisição:</h3>
+    <pre class="json-response text-ss">
+<code>
+{
+    "count": 5,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 5,
+            "title": "Leis de Newton",
+            "activity_slug": "leis-de-newton",
+            "description": "Nesta atividade...",
+            "activity_link": "&lt;base_url&gt;/learn-lab/api/atividades/leis-de-newton/",
+            "content": "Física Geral",
+            "subject": {
+                "id": 4,
+                "name": "Física"
+            },
+            "level": {
+                "id": 9,
+                "name": "2º ano Ensino Médio"
+            },
+            "user": {
+                "id": 2
+                "username": "LucasS"
+            },
+            "file": "&lt;base_url&gt;/media/learn_lab/files/leis-de-newton.pdf",
+            "thumbnail": "&lt;base_url&gt;/media/learn_lab/thumbnails/leis-de-newton.png"
+        },
+        {
+            "id": 4,
+            "title": "Introdução aos átomos",
+            "activity_slug": "introducao-aos-atomos",
+            "description": "Nesta atividade...",
+            "activity_link": "&lt;base_url&gt;/learn-lab/api/atividades/introducao-aos-atomos/",
+            "content": "Átomos",
+            "subject": {
+                "id": 3, 
+                "name": "Química" 
+            },
+            "level": {
+                "id": 7, 
+                "name": "9º
+                 ano Ensino Fundamental" 
+            },
+            "user": {
+                "id": 2, 
+                "username": "LucasS" 
+            },
+            "file": "&lt;base_url&gt;/media/learn_lab/files/introducao-aos-atomos.pdf",
+            "thumbnail": "&lt;base_url&gt;/media/learn_lab/thumbnails/introducao-aos-atomos.png"
+        },
+        ...
+    ]
+}
+</code>
+    </pre>
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px;">200 OK: Sucesso</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">2. Endpoint: <span class='url_api'>/learn-lab/api/atividades/<span style="color:#4279bc;font-weight:bold;">&lt;atividade&gt;</span></span></h2><br><br>
+    <p class="text-s">
+        <strong>HTTP Method</strong>: GET <br>
+
+        /<strong>&lt;atividade&gt;</strong>/: A atividade especificada na URL é identificada pela sua slug, gerada automaticamente a partir do título da atividade. Exemplo: "/learn-lab/api/atividades/o-ciclo-da-agua/"<br><br>
+
+        Esta URL retorna os mesmos dados apresentado no endpoint de lista, porém para uma atividade específica.<br><br>
+    </p>
+
+    <h3 class="outfit-s">Exemplo de Retorno da Requisição:</h3>
+    <pre class="json-response text-ss">
+<code>
+{
+    "id": 5,
+    "title": "Leis de Newton",
+    "activity_slug": "leis-de-newton",
+    "description": "Nesta atividade...",
+    "activity_link": "&lt;base_url&gt;/learn-lab/api/atividades/leis-de-newton/",
+    "content": "Física Geral",
+    "subject": {
+        "id": 4,
+        "name": "Física"
+    },
+    "level": {
+        "id": 9,
+        "name": "2º ano Ensino Médio"
+    },
+    "user": {
+        "id": 2,
+        "username": "LucasS"
+    },
+    "file": "&lt;base_url&gt;/media/learn_lab/files/leis-de-newton.pdf",
+    "thumbnail": "&lt;base_url&gt;/media/learn_lab/thumbnails/leis-de-newton.png"
+}
+</code>
+    </pre>
+
+    <br><br>
+    <h3 class="outfit-s">Status de Resposta</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px;">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px;">404 Not Found: Atividade não encontrada</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">3. Endpoint: <span class="url_api">/learn-lab/api/atividades/</span></h2><br><br>
+
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: POST <br>
+        Esta URL permite a criação de uma atividade pelo o usuário autenticado.<br><br>
+    
+        <strong>Obs:</strong> <br>
+        1. Os campos de 'user', 'slug' e 'thumbnail' são preenchidos automaticamente quando a atividade é salva. <br>
+        2. O campo de 'file' requer um envio de fomulário do tipo Multipart. <br>
+        3. Os campos de 'subject' e 'level' requerem seus valores em id, pois são objetos de outra tabela.
+    
+        <br><br>
+    </p>
+
+    <h3 class="outfit-s">Validações e Tratamento de Erros:</h3>
+    <p class="text-s">Todos os campos possuem validações para garantir que nenhum deles seja salvo com valores em branco. Mas há casos específicos para os campos de 'subject', 'level' e 'file'</p>
+
+    <table class="text-ss data_list_table">
+        <thead>
+            <tr>
+                <th scope="col">Campo</th>
+                <th scope="col">Regra de Validação</th>
+                <th scope="col">Mensagem de Erro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">subject</th>
+                <td>É necessário enviar um valor numérico inteiro;<br>Deve haver um objetivo criado para o id passado</td>
+                <td>
+                    <li>"Tipo incorreto. Esperado valor pk, recebeu str" ;</li>
+                    <li>"Pk inválido \"9\" - objeto não existe."</li>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">level</th>
+                <td>É necessário enviar um valor numérico inteiro;<br>Deve haver um objetivo criado para o id passado</td>
+                <td>
+                    <li>"Tipo incorreto. Esperado valor pk, recebeu str" ;</li>
+                    <li>"Pk inválido \"9\" - objeto não existe."</li>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">file</th>
+                <td>Somente é permitido o envio de arquivos PDF</td>
+                <td>
+                    <li>"Você deve enviar um arquivo do tipo PDF" ;</li>
+                    <li>"Erro ao processar o arquivo PDF: arquivo inválido"</li>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    
+    <h3 class="outfit-s">Exemplo de uso (python)</h3><br>    
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    headers = { 
+        <span style="color:#ffe659">"Authorization"</span>: <span style="color:#ffe659">"Bearer eybGciOUzI1NiInFawdTyA..."</span> 
+    }
+    
+    data = {
+        <span style="color:#ffe659">"title"</span>: <span style="color:#ffe659">"O ciclo da água"</span>,
+        <span style="color:#ffe659">"description"</span>: <span style="color:#ffe659">"Esta atividade..."</span>,
+        <span style="color:#ffe659">"content"</span>: <span style="color:#ffe659">"Ecologia"</span>,
+        <span style="color:#ffe659">"subject"</span>: <span style="color:#c60a43">2</span>,
+        <span style="color:#ffe659">"level"</span>: <span style="color:#c60a43">6</span>,
+    }
+
+    file = {'file': <span style="color:#00cd21">open</span>('<span style="color:#ffe659">"caminho/para/seu/arquivo.pdf"</span>', 'rb')}
+    
+    response = requests.<span style="color:#00cd21">post</span>(
+        <span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>,
+        data=data,
+        headers=headers,
+        files=file
+    )
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>: 
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>: 
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+    
+    file.<span style="color:#00cd21">close</span>()    
+        </code></pre>
+    </div>
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta:</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px;">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px;">400 Bad Request: Erro no corpo da requisição</li>
+        <li style="list-style-type: disc; margin-left:20px;">401 Unauthorized: As credenciais de autenticação não foram fornecidas</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">4. Endpoint: <span class='url_api'>/learn-lab/api/atividades/<span style="color:#4279bc;font-weight:bold;">&lt;atividade&gt;</span>/</span></span></h2><br><br>
+
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: PATCH <br>
+        /<strong>&lt;atividade&gt;</strong>/: A atividade especificada na URL é identificada pela sua slug, gerada automaticamente a partir do título da atividade. Exemplo: "/learn-lab/api/atividades/o-ciclo-da-agua/"<br><br>
+    
+        Está URL permite alterar dados da atividade de modo parcial, escolhendo qual campo deseja-se mudar.
+    
+        <table class="data_list_table text-ss">
+            <caption class="justify-text text-s">
+                Corpo da requisição:
+            </caption>
+            <thead>
+                <tr>
+                <th scope="col">Campo</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">title (opcional)</th>
+                    <td>Altera o título da atividade</td>
+                    <td>string</td>
+                </tr>
+                <tr>
+                    <th scope="row">description (opcional)</th>
+                    <td>Altera a descrição da atividade</td>
+                    <td>string</td>
+                </tr>
+                <tr>
+                    <th scope="row">content (opcional)</th>
+                    <td>Altera o conteúdo da atividade</td>
+                    <td>string</td>
+                </tr>
+                <tr>
+                    <th scope="row">subject (opcional)</th>
+                    <td>Altera a matéria da atividade</td>
+                    <td>int</td>
+                </tr>
+                <tr>
+                    <th scope="row">level (opcional)</th>
+                    <td>Altera a turma da atividade</td>
+                    <td>int</td>
+                </tr>
+                <tr>
+                    <th scope="row">file (opcional)</th>
+                    <td>Altera o arquivo PDF da atividade</td>
+                    <td>file</td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3><br>    
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    headers = { 
+        <span style="color:#ffe659">"Authorization"</span>: <span style="color:#ffe659">"Bearer eybGciOUzI1NiInFawdTyA..."</span> 
+    }
+    
+    data = {
+        <span style="color:#ffe659">"description"</span>: <span style="color:#ffe659">"Esta atividade fala sobre..."</span>,
+        <span style="color:#ffe659">"content"</span>: <span style="color:#ffe659">"Ecologia, Sustentabilidade"</span>,
+    }
+    
+    response = requests.<span style="color:#00cd21">patch</span>(
+        <span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>,
+        data=data,
+        headers=headers,
+    )
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>: 
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>: 
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+    </code></pre>
+    </div>
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta:</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px;">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px;">401 Unauthorized: As credenciais de autenticação não foram fornecidas</li>
+        <li style="list-style-type: disc; margin-left:20px;">403 Forbidden: Não é permitido alterar atividade de terceiros</li>
+        <li style="list-style-type: disc; margin-left:20px;">404 Not Found: Atividade não encontrada</li>
+    </ul>
+    
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">Tabela 'subject'</h2>
+    <br><br>
+    <p class="text-s">
+        Na criação de atividades, é necessário o enviar o id da matéria (subject) que deseja atribuir a atividade, sendo elas:
+    </p>
+
+    <table class="data_list_table text-ss">
+        <thead>
+            <tr>
+            <th scope="col">id</th>
+            <th scope="col">valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">1</th>
+            <td>Matemática</td>
+            </tr>
+            <th scope="row">2</th>
+            <td>Ciências</td>
+            </tr>
+            <th scope="row">3</th>
+            <td>Química</td>
+            </tr>
+            <th scope="row">4</th>
+            <td>Física</td>
+            </tr>
+            <th scope="row">5</th>
+            <td>Biologia</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<br><br>
+
+<section>
+    <h2 class="outfit-m">Tabela 'level'</h2>
+    <br><br>
+    <p class="text-s">
+        Na criação de atividades, é necessário o enviar o id da turma (level) que deseja atribuir a atividade, sendo elas:
+    </p>
+
+    <table class="data_list_table text-ss">
+        <thead>
+            <tr>
+            <th scope="col">id</th>
+            <th scope="col">valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">1</th>
+            <td>3º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">2</th>
+            <td>4º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">3</th>
+            <td>5º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">4</th>
+            <td>6º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">5</th>
+            <td>7º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">6</th>
+            <td>8º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">7</th>
+            <td>9º ano Ensino Fundamental</td>
+            </tr>
+            <th scope="row">8</th>
+            <td>1º ano Ensino Médio</td>
+            </tr>
+            <th scope="row">9</th>
+            <td>2º ano Ensino Médio</td>
+            </tr>
+            <th scope="row">10</th>
+            <td>3º ano Ensino Médio</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+{% endblock api_content_main %}

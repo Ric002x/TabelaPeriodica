@@ -18,11 +18,14 @@ class ActivityAdmin(admin.ModelAdmin):
 @admin.register(ActivitySubject)
 class ActivitySubjectAdmin(admin.ModelAdmin):
     fields = ['name']
+    list_display = ['id', 'name']
+    list_editable = ['name']
 
 
 @admin.register(ActivityLevel)
 class ActivityLevelAdmin(admin.ModelAdmin):
     fields = ['name']
+    list_display = ['id', 'name']
 
 
 @admin.register(ActivityRating)

@@ -1,0 +1,221 @@
+{% extends "periodic_table/pages/api/base.html" %}
+
+{% block api_content_main %}
+
+<h1 class="title-xl outfit">Gerenciamento de Tokens JWT</h1>
+<br>
+<p class="text-s justify-text">
+    A API de JWT (JSON Web Token) permite a criação, verificação e atualização de tokens que servirão para autenticação de usuários. Todas as urls presentes nesta api funcionam pelo método HTTP <strong>POST</strong>, sendo necessário envio de corpo JSON em todas as requisições. <br><br>
+
+    A autenticação por JWT será requirida em diversas partes da API, pois será necessário autenticação de um usuário durante a requisição de diversos endpoints.
+</p>
+
+<table class="endpoints_table">
+    <thead>
+        <tr class="text-ss">
+        <th scope="col">Função</th>
+        <th scope="col">Endpoint</th>
+        <th scope="col">Método</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-ss">
+        <th scope="row">Gera os tokens do usuário autenticado</th>
+        <td>&lt;base_url&gt;/usuarios/api/token/</td>
+        <td>POST</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Verifica se o token é válido</th>
+        <td>&lt;base_url&gt;/usuarios/api/token/verify</td>
+        <td>POST</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Atualiza o token de acesso usando o refresh_token</th>
+        <td>&lt;base_url&gt;/usuarios/api/token/refresh</td>
+        <td>POST</td>
+        </tr>
+    </tbody>
+</table>
+
+<section>
+    <h2 class="outfit-m">1. Endpoint: <span class='url_api'>/usuarios/api/tokens/</span></h2><br>
+    <p class="text-s justify-text">
+        Cria o token de acesso (access_token) e de atualização (refresh_token) para o usuário da requisição.
+    </p>
+    
+    <table class="data_list_table text-ss">
+        <caption class="justify-text text-s">
+            Dados retornados
+        </caption>
+        <thead>
+            <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">access_token</th>
+            <td>Token de acesso do usuário</td>
+            <td>string</td>
+            </tr>
+            <tr>
+            <th scope="row">refresh_token</th>
+            <td>Token de atualização do usuário</td>
+            <td>string</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3><br>
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    data = {
+        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"nome_de_usuario"</span>,
+        <span style="color:#ffe659">"password"</span>: <span style="color:#ffe659">"senha"</span>
+    }
+    
+    response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/token/"</span>, data=data)
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>:
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        </code></pre>
+    </div>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de Retorno da Requisição:</h3>
+    <div class="json-response text-ss">
+    <pre><code>
+{
+    <span class="json-string">"refresh"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR..."</span>,
+    <span class="json-string">"access"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR5..."</span>
+}
+</code></pre>
+    </div>
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3><br>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px;">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px;">400 Bad request: Erro no corpo da requisição</li>
+        <li style="list-style-type: disc; margin-left:20px;">401 Unauthorized: Dados de usuário não encontrado ou incorretos</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">2. Endpoint: <span class='url_api'>/usuarios/api/tokens/verify/</span></h2><br>
+
+    <p class="text-s justify-text">
+        Verifica a validação do <strong>access_token</strong> do usuário.
+    </p>
+
+    <table class="data_list_table text-ss">
+        <thead>
+            <tr>
+            <th scope="col">Não retorna dados</th>
+            </tr>
+        </thead>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3><br>    
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    data = {
+        <span style="color:#ffe659">"token"</span>: <span style="color:#ffe659">"access_token"</span>
+    }
+    
+    response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/tokens/verify/"</span>, data=data)
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>:
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        </code></pre>
+    </div>
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3><br>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px;">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px;">400 Bad request: Erro no corpo da requisição</li>
+        <li style="list-style-type: disc; margin-left:20px;">401 Unauthorized: Dados de usuário não encontrado ou incorretos</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">3. Endpoint: <span class='url_api'>/usuarios/api/tokens/refresh/</span></h2><br>
+
+
+    <p class="text-s justify-text">
+        Gera um novo access_token para o usuário utilizando o refresh_token, sem haver a necessidade de autenticar o usuário novamente.
+    </p>
+
+    <table class="data_list_table text-ss">
+        <caption class="justify-text text-s">
+            Dados retornados
+        </caption>
+        <thead>
+            <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">access_token</th>
+            <td>Token de acesso do usuário</td>
+            <td>string</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3> 
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    data = {<span style="color:#ffe659">"refresh"</span>: <span style="color:#ffe659">"refresh_token"</span>}
+    
+    response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/token/refresh/"</span>, data=data)
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>:
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        </code></pre>
+    </div>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de Retorno da Requisição:</h3>
+    <div class="json-response text-ss">
+        <pre><code>
+{
+    <span class="json-string">"access"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR5..."</span>
+}
+    </code></pre>
+        </div>
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px">400 Bad request: Erro no corpo da requisição</li>
+        <li style="list-style-type: disc; margin-left:20px">401 Unauthorized: Dados de usuário não encontrado ou incorretos</li>
+    </ul>
+</section>
+{% endblock api_content_main %}

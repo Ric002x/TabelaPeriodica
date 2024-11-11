@@ -99,3 +99,25 @@ def privacy_police_view(request):
     return render(request, 'periodic_table/pages/privacy_police.html', {
         'privacy_police_page': True,
     })
+
+
+def api_documentation(request):
+    return render(request, 'periodic_table/pages/api/home.html', {
+        "api_page": True,
+    })
+
+
+def api_documentation_elements(request):
+    return render(request, 'periodic_table/pages/api/elements.html')
+
+
+def api_documentation_jwt(request):
+    return render(request, 'periodic_table/pages/api/jwt.html')
+
+
+def api_documentation_users(request):
+    return render(request, 'periodic_table/pages/api/users.html')
+
+
+def api_documentation_activities(request):
+    return render(request, 'periodic_table/pages/api/activities.html')

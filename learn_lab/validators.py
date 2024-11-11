@@ -18,6 +18,8 @@ class ActivityValidator:
             self.clean_file()
         except TypeError:
             ...
+        self.clean_subject()
+        self.clean_level()
 
         clean_data = self.data
 
@@ -71,3 +73,17 @@ class ActivityValidator:
             if file:
                 self.errors['file'].append(
                     "Erro ao processar o arquivo PDF: arquivo inválido")
+
+    def clean_subject(self, *args, **kwargs):
+        subject = self.data.get('subject')
+
+        if not subject:
+            self.errors['subject'].append(
+                "Campo obrigatório")
+
+    def clean_level(self, *args, **kwargs):
+        level = self.data.get('level')
+
+        if not level:
+            self.errors['level'].append(
+                "Campo obrigatório")

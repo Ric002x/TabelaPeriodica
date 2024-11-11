@@ -19,6 +19,7 @@
     --blue4: #303a6b;
     --green1: #008646;
     --green2: #006434;
+    --green3: #08be66;
     --orange1: #d95c14;
     --orange2: #c5591b;
     --yellow1: #f2d80f;
@@ -304,11 +305,11 @@ input::placeholder {font-size: var(--font-size-ss);}
 .w-10 {width: 10%;}
 .w-fit {width: fit-content;}
 
-.h-100 {width: 100%;}
-.h-75 {width: 75%;}
-.h-50 {width: 50%;}
-.h-25 {width: 25%;}
-.h-fit {width: fit-content;}
+.h-100 {height: 100%;}
+.h-75 {height: 75%;}
+.h-50 {height: 50%;}
+.h-25 {height: 25%;}
+.h-fit {height: fit-content;}
 
 .m-y-s {margin: var(--spacing-s) 0;}
 .m-y-m {margin: var(--spacing-m) 0;}

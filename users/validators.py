@@ -58,7 +58,7 @@ class UsersValidatorsForCreate:
         if User.objects.filter(email=email).exists():
             self.errors['email'].append(
                 self.ErrorClass(
-                    'Inválido! Já existe um usuário '
+                    'Já existe um usuário '
                     'cadastrado com esse email.',
                     code='unique'
                 )

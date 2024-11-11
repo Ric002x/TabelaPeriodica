@@ -1,0 +1,80 @@
+{% extends "periodic_table/pages/api/base.html" %}
+
+    {% block api_content_main %}
+        <h1 class="title-xl outfit">Documentação da API do Site</h1>
+        <br>
+        <p class="text-s justify-text">
+            Bem-vindo à documentação oficial da API do Projeto <strong>Tabela Periódica</strong>. Esta API fornece acesso a dados relacionados a elementos químicos, atividades educacionais, autenticação de usuários, e mais. Desenvolvida com o Django REST Framework, a API foi projetada para ser segura e fácil de usar, permitindo que desenvolvedores integrem recursos do Projeto Tabela Periódica em suas próprias aplicações.
+        </p>
+        <br>
+        <p class="text-s justify-text">
+            Os endpoints da API seguem um padrão simples e organizado. Cada app possui uma URL inicial específica seguida por <code>/api/</code>, exceto pelo app periodic_table, que utiliza diretamente /api/. Os caminhos ficam da seguinte forma:
+        </p>
+
+        <table class="text-ss endpoints_table">
+            <thead>
+                <tr>
+                <th scope="col">App</th>
+                <th scope="col">URL inicial</th>
+                <th scope="col">Dados / Tabelas trabalhadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">periodic_table</th>
+                <td>/api/.../</td>
+                <td>Elements</td>
+                </tr>
+                <tr>
+                <th scope="row">users</th>
+                <td>/usuarios/api/.../</td>
+                <td>Tokens, Users</td>
+                </tr>
+                <tr>
+                <th scope="row">learn_lab</th>
+                <td>/learn-lab/api/.../</td>
+                <td>Activities, Ratings</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section>
+            <h2 class="outfit-m">Recursos Disponíveis</h2><br>
+            <ul class="text-s">
+                <li style="list-style-type: disc; margin-left:20px;">Consulta e detalhamento de <strong>elementos químicos</strong>: obtenha propriedades detalhadas de cada elemento.</li>
+                <li style="list-style-type: disc; margin-left:20px;">Gerenciamento de <strong>usuários</strong>: incluindo criação, consulta e atualização de perfis.</li>
+                <li style="list-style-type: disc; margin-left:20px;">Gestão de <strong>atividades educativas</strong>: crie, liste, edite, e exclua atividades de aprendizado.</li>
+                <li style="list-style-type: disc; margin-left:20px;"><strong>Autenticação</strong> segura com JWT: controle de acesso através de Tokens de Segurança.</li>
+            </ul>
+        </section>
+        <br><br>
+
+        <section>
+            <h2 class="outfit-m">Pré-requisitos</h2><br>
+            <ul class="text-s">
+                <li style="list-style-type: disc; margin-left:20px;">Django e Django REST Framework instalados na sua aplicação.</li>
+                <li style="list-style-type: disc; margin-left:20px;">Bibliotecas de Autenticação JWT: configuradas para gerenciar a autenticação de tokens.</li>
+                <li style="list-style-type: disc; margin-left:20px;">Um ambiente de desenvolvimento configurado, idealmente com um ambiente virtual Python.</li>
+            </ul>
+        </section>
+        <br><br>
+
+        <section>
+            <h2 class="outfit-m">Instalação e Configuração</h2><br> 
+            <ul class="text-s">
+                <li style="list-style-type: disc; margin-left:20px;">Clone o repositório e instale as dependências necessárias.</li>
+                <li style="list-style-type: disc; margin-left:20px;">Configure as variáveis de ambiente necessárias, como as chaves de API e secret keys, caso sejam requisitadas.</li>
+                <li style="list-style-type: disc; margin-left:20px;">Certifique-se de ter o Django configurado e a API ativa para começar a utilizá-la.</li>
+            </ul>
+            <br>
+            <p class="justify-text text-s">Consulte a documentação do projeto para mais informações sobre instalação e configuração: <a class="link" href="">https://github.com/Ric002x/TabelaPeriodica</a></p>
+        </section>
+        <br><br>
+
+        <section>
+            <h2 class="outfit-m">Suporte e Contato</h2><br>
+            <p class="text-s justify-text">
+                Em caso de dúvidas, problemas ou sugestões, entre em contato pelo e-mail: <a class="link" href="mailto:ricvenicius@gmail.com">ricvenicius@gmail.com</a>.
+            </p>
+        </section>
+    {% endblock api_content_main %}

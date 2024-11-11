@@ -18,10 +18,25 @@ urlpatterns = [
     path('politicas-de-privacidade', views.privacy_police_view,
          name='privacy_police'),
 
+    path('api/docs/', views.api_documentation,
+         name='api_docs'),
+
+    path('api/docs/elementos/', views.api_documentation_elements,
+         name='api_docs_elements'),
+
+    path('api/docs/jwt/', views.api_documentation_jwt,
+         name='api_docs_jwt'),
+
+    path('api/docs/usuarios/', views.api_documentation_users,
+         name='api_docs_users'),
+
+    path('api/docs/atividades/', views.api_documentation_activities,
+         name='api_docs_activities'),
+
     # Url's for API
     path("api/elementos/", views.ElementListViewAPI.as_view(),
          name="api_elements_list_view"),
 
     path("api/elementos/<str:symbol>/", views.ElementDetailViewAPI.as_view(),
-         name="api_elements_detail_view")
+         name="api_elements_detail_view"),
 ]

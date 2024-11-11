@@ -1,0 +1,440 @@
+{% extends "periodic_table/pages/api/base.html" %}
+
+{% block api_content_main %}
+
+<h1 class="title-xl outfit">Gerenciamento de Usuários</h1><br>
+
+<p class="text-s justify-text">
+    A API de Usuários permite a criação, atualização e exibição de informações de usuários registrados.
+</p>
+
+<table class=" endpoints_table">
+    <thead>
+        <tr class="text-ss">
+        <th scope="col">Função</th>
+        <th scope="col">Endpoint</th>
+        <th scope="col">Método</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-ss">
+        <th scope="row">Cria um usuário</th>
+        <td>&lt;base_url&gt;/usuarios/api/</td>
+        <td>POST</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Retorna os dados de um usuário</th>
+        <td>&lt;base_url&gt;/usuarios/api/&lt;usuario&gt;/</td>
+        <td>GET</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Atualiza os dados de um usuário</th>
+        <td>&lt;base_url&gt;/usuarios/api/&lt;usuario&gt;/</td>
+        <td>PATCH</td>
+        </tr>
+        <tr class="text-ss">
+        <th scope="row">Atualiza a senha de um usuário</th>
+        <td>&lt;base_url&gt;/usuarios/api/&lt;usuario&gt;/change-password/</td>
+        <td>PATCH</td>
+        </tr>
+    </tbody>
+</table>
+
+<section>
+    <h2 class="outfit-m">1. Endpoint: <span class='url_api'>/usuarios/api/</span></h2><br>
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: POST <br>
+        Cria um novo usuário com os dados fornecidos. Todos os campos são obrigatórios e passam por validações antes de completar o cadastro.
+    </p>
+
+    <table class="data_list_table text-ss">
+        <caption class="justify-text text-s">
+            Corpo da requisição:
+        </caption>
+        <thead>
+            <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <th scope="row">username</th>
+            <td>Nome de usuário</td>
+            <td>string</td>
+            </tr>
+            <th scope="row">first_name</th>
+            <td>Primeiro nome</td>
+            <td>string</td>
+            </tr>
+            <th scope="row">last_name</th>
+            <td>Sobrenome</td>
+            <td>string</td>
+            </tr>
+            <th scope="row">email</th>
+            <td>E-mail</td>
+            <td>string</td>
+            </tr>
+            <th scope="row">password</th>
+            <td>Senha</td>
+            <td>string</td>
+            </tr>
+            <th scope="row">reset_password</th>
+            <td>Repetir senha</td>
+            <td>string</td>
+            </tr>
+            <th scope="row">agree_to_terms</th>
+            <td>Concordar com os termos do aplicação</td>
+            <td>Bool</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    
+    <h3 class="outfit-s">Exemplo de uso (python)</h3>  
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+
+    data = {
+        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"LucaS"</span>,
+        <span style="color:#ffe659">"email"</span>: <span style="color:#ffe659">"email_do_lucas@email.com"</span>,
+        <span style="color:#ffe659">"first_name"</span>: <span style="color:#ffe659">"Lucas"</span>,
+        <span style="color:#ffe659">"last_name"</span>: <span style="color:#ffe659">"Santos"</span>,
+        <span style="color:#ffe659">"password"</span>: <span style="color:#ffe659">"Senha12345"</span>,
+        <span style="color:#ffe659">"repeat_password"</span>: <span style="color:#ffe659">"Senha12345"</span>,
+        <span style="color:#ffe659">"agree_to_terms"</span>: <span style="color:#ffe659">True</span>
+    }
+
+    response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/"</span>, data=data)
+
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>:
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+    </code></pre>
+    </div>
+<br><br>
+
+    <h3 class="outfit-s">Validações e Tratamento de Erros</h3>
+    <p class="text-s justify-text">
+        Abaixo estão as validações implementadas para garantir que o usuário forneça dados válidos no corpo da requisição.
+    </p>
+
+    <table class="text-ss data_list_table">
+        <thead>
+            <tr>
+                <th scope="col">Campo</th>
+                <th scope="col">Regra de Validação</th>
+                <th scope="col">Mensagem de Erro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>username</td>
+                <td>Mínimo de 5 caracteres; permitido apenas letras, números, hifens (-) e sublinhados (_)</td>
+                <td>
+                    <li>"O nome de usuário precisa ter no mínimo 5 caracteres."<br></li>
+                    <li>"O nome de usuário só pode conter letras, números, hifens (-) e sublinhados (_)."</li>
+                </td>
+            </tr>
+            <tr>
+                <td>email</td>
+                <td>Deve ser um endereço de e-mail válido; email único para cada usuário</td>
+                <td>
+                    <li>"Insira um endereço de e-mail válido."<br></li>
+                    <li>"Já existe um usuário cadastrado com esse email."</li>
+                </td>
+            </tr>
+            <tr>
+                <td>password</td>
+                <td>Mínimo de 8 caracteres, incluindo pelo menos uma letra e um número</td>
+                <td>
+                    "A senha deve contar pelo menos 8 caracteres, incluindo letras maiúsculas e números"
+                </td>
+            </tr>
+            <tr>
+                <td>repeat_password</td>
+                <td>É necessário preencher os dois campos de senha igualmente</td>
+                <td>
+                    "As senhas precisam ser iguais"
+                </td>
+            </tr>
+        </tbody>
+        <tr>
+            <td>agree_to_terms</td>
+            <td>O usuário precisa concordar com os termos do site para se cadastrar</td>
+            <td>
+                "É necessário concordar com os termos para realizar o cadastro"
+            </td>
+        </tr>
+    </tbody>
+    </table>
+
+    <br><br>
+    <h3 class="outfit-s">Status de Resposta</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px">400 Bad request: Erro no corpo da requisição</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">2. Endpoint: <span class='url_api'>/usuarios/api/<span style="color:#4279bc;font-weight:bold;">&lt;usuario&gt;</span>/</span></h2><br>
+    
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: GET <br>
+        /<strong>&lt;usuario&gt;</strong>/: Substitua pelo username do usuário -> "/usuarios/api/LucasS/"<br><br>
+        Esta URL retornar as informações de um usuário. <br><br>
+        
+        <strong>Obs:</strong> até o momento só é possível visualizar os dados do usuário autenticado por JWT, utilizando o campo "Authorization".
+    </p>
+    
+    <table class="data_list_table text-ss">
+        <caption class="justify-text text-s">
+            Corpo da requisição:
+        </caption>
+        <thead>
+            <tr>
+                <th scope="col">Não é necessário o envio de corpo JSON</th>
+            </tr>
+        </thead>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3>  
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    headers = { <span style="color:#ffe659">"Authorization"</span>: <span style="color:#ffe659">"Bearer eybGciOUzI1NiItSwdTyA..."</span> }
+    
+    response = requests.<span style="color:#00cd21">get</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>, headers=headers)
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>:
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        </code></pre>
+    </div>
+    
+    <br><br>
+
+    <h3 class="outfit-s">Retorno da requisição</h3>
+    <p class="text-s justify-text">
+        Caso o request seja feito com sucesso, dados como esse poderão ser retornados: <br><br>
+    </p>   
+    <div class="json-response text-ss">
+        <pre><code>
+{
+    <span class="json-string">"id"</span>: <span class="json-num">1</span>,
+    <span class="json-string">"username"</span>: <span class="json-string">"LucasS"</span>,
+    <span class="json-string">"first_name"</span>: <span class="json-string">"Lucas"</span>,
+    <span class="json-string">"last_name"</span>: <span class="json-string">"Santos"</span>,
+    <span class="json-string">"email"</span>: <span class="json-string">"email_do_lucas@email.com"</span>
+}
+        </code></pre>
+    </div>
+    
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3>
+    <ul class="text-s">
+        <li style="list-style-type: disc; margin-left:20px">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px">401 Unauthorized: As credenciais de autenticação não foram fornecidas</li>
+        <li style="list-style-type: disc; margin-left:20px">403 Forbidden: Não é permitido visualizar dados de terceiros</li>
+        <li style="list-style-type: disc; margin-left:20px">404 Not Found: Usuário não encontrado</li>
+    </ul>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">3. Endpoint: <span class='url_api'>/usuarios/api/<span style="color:#4279bc;font-weight:bold;">&lt;usuario&gt;</span>/</span></h2><br>
+
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: PATCH <br>
+        /<strong>&lt;usuario&gt;</strong>/: Substitua pelo username do usuário -> "/usuarios/api/LucasS/"<br><br>
+        Esta URL permite que o usuário atualize suas informações de nome, sobrenome, e nome de usuário. <br><br>
+
+        <strong>Obs:</strong> Somente serão atualizados os campos que são passados no corpo da requisição.
+    </p>
+
+    <table class="data_list_table text-ss">
+        <caption class="justify-text text-s">
+            Corpo da requisição:
+        </caption>
+        <thead>
+            <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">username (opcional)</th>
+                <td>Altera o username do usuário</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">email (opcional)</th>
+                <td>Altera o e-mail do usuário</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">first_name (opcional)</th>
+                <td>Altera o nome do usuário</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">last_name (opcional)</th>
+                <td>Altera o sobrenome do usuário</td>
+                <td>string</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3><br>    
+    <div class="python-example">
+        <pre class="text-white text-s"><code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    headers = { 
+        <span style="color:#ffe659">"Authorization"</span>: <span style="color:#ffe659">"Bearer eybGciOUzI1NiInFawdTyA..."</span> 
+    }
+    
+    data = {
+        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"LSantos"</span>,
+    }
+    
+    response = requests.<span style="color:#00cd21">patch</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>, data=data, headers=headers)
+    
+    <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>: 
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8">else</span>: 
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        </code></pre>
+    </div>
+    
+    <br><br>
+
+    <h3 class="outfit-s">Retorno da requisição</h3>
+    <p class="text-s justify-text">
+        Caso o request seja feito com sucesso, dados como esse poderão ser retornados: <br><br>
+    </p>
+    <div class="json-response text-ss">
+        <pre><code>
+{
+    <span class="json-string">"id"</span>: <span class="json-num">1</span>,
+    <span class="json-string">"username"</span>: <span class="json-string">"LSantos"</span>,
+    <span class="json-string">"first_name"</span>: <span class="json-string">"Lucas"</span>,
+    <span class="json-string">"last_name"</span>: <span class="json-string">"Santos"</span>,
+    <span class="json-string">"email"</span>: <span class="json-string">"email_do_lucas@email.com"</span>
+}
+        </code></pre>
+    </div>
+    
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3>   
+    <ul class="text-s" style="list-style-type: disc;">
+        <li style="list-style-type: disc; margin-left:20px">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px">401 Unauthorized: As credenciais de autenticação não foram fornecidas</li>
+        <li style="list-style-type: disc; margin-left:20px">403 Forbidden: Não é permitido alterar dados de terceiros</li>
+        <li style="list-style-type: disc; margin-left:20px">404 Not Found: Usuário não encontrado</li>
+    </ul>
+    <br><br>
+
+    <h3 class="outfit-s"><i style="color:#e8ae00; margin-right:5px;" class="fa-solid fa-triangle-exclamation"></i> observação</h3>   
+    <p class="text-s justify-text">
+        As URL's funcionam de modo dinâmico, de modo que, ao atualizar o username de um usuário, seu endpoint também muda. Ou seja, de <strong>"/usuarios/api/LucasS/"</strong>, foi para <strong>"/usuarios/api/LSantos/"</strong>
+    </p>
+</section>
+
+<hr style="margin:60px 0">
+
+<section>
+    <h2 class="outfit-m">4. Endpoint: <span class='url_api'>/usuarios/api/<span style="color:#4279bc;font-weight:bold;">&lt;usuario&gt;</span>/change-password/</span></h2><br>
+
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: PATCH <br>
+        /<strong>&lt;usuario&gt;</strong>/: Substitua pelo username do usuário -> "/usuarios/api/LucasS/"<br><br>
+        Esta URL permite atualizar a senha do usuário, com objetivo de manter sua conta segura.
+    </p>
+
+    <table class="data_list_table text-ss">
+        <caption class="justify-text text-s">
+            Corpo da requisição:
+        </caption>
+        <thead>
+            <tr>
+            <th scope="col">Campo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">old_password</th>
+                <td>Senha antiga do usuário</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">new_password</th>
+                <td>Nova senha do usuário</td>
+                <td>string</td>
+            </tr>
+            <tr>
+                <th scope="row">repeat_password</th>
+                <td>Repetir senha desejada</td>
+                <td>string</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+
+    <h3 class="outfit-s">Exemplo de uso (python)</h3> 
+    <div class="python-example">
+        <pre class="text-white text-s">
+    <code>
+    <span style="color:#218fc8;">import</span> requests
+    
+    headers = { <span style="color:#ffe659">"Authorization"</span>: <span style="color:#ffe659">"Bearer eybGciOUzI1NiInFawdTyA..."</span> }
+    data = {
+        <span style="color:#ffe659">"old_password"</span>: <span style="color:#ffe659">"Senha12345"</span>,
+        <span style="color:#ffe659">"new_password"</span>: <span style="color:#ffe659">"NovaSenhaDoLucas"</span>,
+        <span style="color:#ffe659">"repeat_password"</span>: <span style="color:#ffe659">"NovaSenhaDoLucas"</span>,
+    }
+    
+    response = requests.<span style="color:#00cd21">patch</span>(
+        <span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LSantos/change-password/"</span>,
+        data=data,
+        headers=headers)
+    
+    <span style="color:#218fc8;">if</span> response.status_code == <span style="color:#c60a43">200</span>:
+        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+    <span style="color:#218fc8;">else</span>:
+        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+    </code>
+    </pre>
+    </div>
+        
+    <br><br>
+
+    <h3 class="outfit-s">Status de Resposta</h3> 
+    <ul class="text-s" style="list-style-type: disc;">
+        <li style="list-style-type: disc; margin-left:20px">200 OK: Sucesso</li>
+        <li style="list-style-type: disc; margin-left:20px">400 Bad Request: Erro no corpo da requisição</li>
+        <li style="list-style-type: disc; margin-left:20px">401 Unauthorized: As credenciais de autenticação não foram fornecidas</li>
+        <li style="list-style-type: disc; margin-left:20px">403 Forbidden: Não é permitido alterar dados de terceiros</li>
+        <li style="list-style-type: disc; margin-left:20px">404 Not Found: Usuário não encontrado</li>
+    </ul>
+</section>
+
+
+{% endblock api_content_main %}

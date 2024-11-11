@@ -1,6 +1,6 @@
 /* Base Footer */
 
-footer {
+.main-footer {
     background-color: var(--blue1);
     padding: var(--spacing-xl) 0;
 }
