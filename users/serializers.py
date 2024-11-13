@@ -67,7 +67,7 @@ class UsersChangePasswordSerializer(serializers.ModelSerializer):
                 )
         else:
             raise serializers.ValidationError(
-                {"old_password": "Campo obrigatório."}
+                {"old_password": "Campo obrigatório."}, code="blank"
             )
 
         # Validação para nova senha:

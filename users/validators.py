@@ -162,7 +162,7 @@ class UsersValidatorsForUpdate(UsersValidatorsForCreate):
         if 'password' in self.data or 'password2' in self.data:
             self.errors['password'].append(
                 self.ErrorClass(
-                    'Não é possível atualizar a senha neste endpoint',
+                    'Não é possível atualizar a senha nesta url',
                     code='forbidden_field'
                 )
             )
