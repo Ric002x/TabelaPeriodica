@@ -142,3 +142,4 @@ GitHub.sublime-settings
 # Personal Addition
 ds.sqlite3
 gunicorn-error-log
+static/
