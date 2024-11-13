@@ -239,16 +239,16 @@ def forgot_my_password(request):
             mail = EmailMultiAlternatives(
                 subject="Solicitação de Alteração de Senha",
                 body=(
-                    "Houve uma solicitação de redefinição de senha para o"
-                    " seu cadastro no site:\n"
+                    f"Olá, {user.username}! Houve uma solicitação de "
+                    "redefinição de senha para o seu cadastro no site:\n"
                     "atomicdiscoveries.ricardovenicius.com.br.\n\n"
 
-                    "Para continuar com a solicitação, clique no link abaixo"
-                    " para seguir com a redefinição de senha:\n"
+                    "Clique no link abaixo "
+                    "para seguir com a redefinição de senha:\n"
                     f"{reset_link}\n\n"
 
-                    "Este link tem uma validade de 5 minutos, após passado"
-                    " esse tempo, será necessário fazer uma nova solicitação."
+                    "Este link tem uma validade de 5 minutos, após passado "
+                    "esse tempo, será necessário fazer uma nova solicitação."
 
                     "\n\nCaso não tenha solicitado esta alteração, ignore este"
                     " e-mail e sua senha permanecerá a mesma.\n\n"
