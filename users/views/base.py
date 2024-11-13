@@ -229,7 +229,7 @@ def forgot_my_password(request):
 
         try:
             user = User.objects.get(email=email)
-            uid = urlsafe_base64_encode(force_bytes(user.id))
+            uid = urlsafe_base64_encode(force_bytes(user.id))  # type: ignore
             token = token_password.make_token(user)
             reset_link = request.build_absolute_uri(
                 reverse("users:reset_password", kwargs={

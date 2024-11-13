@@ -2,7 +2,7 @@
 
 {% block api_content_main %}
 
-<h1 class="title-xl outfit">API de Elementos</h1>
+<h1 class="outfit-xl outfit">API de Elementos</h1>
 <br>
 <p class="text-s justify-text">
     A API de Elementos permite o acesso aos dados de elementos químicos armazenados no banco de dados da aplicação, retornando informações essenciais como símbolo, massa atômica, número de prótons, entre outros detalhes. Abaixo estão descritos os endpoints disponíveis para listar todos os elementos e buscar informações específicas sobre um elemento individual. <br><br>
@@ -32,10 +32,15 @@
     </tbody>
 </table>
 
-<section>
-    <h2 class="outfit-m">1. Endpoint: <span class='url_api'>/api/elementos/</span></h2><br>
-    <p class="text-s">O banco de dados possui variadas informações sobre os elementos químicos, e este endpoint serve para retornar uma lista com os elementos informações de forma simplificada.</p>
+<section id="element-list">
+    <h2 class="outfit-l">Lista de Elementos</h2><br>
+    <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: GET <br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/api/elementos/" class='url_api'>/api/elementos/</a><br><br>
 
+        O banco de dados possui variadas informações sobre os elementos químicos, e este endpoint serve para retornar uma lista com os elementos informações de forma simplificada.
+    </p>
+    
     <table class="data_list_table text-ss">
         <caption class="justify-text text-s">
             Dados retornados
@@ -45,7 +50,6 @@
             <th scope="col">Campo</th>
             <th scope="col">Descrição</th>
             <th scope="col">Tipo</th>
-            <th scope="col">Valor exemplo</th>
             </tr>
         </thead>
         <tbody>
@@ -53,35 +57,29 @@
             <th scope="row">atomic_number</th>
             <td>Número atômico do elemento</td>
             <td>int</td>
-            <td>8</td>
             </tr>
             <tr>
             <th scope="row">name</th>
             <td>Nome do elemento/</td>
             <td>string</td>
-            <td>Oxigênio</td>
             </tr>
             <tr>
             <th scope="row">symbol</th>
             <td>Símbolo químico do elemento</td>
             <td>string</td>
-            <td>O</td>
             </tr>
             <th scope="row">atomic_mass</th>
             <td>Massa atômica do elemento</td>
             <td>float</td>
-            <td>15,999</td>
             </tr>
             <tr>
             <th scope="row">state_matter</th>
             <td>Estado físico do elemento à temperatura ambiente</td>
             <td>string</td>
-            <td>Gasoso</td>
             </tr>
             <th scope="row">eletronic_configuration</th>
             <td>Configuração eletrônica do elemento</td>
             <td>string</td>
-            <td>1s² 2s² 2p⁴</td>
             </tr>
         </tbody>
     </table>
@@ -93,41 +91,41 @@
     </p>   
     <div class="json-response text-ss">
         <pre><code>
-{
-    <span class="json-string">"count"</span>: <span class="json-num">118</span>,
-    <span class="json-string">"next"</span>: <span class="json-string">"http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/?page=2"</span>,
-    <span class="json-string">"previous"</span>: <span class="json-null">null</span>,
-    <span class="json-string">"results"</span>: [
-        {
-            <span class="json-string">"atomic_number"</span>: <span class="json-num">1</span>,
-            <span class="json-string">"element_link"</span>: <span class="json-string">"http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/H/"</span>,
-            <span class="json-string">"name"</span>: <span class="json-string">"Hidrogênio"</span>,
-            <span class="json-string">"symbol"</span>: <span class="json-string">"H"</span>,
-            <span class="json-string">"atomic_mass"</span>: <span class="json-num">1.008</span>,
-            <span class="json-string">"state_matter"</span>: <span class="json-string">"Gasoso"</span>,
-            <span class="json-string">"electronic_configuration"</span>: <span class="json-string">"1s¹"</span>
-        },
-        {
-            <span class="json-string">"atomic_number"</span>: <span class="json-num">2</span>,
-            <span class="json-string">"element_link"</span>: <span class="json-string">"http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/He/"</span>,
-            <span class="json-string">"name"</span>: <span class="json-string">"Hélio"</span>,
-            <span class="json-string">"symbol"</span>: <span class="json-string">"He"</span>,
-            <span class="json-string">"atomic_mass"</span>: <span class="json-num">4.0026</span>,
-            <span class="json-string">"state_matter"</span>: <span class="json-string">"Gasoso"</span>,
-            <span class="json-string">"electronic_configuration"</span>: <span class="json-string">"1s²"</span>
-        },
-        {
-            <span class="json-string">"atomic_number"</span>: <span class="json-num">3</span>,
-            <span class="json-string">"element_link"</span>: <span class="json-string">"http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/Li/"</span>,
-            <span class="json-string">"name"</span>: <span class="json-string">"Lítio"</span>,
-            <span class="json-string">"symbol"</span>: <span class="json-string">"Li"</span>,
-            <span class="json-string">"atomic_mass"</span>: <span class="json-num">6.94</span>,
-            <span class="json-string">"state_matter"</span>: <span class="json-string">"Sólido"</span>,
-            <span class="json-string">"electronic_configuration"</span>: <span class="json-string">"1s² 2s¹"</span>
-        },
-        ...
-    ]
-}
+    {
+        "count": <span class="json-num">118</span>,
+        "next": "http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/?page=2",
+        "previous": <span class="json-null">null</span>,
+        "results": [
+            {
+                "atomic_number": <span class="json-num">1,</span>
+                "element_link": "http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/H/",
+                "name": "Hidrogênio",
+                "symbol": "H",
+                "atomic_mass": <span class="json-num">1.008</span>,
+                "state_matter": "Gasoso",
+                "electronic_configuration": "1s¹"
+            },
+            {
+                "atomic_number": <span class="json-num">2</span>,
+                "element_link": "http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/He/",
+                "name": "Hélio",
+                "symbol": "He",
+                "atomic_mass": <span class="json-num">4.0026</span>,
+                "state_matter": "Gasoso",
+                "electronic_configuration": "1s²"
+            },
+            {
+                "atomic_number": <span class="json-num">3</span>,
+                "element_link": "http://atomicdiscoveries.ricardovenicius.com.br/api/elementos/Li/",
+                "name": "Lítio",
+                "symbol": "Li",
+                "atomic_mass": <span class="json-num">6.94</span>,
+                "state_matter": "Sólido",
+                "electronic_configuration": "1s² 2s¹"
+            },
+            ...
+        ]
+    }
         </code></pre>
     </div>    
     <br><br>
@@ -138,14 +136,17 @@
     </ul>
 </section>
 
-<hr style="margin:60px 0">
+<hr style="margin:40px 0 0 0">
 
-<section>
-    <h2 class="outfit-m">2. Endpoint: <span class='url_api'>/api/elementos/&lt;elemento&gt;/</span></h2><br>
-
+<section id="element-detail">
+    <h2 class="outfit-l">Consultar Elemento Específico</h2><br>
     <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: GET <br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/api/elementos/H/" class='url_api'>/api/elementos/&lt;elemento&gt;/</a><br><br>
+
         Para pesquisar um elemento específico, basta adicionar ao fim da URL "api/elementos/", o símbolo do elemento que seja pesquisar. Exemplo: /api/elementos/Fe/ -> Deste modo, você estará pesquisando pelo elemento Ferro. <br><br>
-        Diferente da lista, esta pesquisa retorna dados a mais sobre o elemento, como:
+        Diferente da lista, esta pesquisa retorna dados a mais sobre o elemento.
+
     </p>
 
     <table class="data_list_table text-ss">
@@ -157,7 +158,6 @@
             <th scope="col">Campo</th>
             <th scope="col">Descrição</th>
             <th scope="col">Tipo</th>
-            <th scope="col">Valor exemplo</th>
             </tr>
         </thead>
         <tbody>
@@ -165,97 +165,61 @@
             <th scope="row">atomic_number</th>
             <td>Número atômico do elemento</td>
             <td>int</td>
-            <td>26</td>
             </tr>
             <tr>
             <th scope="row">name</th>
             <td>Nome do elemento/</td>
             <td>string</td>
-            <td>Ferro</td>
             </tr>
             <tr>
             <th scope="row">symbol</th>
             <td>Símbolo químico do elemento</td>
             <td>string</td>
-            <td>Fr</td>
             </tr>
             <th scope="row">atomic_mass</th>
             <td>Massa atômica do elemento</td>
             <td>float | string</td>
-            <td>55,845 | g/mol</td>
             </tr>
             <tr>
             <th scope="row">state_matter</th>
             <td>Estado físico do elemento à temperatura ambiente</td>
             <td>string</td>
-            <td>Sólido</td>
             </tr>
             <th scope="row">eletronic_configuration</th>
             <td>Configuração eletrônica</td>
             <td>string</td>
-            <td>1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶</td>
             </tr>
             <th scope="row">electron_distribution</th>
             <td>Distribuição de elétrons</td>
             <td>string</td>
-            <td>K² L⁸ M²⁰ N⁰ O⁰ Q⁰ R⁰</td>
             </tr>
             <th scope="row">electrons_qty</th>
             <td>Quantidade de elétrons</td>
             <td>int</td>
-            <td>26</td>
             </tr>
             <th scope="row">neutrons_qty</th>
             <td>Quantidade de nêutrons</td>
             <td>int</td>
-            <td>30</td>
             </tr>
             <th scope="row">ionic_states</th>
             <td>Estados iônicos</td>
             <td>string</td>
-            <td>Fe²⁺</td>
             </tr>
             <th scope="row">density</th>
             <td>Densidade</td>
             <td>float | string</td>
-            <td>7,874 | g/cm³</td>
             </tr>
             <th scope="row">melting_point</th>
             <td>Ponto de fusão</td>
             <td>float</td>
-            <td>
-                <li>1538,0 | Celsius</li>
-                <hr>
-                <li>2800,4 | Fahrenheit</li>
-                <hr>
-                <li>1811,15 | Kelvin</li>
-            </td>
             </tr>
             <th scope="row">boiling_point</th>
             <td>Ponto de ebulição</td>
             <td>float</td>
-            <td>
-                <li>2862,0 | Celsius</li>
-                <hr>
-                <li>5183,6 | Fahrenheit</li>
-                <hr>
-                <li>3135,15 | Kelvin</li>
-            </td>
             </tr>
             <th scope="row">additional_information</th>
             <td>Informações adicionais do elemento</td>
             <td>string</td>
-            <td>
-                <li>description</li>
-                <hr>
-                <li>history_and_discovery</li>
-                <hr>
-                <li>chemical_properties</li>
-                <hr>
-                <li>usage</li>
-                <hr>
-                <li>extra_information</li>
-            </td>
             </tr>
         </tbody>
     </table>
@@ -267,44 +231,44 @@
     </p>   
     <div class="json-response text-ss">
         <pre><code>
-{
-    <span class="json-string">"atomic_number"</span>: <span class="json-num">8</span>,
-    <span class="json-string">"name"</span>: <span class="json-string">"Oxigênio"</span>,
-    <span class="json-string">"symbol"</span>: <span class="json-string">"O"</span>,
-    <span class="json-string">"atomic_mass"</span>: {
-        <span class="json-string">"value"</span>: <span class="json-num">15.999</span>,
-        <span class="json-string">"unit"</span>: <span class="json-string">"g/mol"</span>
-    },
-    <span class="json-string">"electrons_number"</span>: <span class="json-num">8</span>,
-    <span class="json-string">"neutrons_number"</span>: <span class="json-num">8</span>,
-    <span class="json-string">"state_matter"</span>: <span class="json-string">"Gasoso"</span>,
-    <span class="json-string">"electronic_configuration"</span>: <span class="json-string">"1s² 2s² 2p⁴"</span>,
-    <span class="json-string">"electron_distribution"</span>: <span class="json-string">"K² L⁶ M⁰ N⁰ O⁰ Q⁰ R⁰"</span>,
-    <span class="json-string">"ionic_states"</span>: <span class="json-string">"O²⁻"</span>,
-    <span class="json-string">"physical_properties"</span>: {
-        <span class="json-string">"density"</span>: {
-            <span class="json-string">"value"</span>: <span class="json-num">0.001429</span>,
-            <span class="json-string">"unit"</span>: <span class="json-string">"g/cm³"</span>
+    {
+        "atomic_number": <span class="json-num">8</span>,
+        "name": "Oxigênio",
+        "symbol": "O",
+        "atomic_mass": {
+            "value": <span class="json-num">15.999</span>,
+            "unit": "g/mol"
         },
-        <span class="json-string">"melting_point"</span>: {
-            <span class="json-string">"Celsius"</span>: <span class="json-num">-218.79</span>,
-            <span class="json-string">"Fahrenheit"</span>: <span class="json-num">-361.822</span>,
-            <span class="json-string">"Kelvin"</span>: <span class="json-num">54.36</span>
+        "electrons_number": <span class="json-num">8</span>,
+        "neutrons_number": <span class="json-num">8</span>,
+        "state_matter": "Gasoso",
+        "electronic_configuration": "1s² 2s² 2p⁴",
+        "electron_distribution": "K² L⁶ M⁰ N⁰ O⁰ Q⁰ R⁰",
+        "ionic_states": "O²⁻",
+        "physical_properties": {
+            "density": {
+                "value": <span class="json-num">0.001429</span>,
+                "unit": "g/cm³"
+            },
+            "melting_point": {
+                "Celsius": <span class="json-num">-218.79</span>,
+                "Fahrenheit": <span class="json-num">-361.822</span>,
+                "Kelvin": <span class="json-num">54.36</span>
+            },
+            "boiling_point": {
+                "Celsius": <span class="json-num">-182.96</span>,
+                "Fahrenheit": <span class="json-num">-297.328</span>,
+                "Kelvin": <span class="json-num">90.19</span>
+            }
         },
-        <span class="json-string">"boiling_point"</span>: {
-            <span class="json-string">"Celsius"</span>: <span class="json-num">-182.96</span>,
-            <span class="json-string">"Fahrenheit"</span>: <span class="json-num">-297.328</span>,
-            <span class="json-string">"Kelvin"</span>: <span class="json-num">90.19</span>
+        "additional_information": {
+            "description": "",
+            "history_and_discovery": "",
+            "chemical_properties": "",
+            "usage": "",
+            "extra_information": ""
         }
-    },
-    <span class="json-string">"additional_information"</span>: {
-        <span class="json-string">"description"</span>: <span class="json-string">""</span>,
-        <span class="json-string">"history_and_discovery"</span>: <span class="json-string">""</span>,
-        <span class="json-string">"chemical_properties"</span>: <span class="json-string">""</span>,
-        <span class="json-string">"usage"</span>: <span class="json-string">""</span>,
-        <span class="json-string">"extra_information"</span>: <span class="json-string">""</span>
     }
-}
         </code></pre>
     </div>
     

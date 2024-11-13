@@ -37,9 +37,12 @@
     </tbody>
 </table>
 
-<section>
-    <h2 class="outfit-m">1. Endpoint: <span class='url_api'>/usuarios/api/tokens/</span></h2><br>
+<section id="jwt-create">
+    <h2 class="outfit-l">Criação de Tokens - Autenticação</h2><br>
     <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: POST <br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/tokens/" class='url_api'>/usuarios/api/tokens/</a><br><br>
+
         Cria o token de acesso (access_token) e de atualização (refresh_token) para o usuário da requisição.
     </p>
     
@@ -82,9 +85,9 @@
     response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/token/"</span>, data=data)
     
     <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8">else</span>:
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code}"</span>)
         </code></pre>
     </div>
     <br><br>
@@ -92,11 +95,11 @@
     <h3 class="outfit-s">Exemplo de Retorno da Requisição:</h3>
     <div class="json-response text-ss">
     <pre><code>
-{
-    <span class="json-string">"refresh"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR..."</span>,
-    <span class="json-string">"access"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR5..."</span>
-}
-</code></pre>
+    {
+        "refresh": "eyJhbGciOiJIUzI1NiIsInR...",
+        "access": "eyJhbGciOiJIUzI1NiIsInR5..."
+    }
+    </code></pre>
     </div>
     <br><br>
 
@@ -108,13 +111,15 @@
     </ul>
 </section>
 
-<hr style="margin:60px 0">
+<hr style="margin:40px 0 0 0">
 
-<section>
-    <h2 class="outfit-m">2. Endpoint: <span class='url_api'>/usuarios/api/tokens/verify/</span></h2><br>
-
+<section id="jwt-verify">
+    <h2 class="outfit-l">Verificação de Token</h2><br>
     <p class="text-s justify-text">
-        Verifica a validação do <strong>access_token</strong> do usuário.
+        <strong>HTTP Method</strong>: POST <br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/tokens/verify/" class='url_api'>/usuarios/api/tokens/verify/</a><br><br>
+
+        Verifica a validação do <strong>access_token</strong> de um usuário.
     </p>
 
     <table class="data_list_table text-ss">
@@ -138,9 +143,9 @@
     response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/tokens/verify/"</span>, data=data)
     
     <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8">else</span>:
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code}"</span>)
         </code></pre>
     </div>
     <br><br>
@@ -153,13 +158,14 @@
     </ul>
 </section>
 
-<hr style="margin:60px 0">
+<hr style="margin:40px 0 0 0">
 
-<section>
-    <h2 class="outfit-m">3. Endpoint: <span class='url_api'>/usuarios/api/tokens/refresh/</span></h2><br>
-
-
+<section id="jwt-update">
+    <h2 class="outfit-l">Atualizar Token de Acesso</h2><br>
     <p class="text-s justify-text">
+        <strong>HTTP Method</strong>: POST <br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/tokens/refresh/" class='url_api'>/usuarios/api/tokens/refresh/</a><br><br>
+
         Gera um novo access_token para o usuário utilizando o refresh_token, sem haver a necessidade de autenticar o usuário novamente.
     </p>
 
@@ -194,9 +200,9 @@
     response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/token/refresh/"</span>, data=data)
     
     <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8">else</span>:
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code}"</span>)
         </code></pre>
     </div>
     <br><br>
@@ -205,7 +211,7 @@
     <div class="json-response text-ss">
         <pre><code>
 {
-    <span class="json-string">"access"</span>: <span class="json-string">"eyJhbGciOiJIUzI1NiIsInR5..."</span>
+    "access": "eyJhbGciOiJIUzI1NiIsInR5..."
 }
     </code></pre>
         </div>

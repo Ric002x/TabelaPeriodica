@@ -254,7 +254,7 @@ input::placeholder {font-size: var(--font-size-ss);}
     }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
     .title-7xl {
         font-size: calc(var(--font-size-7xl) * 0.5);
     }
@@ -274,9 +274,6 @@ input::placeholder {font-size: var(--font-size-ss);}
         font-size: calc(var(--font-size-l) * 0.5);
     }
     .title-m {
-        font-size: calc(var(--font-size-m) * 0.5);
-    }
-    .text-m {
         font-size: calc(var(--font-size-m) * 0.5);
     }
     .text-s {

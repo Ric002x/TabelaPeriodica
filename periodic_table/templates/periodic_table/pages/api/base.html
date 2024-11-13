@@ -10,6 +10,8 @@
     <title>API Docs | Tabela Periódica</title>
     <link rel="stylesheet" href="{% static 'global/css/base_styles.css' %}">
     <link rel="stylesheet" href="{% static "css/api_docs/api_docs.css" %}">
+    <link rel="stylesheet" href="{% static "js/api.js" %}">
+    <script src="{% static "js/api.js" %}"></script>
 </head>
 
 <body>
@@ -19,7 +21,7 @@
                 <img src="{% static "global/assets/green-logo.png" %}" alt="">
                 <a class="title-l text-white" href="/api/docs">API Document</a>
             </div>
-            <nav class="h-100 api-nav">
+            <nav class="h-100 api-nav" id="APINav">
                 <ul class="fira text-white text-s">
                     <li><a class="text-white" href="{% url "periodic_table:api_docs_elements" %}">Elementos</a></li>
                     <li><a class="text-white" href="{% url "periodic_table:api_docs_jwt" %}">Autenticação por JWT</a></li>
@@ -27,12 +29,94 @@
                     <li><a class="text-white" href="{% url "periodic_table:api_docs_activities" %}">Atividadades</a></li>
                 </ul>
             </nav>
+
+            <div class="show-api-nav" id="showAPINav">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </header>
 
-        <aside class="api-aside">{% block api_content_aside %}{% endblock api_content_aside %}</aside>
+        <aside class="api-aside">
+            <nav class="text-s aside-nav">
+                <div class="summary-group">
+                    <a href="/api/docs/" class="outfit-m summary-title">Introdução</a>
+                    {% if api_home %}
+                    <ul class="api-link-group"> 
+                        <li><a href="#resources-available">Recursos Disponíveis</a></li>
+                        <li><a href="#required">Pré-requisitos</a></li>
+                        <li><a href="#configuration">Instalação e Configuração</a></li>
+                        <li><a href="#support">Suporte e Contato</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="summary-group">
+                    <a href="/api/docs/elementos/" class="outfit-m summary-title">Elementos</a>
+                    {% if api_elements %}
+                    <ul class="api-link-group"> 
+                        <li><a href="#element-list">Lista de Elementos</a></li>
+                        <li><a href="#element-detail">Consultar Elemento</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="summary-group">
+                    <a href="/api/docs/jwt/" class="outfit-m summary-title">Autenticação - JWT</a>
+                    {% if api_jwt %}
+                    <ul class="api-link-group"> 
+                        <li><a href="#jwt-create">Criação de Tokens</a></li>
+                        <li><a href="#jwt-verify">Verificar Token</a></li>
+                        <li><a href="#jwt-update">Atualizar Token</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="summary-group">
+                    <a href="/api/docs/usuarios/" class="outfit-m summary-title">Usuários</a>
+                    {% if api_users %}
+                    <ul class="api-link-group"> 
+                        <li><a href="#create-user">Criação de Usuário</a></li>
+                        <li><a href="#read-user">Perfil de Usuário</a></li>
+                        <li><a href="#update-user">Atualizar Usuário</a></li>
+                        <li><a href="#update-password">Atualizar Senha do Usuário</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="summary-group">
+                    <a href="/api/docs/atividades/" class="outfit-m summary-title">Atividades</a>
+                    {% if api_activities %}
+                    <ul class="api-link-group"> 
+                        <li><a href="#activities-list">Lista de Atividades</a></li>
+                        <li><a href="#activities-detail">Consultar Atividade</a></li>
+                        <li><a href="#activities-create">Criar Atividade</a></li>
+                        <li><a href="#activities-update">Atualizar Atividade</a></li>
+                        <li><a href="#activities-delete">Deletar Atividade</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </nav>
+        </aside>
         <main class="api-main">{% block api_content_main %}{% endblock api_content_main %}</main>
 
-        <footer class="api-footer"></footer>
+        <footer class="api-footer text-s">
+            <div class="footer-container">
+                <div class="footer-logos">
+                    <a href="https://github.com/Ric002x/TabelaPeriodica" target="_blank" class="logo"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ricardo-oliveira-a48516223/" target="_blank" class="logo"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/r_venicius0/" target="_blank" class="logo"><i class="fa-brands fa-square-instagram"></i></a>
+                </div>
+
+                <nav class="footer-nav">
+                    <a href="/">Voltar para o Site</a>
+                    <a href="/api/docs/">Início da API</a>
+                    <a href="/politicas-de-privacidade">Políticas do site</a>
+                </nav>
+
+                <div class="footer-info text-white">
+                    <p>&copy; 2024 Atomic Discoveries. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 

@@ -40,10 +40,12 @@
     </tbody>
 </table>
 
-<section>
-    <h2 class="outfit-m">1. Endpoint: <span class='url_api'>/usuarios/api/</span></h2><br>
+<section id="create-user">
+    <h2 class="outfit-l">Criação de usuário</h2><br>
     <p class="text-s justify-text">
         <strong>HTTP Method</strong>: POST <br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/" class='url_api'>/usuarios/api/</a><br><br>
+
         Cria um novo usuário com os dados fornecidos. Todos os campos são obrigatórios e passam por validações antes de completar o cadastro.
     </p>
 
@@ -98,24 +100,24 @@
     <span style="color:#218fc8;">import</span> requests
 
     data = {
-        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"LucaS"</span>,
-        <span style="color:#ffe659">"email"</span>: <span style="color:#ffe659">"email_do_lucas@email.com"</span>,
-        <span style="color:#ffe659">"first_name"</span>: <span style="color:#ffe659">"Lucas"</span>,
-        <span style="color:#ffe659">"last_name"</span>: <span style="color:#ffe659">"Santos"</span>,
-        <span style="color:#ffe659">"password"</span>: <span style="color:#ffe659">"Senha12345"</span>,
-        <span style="color:#ffe659">"repeat_password"</span>: <span style="color:#ffe659">"Senha12345"</span>,
+        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"LucaS,</span>
+        <span style="color:#ffe659">"email"</span>: <span style="color:#ffe659">"email_do_lucas@email.com,</span>
+        <span style="color:#ffe659">"first_name"</span>: <span style="color:#ffe659">"Lucas,</span>
+        <span style="color:#ffe659">"last_name"</span>: <span style="color:#ffe659">"Santos,</span>
+        <span style="color:#ffe659">"password"</span>: <span style="color:#ffe659">"Senha12345,</span>
+        <span style="color:#ffe659">"repeat_password"</span>: <span style="color:#ffe659">"Senha12345,</span>
         <span style="color:#ffe659">"agree_to_terms"</span>: <span style="color:#ffe659">True</span>
     }
 
     response = requests.<span style="color:#00cd21">post</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/"</span>, data=data)
 
     <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8">else</span>:
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code})
     </code></pre>
     </div>
-<br><br>
+    <br><br>
 
     <h3 class="outfit-s">Validações e Tratamento de Erros</h3>
     <p class="text-s justify-text">
@@ -180,15 +182,16 @@
     </ul>
 </section>
 
-<hr style="margin:60px 0">
+<hr style="margin:40px 0 0 0">
 
-<section>
-    <h2 class="outfit-m">2. Endpoint: <span class='url_api'>/usuarios/api/<span style="color:#4279bc;font-weight:bold;">&lt;usuario&gt;</span>/</span></h2><br>
-    
+<section id="read-user">
+    <h2 class="outfit-l">Perfil de Usuário</h2><br>
     <p class="text-s justify-text">
         <strong>HTTP Method</strong>: GET <br>
-        /<strong>&lt;usuario&gt;</strong>/: Substitua pelo username do usuário -> "/usuarios/api/LucasS/"<br><br>
-        Esta URL retornar as informações de um usuário. <br><br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/" class='url_api'>/usuarios/api/&lt;usuario&gt;/</a>
+        <span class="url-object"><i class="fa-solid fa-arrow-turn-up"></i>Substitua &lt;usuario&gt; pelo o username do usuário. Exemplo: "/usuarios/api/LucasS/<br>
+
+        Esta URL retornar as informações do usuário autenticado. <br><br>
         
         <strong>Obs:</strong> até o momento só é possível visualizar os dados do usuário autenticado por JWT, utilizando o campo "Authorization".
     </p>
@@ -215,9 +218,9 @@
     response = requests.<span style="color:#00cd21">get</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>, headers=headers)
     
     <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>:
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8">else</span>:
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code})
         </code></pre>
     </div>
     
@@ -229,13 +232,13 @@
     </p>   
     <div class="json-response text-ss">
         <pre><code>
-{
-    <span class="json-string">"id"</span>: <span class="json-num">1</span>,
-    <span class="json-string">"username"</span>: <span class="json-string">"LucasS"</span>,
-    <span class="json-string">"first_name"</span>: <span class="json-string">"Lucas"</span>,
-    <span class="json-string">"last_name"</span>: <span class="json-string">"Santos"</span>,
-    <span class="json-string">"email"</span>: <span class="json-string">"email_do_lucas@email.com"</span>
-}
+    {
+        "id: <span class="json-num">1</span>,
+        "username: "LucasS,
+        "first_name: "Lucas,
+        "last_name: "Santos,
+        "email: "email_do_lucas@email.com
+    }
         </code></pre>
     </div>
     
@@ -250,16 +253,16 @@
     </ul>
 </section>
 
-<hr style="margin:60px 0">
+<hr style="margin:40px 0 0 0">
 
-<section>
-    <h2 class="outfit-m">3. Endpoint: <span class='url_api'>/usuarios/api/<span style="color:#4279bc;font-weight:bold;">&lt;usuario&gt;</span>/</span></h2><br>
-
+<section id="update-user">
+    <h2 class="outfit-l">Atualizar Dados Usuário</h2><br>
     <p class="text-s justify-text">
         <strong>HTTP Method</strong>: PATCH <br>
-        /<strong>&lt;usuario&gt;</strong>/: Substitua pelo username do usuário -> "/usuarios/api/LucasS/"<br><br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/" class='url_api'>/usuarios/api/&lt;usuario&gt;/</a>
+        <span class="url-object"><i class="fa-solid fa-arrow-turn-up"></i>Substitua &lt;usuario&gt; pelo o username do usuário. Exemplo: "/usuarios/api/LucasS/<br>
         Esta URL permite que o usuário atualize suas informações de nome, sobrenome, e nome de usuário. <br><br>
-
+        
         <strong>Obs:</strong> Somente serão atualizados os campos que são passados no corpo da requisição.
     </p>
 
@@ -309,15 +312,19 @@
     }
     
     data = {
-        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"LSantos"</span>,
+        <span style="color:#ffe659">"username"</span>: <span style="color:#ffe659">"LSantos",</span>
     }
     
-    response = requests.<span style="color:#00cd21">patch</span>(<span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>, data=data, headers=headers)
+    response = requests.<span style="color:#00cd21">patch</span>(
+        <span style="color:#ffe659">"https://&lt;base_url&gt;.com/usuarios/api/LucasS/"</span>,
+        data=data,
+        headers=headers
+    )
     
     <span style="color:#218fc8">if</span> response.status_code == <span style="color:#c60a43">200</span>: 
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8">else</span>: 
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code})
         </code></pre>
     </div>
     
@@ -329,13 +336,13 @@
     </p>
     <div class="json-response text-ss">
         <pre><code>
-{
-    <span class="json-string">"id"</span>: <span class="json-num">1</span>,
-    <span class="json-string">"username"</span>: <span class="json-string">"LSantos"</span>,
-    <span class="json-string">"first_name"</span>: <span class="json-string">"Lucas"</span>,
-    <span class="json-string">"last_name"</span>: <span class="json-string">"Santos"</span>,
-    <span class="json-string">"email"</span>: <span class="json-string">"email_do_lucas@email.com"</span>
-}
+    {
+        "id: <span class="json-num">1</span>,
+        "username: "LSantos,
+        "first_name: "Lucas,
+        "last_name: "Santos,
+        "email: "email_do_lucas@email.com
+    }
         </code></pre>
     </div>
     
@@ -356,14 +363,14 @@
     </p>
 </section>
 
-<hr style="margin:60px 0">
+<hr style="margin:40px 0 0 0">
 
-<section>
-    <h2 class="outfit-m">4. Endpoint: <span class='url_api'>/usuarios/api/<span style="color:#4279bc;font-weight:bold;">&lt;usuario&gt;</span>/change-password/</span></h2><br>
-
+<section id="update-password">
+    <h2 class="outfit-l">Atualizar Senha do Usuário</h2><br>
     <p class="text-s justify-text">
         <strong>HTTP Method</strong>: PATCH <br>
-        /<strong>&lt;usuario&gt;</strong>/: Substitua pelo username do usuário -> "/usuarios/api/LucasS/"<br><br>
+        <strong>Endpoint:</strong> <a target="_blank" rel="noopener noreferrer" href="https://atomicdiscoveries.ricardovenicius.com.br/usuarios/api/" class='url_api'>/usuarios/api/&lt;usuario&gt;/</a>
+        <span class="url-object"><i class="fa-solid fa-arrow-turn-up"></i>Substitua &lt;usuario&gt; pelo o username do usuário. Exemplo: "/usuarios/api/LucasS/<br>
         Esta URL permite atualizar a senha do usuário, com objetivo de manter sua conta segura.
     </p>
 
@@ -408,7 +415,7 @@
     data = {
         <span style="color:#ffe659">"old_password"</span>: <span style="color:#ffe659">"Senha12345"</span>,
         <span style="color:#ffe659">"new_password"</span>: <span style="color:#ffe659">"NovaSenhaDoLucas"</span>,
-        <span style="color:#ffe659">"repeat_password"</span>: <span style="color:#ffe659">"NovaSenhaDoLucas"</span>,
+        <span style="color:#ffe659">"repeat_password"</span>: <span style="color:#ffe659">"NovaSenhaDoLucas"</span>
     }
     
     response = requests.<span style="color:#00cd21">patch</span>(
@@ -417,9 +424,9 @@
         headers=headers)
     
     <span style="color:#218fc8;">if</span> response.status_code == <span style="color:#c60a43">200</span>:
-        <span style="color:#dbd52e">print</span>(response.<span style="color:#00cd21">json</span>())
+        <span style="color:#00cd21">print</span>(response.<span style="color:#00cd21">json</span>())
     <span style="color:#218fc8;">else</span>:
-        <span style="color:#dbd52e">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro: {response.status_code}"</span>)
+        <span style="color:#00cd21">print</span>(<span style="color:#c60a43">f</span><span style="color:#ffe659">"Erro"</span>: {response.status_code})
     </code>
     </pre>
     </div>

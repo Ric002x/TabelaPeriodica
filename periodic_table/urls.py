@@ -15,7 +15,7 @@ urlpatterns = [
     path('elementos/<str:symbol>/', views.ElementDetailView.as_view(),
          name='single_element'),
 
-    path('politicas-de-privacidade', views.privacy_police_view,
+    path('politicas-de-privacidade/', views.privacy_police_view,
          name='privacy_police'),
 
     path('api/docs/', views.api_documentation,
